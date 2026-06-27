@@ -12,8 +12,8 @@ type MenuGroup = { type: "group"; key: string; children: MenuLink[] };
 type ShopMenuItem = MenuLink | MenuGroup;
 
 const SHOP_MENU: ShopMenuItem[] = [
-  { type: "link", key: "menu_pokemon", href: "/?category=宝可梦原盒" },
-  { type: "link", key: "menu_one_piece", href: "/?q=One%20Piece" },
+  { type: "link", key: "menu_pokemon", href: "/?game=pokemon" },
+  { type: "link", key: "menu_one_piece", href: "/?game=onepiece" },
   {
     type: "group",
     key: "menu_other_tcg",
@@ -41,7 +41,7 @@ const SHOP_MENU: ShopMenuItem[] = [
 ];
 
 const MORE_MENU = [
-  { key: "menu_new_arrivals", href: "/?sort=newest&inStock=1" },
+  { key: "menu_new_arrivals", href: "/?sort=newest&stock=instock" },
   { key: "menu_wholesale", href: "/contact" },
   { key: "menu_shipping", href: "/shipping" },
   { key: "menu_guide", href: "/guide" },
@@ -49,7 +49,7 @@ const MORE_MENU = [
 
 const MOBILE_MENU = [
   { key: "nav_home", href: "/" },
-  { key: "nav_shop", href: "/?inStock=1" },
+  { key: "nav_shop", href: "/?stock=instock" },
   { key: "menu_wholesale", href: "/contact" },
   { key: "footer_contact", href: "/contact" },
 ] as const;

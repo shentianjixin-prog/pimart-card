@@ -274,6 +274,137 @@ button:not(:disabled),
   .hero-dot-inactive:hover {
     background: #9ca3af;
   }
+
+  /* Product listing filters */
+  .filter-sidebar {
+    @apply sticky top-24 w-full shrink-0 self-start;
+    max-width: 280px;
+  }
+
+  .filter-sidebar-head {
+    @apply mb-4 flex items-center justify-between gap-2 px-1;
+  }
+
+  .filter-panel-inner {
+    @apply rounded-[24px] border p-5;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: var(--border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .filter-section {
+    @apply border-b py-3 last:border-b-0;
+    border-color: var(--border);
+  }
+
+  .filter-section-head {
+    @apply flex min-h-11 w-full items-center justify-between gap-2 text-sm font-semibold text-[#111827];
+  }
+
+  .filter-section-body {
+    @apply space-y-0.5 pb-1 pt-2;
+  }
+
+  .filter-option {
+    @apply flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-2 py-1.5 text-sm text-[#374151] transition hover:bg-[#f7f8fa];
+  }
+
+  .filter-checkbox {
+    @apply h-4 w-4 shrink-0 accent-[#111827];
+  }
+
+  .filter-option-label {
+    @apply flex flex-1 items-center gap-1;
+  }
+
+  .filter-option-count {
+    @apply text-xs text-[#9ca3af];
+  }
+
+  .filter-toolbar {
+    @apply mb-4 flex flex-wrap items-center justify-between gap-3 rounded-[24px] border px-5 py-4;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .filter-count {
+    @apply text-sm text-[#6b7280];
+  }
+
+  .filter-sort-select {
+    @apply min-h-11 rounded-full border bg-white px-4 py-2 text-sm text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#111827]/10;
+    border-color: var(--border);
+  }
+
+  .filter-chips {
+    @apply mb-4 flex flex-wrap gap-2;
+  }
+
+  .filter-chip {
+    @apply inline-flex min-h-9 items-center rounded-full border bg-white px-3.5 py-1.5 text-xs font-medium text-[#374151] transition hover:border-[#111827]/20 hover:text-[#111827];
+    border-color: var(--border);
+  }
+
+  .filter-chip-clear {
+    @apply inline-flex min-h-9 items-center px-2 text-xs font-medium text-[#6b7280] underline-offset-2 hover:text-[#111827] hover:underline;
+  }
+
+  .filter-clear-link {
+    @apply text-xs font-medium text-[#6b7280] underline-offset-2 hover:text-[#111827] hover:underline;
+  }
+
+  .filter-mobile-bar {
+    @apply mb-4 grid grid-cols-2 gap-3;
+  }
+
+  .filter-mobile-btn {
+    @apply relative inline-flex min-h-11 items-center justify-center rounded-[24px] border bg-white px-4 text-sm font-semibold text-[#111827] shadow-sm transition active:scale-[0.98];
+    border-color: var(--border);
+  }
+
+  .filter-mobile-badge {
+    @apply absolute right-3 top-2 h-2 w-2 rounded-full bg-[#111827];
+  }
+
+  .filter-sheet-root {
+    @apply fixed inset-0 z-[100] lg:hidden;
+  }
+
+  .filter-sheet-backdrop {
+    @apply absolute inset-0 bg-[#111827]/30 backdrop-blur-[2px];
+  }
+
+  .filter-sheet-panel {
+    @apply absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col rounded-t-[24px] border bg-white shadow-lg;
+    border-color: var(--border);
+    animation: sheet-up 280ms ease-out;
+  }
+
+  .filter-sheet-header {
+    @apply flex shrink-0 items-center justify-between border-b px-5 py-4;
+    border-color: var(--border);
+  }
+
+  .filter-sheet-close {
+    @apply flex h-11 w-11 items-center justify-center rounded-full text-2xl font-light text-[#6b7280] hover:bg-[#f7f8fa];
+  }
+
+  .filter-sheet-body {
+    @apply overflow-y-auto px-5 py-4;
+  }
+
+  .filter-sort-option {
+    @apply flex min-h-11 w-full items-center rounded-2xl px-4 text-left text-sm font-medium text-[#374151] transition hover:bg-[#f7f8fa];
+  }
+
+  .filter-sort-option.is-active {
+    @apply bg-[#f7f8fa] font-semibold text-[#111827];
+  }
 }
 
 @keyframes fade-up {
@@ -317,6 +448,15 @@ button:not(:disabled),
     transform: translateX(calc(var(--stack-x, 0) * 1px))
       translateY(calc((var(--stack-y, 0) - 12) * 1px))
       rotate(calc(var(--stack-r, 0) * 0.25deg));
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 

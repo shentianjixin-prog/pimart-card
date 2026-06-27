@@ -1,20 +1,12 @@
+import { type FilterState, buildListingHref } from "@/lib/product-filters";
+
 type Props = {
   currentPage: number;
   totalPages: number;
-  searchParams: Record<string, string | undefined>;
+  filterState: FilterState;
 };
 
-function buildHref(params: Record<string, string | undefined>, page: number) {
-  const usp = new URLSearchParams();
-  for (const [key, value] of Object.entries(params)) {
-    if (value && key !== "page") usp.set(key, value);
-  }
-  if (page > 1) usp.set("page", String(page));
-  const qs = usp.toString();
-  return qs ? `/?${qs}` : "/";
-}
-
-export function Pagination({ currentPage, totalPages, searchParams }: Props) {
+export function Pagination({ currentPage, totalPages, filterState }: Props) {
   if (totalPages <= 1) return null;
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -24,7 +16,7 @@ export function Pagination({ currentPage, totalPages, searchParams }: Props) {
       {pages.map((p) => (
         <a
           key={p}
-          href={buildHref(searchParams, p)}
+          href={buildListingHref(filterState, { page: p })}
           className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-medium transition ${
             p === currentPage
               ? "border-[#111827] bg-[#111827] text-white"
