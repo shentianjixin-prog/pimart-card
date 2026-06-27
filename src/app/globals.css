@@ -212,6 +212,14 @@ button:not(:disabled),
   .hero-desc {
     @apply text-base font-medium text-[#6b7280] sm:text-lg;
   }
+
+  .hero-carousel-card {
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .hero-carousel-slide:hover .hero-carousel-card {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 64px rgba(17, 24, 39, 0.12);
+  }
 }
 
 @keyframes fade-up {

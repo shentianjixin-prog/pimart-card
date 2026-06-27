@@ -5,7 +5,6 @@ import { ProductCard } from "@/components/ProductCard";
 import { FilterSidebar } from "@/components/FilterSidebar";
 import { Pagination } from "@/components/Pagination";
 import { HomeHero } from "@/components/HomeHero";
-import { CategoryShowcase } from "@/components/CategoryShowcase";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductSection } from "@/components/ProductSection";
 import { WhyPimart } from "@/components/WhyPimart";
@@ -97,8 +96,8 @@ export default async function Home({
     total,
     categoryFacets,
     heroProducts,
+    popularProducts,
     newArrivals,
-    bestSellers,
     psaPicks,
   ] = await Promise.all([
     prisma.product.findMany({
@@ -123,14 +122,14 @@ export default async function Home({
       : Promise.resolve([]),
     showMarketing
       ? prisma.product.findMany({
-          where: stockFilter,
+          where: { ...stockFilter, featured: true },
           orderBy: { createdAt: "desc" },
           take: 4,
         })
       : Promise.resolve([]),
     showMarketing
       ? prisma.product.findMany({
-          where: { ...stockFilter, featured: true },
+          where: stockFilter,
           orderBy: { createdAt: "desc" },
           take: 4,
         })
@@ -155,18 +154,27 @@ export default async function Home({
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   if (showMarketing) {
+    const popular =
+      popularProducts.length > 0 ? popularProducts : newArrivals.slice(0, 4);
+
     return (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Hero（动态轮播） */}
         <div className="py-8 sm:py-10 lg:py-12">
           <HomeHero products={heroProducts} />
         </div>
 
-        <div className="section-block pb-8 sm:pb-10">
-          <SearchBar large className="mx-auto max-w-2xl" />
-        </div>
+        {/* Popular Products */}
+        <ProductSection
+          title={T("section_popular")}
+          subtitle={T("section_popular_sub")}
+          products={popular}
+          viewAllHref="/?inStock=1"
+          viewAllLabel={T("section_view_all")}
+          tone="default"
+        />
 
-        <CategoryShowcase />
-
+        {/* New Arrivals */}
         <ProductSection
           title={T("section_new_arrivals")}
           subtitle={T("section_new_sub")}
@@ -175,14 +183,8 @@ export default async function Home({
           viewAllLabel={T("section_shop_all")}
           tone="blue"
         />
-        <ProductSection
-          title={T("section_best_sellers")}
-          subtitle={T("section_best_sub")}
-          products={bestSellers}
-          viewAllHref="/?inStock=1"
-          viewAllLabel={T("section_view_all")}
-          tone="purple"
-        />
+
+        {/* PSA Picks */}
         <ProductSection
           title={T("section_psa_picks")}
           subtitle={T("section_psa_sub")}
@@ -191,9 +193,15 @@ export default async function Home({
           viewAllLabel={T("section_view_psa")}
           tone="sky"
         />
-        <div className="space-y-10 py-10 sm:space-y-12 sm:py-14 lg:py-16">
-          <WhyPimart />
+
+        {/* Wholesale */}
+        <div className="py-10 sm:py-14 lg:py-16">
           <WholesaleBanner />
+        </div>
+
+        {/* Why PIMART CARD */}
+        <div className="pb-10 sm:pb-14 lg:pb-16">
+          <WhyPimart />
         </div>
       </div>
     );

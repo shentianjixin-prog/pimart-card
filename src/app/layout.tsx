@@ -6,7 +6,6 @@ import { CartProvider } from "@/lib/cart-context";
 import { LangProvider } from "@/lib/lang-context";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { NewsletterBar } from "@/components/NewsletterBar";
 import { HTML_LANG, resolveLang } from "@/lib/translations";
 
 const inter = Inter({
@@ -56,7 +55,6 @@ export default async function RootLayout({
           <CartProvider>
             <Header />
             <main className="flex-1">{children}</main>
-            <NewsletterBar />
             <Footer />
           </CartProvider>
         </LangProvider>

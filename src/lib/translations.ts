@@ -211,6 +211,8 @@ const dict: Record<string, Record<Lang, string>> = {
   cat_wholesale:    { zh: "批发", ja: "卸売", en: "Wholesale" },
 
   // 首页商品区块
+  section_popular:      { zh: "人气商品", ja: "人気商品", en: "Popular Products" },
+  section_popular_sub:  { zh: "店铺热销与精选推荐", ja: "店舗の人気・おすすめ商品", en: "Top picks and customer favorites" },
   section_new_arrivals: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
   section_new_sub:      { zh: "最新原盒与评级卡", ja: "最新の未開封BOXと鑑定品", en: "Latest sealed boxes and graded picks" },
   section_best_sellers: { zh: "热销商品", ja: "人気商品", en: "Best Sellers" },
