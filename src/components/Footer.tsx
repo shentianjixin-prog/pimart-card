@@ -12,8 +12,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" aria-label="PIMART CARD">
-              <PimartLogo height={32} />
+            <Link href="/" aria-label="PIMARTCARD">
+              <PimartLogo height={34} />
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-[#6b7280]">
               {T("footer_tagline")}

@@ -143,8 +143,8 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
               <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-center px-5 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:px-8 xl:px-10">
                 <div className="text-center lg:text-left">
                   {slide.brand ? (
-                    <div className="mb-4 flex justify-center lg:justify-start">
-                      <PimartLogo height={44} className="max-w-[220px]" />
+                    <div className="mb-5 flex justify-center lg:justify-start">
+                      <PimartLogo variant="wordmark" height={48} className="max-w-[280px]" />
                     </div>
                   ) : (
                     <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">

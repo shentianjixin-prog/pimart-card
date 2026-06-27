@@ -253,7 +253,7 @@ export function Header() {
             onClick={closeMobile}
             aria-label="PIMART CARD"
           >
-            <PimartLogo height={36} className="w-auto max-w-[148px] sm:max-w-[168px]" />
+            <PimartLogo height={36} className="w-auto max-w-[160px] sm:max-w-[180px]" />
           </Link>
 
           <nav className="hidden flex-1 items-center gap-1 lg:flex">

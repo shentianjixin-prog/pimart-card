@@ -1,116 +1,146 @@
 type Props = {
-  /** 显示高度（px），宽度按比例自适应 */
   height?: number;
   className?: string;
-  /** compact：仅图标 + 短字标，适合极小空间 */
-  variant?: "full" | "compact";
+  variant?: "full" | "compact" | "wordmark";
 };
 
-const GREEN_PRIMARY = "#15803D";
-const GREEN_ACCENT = "#16A34A";
+/** 深林绿 +  sage + 箔金点缀 */
+const INK = "#0C1F17";
+const FOREST = "#14532D";
+const SAGE = "#3F7D5A";
+const FOIL = "#B8956B";
+const MIST = "#E8F3ED";
+
+function Mark({ size = 40 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      aria-hidden
+    >
+      <rect x="4" y="10" width="26" height="34" rx="4.5" fill={MIST} transform="rotate(-7 17 27)" />
+      <rect
+        x="10"
+        y="4"
+        width="26"
+        height="34"
+        rx="4.5"
+        fill="#FFFFFF"
+        stroke={FOREST}
+        strokeWidth="1.15"
+        transform="rotate(4 23 21)"
+      />
+      <path
+        d="M14 11.5 H30"
+        stroke={FOIL}
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        transform="rotate(4 23 21)"
+      />
+      <path
+        d="M17 18 C17 14.5 19.8 12.5 23.2 12.5 C26.2 12.5 28.5 14 28.5 16.8 C28.5 19.2 27 20.5 24.6 21.2 L28.8 28.5 H25.4 L21.6 21.6 H20.2 V28.5 H17 V18 Z M20.2 19.2 H23 C24.6 19.2 25.6 18.4 25.6 16.9 C25.6 15.5 24.6 14.7 23 14.7 H20.2 V19.2 Z"
+        fill={FOREST}
+        transform="translate(1.5 2) rotate(4 23 21)"
+      />
+    </svg>
+  );
+}
 
 export function PimartLogo({ height = 36, className = "", variant = "full" }: Props) {
-  const width = variant === "compact" ? height * 1.15 : height * (280 / 64);
-
   if (variant === "compact") {
+    return (
+      <span className={`inline-flex shrink-0 items-center ${className}`} role="img" aria-label="PIMARTCARD">
+        <Mark size={height} />
+      </span>
+    );
+  }
+
+  if (variant === "wordmark") {
+    const width = height * 5.2;
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 64 64"
+        viewBox="0 0 200 36"
         width={width}
         height={height}
         className={className}
         role="img"
-        aria-label="PIMART CARD"
+        aria-label="PIMARTCARD"
       >
-        <rect width="64" height="64" rx="14" fill="#FFFFFF" />
-        <rect
-          x="1"
-          y="1"
-          width="62"
-          height="62"
-          rx="13"
-          stroke="rgba(15,23,42,0.08)"
-          strokeWidth="1.5"
-          fill="none"
-        />
         <text
-          x="32"
-          y="42"
-          textAnchor="middle"
-          fill={GREEN_PRIMARY}
-          fontFamily="var(--font-inter), Inter, system-ui, sans-serif"
-          fontSize="28"
-          fontWeight="800"
-          letterSpacing="-1"
+          x="0"
+          y="27"
+          fontFamily="var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif"
+          fontSize="22"
+          fill={INK}
         >
-          P
+          <tspan fontWeight="600" letterSpacing="0.04em">
+            PIMART
+          </tspan>
+          <tspan fontWeight="400" letterSpacing="0.18em" fill={SAGE}>
+            CARD
+          </tspan>
         </text>
       </svg>
     );
   }
 
+  const width = height * (232 / 40);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 280 64"
+      viewBox="0 0 232 40"
       width={width}
       height={height}
       className={className}
       role="img"
-      aria-label="PIMART CARD"
+      aria-label="PIMARTCARD"
     >
-      <rect width="280" height="64" rx="14" fill="#FFFFFF" />
-      <rect
-        x="0.75"
-        y="0.75"
-        width="278.5"
-        height="62.5"
-        rx="13.25"
-        stroke="rgba(15,23,42,0.08)"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <rect x="16" y="16" width="24" height="32" rx="4" fill={GREEN_ACCENT} fillOpacity="0.12" />
-      <rect
-        x="18"
-        y="18"
-        width="20"
-        height="28"
-        rx="3"
-        stroke={GREEN_PRIMARY}
-        strokeWidth="1.75"
-        fill="none"
-      />
-      <path
-        d="M22 38 L28 26 L34 32 L40 24"
-        stroke={GREEN_PRIMARY}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
+      <g transform="translate(0 0)">
+        <rect x="5" y="9" width="22" height="28" rx="3.5" fill={MIST} transform="rotate(-7 16 23)" />
+        <rect
+          x="9"
+          y="5"
+          width="22"
+          height="28"
+          rx="3.5"
+          fill="#FFFFFF"
+          stroke={FOREST}
+          strokeWidth="1"
+          transform="rotate(4 20 19)"
+        />
+        <path
+          d="M12 10 H28"
+          stroke={FOIL}
+          strokeWidth="1.1"
+          strokeLinecap="round"
+          transform="rotate(4 20 19)"
+        />
+        <path
+          d="M14.5 14.5 C14.5 12.2 16.5 10.8 18.8 10.8 C20.8 10.8 22.3 12 22.3 13.6 C22.3 15.2 21.2 16.1 19.5 16.5 L22.5 21.5 H20 L17.8 16.8 H16.8 V21.5 H14.5 V14.5 Z M16.8 15.5 H18.8 C19.8 15.5 20.5 14.9 20.5 13.9 C20.5 12.9 19.8 12.3 18.8 12.3 H16.8 V15.5 Z"
+          fill={FOREST}
+          transform="translate(0.5 1) rotate(4 20 19)"
+        />
+      </g>
+
+      <line x1="44" y1="8" x2="44" y2="32" stroke={FOIL} strokeWidth="0.75" opacity="0.55" />
+
       <text
         x="52"
-        y="40"
-        fill={GREEN_PRIMARY}
-        fontFamily="var(--font-inter), Inter, system-ui, sans-serif"
-        fontSize="24"
-        fontWeight="700"
-        letterSpacing="0.5"
+        y="27"
+        fontFamily="var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif"
+        fontSize="19"
+        fill={INK}
       >
-        PIMART
-      </text>
-      <text
-        x="178"
-        y="40"
-        fill={GREEN_ACCENT}
-        fontFamily="var(--font-inter), Inter, system-ui, sans-serif"
-        fontSize="15"
-        fontWeight="600"
-        letterSpacing="4"
-      >
-        CARD
+        <tspan fontWeight="600" letterSpacing="0.06em">
+          PIMART
+        </tspan>
+        <tspan fontWeight="400" letterSpacing="0.2em" fill={SAGE}>
+          CARD
+        </tspan>
       </text>
     </svg>
   );

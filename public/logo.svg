@@ -1,9 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" role="img" aria-label="PIMART CARD">
-  <rect width="280" height="64" rx="14" fill="#FFFFFF"/>
-  <rect x="0.75" y="0.75" width="278.5" height="62.5" rx="13.25" stroke="rgba(15,23,42,0.08)" stroke-width="1.5"/>
-  <rect x="16" y="16" width="24" height="32" rx="4" fill="#16A34A" fill-opacity="0.12"/>
-  <rect x="18" y="18" width="20" height="28" rx="3" stroke="#15803D" stroke-width="1.75"/>
-  <path d="M22 38 L28 26 L34 32 L40 24" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="52" y="40" fill="#15803D" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="700" letter-spacing="0.5">PIMART</text>
-  <text x="178" y="40" fill="#16A34A" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4">CARD</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 40" fill="none" role="img" aria-label="PIMARTCARD">
+  <rect x="5" y="9" width="22" height="28" rx="3.5" fill="#E8F3ED" transform="rotate(-7 16 23)"/>
+  <rect x="9" y="5" width="22" height="28" rx="3.5" fill="#FFFFFF" stroke="#14532D" stroke-width="1" transform="rotate(4 20 19)"/>
+  <path d="M12 10 H28" stroke="#B8956B" stroke-width="1.1" stroke-linecap="round" transform="rotate(4 20 19)"/>
+  <path d="M14.5 14.5 C14.5 12.2 16.5 10.8 18.8 10.8 C20.8 10.8 22.3 12 22.3 13.6 C22.3 15.2 21.2 16.1 19.5 16.5 L22.5 21.5 H20 L17.8 16.8 H16.8 V21.5 H14.5 V14.5 Z M16.8 15.5 H18.8 C19.8 15.5 20.5 14.9 20.5 13.9 C20.5 12.9 19.8 12.3 18.8 12.3 H16.8 V15.5 Z" fill="#14532D" transform="translate(0.5 1) rotate(4 20 19)"/>
+  <line x1="44" y1="8" x2="44" y2="32" stroke="#B8956B" stroke-width="0.75" opacity="0.55"/>
+  <text x="52" y="27" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="19" fill="#0C1F17">
+    <tspan font-weight="600" letter-spacing="0.06em">PIMART</tspan><tspan font-weight="400" letter-spacing="0.2em" fill="#3F7D5A">CARD</tspan>
+  </text>
 </svg>
