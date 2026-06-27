@@ -396,27 +396,6 @@ button:not(:disabled),
       0 4px 16px rgba(15, 23, 42, 0.04);
   }
 
-  .home-announce-flow {
-    position: absolute;
-    pointer-events: none;
-    color: rgba(17, 24, 39, 0.14);
-    z-index: 1;
-  }
-
-  .home-announce-flow--tl {
-    top: -4px;
-    left: -2px;
-    width: 140px;
-    height: 88px;
-  }
-
-  .home-announce-flow--br {
-    right: -2px;
-    bottom: -6px;
-    width: 160px;
-    height: 96px;
-  }
-
   .home-announce-inner {
     @apply relative flex flex-col gap-5 overflow-hidden px-5 py-5 sm:flex-row sm:items-stretch sm:gap-8 sm:px-8 sm:py-6;
     border-radius: 26px 42px 30px 38px;
