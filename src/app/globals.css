@@ -566,24 +566,87 @@ button:not(:disabled),
   }
 
   /* World trust */
-  .home-world-dot {
+  .home-world-lines {
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .home-world-line {
+    fill: none;
+    stroke: url(#world-line-gradient);
+    stroke-width: 0.45;
+    stroke-linecap: round;
+    stroke-dasharray: 3 2;
+    animation: world-line-flow 4s linear infinite;
+  }
+
+  @keyframes world-line-flow {
+    to {
+      stroke-dashoffset: -10;
+    }
+  }
+
+  .home-world-marker {
+    z-index: 2;
     transform: translate(-50%, -50%);
   }
 
-  .home-world-pulse {
-    @apply block h-3 w-3 rounded-full bg-[#15803D];
-    box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.2);
+  .home-world-marker--hub {
+    z-index: 3;
+  }
+
+  .home-world-marker-ring {
+    @apply absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full;
+    background: radial-gradient(circle, rgba(21, 128, 61, 0.18) 0%, transparent 70%);
     animation: world-pulse 2.5s ease-in-out infinite;
   }
 
+  .home-world-marker--hub .home-world-marker-ring {
+    @apply h-14 w-14;
+  }
+
+  .home-world-marker-badge {
+    @apply relative flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-white sm:h-12 sm:w-12;
+    box-shadow:
+      0 8px 24px rgba(15, 23, 42, 0.12),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
+  }
+
+  .home-world-marker--hub .home-world-marker-badge {
+    @apply h-12 w-12 sm:h-[3.25rem] sm:w-[3.25rem];
+    box-shadow:
+      0 12px 32px rgba(21, 128, 61, 0.2),
+      0 0 0 2px rgba(21, 128, 61, 0.15);
+  }
+
+  .home-world-flag {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .home-world-marker--hub .home-world-flag {
+    font-size: 1.5rem;
+  }
+
+  .home-world-pokemon {
+    @apply absolute -bottom-1.5 -right-2 h-7 w-7 object-contain sm:h-8 sm:w-8;
+    filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.18));
+    pointer-events: none;
+  }
+
+  .home-world-marker--hub .home-world-pokemon {
+    @apply -bottom-2 -right-2.5 h-8 w-8 sm:h-9 sm:w-9;
+  }
+
   .home-world-label {
-    @apply absolute left-1/2 top-5 hidden -translate-x-1/2 whitespace-nowrap rounded-full border bg-white px-2 py-0.5 text-[10px] font-medium text-[#374151] lg:block;
+    @apply absolute left-1/2 top-[calc(100%+6px)] hidden -translate-x-1/2 whitespace-nowrap rounded-full border bg-white px-2.5 py-1 text-[10px] font-bold text-[#374151] lg:block;
     border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
   }
 
   @keyframes world-pulse {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.15); }
-    50% { box-shadow: 0 0 0 8px rgba(21, 128, 61, 0.08); }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+    50% { transform: translate(-50%, -50%) scale(1.12); opacity: 0.45; }
   }
 
   @media (min-width: 1024px) {
