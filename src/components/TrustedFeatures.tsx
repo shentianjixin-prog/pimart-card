@@ -18,10 +18,11 @@ export function TrustedFeatures() {
         <h2 className="trusted-section-title">{T("trusted_title")}</h2>
         <p className="trusted-section-subtitle mx-auto max-w-2xl">{T("trusted_subtitle")}</p>
       </div>
-      <div className="trusted-features-track">
+      <div className="trusted-features-track metal-grid">
         {FEATURES.map((f) => (
-          <div key={f.titleKey} className="trusted-feature-card">
-            <h3 className="trusted-feature-title">{T(f.titleKey)}</h3>
+          <div key={f.titleKey} className="trusted-feature-card metal-card">
+            <div className="metal-card-shine" aria-hidden />
+            <h3 className="trusted-feature-title metal-heading">{T(f.titleKey)}</h3>
             <p className="trusted-feature-desc">{T(f.descKey)}</p>
           </div>
         ))}
