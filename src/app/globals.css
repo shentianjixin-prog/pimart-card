@@ -381,35 +381,43 @@ button:not(:disabled),
 
   /* Announce bar */
   .home-announce-inner {
-    @apply flex min-h-14 items-center gap-4 overflow-hidden rounded-[24px] border bg-white px-4 sm:px-5;
+    @apply flex flex-col gap-3 rounded-[24px] border bg-white px-4 py-4 sm:flex-row sm:items-start sm:gap-5 sm:px-5;
     border-color: rgba(15, 23, 42, 0.08);
     box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
   }
 
   .home-announce-label {
-    @apply shrink-0 text-sm font-semibold text-[#111827];
+    @apply shrink-0 text-sm font-semibold text-[#111827] sm:pt-0.5;
   }
 
-  .home-announce-scroll {
-    @apply min-w-0 flex-1 overflow-x-auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .home-announce-items {
-    @apply flex gap-3 sm:gap-6;
+  .home-announce-list {
+    @apply flex min-w-0 flex-1 flex-col gap-0;
   }
 
   .home-announce-item {
-    @apply shrink-0 whitespace-nowrap text-sm text-[#6B7280];
+    @apply flex items-start gap-3 border-t py-2.5 text-sm first:border-t-0 first:pt-0 last:pb-0;
+    border-color: rgba(15, 23, 42, 0.06);
+    animation: announce-enter 0.45s ease both;
   }
 
-  .home-announce-item::before {
-    content: "•";
-    @apply mr-3 text-[#D1D5DB];
+  .home-announce-date {
+    @apply shrink-0 font-medium tabular-nums text-[#111827];
+    min-width: 4.5rem;
   }
 
-  .home-announce-item:first-child::before {
-    content: none;
+  .home-announce-text {
+    @apply min-w-0 flex-1 text-[#6B7280];
+  }
+
+  @keyframes announce-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Product tabs */

@@ -1,30 +1,49 @@
 "use client";
 
-import { useT } from "@/lib/lang-context";
+import { useLang, useT } from "@/lib/lang-context";
+import type { Lang } from "@/lib/translations";
 
-const ITEMS = [
-  "announce_sv",
-  "announce_op",
-  "announce_psa",
-  "announce_b2b",
-] as const;
+type Announcement = {
+  id: string;
+  /** ISO date YYYY-MM-DD — newest first, pushes older items down */
+  date: string;
+  messageKey: string;
+};
+
+/** Newest at top; add entries here when publishing updates */
+const ANNOUNCEMENTS: Announcement[] = [
+  { id: "op-eb06", date: "2025-06-28", messageKey: "announce_op_eb06" },
+  { id: "gem-restock", date: "2025-06-18", messageKey: "announce_gem_restock" },
+  { id: "psa-weekly", date: "2025-06-12", messageKey: "announce_psa" },
+  { id: "b2b", date: "2025-06-05", messageKey: "announce_b2b" },
+].sort((a, b) => b.date.localeCompare(a.date));
+
+function formatAnnounceDate(iso: string, lang: Lang): string {
+  const d = new Date(`${iso}T00:00:00`);
+  if (lang === "en") {
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  }
+  return `${d.getMonth() + 1}月${d.getDate()}日`;
+}
 
 export function HomeAnnounceBar() {
   const T = useT();
+  const { lang } = useLang();
 
   return (
     <section className="home-announce mb-10 sm:mb-14">
       <div className="home-announce-inner">
         <span className="home-announce-label">{T("announce_title")}</span>
-        <div className="home-announce-scroll">
-          <div className="home-announce-items">
-            {ITEMS.map((key) => (
-              <span key={key} className="home-announce-item">
-                {T(key)}
-              </span>
-            ))}
-          </div>
-        </div>
+        <ul className="home-announce-list">
+          {ANNOUNCEMENTS.map((item) => (
+            <li key={item.id} className="home-announce-item">
+              <time className="home-announce-date" dateTime={item.date}>
+                {formatAnnounceDate(item.date, lang)}
+              </time>
+              <span className="home-announce-text">{T(item.messageKey)}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

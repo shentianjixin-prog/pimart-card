@@ -347,6 +347,8 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_cta_wholesale: { zh: "批发咨询", ja: "卸売相談", en: "Wholesale Inquiry" },
 
   announce_title: { zh: "公告", ja: "お知らせ", en: "Announcements" },
+  announce_gem_restock: { zh: "宝石包补货通知", ja: "宝石パック再入荷のお知らせ", en: "Gem Pack restock notice" },
+  announce_op_eb06: { zh: "海贼王 EB06 预售开启", ja: "ワンピース EB06 予約開始", en: "One Piece EB06 pre-order now open" },
   announce_sv: { zh: "SV 新品已到货", ja: "SV新着入荷", en: "SV new arrivals in stock" },
   announce_op: { zh: "海贼王新品预售中", ja: "ワンピース予約受付中", en: "One Piece pre-orders open" },
   announce_psa: { zh: "PSA 每周更新", ja: "PSA毎週更新", en: "PSA updated weekly" },
