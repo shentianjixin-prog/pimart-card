@@ -7,8 +7,7 @@ import { LangProvider } from "@/lib/lang-context";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { NewsletterBar } from "@/components/NewsletterBar";
-import type { Lang } from "@/lib/translations";
-import { HTML_LANG } from "@/lib/translations";
+import { HTML_LANG, resolveLang } from "@/lib/translations";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,9 +27,9 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "PIMART CARD | Global Trading Card Marketplace",
+  title: "PIMART CARD | グローバルトレーディングカードマーケット",
   description:
-    "Japanese & Chinese TCG Sealed Boxes, PSA Cards & Wholesale Supply. Authentic guarantee, ships from Japan.",
+    "日版・中国語版 TCG 未開封BOX、PSA鑑定品、卸売対応。正規品保証、日本から発送。",
 };
 
 export default async function RootLayout({
@@ -39,8 +38,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const rawLang = cookieStore.get("lang")?.value ?? "zh";
-  const lang: Lang = rawLang === "ja" || rawLang === "en" ? rawLang : "zh";
+  const lang = resolveLang(cookieStore.get("lang")?.value);
 
   return (
     <html

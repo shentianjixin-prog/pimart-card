@@ -7,19 +7,19 @@ import { useLang, useT } from "@/lib/lang-context";
 import { LANGS, LANG_LABELS } from "@/lib/translations";
 
 const SHOP_MENU = [
-  { label: "Pokémon", href: "/?category=宝可梦原盒" },
-  { label: "One Piece", href: "/?q=One%20Piece" },
-  { label: "Dragon Ball", href: "/?q=Dragon%20Ball" },
-  { label: "Sealed Boxes", href: "/?inStock=1" },
-  { label: "PSA Cards", href: "/?q=PSA" },
-];
+  { key: "menu_pokemon", href: "/?category=宝可梦原盒" },
+  { key: "menu_one_piece", href: "/?q=One%20Piece" },
+  { key: "menu_dragon_ball", href: "/?q=Dragon%20Ball" },
+  { key: "menu_sealed", href: "/?inStock=1" },
+  { key: "menu_psa", href: "/?q=PSA" },
+] as const;
 
 const MORE_MENU = [
-  { label: "New Arrivals", href: "/?sort=newest&inStock=1" },
-  { label: "Wholesale", href: "/contact" },
-  { label: "Shipping", href: "/shipping" },
-  { label: "Guide", href: "/guide" },
-];
+  { key: "menu_new_arrivals", href: "/?sort=newest&inStock=1" },
+  { key: "menu_wholesale", href: "/contact" },
+  { key: "menu_shipping", href: "/shipping" },
+  { key: "menu_guide", href: "/guide" },
+] as const;
 
 function NavDropdown({
   label,
@@ -84,9 +84,6 @@ export function Header() {
 
   useEffect(() => {
     setMounted(true);
-    if (!document.cookie.includes("lang=")) {
-      document.cookie = `lang=zh; path=/; max-age=${365 * 24 * 3600}`;
-    }
   }, []);
 
   useEffect(() => {
@@ -95,6 +92,9 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  const shopItems = SHOP_MENU.map((item) => ({ label: T(item.key), href: item.href }));
+  const moreItems = MORE_MENU.map((item) => ({ label: T(item.key), href: item.href }));
 
   return (
     <header className="glass-header sticky top-0 z-50">
@@ -114,8 +114,8 @@ export function Header() {
           >
             {T("nav_home")}
           </Link>
-          <NavDropdown label="Shop" items={SHOP_MENU} />
-          <NavDropdown label="More" items={MORE_MENU} />
+          <NavDropdown label={T("nav_shop")} items={shopItems} />
+          <NavDropdown label={T("nav_more")} items={moreItems} />
         </nav>
 
         <form action="/" className="hidden flex-1 max-w-xs md:flex">
@@ -164,7 +164,7 @@ export function Header() {
             type="button"
             className="touch-target rounded-full text-[#374151] lg:hidden"
             onClick={() => setMenuOpen((o) => !o)}
-            aria-label="菜单"
+            aria-label={T("nav_menu")}
             aria-expanded={menuOpen}
           >
             <span className={`block h-0.5 w-6 bg-[#374151] transition-transform ${menuOpen ? "translate-y-1.5 rotate-45" : ""}`} />
@@ -182,8 +182,8 @@ export function Header() {
             </form>
 
             <div className="glass-dropdown mb-4 p-2">
-              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">Shop</p>
-              {SHOP_MENU.map((item) => (
+              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">{T("nav_shop")}</p>
+              {shopItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -196,8 +196,8 @@ export function Header() {
             </div>
 
             <div className="glass-dropdown mb-4 p-2">
-              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">More</p>
-              {MORE_MENU.map((item) => (
+              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">{T("nav_more")}</p>
+              {moreItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useT } from "@/lib/lang-context";
 
 export type HeroStackProduct = {
   name: string;
@@ -18,6 +19,7 @@ const STACK_STYLES = [
 ];
 
 export function HomeHero({ products }: { products: HeroStackProduct[] }) {
+  const T = useT();
   const stack = products.slice(0, 5);
   while (stack.length < 5) {
     stack.push({
@@ -34,26 +36,26 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
       <div className="relative grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
         <div className="animate-fade-up text-center lg:text-left">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6b7280]">
-            Premium TCG Marketplace
+            {T("hero_tag")}
           </p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#111827] sm:text-5xl lg:text-6xl">
             PIMART CARD
           </h1>
           <p className="mt-2 text-lg font-medium text-[#374151] sm:text-xl">
-            Global Trading Card Marketplace
+            {T("hero_subtitle")}
           </p>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#6b7280] lg:mx-0 sm:text-base">
-            Japanese &amp; Chinese TCG Sealed Boxes, PSA Cards &amp; Wholesale Supply
+            {T("hero_desc")}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
             <Link href="/?sort=newest&inStock=1" className="btn-primary">
-              Shop New Arrivals
+              {T("hero_cta_new")}
             </Link>
             <Link href="/contact" className="btn-secondary">
-              Wholesale Inquiry
+              {T("hero_cta_wholesale")}
             </Link>
             <Link href="/?q=PSA" className="btn-secondary">
-              View PSA Picks
+              {T("hero_cta_psa")}
             </Link>
           </div>
         </div>

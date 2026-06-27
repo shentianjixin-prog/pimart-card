@@ -9,13 +9,13 @@ import { CategoryPills } from "@/components/CategoryPills";
 import { ProductSection } from "@/components/ProductSection";
 import { WhyPimart } from "@/components/WhyPimart";
 import { WholesaleBanner } from "@/components/WholesaleBanner";
-import { t, type Lang } from "@/lib/translations";
+import { t, resolveLang } from "@/lib/translations";
 import type { Prisma } from "@/generated/prisma/client";
 
 const PAGE_SIZE = 12;
 
 const ACTIVE_PRODUCT: Prisma.ProductWhereInput = {
-  NOT: { status: "下架" },
+  status: "上架",
 };
 
 type SearchParams = {
@@ -49,8 +49,7 @@ export default async function Home({
   searchParams: Promise<SearchParams>;
 }) {
   const [sp, cookieStore] = await Promise.all([searchParams, cookies()]);
-  const rawLang = cookieStore.get("lang")?.value ?? "zh";
-  const lang: Lang = rawLang === "ja" || rawLang === "en" ? rawLang : "zh";
+  const lang = resolveLang(cookieStore.get("lang")?.value);
   const T = (key: string) => t(key, lang);
 
   const page = Math.max(1, Number(sp.page) || 1);
@@ -162,26 +161,26 @@ export default async function Home({
         </div>
         <CategoryPills />
         <ProductSection
-          title="New Arrivals"
-          subtitle="Latest sealed boxes and graded picks"
+          title={T("section_new_arrivals")}
+          subtitle={T("section_new_sub")}
           products={newArrivals}
           viewAllHref="/?sort=newest&inStock=1"
-          viewAllLabel="Shop all"
+          viewAllLabel={T("section_shop_all")}
         />
         <ProductSection
-          title="Best Sellers"
-          subtitle="Popular items with strong demand"
+          title={T("section_best_sellers")}
+          subtitle={T("section_best_sub")}
           products={bestSellers}
           viewAllHref="/?inStock=1"
-          viewAllLabel="View all"
-          badge="Hot"
+          viewAllLabel={T("section_view_all")}
+          badge={T("page_hot_badge")}
         />
         <ProductSection
-          title="PSA Picks"
-          subtitle="Graded cards and premium inventory"
+          title={T("section_psa_picks")}
+          subtitle={T("section_psa_sub")}
           products={psaPicks}
           viewAllHref="/?q=PSA"
-          viewAllLabel="View PSA"
+          viewAllLabel={T("section_view_psa")}
         />
         <div className="space-y-8 py-8 sm:py-10">
           <WhyPimart />
@@ -226,7 +225,7 @@ export default async function Home({
           <Pagination currentPage={page} totalPages={totalPages} searchParams={sp} />
           <div className="mt-8 text-center">
             <Link href="/" className="text-sm font-medium text-[#374151] hover:text-[#111827]">
-              ← Back to home
+              {T("page_back_home")}
             </Link>
           </div>
         </div>

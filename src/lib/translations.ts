@@ -1,14 +1,38 @@
 export type Lang = "zh" | "ja" | "en";
-export const LANGS: Lang[] = ["zh", "ja", "en"];
-export const LANG_LABELS: Record<Lang, string> = { zh: "中", ja: "日", en: "EN" };
+export const DEFAULT_LANG: Lang = "ja";
+export const LANGS: Lang[] = ["ja", "zh", "en"];
+export const LANG_LABELS: Record<Lang, string> = {
+  ja: "日本語",
+  zh: "中文",
+  en: "EN",
+};
+
+/** 从 cookie 解析语言，默认日语（主站面向日本客户） */
+export function resolveLang(raw?: string | null): Lang {
+  if (raw === "zh" || raw === "en") return raw;
+  return DEFAULT_LANG;
+}
 
 const dict: Record<string, Record<Lang, string>> = {
   // 导航
   nav_home:       { zh: "首页",       ja: "ホーム",       en: "Home" },
+  nav_shop:       { zh: "选购",       ja: "ショップ",     en: "Shop" },
+  nav_more:       { zh: "更多",       ja: "その他",       en: "More" },
+  nav_menu:       { zh: "菜单",       ja: "メニュー",     en: "Menu" },
   nav_pokemon:    { zh: "宝可梦原盒", ja: "ポケモンBOX",  en: "Pokémon Boxes" },
   nav_naruto:     { zh: "火影忍者",   ja: "NARUTO",        en: "Naruto" },
   nav_cart:       { zh: "购物车",     ja: "カート",        en: "Cart" },
   nav_search:     { zh: "搜索商品名称", ja: "商品名を検索", en: "Search products" },
+
+  menu_pokemon:     { zh: "宝可梦",     ja: "ポケモン",         en: "Pokémon" },
+  menu_one_piece:   { zh: "海贼王",     ja: "ワンピース",       en: "One Piece" },
+  menu_dragon_ball: { zh: "龙珠",       ja: "ドラゴンボール",   en: "Dragon Ball" },
+  menu_sealed:      { zh: "现货原盒",   ja: "未開封BOX",        en: "Sealed Boxes" },
+  menu_psa:         { zh: "PSA 评级卡", ja: "PSA鑑定品",        en: "PSA Cards" },
+  menu_new_arrivals:{ zh: "新品上架",   ja: "新着商品",         en: "New Arrivals" },
+  menu_wholesale:   { zh: "批发询价",   ja: "卸売・お問い合わせ", en: "Wholesale" },
+  menu_shipping:    { zh: "发货说明",   ja: "配送について",     en: "Shipping" },
+  menu_guide:       { zh: "购物指南",   ja: "ご利用ガイド",     en: "Guide" },
 
   // 筛选栏
   filter_sort:         { zh: "排序",           ja: "並び替え",     en: "Sort" },
@@ -39,7 +63,8 @@ const dict: Record<string, Record<Lang, string>> = {
   page_all_products:   { zh: "全部商品",    ja: "全商品",        en: "All Products" },
   page_total_unit:     { zh: "件商品",      ja: "件の商品",      en: " products" },
   page_total_pre:      { zh: "共 ",         ja: "全 ",           en: "" },
-  page_shipping_desc:  { zh: "简中原盒 / 预售现货 / 5-7 天发货", ja: "中国語版 / 予約・現物 / 5-7日発送", en: "CN edition · Pre-order & In Stock · Ships in 5-7 days" },
+  page_shipping_desc:  { zh: "简中原盒 / 预售现货 / 5-7 天发货", ja: "日・中 TCG 未開封BOX / PSA / 予約・現物 / 5〜7日発送", en: "JP & CN sealed boxes · PSA · Pre-order & in stock · Ships in 5-7 days" },
+  page_back_home:      { zh: "← 返回首页", ja: "← ホームに戻る", en: "← Back to home" },
   page_no_products:    { zh: "没有找到符合条件的商品", ja: "条件に合う商品が見つかりません", en: "No products found" },
   page_hot_badge:      { zh: "热销",        ja: "人気",          en: "Hot" },
   page_search_pre:     { zh: "搜索结果：\"", ja: "検索結果：\"",  en: "Search: \"" },
@@ -136,10 +161,69 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_2_cta2:  { zh: "查看现货",     ja: "現物を見る",      en: "View In Stock" },
 
   filter_count_unit: { zh: "件", ja: "件", en: "" },
+
+  // Hero（首页主视觉）
+  hero_tag:         { zh: "高端 TCG 交易平台", ja: "プレミアムTCGマーケット", en: "Premium TCG Marketplace" },
+  hero_subtitle:    { zh: "全球卡牌交易平台", ja: "グローバルトレーディングカードマーケット", en: "Global Trading Card Marketplace" },
+  hero_desc:        { zh: "日版・简中 TCG 未开封原盒、PSA 评级卡与批发供货", ja: "日版・中国語版 TCG 未開封BOX、PSA鑑定品、卸売対応", en: "Japanese & Chinese TCG sealed boxes, PSA cards & wholesale supply" },
+  hero_cta_new:     { zh: "浏览新品", ja: "新着商品を見る", en: "Shop New Arrivals" },
+  hero_cta_wholesale:{ zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
+  hero_cta_psa:     { zh: "查看 PSA 精选", ja: "PSA商品を見る", en: "View PSA Picks" },
+
+  // 首页分类胶囊
+  cat_pokemon:      { zh: "宝可梦", ja: "ポケモン", en: "Pokémon" },
+  cat_one_piece:    { zh: "海贼王", ja: "ワンピース", en: "One Piece" },
+  cat_dragon_ball:  { zh: "龙珠", ja: "ドラゴンボール", en: "Dragon Ball" },
+  cat_psa:          { zh: "PSA", ja: "PSA", en: "PSA" },
+  cat_sealed:       { zh: "现货原盒", ja: "未開封BOX", en: "Sealed Boxes" },
+  cat_wholesale:    { zh: "批发", ja: "卸売", en: "Wholesale" },
+
+  // 首页商品区块
+  section_new_arrivals: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
+  section_new_sub:      { zh: "最新原盒与评级卡", ja: "最新の未開封BOXと鑑定品", en: "Latest sealed boxes and graded picks" },
+  section_best_sellers: { zh: "热销商品", ja: "人気商品", en: "Best Sellers" },
+  section_best_sub:     { zh: "需求旺盛的人气商品", ja: "人気の高い定番アイテム", en: "Popular items with strong demand" },
+  section_psa_picks:    { zh: "PSA 精选", ja: "PSAピックアップ", en: "PSA Picks" },
+  section_psa_sub:      { zh: "评级卡与高端库存", ja: "鑑定品とプレミアム在庫", en: "Graded cards and premium inventory" },
+  section_shop_all:     { zh: "查看全部", ja: "すべて見る", en: "Shop all" },
+  section_view_all:     { zh: "查看全部", ja: "すべて見る", en: "View all" },
+  section_view_psa:     { zh: "查看 PSA", ja: "PSAを見る", en: "View PSA" },
+
+  // Why PIMART
+  why_title:    { zh: "为什么选择 PIMART CARD", ja: "PIMART CARDが選ばれる理由", en: "Why PIMART CARD" },
+  why_subtitle: { zh: "原盒、评级卡与批发客户的可靠供货", ja: "未開封BOX・鑑定品・卸売向けの信頼できる仕入れ", en: "Trusted supply for sealed boxes, graded cards, and wholesale buyers" },
+  why_auth_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
+  why_auth_desc:  { zh: "所有商品均来自可溯源的正规渠道", ja: "すべて正規ルートから仕入れ、トレーサビリティを確保", en: "All products sourced through verified channels with traceable supply." },
+  why_japan_title:{ zh: "日本发货", ja: "日本から発送", en: "Ships from Japan" },
+  why_japan_desc: { zh: "日本国内精心打包，可靠出库", ja: "日本国内で丁寧に梱包し、確実に発送", en: "Carefully packed and dispatched from Japan with reliable handling." },
+  why_world_title:{ zh: "全球配送", ja: "世界各国へ配送", en: "Worldwide Shipping" },
+  why_world_desc: { zh: "支持海外收藏家与经销商配送", ja: "海外のコレクター・業者向けに国際配送対応", en: "International delivery support for collectors and resellers worldwide." },
+  why_pay_title:  { zh: "安全支付", ja: "安全な決済", en: "Secure Payment" },
+  why_pay_desc:   { zh: "Stripe 加密结账，安心付款", ja: "Stripeによる暗号化チェックアウト", en: "Stripe-powered checkout with encrypted payment processing." },
+
+  // 批发横幅
+  wholesale_tag:   { zh: "B2B / 批发", ja: "B2B / 卸売", en: "B2B / Wholesale" },
+  wholesale_title: { zh: "批发与批量供货", ja: "卸売・大口仕入れ", en: "Wholesale & Bulk Supply" },
+  wholesale_desc:  { zh: "需要原盒、PSA 库存或定期供货？欢迎联系询价与专属支持。", ja: "未開封BOX・PSA在庫・定期仕入れをご希望の方は、価格・在庫・専任サポートをご相談ください。", en: "Looking for sealed boxes, PSA inventory, or recurring supply? Contact us for pricing, availability, and dedicated support for resellers and shops." },
+  wholesale_cta:   { zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
+
+  // 页脚扩展
+  footer_tagline:  { zh: "全球卡牌交易平台——原盒、PSA 评级卡与批发供货", ja: "未開封BOX・PSA鑑定品・卸売対応のグローバルTCGマーケット", en: "Global Trading Card Marketplace for sealed boxes, PSA cards, and wholesale supply." },
+  footer_shop:     { zh: "选购", ja: "ショップ", en: "Shop" },
+  footer_support:  { zh: "支持", ja: "サポート", en: "Support" },
+  footer_legal:    { zh: "法律信息", ja: "法的情報", en: "Legal" },
+  footer_link_psa: { zh: "PSA 精选", ja: "PSA商品", en: "PSA Picks" },
+
+  // 邮件订阅
+  newsletter_title:       { zh: "订阅更新", ja: "最新情報を受け取る", en: "Stay updated" },
+  newsletter_sub:           { zh: "新品、PSA 上架与批发资讯", ja: "新着・PSA入荷・卸売情報", en: "New arrivals, PSA drops, and wholesale updates." },
+  newsletter_placeholder: { zh: "your@email.com", ja: "your@email.com", en: "your@email.com" },
+  newsletter_btn:         { zh: "订阅", ja: "登録する", en: "Subscribe" },
+  newsletter_done:          { zh: "订阅成功，感谢加入 PIMART CARD。", ja: "登録ありがとうございます。", en: "Subscribed — thank you for joining PIMART CARD." },
 };
 
 export function t(key: string, lang: Lang): string {
-  return dict[key]?.[lang] ?? dict[key]?.["zh"] ?? key;
+  return dict[key]?.[lang] ?? dict[key]?.[DEFAULT_LANG] ?? dict[key]?.["zh"] ?? key;
 }
 
 const BOX_TYPE_KEY: Record<string, string> = {

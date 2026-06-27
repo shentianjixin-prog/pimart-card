@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { formatJpy } from "@/lib/format";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
-import { t, type Lang } from "@/lib/translations";
+import { t, resolveLang, type Lang } from "@/lib/translations";
 import { isProductArchived } from "@/lib/product-status";
 
 function formatReleaseDate(date: Date, lang: Lang) {
@@ -29,8 +29,7 @@ export default async function ProductPage({
 
   if (!product || isProductArchived(product.status)) notFound();
 
-  const rawLang = cookieStore.get("lang")?.value ?? "zh";
-  const lang: Lang = rawLang === "ja" || rawLang === "en" ? rawLang : "zh";
+  const lang = resolveLang(cookieStore.get("lang")?.value);
   const T = (key: string) => t(key, lang);
 
   const soldOut = product.stock <= 0;
