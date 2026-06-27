@@ -7,47 +7,44 @@ export function Footer() {
   const T = useT();
 
   return (
-    <footer className="mt-16 border-t border-white/10 bg-black">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mb-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {/* 品牌 */}
-          <div className="col-span-2 sm:col-span-1">
-            <p className="text-base font-bold text-white">PIMART CARD</p>
-            <p className="mt-2 text-xs leading-relaxed text-gray-500">{T("brand_tagline")}</p>
-          </div>
-
-          {/* 购物指南 */}
+    <footer className="mt-20 border-t border-[var(--border)] bg-black">
+      <div className="editorial-rule" />
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-8 lg:px-12">
+        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">{T("footer_guide")}</p>
-            <div className="flex flex-col gap-2">
-              <Link href="/shipping" className="text-sm text-gray-500 hover:text-gray-300">{T("footer_shipping")}</Link>
-              <Link href="/guide" className="text-sm text-gray-500 hover:text-gray-300">{T("footer_guide")}</Link>
-              <Link href="/contact" className="text-sm text-gray-500 hover:text-gray-300">{T("footer_contact")}</Link>
+            <p className="font-display text-3xl font-light tracking-wide text-[var(--ivory)]">PIMART CARD</p>
+            <p className="mt-2 text-[10px] uppercase tracking-[0.3em] text-neutral-600">{T("brand_tagline")}</p>
+          </div>
+          <p className="font-display text-sm italic text-[var(--gold)] opacity-70">{T("hero_motto")}</p>
+        </div>
+
+        <div className="mb-10 grid grid-cols-2 gap-10 sm:grid-cols-4">
+          <div>
+            <p className="mb-4 text-[10px] uppercase tracking-[0.25em] text-[var(--gold)]">{T("footer_guide")}</p>
+            <div className="flex flex-col gap-2.5">
+              <Link href="/shipping" className="link-muted text-sm">{T("footer_shipping")}</Link>
+              <Link href="/guide" className="link-muted text-sm">{T("footer_guide")}</Link>
+              <Link href="/contact" className="link-muted text-sm">{T("footer_contact")}</Link>
             </div>
           </div>
-
-          {/* 法律 */}
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">Legal</p>
-            <div className="flex flex-col gap-2">
-              <Link href="/privacy" className="text-sm text-gray-500 hover:text-gray-300">{T("footer_privacy")}</Link>
-              <Link href="/terms" className="text-sm text-gray-500 hover:text-gray-300">{T("footer_terms")}</Link>
-              <Link href="/tokusho" className="text-sm text-gray-500 hover:text-gray-300">{T("footer_tokusho")}</Link>
+            <p className="mb-4 text-[10px] uppercase tracking-[0.25em] text-[var(--gold)]">Legal</p>
+            <div className="flex flex-col gap-2.5">
+              <Link href="/privacy" className="link-muted text-sm">{T("footer_privacy")}</Link>
+              <Link href="/terms" className="link-muted text-sm">{T("footer_terms")}</Link>
+              <Link href="/tokusho" className="link-muted text-sm">{T("footer_tokusho")}</Link>
             </div>
           </div>
-
-          {/* 联系 */}
-          <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">{T("footer_contact")}</p>
-            <div className="flex flex-col gap-2">
-              <Link href="/contact" className="text-sm text-gray-500 hover:text-gray-300">shentianjixin@gmail.com</Link>
-            </div>
+          <div className="col-span-2 sm:col-span-2">
+            <p className="mb-4 text-[10px] uppercase tracking-[0.25em] text-[var(--gold)]">{T("footer_contact")}</p>
+            <Link href="/contact" className="link-muted text-sm">shentianjixin@gmail.com</Link>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-gray-600">© {new Date().getFullYear()} PIMART CARD. All rights reserved.</p>
-          <p className="text-xs text-gray-600">
+        <div className="editorial-rule mb-6" />
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[11px] text-neutral-600">© {new Date().getFullYear()} PIMART CARD</p>
+          <p className="text-[11px] text-neutral-600">
             {process.env.NEXT_PUBLIC_STRIPE_LIVE === "true"
               ? T("footer_payment_live")
               : T("footer_payment")}

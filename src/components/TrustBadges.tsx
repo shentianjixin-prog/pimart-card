@@ -14,13 +14,25 @@ const BADGES = [
 export function TrustBadges() {
   const T = useT();
   return (
-    <div className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:grid-cols-6">
-      {BADGES.map((b) => (
-        <div key={b.titleKey} className="flex flex-col gap-1 bg-black p-4">
-          <p className="text-xs font-semibold text-white leading-tight">{T(b.titleKey)}</p>
-          <p className="text-[11px] text-neutral-500 leading-tight">{T(b.descKey)}</p>
-        </div>
-      ))}
+    <div className="mb-12 border border-[var(--border-subtle)]">
+      <div className="grid grid-cols-2 lg:grid-cols-6">
+        {BADGES.map((b, i) => (
+          <div
+            key={b.titleKey}
+            className={`flex flex-col gap-2 border-[var(--border-subtle)] bg-[#080808] p-5 ${
+              i % 2 === 0 ? "border-r" : ""
+            } ${i < BADGES.length - 2 ? "border-b lg:border-b-0" : ""} lg:border-r lg:last:border-r-0`}
+          >
+            <span className="font-display text-lg text-[var(--gold)] opacity-60">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-[var(--ivory)]">
+              {T(b.titleKey)}
+            </p>
+            <p className="text-[11px] leading-relaxed text-neutral-600">{T(b.descKey)}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

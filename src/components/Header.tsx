@@ -127,7 +127,7 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
   const NAV = buildNav(categoryCounts);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-[var(--border-subtle)] bg-black/92 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8" style={{ height: 56 }}>
 
         {/* Logo */}
@@ -136,7 +136,7 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
           className="flex shrink-0 items-center gap-2 leading-none"
           onClick={() => { setMenuOpen(false); setOpenDrop(null); }}
         >
-          <Image src="/logo.svg" alt="PIMART CARD" width={120} height={30} className="h-7 w-auto" priority />
+          <Image src="/logo.svg" alt="PIMART CARD" width={110} height={28} className="h-6 w-auto opacity-95" priority />
         </Link>
 
         {/* 桌面导航 */}
@@ -150,7 +150,7 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
                   <button
                     type="button"
                     onClick={() => setOpenDrop(isOpen ? null : item.labelKey)}
-                    className={`flex items-center gap-0.5 px-3 py-0 text-sm font-medium transition ${isOpen ? "text-white" : "text-gray-400 hover:text-white"}`}
+                    className={`flex items-center gap-0.5 px-3 py-0 text-[11px] font-medium uppercase tracking-[0.12em] transition ${isOpen ? "text-[var(--ivory)]" : "text-neutral-500 hover:text-[var(--ivory)]"}`}
                     style={{ height: 56 }}
                   >
                     {T(item.labelKey)}
@@ -162,7 +162,7 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
                   <Link
                     href={item.href!}
                     onClick={() => setOpenDrop(null)}
-                    className="flex items-center px-3 text-sm font-medium text-gray-400 transition hover:text-white"
+                    className="flex items-center px-3 text-[11px] font-medium uppercase tracking-[0.12em] text-neutral-500 transition hover:text-[var(--ivory)]"
                     style={{ height: 56 }}
                   >
                     {T(item.labelKey)}

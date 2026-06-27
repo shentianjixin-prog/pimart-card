@@ -20,15 +20,15 @@ export function Pagination({ currentPage, totalPages, searchParams }: Props) {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <nav className="mt-10 flex items-center justify-center gap-2 text-sm">
+    <nav className="mt-12 flex items-center justify-center gap-1 text-sm">
       {pages.map((p) => (
         <a
           key={p}
           href={buildHref(searchParams, p)}
-          className={`flex h-8 w-8 items-center justify-center rounded-lg transition ${
+          className={`flex h-9 w-9 items-center justify-center rounded-sm border text-xs transition ${
             p === currentPage
-              ? "bg-gradient-to-r from-cyan-400 to-violet-500 text-black"
-              : "text-gray-400 hover:bg-white/10 hover:text-white"
+              ? "border-[var(--gold)] bg-[var(--gold)] text-black"
+              : "border-transparent text-neutral-500 hover:border-[var(--border-subtle)] hover:text-[var(--ivory)]"
           }`}
         >
           {p}

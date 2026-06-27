@@ -67,9 +67,9 @@ export function ProductCard({ product }: Props) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group surface relative block overflow-hidden transition hover:border-white/25"
+      className="group surface-gallery relative block overflow-hidden"
     >
-      <div className="relative aspect-[5/7] w-full overflow-hidden bg-white/[0.02]">
+      <div className="relative aspect-[5/7] w-full overflow-hidden bg-[#050505] p-3">
         <Image
           src={image}
           alt={product.name}
@@ -117,13 +117,13 @@ export function ProductCard({ product }: Props) {
         )}
       </div>
 
-      <div className="p-3">
-        <p className="line-clamp-2 text-sm font-medium text-white">{product.name}</p>
+      <div className="border-t border-[var(--border-subtle)] p-4">
+        <p className="font-display line-clamp-2 text-sm font-light leading-snug text-[var(--ivory)]">{product.name}</p>
         {product.series && (
-          <p className="mt-1 text-xs text-gray-500">{product.series}</p>
+          <p className="mt-1.5 text-[10px] uppercase tracking-[0.15em] text-neutral-600">{product.series}</p>
         )}
-        <div className="mt-2 flex items-end justify-between">
-          <p className="text-base font-bold text-white">{formatJpy(product.priceJpy)}</p>
+        <div className="mt-3 flex items-end justify-between border-t border-[var(--border-subtle)] pt-3">
+          <p className="font-display text-lg font-light text-[var(--ivory)]">{formatJpy(product.priceJpy)}</p>
           {!soldOut && product.stock <= 3 && (
             <p className="text-xs font-medium text-orange-400">
               {T("card_remaining_pre")}{product.stock}{T("card_remaining_suf")}

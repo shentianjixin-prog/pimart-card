@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { CartProvider } from "@/lib/cart-context";
@@ -20,6 +20,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
 export const metadata: Metadata = {
   title: "PIMART CARD | 日本·中国正版TCG卡牌 / PSA评级 / 批发",
   description: "日本·中国正版TCG卡牌，宝可梦/海贼王/火影忍者等原盒现货与预售，PSA评级，B2B批发，5-7天发货",
@@ -37,11 +43,11 @@ export default async function RootLayout({
   return (
     <html
       lang={HTML_LANG[lang]}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <div className="ambient-glow" aria-hidden="true" />
+        <div className="page-texture" aria-hidden="true" />
         <LangProvider initial={lang}>
           <CartProvider>
             <HeaderShell />

@@ -13,31 +13,33 @@ export function NewsletterBar() {
   }
 
   return (
-    <div className="border-t border-white/10 bg-white/[0.02] py-8">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="border-t border-[var(--border-subtle)] bg-[#080808] py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
         {done ? (
-          <p className="text-center text-sm text-cyan-300">
-            ✅ 已订阅，感谢！我们将第一时间通知您新品预售信息。
+          <p className="text-center font-display text-sm text-[var(--gold)]">
+            已订阅 — 感谢信任
           </p>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+            className="flex flex-col items-center gap-5 sm:flex-row sm:justify-between"
           >
-            <p className="text-sm font-medium text-gray-300">
-              🔔 订阅新品通知，第一时间获取预售信息
+            <p className="font-display text-lg font-light text-[var(--ivory)]">
+              订阅新品与预售通知
             </p>
-            <input
-              type="email"
-              placeholder="输入您的邮箱"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="input-field w-full max-w-xs py-1.5"
-            />
-            <button type="submit" className="btn-primary shrink-0 py-1.5">
-              订阅
-            </button>
+            <div className="flex w-full max-w-md gap-3">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="input-field flex-1 py-2"
+              />
+              <button type="submit" className="btn-primary shrink-0 px-8">
+                订阅
+              </button>
+            </div>
           </form>
         )}
       </div>

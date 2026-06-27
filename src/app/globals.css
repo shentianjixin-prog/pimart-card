@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
+  --background: #040404;
   --surface: #0a0a0a;
   --surface-elevated: #111111;
-  --foreground: #fafafa;
-  --muted: #a3a3a3;
-  --border: rgba(255, 255, 255, 0.12);
+  --foreground: #f5f3ef;
+  --ivory: #e8e4dc;
+  --muted: #8a8680;
+  --border: rgba(196, 165, 116, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --gold: #c4a574;
+  --gold-dim: rgba(196, 165, 116, 0.45);
   --accent-sky: #38bdf8;
   --accent-sky-hover: #0ea5e9;
-  --notify-red: #ef4444;
+  --notify-red: #dc2626;
 }
 
 @theme inline {
@@ -17,12 +21,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cormorant);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -46,54 +51,127 @@ button:not(:disabled),
   display: none;
 }
 
+/* 天野喜孝式背景：极淡金线纹理 */
+.page-texture {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("/decor/hero-lines.svg");
+  background-size: cover;
+  background-position: center top;
+}
+
 @layer components {
+  .font-display {
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  }
+
   .surface {
-    @apply rounded-xl border border-white/10 bg-[#0a0a0a];
+    @apply rounded-sm border bg-[#0a0a0a];
+    border-color: var(--border-subtle);
   }
+
+  .surface-gallery {
+    @apply rounded-sm border bg-[#080808] transition duration-500;
+    border-color: var(--border-subtle);
+  }
+  .surface-gallery:hover {
+    border-color: var(--border);
+    box-shadow: 0 0 0 1px rgba(196, 165, 116, 0.08);
+  }
+
   .surface-solid {
-    @apply rounded-xl border border-white/10 bg-[#111111];
+    @apply rounded-sm border bg-[#0c0c0c];
+    border-color: var(--border-subtle);
   }
+
+  .hairline-gold {
+    border-color: var(--border);
+  }
+
   .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold text-black transition active:brightness-90 disabled:cursor-not-allowed disabled:opacity-40 touch-manipulation;
+    @apply inline-flex min-h-11 items-center justify-center rounded-sm px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-black transition active:brightness-90 disabled:cursor-not-allowed disabled:opacity-40 touch-manipulation;
     background: var(--accent-sky);
   }
   .btn-primary:hover {
     background: var(--accent-sky-hover);
   }
+
   .btn-buy {
-    @apply inline-flex min-h-10 w-full items-center justify-center rounded-md px-4 py-2 text-xs font-semibold text-black transition active:brightness-90 touch-manipulation;
+    @apply inline-flex min-h-10 w-full items-center justify-center rounded-sm px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-black transition active:brightness-90 touch-manipulation;
     background: var(--accent-sky);
   }
   .btn-buy:hover {
     background: var(--accent-sky-hover);
   }
+
   .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-white/20 bg-transparent px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/40 hover:bg-white/5 active:bg-white/10 touch-manipulation;
+    @apply inline-flex min-h-11 items-center justify-center rounded-sm border bg-transparent px-6 py-2.5 text-xs font-medium uppercase tracking-[0.12em] text-[var(--ivory)] transition hover:bg-white/[0.03] active:bg-white/[0.06] touch-manipulation;
+    border-color: var(--border);
   }
+
   .input-field {
-    @apply w-full rounded-lg border border-white/15 bg-black px-3 py-2 text-base text-white placeholder:text-neutral-500 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20;
+    @apply w-full rounded-sm border bg-black px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 focus:outline-none;
+    border-color: var(--border-subtle);
   }
+  .input-field:focus {
+    border-color: var(--border);
+  }
+
   .badge-soft {
-    @apply rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium text-neutral-300;
+    @apply rounded-sm border px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-neutral-400;
+    border-color: var(--border-subtle);
   }
+
   .gradient-text {
-    @apply text-white;
+    @apply text-[var(--ivory)];
   }
+
   .link-muted {
-    @apply text-neutral-400 transition hover:text-white;
+    @apply text-neutral-500 transition hover:text-[var(--ivory)];
   }
+
+  .link-editorial {
+    @apply text-[11px] uppercase tracking-[0.2em] text-neutral-500 transition hover:text-[var(--gold)];
+  }
+
   .badge-notify {
-    @apply absolute flex items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-black;
+    @apply absolute flex items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white ring-2 ring-black;
     min-width: 1.125rem;
     height: 1.125rem;
     padding: 0 0.25rem;
   }
+
   .badge-notify-pulse {
     animation: notify-pulse 2s ease-in-out infinite;
+  }
+
+  .section-index {
+    @apply font-display text-5xl font-light leading-none text-[var(--gold)] opacity-40 sm:text-6xl;
+  }
+
+  .section-title {
+    @apply font-display text-2xl font-light tracking-wide text-[var(--ivory)] sm:text-3xl;
+  }
+
+  .editorial-rule {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
   }
 }
 
 @keyframes notify-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.45); }
+  50% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out both;
 }
