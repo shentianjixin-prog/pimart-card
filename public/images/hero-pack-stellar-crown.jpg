@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>The official Pokémon Website in China | The official Pokémon Website in China</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="The official Pokémon Website in China | The official Pokémon Website in China">
+<meta property="og:site_name" content="The official Pokémon Website in China">
+<meta property="og:description" content="The official Pokémon Website in China">
+<meta property="og:url" content="https://www.pokemon.cn/">
+<meta name="description" content="The official Pokémon Website in China">
+<meta name="keywords" content="宝可梦,精灵宝可梦,宠物小精灵,神奇宝贝,口袋妖怪,皮卡丘,pokemon">
+<meta property="og:image" content="https://www.pokemon.cn/wp-content/themes/pokemon/assets/img/common/og-image.png">
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<meta name="description" content="宝可梦中国官方网站" />
+<link rel="canonical" href="https://www.pokemon.cn/" />
+<link rel="next" href="https://www.pokemon.cn/p/2" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The official Pokémon Website in China" />
+<meta property="og:description" content="宝可梦中国官方网站" />
+<meta property="og:url" content="https://www.pokemon.cn/" />
+<meta property="og:site_name" content="The official Pokémon Website in China" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"CollectionPage","@id":"https:\/\/www.pokemon.cn\/","url":"https:\/\/www.pokemon.cn\/","name":"宝可梦官方网站｜Pokémon 中国","isPartOf":{"@id":"https:\/\/www.pokemon.cn\/#website"},"about":{"@id":"https:\/\/www.pokemon.cn\/#organization"},"description":"宝可梦中国官方网站","breadcrumb":{"@id":"https:\/\/www.pokemon.cn\/#breadcrumb"},"inLanguage":"zh-Hans"},{"@type":"BreadcrumbList","@id":"https:\/\/www.pokemon.cn\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页"}]},{"@type":"WebSite","@id":"https:\/\/www.pokemon.cn\/#website","url":"https:\/\/www.pokemon.cn\/","name":"The official Pokémon Website in China","description":"","publisher":{"@id":"https:\/\/www.pokemon.cn\/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.pokemon.cn\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"zh-Hans"},{"@type":"Organization","@id":"https:\/\/www.pokemon.cn\/#organization","name":"Pokémon Shanghai","url":"https:\/\/www.pokemon.cn\/","logo":{"@type":"ImageObject","inLanguage":"zh-Hans","@id":"https:\/\/www.pokemon.cn\/#\/schema\/logo\/image\/","url":"https:\/\/image.pokemon.com.cn\/wp-content\/uploads\/2025\/08\/logo.png?auth_key=1782548034-3dea5d82341b4caba80fcb77b4147d54-0-0e3d22d88198239a9ccec18342e7c476","contentUrl":"https:\/\/image.pokemon.com.cn\/wp-content\/uploads\/2025\/08\/logo.png?auth_key=1782548034-3dea5d82341b4caba80fcb77b4147d54-0-0e3d22d88198239a9ccec18342e7c476","width":201,"height":74,"caption":"Pokémon Shanghai"},"image":{"@id":"https:\/\/www.pokemon.cn\/#\/schema\/logo\/image\/"},"sameAs":["https:\/\/weibo.com\/u\/6305628151","https:\/\/www.xiaohongshu.com\/user\/profile\/65d54e280000000017014262","https:\/\/space.bilibili.com\/1038290200"]}]}</script>
+<style id='wp-img-auto-sizes-contain-inline-css' type='text/css'>img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}</style>
+<link rel='stylesheet' id='dashicons-css' href='https://www.pokemon.cn/wp-includes/css/dashicons.min.css?ver=6.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='post-views-counter-frontend-css' href='https://www.pokemon.cn/wp-content/plugins/post-views-counter/css/frontend.css?ver=1.7.11' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>img.wp-smiley,img.emoji{display:inline !important;border:none !important;box-shadow:none !important;height:1em !important;width:1em !important;margin:0 0.07em !important;vertical-align:-0.1em !important;background:none !important;padding:0 !important;}</style>
+<style id='wp-block-library-inline-css' type='text/css'>:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html:where(.has-border-color){border-style:solid}html:where([style*=border-color]){border-style:solid}html:where([style*=border-top-color]){border-top-style:solid}html:where([style*=border-right-color]){border-right-style:solid}html:where([style*=border-bottom-color]){border-bottom-style:solid}html:where([style*=border-left-color]){border-left-style:solid}html:where([style*=border-width]){border-style:solid}html:where([style*=border-top-width]){border-top-style:solid}html:where([style*=border-right-width]){border-right-style:solid}html:where([style*=border-bottom-width]){border-bottom-style:solid}html:where([style*=border-left-width]){border-left-style:solid}html:where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html:where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html:where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}</style>
+<style id='global-styles-inline-css' type='text/css'>:root{--wp--preset--aspect-ratio--square:1;--wp--preset--aspect-ratio--4-3:4/3;--wp--preset--aspect-ratio--3-4:3/4;--wp--preset--aspect-ratio--3-2:3/2;--wp--preset--aspect-ratio--2-3:2/3;--wp--preset--aspect-ratio--16-9:16/9;--wp--preset--aspect-ratio--9-16:9/16;--wp--preset--color--black:#000000;--wp--preset--color--cyan-bluish-gray:#abb8c3;--wp--preset--color--white:#ffffff;--wp--preset--color--pale-pink:#f78da7;--wp--preset--color--vivid-red:#cf2e2e;--wp--preset--color--luminous-vivid-orange:#ff6900;--wp--preset--color--luminous-vivid-amber:#fcb900;--wp--preset--color--light-green-cyan:#7bdcb5;--wp--preset--color--vivid-green-cyan:#00d084;--wp--preset--color--pale-cyan-blue:#8ed1fc;--wp--preset--color--vivid-cyan-blue:#0693e3;--wp--preset--color--vivid-purple:#9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple:linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan:linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange:linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red:linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray:linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum:linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple:linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux:linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk:linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean:linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass:linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight:linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small:13px;--wp--preset--font-size--medium:20px;--wp--preset--font-size--large:36px;--wp--preset--font-size--x-large:42px;--wp--preset--spacing--20:0.44rem;--wp--preset--spacing--30:0.67rem;--wp--preset--spacing--40:1rem;--wp--preset--spacing--50:1.5rem;--wp--preset--spacing--60:2.25rem;--wp--preset--spacing--70:3.38rem;--wp--preset--spacing--80:5.06rem;--wp--preset--shadow--natural:6px 6px 9px rgba(0,0,0,0.2);--wp--preset--shadow--deep:12px 12px 50px rgba(0,0,0,0.4);--wp--preset--shadow--sharp:6px 6px 0px rgba(0,0,0,0.2);--wp--preset--shadow--outlined:6px 6px 0px -3px rgb(255,255,255),6px 6px rgb(0,0,0);--wp--preset--shadow--crisp:6px 6px 0px rgb(0,0,0);}.wp-block-button{--wp--preset--dimension--25:25%;--wp--preset--dimension--50:50%;--wp--preset--dimension--75:75%;--wp--preset--dimension--100:100%;}:where(body){margin:0;}:where(.is-layout-flex){gap:0.5em;}:where(.is-layout-grid){gap:0.5em;}body .is-layout-flex{display:flex;}.is-layout-flex{flex-wrap:wrap;align-items:center;}.is-layout-flex>:is(*,div){margin:0;}body .is-layout-grid{display:grid;}.is-layout-grid>:is(*,div){margin:0;}body{padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;}:root:where(.wp-element-button,.wp-block-button__link){background-color:#32373c;border-width:0;color:#fff;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;padding-top:calc(0.667em + 2px);padding-right:calc(1.333em + 2px);padding-bottom:calc(0.667em + 2px);padding-left:calc(1.333em + 2px);text-decoration:none;text-transform:inherit;}.has-black-color{color:var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color:var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color:var(--wp--preset--color--white) !important;}.has-pale-pink-color{color:var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color:var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color:var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color:var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color:var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color:var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color:var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color:var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color:var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color:var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color:var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color:var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color:var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color:var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color:var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color:var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color:var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color:var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color:var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color:var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color:var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color:var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color:var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color:var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color:var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color:var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color:var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color:var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color:var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color:var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color:var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color:var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color:var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background:var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background:var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background:var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background:var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background:var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background:var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background:var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background:var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background:var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background:var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background:var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background:var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size:var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size:var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size:var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size:var(--wp--preset--font-size--x-large) !important;}</style>
+<style id='wp-global-styles-placeholder-inline-css' type='text/css'>:root{--wp-internal-comment:"Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer."}</style>
+<link rel='stylesheet' id='pokemon-style-css' href='https://www.pokemon.cn/wp-content/themes/pokemon/assets/css/style.css?ver=1778767059' type='text/css' media='all' />
+<link rel='stylesheet' id='pokemon-style2-css' href='https://www.pokemon.cn/wp-content/themes/pokemon/assets/css/style2.css?ver=1778767059' type='text/css' media='all' />
+<link rel='stylesheet' id='pokemon-cn-style-css' href='https://www.pokemon.cn/wp-content/themes/pokemon/assets/css/cn_style.css?ver=1778767059' type='text/css' media='all' />
+<link rel='stylesheet' id='pokemon-cn_content_area-style-css' href='https://www.pokemon.cn/wp-content/themes/pokemon/assets/css/cn_content_area.css?ver=1778767059' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/hm.js?ver=1778767059" id="pokemon-hm-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/jquery.min.js?ver=1778767059" id="pokemon-jquery-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/baser.min.js?ver=1778767059" id="pokemon-baser-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/slick.min.js?ver=1778767059" id="pokemon-slick-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/script_common.js?ver=1778767059" id="pokemon-script-common-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/jweixin-1.3.2.js?ver=1778767059" id="pokemon-jweixin-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/js/cn_common.js?ver=1778767059" id="pokemon-cn-common-js"></script>
+<script type="text/javascript" src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/fonts/icomoon.ttf?ver=1778767059" id="icomoon-js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.pokemon.cn/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.9.4" />
+<link rel="icon" href="https://image.pokemon.com.cn/wp-content/uploads/2025/11/icon512-150x150.png?auth_key=1782548034-940a82ed91ba4bf8a9cf29eea41c722a-0-0ab9ba6a6c7c4e47f6d87519fb83d1a4" sizes="32x32" />
+<link rel="icon" href="https://image.pokemon.com.cn/wp-content/uploads/2025/11/icon512-300x300.png?auth_key=1782548034-6fe3e657abab49bfb6e0af532547968a-0-a9d60491a8940f567f57dca283b8a314" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://image.pokemon.com.cn/wp-content/uploads/2025/11/icon512-300x300.png?auth_key=1782548034-b2362139ba514539ad85b4e26c0ae636-0-fa86098cb2e61c8cc8551ba5a77cea7f" />
+<meta name="msapplication-TileImage" content="https://image.pokemon.com.cn/wp-content/uploads/2025/11/icon512-300x300.png?auth_key=1782548034-c195d564454c48c78e757defe23b9e8d-0-57b30d0cbc2bf393002547ff1939be30" />
+<link rel="icon" href="https://www.pokemon.cn/wp-content/themes/pokemon/assets/img/favicon.ico" type="image/x-icon">
+<script type="text/javascript">wx.miniProgram.getEnv(function(res) {undefined
+if (res.miniprogram) {document.querySelector('body').classList.add('xc');}
+})
+</script>
+<meta name="template_name" content="/themes/pokemon/home.php">
+</head>
+<body class="home blog wp-custom-logo wp-theme-pokemon page-home" role="document">
+<header class="global-header hide-xc" role="banner" data-region="cn">
+<div class="global-header__body">
+<div class="global-header__title">
+<h1 class="global-header__site-name"><a href="https://www.pokemon.cn/"><img src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/img/logo.png" alt="宝可梦" width="130"></a></h1>
+</div>
+<nav class="nav-global" role="navigation">
+<div class="nav-global__body">
+<ul class="nav-global__list">
+<li class="nav-global__item"><a class="nav-global__item--card " href="https://www.pokemon.cn/tcg-home/"><span>集换式卡牌游戏</span></a></li>
+<li class="nav-global__item"><a class="nav-global__item--goods " href="https://www.pokemon.cn/goods-home/"><span>商品</span></a></li>
+<li class="nav-global__item"><a class="nav-global__item--movie " href="https://www.pokemon.cn/category/movie/"><span>影视</span></a></li>
+<li class="nav-global__item"><a class="nav-global__item--game " href="https://www.pokemon.cn/game-home/"><span>游戏</span></a></li>
+<li class="nav-global__item"><a class="nav-global__item--shop " href="https://www.pokemon.cn/shop-home/"><span>店铺</span></a></li>
+<li class="nav-global__item nav-global__item--contact"><a target="_blank" href="https://www.pokemon.cn/play/pokedex"><img src="https://image.pokemon.com.cn/wp-content/uploads/2026/03/46b2c1919aa40bca43e31089e4fdb30b.jpg?auth_key=1782548035-78450c668c4e4576a106a3fbb3323bff-0-cab8e106b7be617c05d5115bb8725f7c"></img><span>图鉴</span></a></li>
+<li class="nav-global__item nav-global__item--contact nav-global__item--contact-last"><a target="_blank" href="/customer-support"><img src="https://image.pokemon.com.cn/wp-content/uploads/2026/03/bf144cba479c62cb1c6fd1ff4bce6820.jpg?auth_key=1782548035-348448b4ec3240ea99f2fd73e6a04960-0-6b337341cf2bd27ec8f17202c0557c4c"></img><span>客户支持</span></a></li>
+</ul>
+<div class="global-header__sp-close visible-xs">
+<button>
+<span>Close</span>
+</button>
+</div>
+</div>
+</nav>
+</div>
+<div class="global-header__sp-menu visible-xs hide-xc">
+<button>
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</header><section class="hero hero--home">
+<div class="hero__slideshow" role="presentation" data-interactive-component="shideshow">
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/tcg/product/22237.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/b5f37e33da71d71fcdc1408572310a9b.png?auth_key=1782548035-ca2adbe5fa464be496b8a0bf328ef740-0-4389d1aa8b838087068d6adebeca7149" class="hidden-xs" alt="30th pack">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/dd119cfba843ffe968c0a3afe994a52b.png?auth_key=1782548035-0c9dcca807ef4f7382c83fcbe03f26a2-0-ccf575e813671a40a2847e8bf7cebe86" class="visible-xs" alt="30th pack">
+</a>
+</div>
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/tcg/product/21997.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/05/4e94765e5f67cda7e394374135df5664.png?auth_key=1782548035-3e5f0b1a5c3846098003cf638cc51b19-0-ffb94e064ff8774283f2c70f634567bf" class="hidden-xs" alt="csv9.5">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/05/b4cde8a0875590fbd78e2e786544b070.png?auth_key=1782548035-db61e673c7664af7a9c436734a8e012b-0-594493fbdde943d20a6f463590587fbd" class="visible-xs" alt="csv9.5">
+</a>
+</div>
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/tcg/product/21862.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/05/79a08715b97dbd20d3e261a98f13305e.png?auth_key=1782548035-16ca73539c184dfc9a6cea2e1aac66a2-0-a08a481f8c29280ed6d278ca5f0b172c" class="hidden-xs" alt="30thar">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/05/43682734283a756d65f2df9ac41df4e9.png?auth_key=1782548035-348b882f467947118b2279e57a0abb03-0-e115d6a83b37eeb81c78633659cab786" class="visible-xs" alt="30thar">
+</a>
+</div>
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/tcg/product/21383.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/04/45550ad1289d2fb3b9d773fdd0977e39.png?auth_key=1782548035-388e208966694ca1b5c350c3f784db3f-0-5f9a3c1b3b55489bae4941d7feb05f9c" class="hidden-xs" alt="csv9">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/04/cfd16e37f5c25db78b5aa26c375400da.png?auth_key=1782548035-08fd79becff54f01bbc5c198054b2a30-0-3825a440eec326df4f1eadd10c151354" class="visible-xs" alt="csv9">
+</a>
+</div>
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/tcg/product/20463.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/04/19b4e685dffe2a8d2e73b6fc4e003ec5.png?auth_key=1782548035-7949435e02cd45f5a88fd2b7d58ed04a-0-7bb2f260ebe38bd789fc35c02425def6" class="hidden-xs" alt="绘梦点睛水">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/04/4ae7648c282742bce3a8d65b140d7f43.png?auth_key=1782548035-c13d51c548334cc48a9e32850b1dfc20-0-68eb159dabf0adc1c024434e6fd3f897" class="visible-xs" alt="绘梦点睛水">
+</a>
+</div>
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/tcg/product/21078.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/03/5b8b73f0ff49c34253c1e846ba902cb6.png?auth_key=1782548035-7d89e384727b46faa2f4b32a6ec5019e-0-5feb356113f710c5835b0f1677b9e510" class="hidden-xs" alt="">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/03/b89b56d25184417535498cab3ef1af09.png?auth_key=1782548035-a7e123725e8b4a07861bb5cbb9bb417e-0-1f6817e91eeb2a3c889e76c402461e6e" class="visible-xs" alt="">
+</a>
+</div>
+<div class="hero__slideshow--element">
+<a href="https://www.pokemon.cn/game/17057.html" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2025/11/d4c6ae0a33885361b58c1927972f71bde10fe31b-thumb-1280xauto-28803.jpg?auth_key=1782548035-c44b62efc3114dea9442c5dc9a9acd39-0-c99b12930906126b4acdc26c4e863a7e" class="hidden-xs" alt="">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2025/11/sjbanner-thumb-750xauto-28804.jpg?auth_key=1782548035-19aabc23a8384d9fafc31a5d649ff9eb-0-c34428ec90d8c5a079bf5ad44e31fe30" class="visible-xs" alt="">
+</a>
+</div>
+</div>
+</section>
+<main class="content-main page-home__main">
+<div class="card-list">
+<ul class="card-list__body">
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22567.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/d2b5ca33bd970f64a6301fa75ae2eb22.png?auth_key=1782548035-d62fd1163b174fc4a07e640157e4b836-0-c842c330a4a01a3ed18ec3e57ee33fd0" alt="“2026高校王牌赛”赛事详情及报名开启"> </figure>
+<div class="card__content">
+<p>“2026高校王牌赛”赛事详情及报名开启</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月27日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/product/20012.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/448f95470da1a66b3e55bd1f4edeeeba.png?auth_key=1782548035-4d0e40c96b1849d6a8620e2aea7f3d37-0-7411e6d1aeb917b506145d5a2156ebae" alt="训练家与宝可梦的牵绊，尽现于此！&lt;/br&gt;宝可梦卡牌全新补充包商品“共逐荣光”及套装商品即将发售！"> </figure>
+<div class="card__content">
+<p>训练家与宝可梦的牵绊，尽现于此！</br>宝可梦卡牌全新补充包商品“共逐荣光”及套装商品即将发售！</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月27日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/other/22563.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/3e85b18f03c59299cf65051c69bf83d6.png?auth_key=1782548035-09e9f15c6be0495fb04233b3763c4605-0-b4244369a94ecf6bdc92989e70e086e5" alt="关于宝可梦卡牌赛制调整的说明"> </figure>
+<div class="card__content">
+<p>关于宝可梦卡牌赛制调整的说明</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月27日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/campaign/22494.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/dad1eab2b143076f72b80ab8adbc8c50.jpg?auth_key=1782548035-c60406f7f0824f20a664af41da3cb1d8-0-e86b9f53b1da1c385104b1f9b032bdf3" alt="“宝可梦官方卡牌道馆-武汉 光谷（齿轮组）”正式开业"> </figure>
+<div class="card__content">
+<p>“宝可梦官方卡牌道馆-武汉 光谷（齿轮组）”正式开业</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月26日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--game">
+<a href="https://www.pokemon.cn/game/22339.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/b815eaf38a4b7139b2d1a8aee24840d7.png?auth_key=1782548035-bd9dfb732292423db5e97f27004704d2-0-155c91a53f32c2643a478d1636cfa6d1" alt="宝可梦与华立科技联合开发全新线下游艺产品"> </figure>
+<div class="card__content">
+<p>宝可梦与华立科技联合开发全新线下游艺产品</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月26日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22484.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/9942ff26ef8cdf89282e1a952e23236c.png?auth_key=1782548035-9a1e470625404bc5ad0ed90b2b18cd68-0-2eef213c0741fff400072ff06cb511e2" alt="锋芒暗藏，含苞待放！&lt;/br&gt;“含羞苞”徽章悄悄登场~"> </figure>
+<div class="card__content">
+<p>锋芒暗藏，含苞待放！</br>“含羞苞”徽章悄悄登场~</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月25日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22473.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/5148cc3a0eee8172c305841c4e4c6079.jpg?auth_key=1782548035-d92281f4641c4cd7b83f9e9e480eddee-0-e550820092d3d03ef996211dd31a3647" alt="“2026宝可梦卡牌高级赛夏季场”预赛参赛注意事项"> </figure>
+<div class="card__content">
+<p>“2026宝可梦卡牌高级赛夏季场”预赛参赛注意事项</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月24日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22460.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/5148cc3a0eee8172c305841c4e4c6079.jpg?auth_key=1782548035-18256bfd808b42049357afbb39983872-0-ee3d1b5fbee0b6b5127430d1ea1e12d4" alt="“2026宝可梦卡牌高级赛夏季场”道馆特别活动 "> </figure>
+<div class="card__content">
+<p>“2026宝可梦卡牌高级赛夏季场”道馆特别活动 </p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月23日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22421.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/04/6c8f0a305a2d582a94d28d35b09f6a54.png?auth_key=1782548035-b1420ba038a94fe58e648b2c893b3778-0-12d3d9fd680402591d1513fddef58ee1" alt="宝可梦卡牌城市赛2026年第三赛季即将开启"> </figure>
+<div class="card__content">
+<p>宝可梦卡牌城市赛2026年第三赛季即将开启</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月22日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/22438.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/5148cc3a0eee8172c305841c4e4c6079.jpg?auth_key=1782548035-da2577ca56324c8098df3516f45f8e7d-0-aca7c5475e14ec16a7ea8b209a267aed" alt="“2026宝可梦卡牌高级赛夏季场”购物小站相关说明"> </figure>
+<div class="card__content">
+<p>“2026宝可梦卡牌高级赛夏季场”购物小站相关说明</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月18日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22365.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/5148cc3a0eee8172c305841c4e4c6079.jpg?auth_key=1782548035-4c86ef64401e42e19bd643cb9f761328-0-8e37b690a5d232ac44534852e5f86243" alt="“2026宝可梦卡牌高级赛夏季场”赛事详情及报名开启"> </figure>
+<div class="card__content">
+<p>“2026宝可梦卡牌高级赛夏季场”赛事详情及报名开启</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月10日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22329.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/04/6c8f0a305a2d582a94d28d35b09f6a54.png?auth_key=1782548035-96422e634fa2437d8f371184e84d244e-0-e1a5eb4db3d65f2195ad8549c7180bcd" alt="宝可梦卡牌城市赛2026年第二赛季第八批报名信息"> </figure>
+<div class="card__content">
+<p>宝可梦卡牌城市赛2026年第二赛季第八批报名信息</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月8日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/product/22308.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/67b6849e0673ed3bc9cb2a137a052bb0.jpeg?auth_key=1782548035-e77f2ae5aeba4db28b9e9c6cc81d3b09-0-9b16bdf1451580c12d1575818b01eeb9" alt="宝可梦集换式卡牌游戏 最新信息&lt;br&gt;宝可梦集换式卡牌游戏30周年纪念特别商品信息公布！"> </figure>
+<div class="card__content">
+<p>宝可梦集换式卡牌游戏 最新信息<br>宝可梦集换式卡牌游戏30周年纪念特别商品信息公布！</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月6日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/event/22304.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/d2b5ca33bd970f64a6301fa75ae2eb22.png?auth_key=1782548035-c43bca128047467a988db56fe62a9a9c-0-2370331c6a5189f6aaef98a6d9f62804" alt="王牌争锋，问鼎高校&lt;/br&gt;高校王牌赛报名即将开启"> </figure>
+<div class="card__content">
+<p>王牌争锋，问鼎高校</br>高校王牌赛报名即将开启</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月5日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/campaign/22280.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/05/7a4341b7688fe06d6a3432f9b902b31c.png?auth_key=1782548035-20d79c367440492898e9d37deb15cd12-0-684162da7cc321352c08e38bed38baf7" alt="展出你的钟“伊”！&lt;/br&gt;“伊布‘们’的太晶盛聚”收集活动即将开启！"> </figure>
+<div class="card__content">
+<p>展出你的钟“伊”！</br>“伊布‘们’的太晶盛聚”收集活动即将开启！</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月3日</time>
+</footer>
+</div>
+</div>
+</a>
+</li>
+<li class="card__element card__category--card">
+<a href="https://www.pokemon.cn/tcg/product/22237.html">
+<div class="card__container">
+<header class="card__header">
+<div class="card__header--category">集换式卡牌游戏</div>
+</header>
+<figure class="card__thumb">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/06/5ba3ccdd22fd9ba36c0641f323eab474.png?auth_key=1782548035-f233a9b0503446b784199925e581a83d-0-14849ca440b8ca69ad347ad9a243c34a" alt="宝可梦集换式卡牌游戏 最新信息公布&lt;/br&gt;补充包“30周年庆典”将于9月16日（周三）发售！"> </figure>
+<div class="card__content">
+<p>宝可梦集换式卡牌游戏 最新信息公布</br>补充包“30周年庆典”将于9月16日（周三）发售！</p>
+<footer class="card__footer">
+<time class="card__footer--date">2026年6月1日</time>
+</footer>
+</div>
+</div>
+</a>
+</li> </ul>
+<div class="button-block page-home__main--button">
+<a href="https://www.pokemon.cn/topics/" class="button">
+<span>浏览更多最新消息</span>
+</a>
+</div>
+</div>
+</main>
+<footer class="global-footer" role="contentinfo">
+<div class="global-footer__upper">
+<div class="global-footer__official--title visible-xs">
+              官方账号
+           </div>
+<div class="global-footer__upper--body">
+<div class="global-footer__official">
+<div class="global-footer__official--title hidden-xs">
+                      官方账号
+                   </div>
+<ul class="global-footer__official--list">
+<li>
+<a href="https://weibo.com/u/6305628151" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109151843130.png?auth_key=1782548035-58435c6577ba4c1fb315268c3f6791e6-0-4a9485fee2e0744ceda3dcf80d85aa5e" width="78" alt="微博">
+</a>
+</li>
+<li>
+<a href="https://www.xiaohongshu.com/user/profile/65d54e280000000017014262" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109171639477.png?auth_key=1782548035-0d5cacb9897649c9874fb53ea49459b9-0-dfe7fcc3af3e6e4d9edfae93503acd50" width="78" alt="小红书">
+</a>
+</li>
+<li>
+<a href="https://space.bilibili.com/1038290200" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109171643669.png?auth_key=1782548035-d07bb43a12874b7eb005901d3e505550-0-2e6ee2da8dcc083aa18ee8423d72b785" width="78" alt="Bilibili">
+</a>
+</li>
+<li>
+<a href="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109152224685.jpg?auth_key=1782548035-72847cdd92ff413697708868ced1f787-0-6a4226618538f5f48cb2b905d2823b4e" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109151852900.png?auth_key=1782548035-c4d544de162545d1bdc69baa73888d4d-0-831d6a1ca812d70e62b35cf81a25935d" width="78" alt="抖音">
+</a>
+</li>
+<li>
+<a href="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109152239422.jpg?auth_key=1782548035-04e08ef6e61c443ab0e3877886b13411-0-c1bb076ef309df0c288336163e0e0201" target="_blank">
+<img src="https://image.pokemon.com.cn/wp-content/uploads/2026/01/20260109153708609.png?auth_key=1782548035-7d117be301a64ac2ba38be3dca92e7cf-0-b97a1ec5e3eb572721c35051a5d1cb9d" width="78" alt="快手">
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="global-footer__lower">
+<div class="global-footer__lower--body">
+<div class="global-footer__links" role="complementary">
+<ul>
+<li><a href="/termofuse/">
+使用条款
+</a></li>
+<li><a href="/sitemap/">
+网站地图
+</a></li>
+<li class="button--window">
+<a href="https://www.pokemon.com.cn/privacypolicy/" target="_blank"><span>隐私政策</span></a>
+</li>
+<li class="button--window">
+<a href="https://www.pokemon.com.cn/childprivacypolicy/" target="_blank"><span>儿童隐私政策</span></a>
+</li>
+</ul>
+</div>
+<div class="global-footer__copyright">
+<small>
+©Pokémon. ©Nintendo/Creatures Inc./GAME FREAK inc.<br>
+“Pokémon”和“宝可梦”均为任天堂商标。
+</small>
+</div>
+<div class="global-footer__license">
+<p><a href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank">沪ICP备2020029152号-2</a></p>
+<p>
+<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010502006288">
+<img src="https://www.pokemon.cn/wp-content/themes/pokemon/assets/img/icon_public-security.png">
+<span>沪公网安备 31010502006288号</span>
+</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pokemon/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://www.pokemon.cn/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4"}}
+</script>
+<script type="module">
+/* <![CDATA[ */
+/*! This file is auto-generated */
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+//# sourceURL=https://www.pokemon.cn/wp-includes/js/wp-emoji-loader.min.js
+/* ]]> */
+</script>
+</body>
+</html>

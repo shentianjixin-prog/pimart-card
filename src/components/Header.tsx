@@ -251,7 +251,7 @@ export function Header() {
             href="/"
             className="flex min-h-11 shrink-0 items-center"
             onClick={closeMobile}
-            aria-label="PIMART CARD"
+            aria-label="PIMART"
           >
             <PimartLogo height={36} className="w-auto max-w-[160px] sm:max-w-[180px]" />
           </Link>

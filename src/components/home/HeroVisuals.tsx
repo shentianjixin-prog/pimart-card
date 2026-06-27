@@ -1,31 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 import {
   BoxPlaceholder,
   CardPlaceholder,
-  isUsableProductImage,
   PsaSlabPlaceholder,
 } from "@/components/HeroPlaceholders";
 import type { HeroStackProduct } from "@/components/HomeHero";
-
-function StackImage({ src, alt }: { src: string; alt: string }) {
-  const [failed, setFailed] = useState(false);
-  if (!isUsableProductImage(src) || failed) return <CardPlaceholder />;
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      unoptimized={src.endsWith(".svg")}
-      sizes="140px"
-      className="object-contain p-2"
-      onError={() => setFailed(true)}
-    />
-  );
-}
 
 const STACK = [
   { r: -14, x: -72, y: 20, z: 1, bg: "linear-gradient(135deg,#EAF4FF,#fff)" },
@@ -35,30 +16,23 @@ const STACK = [
   { r: 13, x: 68, y: 18, z: 2, bg: "linear-gradient(135deg,#EAF4FF,#FFF0F5)" },
 ];
 
-export function HeroBrandVisual({ products }: { products: HeroStackProduct[] }) {
-  const stack = [...products.slice(0, 5)];
-  while (stack.length < 5) stack.push({ name: "TCG", images: "", slug: "#" });
+const HERO_BRAND_SLOTS: ({ src: string; alt: string } | null)[] = [
+  null,
+  { src: "/images/hero-pack-gengar.jpg", alt: "宝可梦 宝石包 VOL.3" },
+  { src: "/images/hero-pack-stellar-crown.jpg", alt: "宝可梦 星彩晶璃" },
+  { src: "/images/hero-pack-terastal.jpg", alt: "宝可梦 太晶盛聚" },
+  null,
+];
 
+export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
   return (
     <div className="hero-v2-visual hero-float-group relative mx-auto h-[220px] w-full max-w-[420px] sm:h-[260px] lg:h-[320px] lg:max-w-[480px]">
-      <div className="hero-float-slow absolute right-0 top-2 z-10 w-[38%] max-w-[140px]">
-        <div className="overflow-hidden rounded-[20px] border border-[rgba(15,23,42,0.08)] bg-white p-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-          <PsaSlabPlaceholder />
-        </div>
-      </div>
-      <div className="hero-float-delay absolute bottom-0 left-0 z-10 w-[34%] max-w-[130px]">
-        <div className="overflow-hidden rounded-[20px] border border-[rgba(15,23,42,0.08)] bg-white p-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-          <BoxPlaceholder />
-        </div>
-      </div>
       <div className="absolute left-1/2 top-1/2 w-[88%] -translate-x-1/2 -translate-y-1/2">
-        {stack.map((p, i) => {
+        {HERO_BRAND_SLOTS.map((slot, i) => {
           const s = STACK[i];
-          const img = p.images.split(",")[0]?.trim();
           return (
-            <Link
-              key={`${p.slug}-${i}`}
-              href={p.slug === "#" ? "/" : `/products/${p.slug}`}
+            <div
+              key={`hero-brand-slot-${i}`}
               className="hero-stack-card absolute w-[36%] max-w-[130px]"
               style={{
                 zIndex: s.z,
@@ -72,10 +46,20 @@ export function HeroBrandVisual({ products }: { products: HeroStackProduct[] }) 
                 style={{ background: s.bg }}
               >
                 <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[14px] bg-white">
-                  <StackImage src={img} alt={p.name} />
+                  {slot ? (
+                    <Image
+                      src={slot.src}
+                      alt={slot.alt}
+                      fill
+                      sizes="130px"
+                      className="object-contain p-1.5"
+                    />
+                  ) : (
+                    <CardPlaceholder />
+                  )}
                 </div>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>
