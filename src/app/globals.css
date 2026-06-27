@@ -57,11 +57,11 @@ button:not(:disabled),
 
 @layer components {
   .glass-header {
-    background: var(--glass-header);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(17, 24, 39, 0.06);
   }
 
   .glass-dropdown {
@@ -201,6 +201,16 @@ button:not(:disabled),
 
   .touch-target {
     @apply inline-flex min-h-11 min-w-11 items-center justify-center;
+  }
+
+  .trust-badge {
+    @apply inline-flex min-h-9 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-[#374151];
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .hero-desc {
+    @apply text-base font-medium text-[#6b7280] sm:text-lg;
   }
 }
 

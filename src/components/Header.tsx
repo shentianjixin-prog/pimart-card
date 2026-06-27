@@ -8,20 +8,139 @@ import { LANGS, LANG_LABELS } from "@/lib/translations";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { SearchBar } from "@/components/SearchBar";
 
-const SHOP_MENU = [
-  { key: "menu_pokemon", href: "/?category=宝可梦原盒" },
-  { key: "menu_one_piece", href: "/?q=One%20Piece" },
-  { key: "menu_dragon_ball", href: "/?q=Dragon%20Ball" },
-  { key: "menu_psa", href: "/?q=PSA" },
-  { key: "menu_sealed", href: "/?inStock=1" },
-  { key: "menu_wholesale", href: "/contact" },
-] as const;
+type MenuLink = { type: "link"; key: string; href: string };
+type MenuGroup = { type: "group"; key: string; children: MenuLink[] };
+type ShopMenuItem = MenuLink | MenuGroup;
+
+const SHOP_MENU: ShopMenuItem[] = [
+  { type: "link", key: "menu_pokemon", href: "/?category=宝可梦原盒" },
+  { type: "link", key: "menu_one_piece", href: "/?q=One%20Piece" },
+  {
+    type: "group",
+    key: "menu_other_tcg",
+    children: [
+      { type: "link", key: "menu_dragon_ball", href: "/?q=Dragon%20Ball" },
+      { type: "link", key: "menu_yugioh", href: "/?q=游戏王" },
+      { type: "link", key: "menu_gundam", href: "/?q=高达" },
+      { type: "link", key: "menu_naruto", href: "/?q=火影" },
+      { type: "link", key: "menu_union_arena", href: "/?q=Union%20Arena" },
+      { type: "link", key: "menu_weiss", href: "/?q=Weiss%20Schwarz" },
+    ],
+  },
+  {
+    type: "group",
+    key: "menu_merchandise",
+    children: [
+      { type: "link", key: "menu_sleeves", href: "/?q=卡套" },
+      { type: "link", key: "menu_binders", href: "/?q=卡册" },
+      { type: "link", key: "menu_storage", href: "/?q=收纳盒" },
+      { type: "link", key: "menu_display", href: "/?q=展示" },
+      { type: "link", key: "menu_official", href: "/?q=官方周边" },
+      { type: "link", key: "menu_limited_box", href: "/?q=限定礼盒" },
+    ],
+  },
+];
 
 const MORE_MENU = [
   { key: "menu_new_arrivals", href: "/?sort=newest&inStock=1" },
+  { key: "menu_wholesale", href: "/contact" },
   { key: "menu_shipping", href: "/shipping" },
   { key: "menu_guide", href: "/guide" },
 ] as const;
+
+function ChevronDown() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+      <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ChevronRight() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+      <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ShopNavDropdown({
+  label,
+  items,
+  T,
+  onNavigate,
+}: {
+  label: string;
+  items: ShopMenuItem[];
+  T: (key: string) => string;
+  onNavigate?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative hidden lg:block">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-medium text-[#374151] transition duration-300 hover:bg-[#f7f8fa] hover:text-[#111827]"
+        aria-expanded={open}
+      >
+        {label}
+        <ChevronDown />
+      </button>
+      {open && (
+        <div className="glass-dropdown absolute left-0 top-full z-50 mt-2 min-w-[240px] p-2">
+          {items.map((item) =>
+            item.type === "link" ? (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => {
+                  setOpen(false);
+                  onNavigate?.();
+                }}
+                className="block min-h-11 rounded-[14px] px-4 py-3 text-sm text-[#374151] transition duration-300 hover:bg-[#f7f8fa] hover:text-[#111827]"
+              >
+                {T(item.key)}
+              </Link>
+            ) : (
+              <div key={item.key} className="group/sub relative">
+                <div className="flex min-h-11 cursor-default items-center justify-between rounded-[14px] px-4 py-3 text-sm text-[#374151] transition duration-300 group-hover/sub:bg-[#f7f8fa]">
+                  <span>{T(item.key)}</span>
+                  <ChevronRight />
+                </div>
+                <div className="glass-dropdown invisible absolute left-full top-0 z-50 ml-1 min-w-[220px] p-2 opacity-0 transition duration-200 group-hover/sub:visible group-hover/sub:opacity-100">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={() => {
+                        setOpen(false);
+                        onNavigate?.();
+                      }}
+                      className="block min-h-11 rounded-[14px] px-4 py-3 text-sm text-[#374151] transition duration-300 hover:bg-[#f7f8fa] hover:text-[#111827]"
+                    >
+                      {T(child.key)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function NavDropdown({
   label,
@@ -52,12 +171,10 @@ function NavDropdown({
         aria-expanded={open}
       >
         {label}
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-          <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+        <ChevronDown />
       </button>
       {open && (
-        <div className="glass-dropdown absolute left-0 top-full z-50 mt-2 min-w-[240px] p-2">
+        <div className="glass-dropdown absolute left-0 top-full z-50 mt-2 min-w-[220px] p-2">
           {items.map((item) => (
             <Link
               key={item.href}
@@ -72,6 +189,63 @@ function NavDropdown({
             </Link>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+function MobileShopMenu({
+  items,
+  T,
+  onNavigate,
+}: {
+  items: ShopMenuItem[];
+  T: (key: string) => string;
+  onNavigate: () => void;
+}) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  return (
+    <div className="space-y-1">
+      {items.map((item) =>
+        item.type === "link" ? (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onNavigate}
+            className="flex min-h-11 items-center rounded-[14px] px-3 py-3 text-sm text-[#374151] hover:bg-[#f7f8fa]"
+          >
+            {T(item.key)}
+          </Link>
+        ) : (
+          <div key={item.key}>
+            <button
+              type="button"
+              onClick={() => setExpanded((k) => (k === item.key ? null : item.key))}
+              className="flex min-h-11 w-full items-center justify-between rounded-[14px] px-3 py-3 text-left text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]"
+              aria-expanded={expanded === item.key}
+            >
+              {T(item.key)}
+              <span className={`transition-transform duration-200 ${expanded === item.key ? "rotate-90" : ""}`}>
+                <ChevronRight />
+              </span>
+            </button>
+            {expanded === item.key && (
+              <div className="ml-3 border-l border-[rgba(17,24,39,0.08)] pl-2">
+                {item.children.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={onNavigate}
+                    className="flex min-h-11 items-center rounded-[14px] px-3 py-3 text-sm text-[#6b7280] hover:bg-[#f7f8fa] hover:text-[#111827]"
+                  >
+                    {T(child.key)}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        )
       )}
     </div>
   );
@@ -95,8 +269,8 @@ export function Header() {
     };
   }, [menuOpen]);
 
-  const shopItems = SHOP_MENU.map((item) => ({ label: T(item.key), href: item.href }));
   const moreItems = MORE_MENU.map((item) => ({ label: T(item.key), href: item.href }));
+  const closeMobile = () => setMenuOpen(false);
 
   return (
     <div className="sticky top-0 z-50">
@@ -106,7 +280,7 @@ export function Header() {
           <Link
             href="/"
             className="shrink-0 text-lg font-semibold tracking-tight text-[#111827] sm:text-xl"
-            onClick={() => setMenuOpen(false)}
+            onClick={closeMobile}
           >
             PIMART CARD
           </Link>
@@ -118,7 +292,7 @@ export function Header() {
             >
               {T("nav_home")}
             </Link>
-            <NavDropdown label={T("nav_shop")} items={shopItems} />
+            <ShopNavDropdown label={T("nav_shop")} items={SHOP_MENU} T={T} />
             <NavDropdown label={T("nav_more")} items={moreItems} />
           </nav>
 
@@ -127,7 +301,7 @@ export function Header() {
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
-            <div className="hidden items-center gap-1 rounded-full border border-[rgba(17,24,39,0.08)] bg-white p-1 sm:flex">
+            <div className="hidden items-center gap-1 rounded-full border border-[rgba(17,24,39,0.08)] bg-white/90 p-1 sm:flex">
               {LANGS.map((l) => (
                 <button
                   key={l}
@@ -146,7 +320,7 @@ export function Header() {
 
             <Link
               href="/cart"
-              className="touch-target relative rounded-full text-[#374151] transition duration-300 hover:bg-[#f7f8fa]"
+              className="touch-target relative z-10 rounded-full text-[#374151] transition duration-300 hover:bg-[#f7f8fa]"
               aria-label={T("nav_cart")}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
@@ -161,7 +335,7 @@ export function Header() {
 
             <button
               type="button"
-              className="touch-target rounded-full text-[#374151] lg:hidden"
+              className="touch-target relative z-10 rounded-full text-[#374151] lg:hidden"
               onClick={() => setMenuOpen((o) => !o)}
               aria-label={T("nav_menu")}
               aria-expanded={menuOpen}
@@ -175,39 +349,30 @@ export function Header() {
       </header>
 
       {menuOpen && (
-        <div className="fixed inset-0 top-[104px] z-40 overflow-y-auto bg-white/96 backdrop-blur-md lg:hidden">
-          <div className="border-t border-[rgba(17,24,39,0.08)] px-4 py-5">
+        <div className="fixed inset-x-0 bottom-0 top-[104px] z-40 overflow-y-auto overscroll-contain bg-white/96 backdrop-blur-md lg:hidden">
+          <div className="border-t border-[rgba(17,24,39,0.08)] px-4 py-5 pb-8">
             <SearchBar className="mb-5" />
 
             <div className="glass-dropdown mb-4 p-2">
               <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">{T("nav_shop")}</p>
-              {shopItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block min-h-11 rounded-[14px] px-3 py-3 text-sm text-[#374151] hover:bg-[#f7f8fa]"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <MobileShopMenu items={SHOP_MENU} T={T} onNavigate={closeMobile} />
             </div>
 
-            <div className="glass-dropdown mb-4 p-2">
+            <div className="glass-dropdown mb-5 p-2">
               <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">{T("nav_more")}</p>
               {moreItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block min-h-11 rounded-[14px] px-3 py-3 text-sm text-[#374151] hover:bg-[#f7f8fa]"
+                  onClick={closeMobile}
+                  className="flex min-h-11 items-center rounded-[14px] px-3 py-3 text-sm text-[#374151] hover:bg-[#f7f8fa]"
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
 
-            <div className="flex gap-2 border-t border-[rgba(17,24,39,0.08)] pt-4">
+            <div className="sticky bottom-0 flex gap-2 border-t border-[rgba(17,24,39,0.08)] bg-white/96 pt-4 backdrop-blur-sm">
               {LANGS.map((l) => (
                 <button
                   key={l}

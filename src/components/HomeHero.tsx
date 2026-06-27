@@ -35,18 +35,28 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
 
       <div className="relative grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
         <div className="animate-fade-up text-center lg:text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#6b7280]">
-            {T("hero_tag")}
-          </p>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#111827] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+          <h1 className="text-4xl font-semibold tracking-tight text-[#111827] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
             PIMART CARD
           </h1>
-          <p className="mt-3 text-lg font-medium tracking-tight text-[#374151] sm:text-xl">
+
+          <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+            <span className="trust-badge">
+              <span aria-hidden>🌍</span>
+              {T("hero_trust_global")}
+            </span>
+            <span className="trust-badge">
+              <span aria-hidden>✔️</span>
+              {T("hero_trust_auth")}
+            </span>
+          </div>
+
+          <p className="mt-4 text-lg font-medium tracking-tight text-[#374151] sm:text-xl">
             Global Trading Card Marketplace
           </p>
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#6b7280] lg:mx-0 sm:text-base">
+          <p className="hero-desc mx-auto mt-4 max-w-xl leading-relaxed lg:mx-0">
             {T("hero_desc")}
           </p>
+
           <div className="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start">
             <Link href="/?sort=newest&inStock=1" className="btn-primary">
               {T("hero_cta_new")}
