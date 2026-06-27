@@ -36,6 +36,15 @@ try {
   process.exit(1);
 }
 
+try {
+  execSync(`node ${join(root, "scripts", "sync-product-images.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 图片路径同步失败:", err);
+}
+
 const port = process.env.PORT || "3000";
 console.log(`[railway] 启动 Next.js，端口 ${port}`);
 
