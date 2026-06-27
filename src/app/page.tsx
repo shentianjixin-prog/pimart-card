@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductListingControls } from "@/components/ProductListingControls";
 import { Pagination } from "@/components/Pagination";
-import { HomeHero } from "@/components/HomeHero";
+import { HomeHero, type SlideStacks } from "@/components/HomeHero";
 import { HomeInfoBar } from "@/components/HomeInfoBar";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductSection } from "@/components/ProductSection";
@@ -131,11 +131,18 @@ export default async function Home({
 
   if (showMarketing) {
     const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET);
+    const toStack = (arr: Array<{ name: string; images: string; slug: string }>) =>
+      arr.map((p) => ({ name: p.name, images: p.images, slug: p.slug }));
+    const slideStacks: SlideStacks = [
+      toStack(newArrivals),
+      toStack(psaPicks),
+      toStack(popular.slice(0, 5)),
+    ];
 
     return (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="hero-section-spacing">
-          <HomeHero products={heroProducts} />
+          <HomeHero products={heroProducts} slideStacks={slideStacks} />
         </div>
 
         <HomeInfoBar />

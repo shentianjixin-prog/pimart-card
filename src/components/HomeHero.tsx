@@ -17,6 +17,8 @@ export type HeroStackProduct = {
   slug: string;
 };
 
+export type SlideStacks = [HeroStackProduct[], HeroStackProduct[], HeroStackProduct[]];
+
 const SLIDE_COUNT = 4;
 const AUTOPLAY_MS = 5000;
 const TRANSITION_MS = 500;
@@ -92,9 +94,21 @@ function CardStack({ products }: { products: HeroStackProduct[] }) {
   );
 }
 
-function SlideVisual({ slideIndex, products }: { slideIndex: number; products: HeroStackProduct[] }) {
+function SlideVisual({
+  slideIndex,
+  products,
+  slideStacks,
+}: {
+  slideIndex: number;
+  products: HeroStackProduct[];
+  slideStacks?: SlideStacks;
+}) {
   if (slideIndex === 0) {
     return <CardStack products={products} />;
+  }
+  const extra = slideStacks?.[slideIndex - 1 as 0 | 1 | 2];
+  if (extra && extra.length > 0) {
+    return <CardStack products={extra} />;
   }
   const variant = slideIndex === 2 ? "psa" : "box";
   return (
@@ -151,7 +165,7 @@ const SLIDES: SlideConfig[] = [
   },
 ];
 
-export function HomeHero({ products }: { products: HeroStackProduct[] }) {
+export function HomeHero({ products, slideStacks }: { products: HeroStackProduct[]; slideStacks?: SlideStacks }) {
   const T = useT();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -246,7 +260,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                   </div>
                 </div>
                 <div className="mt-6 flex justify-center lg:mt-0">
-                  <SlideVisual slideIndex={slideIndex} products={products} />
+                  <SlideVisual slideIndex={slideIndex} products={products} slideStacks={slideStacks} />
                 </div>
               </div>
             </div>
