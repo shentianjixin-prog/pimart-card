@@ -2,158 +2,96 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useT } from "@/lib/lang-context";
 
-type Tab = "cards" | "notice" | "shipping";
-
-const TAB_KEYS: { id: Tab; labelKey: string; num: string; hasNew?: boolean }[] = [
-  { id: "cards", labelKey: "hero_tab_cards", num: "01", hasNew: true },
-  { id: "notice", labelKey: "hero_tab_notice", num: "02" },
-  { id: "shipping", labelKey: "hero_tab_shipping", num: "03" },
-];
-
-const CONTENT_KEYS: Record<Tab, string[]> = {
-  cards: ["hero_card_0", "hero_card_1", "hero_card_2"],
-  notice: ["ann_0", "ann_1", "ann_2"],
-  shipping: ["hero_ship_0", "hero_ship_1", "hero_ship_2"],
+export type HeroStackProduct = {
+  name: string;
+  images: string;
+  slug: string;
 };
 
-const READ_KEY = "pimart-hero-tab-read";
+const STACK_STYLES = [
+  { rotate: -12, x: -80, y: 20, z: 1, bg: "linear-gradient(135deg, #EAF4FF 0%, #ffffff 100%)" },
+  { rotate: -4, x: -28, y: -8, z: 2, bg: "linear-gradient(135deg, #F3EEFF 0%, #ffffff 100%)" },
+  { rotate: 0, x: 0, y: 0, z: 3, bg: "linear-gradient(135deg, #FFF7D6 0%, #ffffff 100%)" },
+  { rotate: 6, x: 32, y: -12, z: 2, bg: "linear-gradient(135deg, #FFF0F5 0%, #ffffff 100%)" },
+  { rotate: 14, x: 76, y: 24, z: 1, bg: "linear-gradient(135deg, #EAF4FF 0%, #FFF0F5 100%)" },
+];
 
-export function HomeHero() {
-  const T = useT();
-  const [tab, setTab] = useState<Tab>("cards");
-  const [unread, setUnread] = useState(true);
-
-  useEffect(() => {
-    const read = localStorage.getItem(READ_KEY);
-    if (read === "1") setUnread(false);
-  }, []);
-
-  function selectTab(id: Tab) {
-    setTab(id);
-    if (id === "cards" && unread) {
-      localStorage.setItem(READ_KEY, "1");
-      setUnread(false);
-    }
+export function HomeHero({ products }: { products: HeroStackProduct[] }) {
+  const stack = products.slice(0, 5);
+  while (stack.length < 5) {
+    stack.push({
+      name: "TCG Box",
+      images: "/products/placeholder.svg",
+      slug: "#",
+    });
   }
 
-  const activeMeta = TAB_KEYS.find((t) => t.id === tab)!;
-
   return (
-    <section className="animate-fade-up mb-12 overflow-hidden border border-[var(--border-subtle)] bg-[#060606]">
-      {/* 天野喜孝式金线背景 + Logo 圣域 (~1/8 视口) */}
-      <div className="relative border-b border-[var(--border-subtle)]">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage: "url(/decor/hero-lines.svg)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          aria-hidden
-        />
-        <div
-          className="relative flex flex-col items-center justify-center px-6 py-10 sm:py-12"
-          style={{ minHeight: "12.5vh" }}
-        >
-          <Link href="/" className="block transition hover:opacity-90">
-            <Image
-              src="/logo.svg"
-              alt="PIMART CARD"
-              width={320}
-              height={78}
-              priority
-              className="h-auto w-[min(300px,75vw)]"
-            />
-          </Link>
-          <p className="font-display mt-5 text-center text-sm font-light italic tracking-wide text-[var(--gold)]">
-            {T("hero_motto")}
+    <section className="relative overflow-hidden rounded-[28px] border border-[rgba(17,24,39,0.08)] bg-[#f7f8fa] px-6 py-12 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#EAF4FF_0%,transparent_50%),radial-gradient(circle_at_80%_30%,#F3EEFF_0%,transparent_45%),radial-gradient(circle_at_50%_90%,#FFF7D6_0%,transparent_40%)]" />
+
+      <div className="relative grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
+        <div className="animate-fade-up text-center lg:text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6b7280]">
+            Premium TCG Marketplace
           </p>
-          <p className="mt-2 text-center text-[10px] uppercase tracking-[0.35em] text-neutral-600">
-            {T("brand_tagline")}
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#111827] sm:text-5xl lg:text-6xl">
+            PIMART CARD
+          </h1>
+          <p className="mt-2 text-lg font-medium text-[#374151] sm:text-xl">
+            Global Trading Card Marketplace
           </p>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#6b7280] lg:mx-0 sm:text-base">
+            Japanese &amp; Chinese TCG Sealed Boxes, PSA Cards &amp; Wholesale Supply
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+            <Link href="/?sort=newest&inStock=1" className="btn-primary">
+              Shop New Arrivals
+            </Link>
+            <Link href="/contact" className="btn-secondary">
+              Wholesale Inquiry
+            </Link>
+            <Link href="/?q=PSA" className="btn-secondary">
+              View PSA Picks
+            </Link>
+          </div>
         </div>
-      </div>
 
-      {/* 得遇文化式公告编辑区 */}
-      <div className="grid lg:grid-cols-[220px_1fr]">
-        {/* 左侧 Tab 导航 */}
-        <nav className="border-b border-[var(--border-subtle)] lg:border-b-0 lg:border-r">
-          {TAB_KEYS.map(({ id, labelKey, num, hasNew }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => selectTab(id)}
-              className={`relative flex w-full items-center gap-4 border-b border-[var(--border-subtle)] px-6 py-5 text-left transition last:border-b-0 touch-manipulation ${
-                tab === id
-                  ? "bg-[#0c0c0c] text-[var(--ivory)]"
-                  : "text-neutral-500 hover:bg-[#0a0a0a] hover:text-neutral-300"
-              }`}
-            >
-              <span className={`font-display text-2xl font-light ${tab === id ? "text-[var(--gold)]" : "text-neutral-700"}`}>
-                {num}
-              </span>
-              <span className="text-xs uppercase tracking-[0.18em]">{T(labelKey)}</span>
-              {hasNew && unread && tab !== id && (
-                <span className="absolute right-4 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-red-600 badge-notify-pulse" />
-              )}
-            </button>
-          ))}
-        </nav>
-
-        {/* 右侧内容 */}
-        <div className="px-6 py-8 sm:px-10 sm:py-10">
-          <div className="mb-6 flex items-start justify-between gap-4">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">
-                {activeMeta.num} — {T(activeMeta.labelKey)}
-              </p>
-              <h2 className="font-display mt-2 text-xl font-light text-[var(--ivory)] sm:text-2xl">
-                {T(`hero_${tab}_headline`)}
-              </h2>
-            </div>
-            {unread && tab === "cards" && (
-              <span className="flex shrink-0 items-center gap-1.5 rounded-sm border border-red-900/50 bg-red-950/30 px-2.5 py-1 text-[10px] uppercase tracking-wider text-red-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                {T("hero_new_badge")}
-              </span>
-            )}
-          </div>
-
-          <ul className="space-y-5">
-            {CONTENT_KEYS[tab].map((key, i) => (
-              <li key={key} className="group flex gap-4">
-                <span className="font-display mt-0.5 text-lg font-light text-[var(--gold-dim)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-sm leading-[1.8] text-neutral-400 transition group-hover:text-neutral-200">
-                  {T(key)}
-                </p>
-              </li>
-            ))}
-          </ul>
-
-          <div className="editorial-rule mt-8" />
-
-          <div className="mt-6 flex flex-wrap gap-6">
-            {tab === "shipping" && (
-              <Link href="/shipping" className="link-editorial">
-                {T("hero_ship_link")} →
+        <div className="relative mx-auto flex h-[320px] w-full max-w-md items-center justify-center sm:h-[380px]">
+          {stack.map((product, i) => {
+            const style = STACK_STYLES[i];
+            const image = product.images.split(",")[0]?.trim() || "/products/placeholder.svg";
+            return (
+              <Link
+                key={`${product.slug}-${i}`}
+                href={product.slug === "#" ? "/" : `/products/${product.slug}`}
+                className="hero-stack-card group absolute w-[118px] transition duration-500 sm:w-[160px]"
+                style={{
+                  zIndex: style.z,
+                  ["--stack-x" as string]: `${style.x}`,
+                  ["--stack-y" as string]: `${style.y}`,
+                  ["--stack-r" as string]: `${style.rotate}`,
+                }}
+              >
+                <div
+                  className="overflow-hidden rounded-[20px] border border-[rgba(17,24,39,0.08)] p-3 shadow-[0_20px_50px_rgba(17,24,39,0.08)] transition duration-500 group-hover:-translate-y-2 group-hover:rotate-0"
+                  style={{ background: style.bg }}
+                >
+                  <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[14px] bg-white">
+                    <Image
+                      src={image}
+                      alt={product.name}
+                      fill
+                      unoptimized={image.endsWith(".svg")}
+                      sizes="160px"
+                      className="object-contain p-2 transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
               </Link>
-            )}
-            {tab === "cards" && (
-              <Link href="/?sort=newest" className="link-editorial text-sky-400 hover:text-sky-300">
-                {T("brand_cta_new")} →
-              </Link>
-            )}
-            {tab === "notice" && (
-              <Link href="/guide" className="link-editorial">
-                {T("footer_guide")} →
-              </Link>
-            )}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

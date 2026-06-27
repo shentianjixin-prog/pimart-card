@@ -38,10 +38,10 @@ export function ProductImageGallery({
             <button
               key={i}
               onClick={() => setSelected(i)}
-              className={`relative h-16 w-12 shrink-0 overflow-hidden rounded-lg border transition ${
+              className={`relative h-16 w-12 shrink-0 overflow-hidden rounded-[14px] border transition ${
                 i === selected
-                  ? "border-cyan-400"
-                  : "border-white/10 hover:border-white/30"
+                  ? "border-[#111827]"
+                  : "border-[rgba(17,24,39,0.08)] hover:border-[rgba(17,24,39,0.2)]"
               }`}
             >
               <Image

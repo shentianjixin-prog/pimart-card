@@ -44,7 +44,7 @@ export function AddToCartButton({ product }: Props) {
     return (
       <button
         disabled
-        className="w-full cursor-not-allowed rounded-lg border border-white/10 bg-white/5 py-3 font-medium text-gray-500"
+        className="w-full cursor-not-allowed rounded-[14px] border border-[rgba(17,24,39,0.08)] bg-[#f7f8fa] py-3 font-medium text-[#9ca3af]"
       >
         {T("card_sold_out")}
       </button>
@@ -54,7 +54,7 @@ export function AddToCartButton({ product }: Props) {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
-        <label className="text-sm text-gray-400">{T("btn_quantity")}</label>
+        <label className="text-sm text-[#6b7280]">{T("btn_quantity")}</label>
         <input
           type="number"
           min={1}
@@ -67,16 +67,15 @@ export function AddToCartButton({ product }: Props) {
           }
           className="input-field w-20 py-1"
         />
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-[#9ca3af]">
           {T("btn_stock")} {product.stock}
         </span>
       </div>
       <div className="flex gap-3">
-        <button type="button" onClick={handleAdd} className="btn-secondary flex-1">
+        <button onClick={handleAdd} className="btn-secondary flex-1">
           {added ? T("btn_added_cart") : T("btn_add_cart")}
         </button>
         <button
-          type="button"
           onClick={() => {
             handleAdd();
             router.push("/cart");

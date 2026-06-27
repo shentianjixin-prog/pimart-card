@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
+import { isProductArchived } from "@/lib/product-status";
 
 type CheckoutItem = { productId: string; quantity: number };
 
@@ -29,6 +30,12 @@ export async function POST(request: NextRequest) {
     const product = products.find((p) => p.id === item.productId);
     if (!product) {
       return NextResponse.json({ error: "商品不存在" }, { status: 400 });
+    }
+    if (isProductArchived(product.status)) {
+      return NextResponse.json(
+        { error: `「${product.name}」已下架，无法结算` },
+        { status: 400 }
+      );
     }
     if (item.quantity < 1 || item.quantity > product.stock) {
       return NextResponse.json(

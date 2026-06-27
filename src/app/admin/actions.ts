@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { createAdminSession, destroyAdminSession, getAdminSession } from "@/lib/session";
+import { isProductArchived } from "@/lib/product-status";
 
 export type LoginState = { error?: string } | undefined;
 
@@ -151,8 +152,25 @@ export async function deleteProductAction(formData: FormData) {
   const productId = String(formData.get("productId") || "");
   if (!productId) return;
 
-  await prisma.orderItem.deleteMany({ where: { productId } });
-  await prisma.product.delete({ where: { id: productId } });
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: { _count: { select: { orderItems: true } } },
+  });
+  if (!product) return;
+
+  if (product._count.orderItems > 0 || isProductArchived(product.status)) {
+    // 已有订单历史：禁止硬删除，改为下架归档，保留 OrderItem 关联
+    await prisma.product.update({
+      where: { id: productId },
+      data: {
+        status: "下架",
+        stock: 0,
+        featured: false,
+      },
+    });
+  } else {
+    await prisma.product.delete({ where: { id: productId } });
+  }
 
   revalidatePath("/");
   revalidatePath("/admin/products");

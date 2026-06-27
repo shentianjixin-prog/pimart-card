@@ -31,13 +31,6 @@ const dict: Record<string, Record<Lang, string>> = {
   filter_gift_box:     { zh: "礼盒 / 套装",    ja: "ギフトBOX / セット", en: "Gift Box / Set" },
   filter_category:     { zh: "商品分类",       ja: "カテゴリー",   en: "Category" },
   filter_apply:        { zh: "应用筛选",       ja: "絞り込む",     en: "Apply" },
-  filter_era:          { zh: "时代 / 系列",    ja: "時代 / シリーズ", en: "Era / Series" },
-  era_all:             { zh: "全部时代",       ja: "すべての時代", en: "All Eras" },
-  era_sv:              { zh: "朱紫时代 (SV)",  ja: "スカーレット＆バイオレット", en: "Scarlet & Violet" },
-  era_ss:              { zh: "剑盾时代 (CS)",  ja: "ソード＆シールド", en: "Sword & Shield" },
-  era_sm:              { zh: "太阳月亮时代",   ja: "サン＆ムーン", en: "Sun & Moon" },
-  era_gem:             { zh: "宝石包",         ja: "ジェムパック", en: "Gem Pack" },
-  era_gift:            { zh: "礼盒 / 限定",    ja: "ギフト / 限定", en: "Gift / Limited" },
 
   // 首页
   page_featured:       { zh: "推荐商品",    ja: "おすすめ商品",  en: "Featured" },
@@ -46,7 +39,6 @@ const dict: Record<string, Record<Lang, string>> = {
   page_all_products:   { zh: "全部商品",    ja: "全商品",        en: "All Products" },
   page_total_unit:     { zh: "件商品",      ja: "件の商品",      en: " products" },
   page_total_pre:      { zh: "共 ",         ja: "全 ",           en: "" },
-  page_show_sold_out:  { zh: "含售罄商品",  ja: "売切含む",      en: "Include sold out" },
   page_shipping_desc:  { zh: "简中原盒 / 预售现货 / 5-7 天发货", ja: "中国語版 / 予約・現物 / 5-7日発送", en: "CN edition · Pre-order & In Stock · Ships in 5-7 days" },
   page_no_products:    { zh: "没有找到符合条件的商品", ja: "条件に合う商品が見つかりません", en: "No products found" },
   page_hot_badge:      { zh: "热销",        ja: "人気",          en: "Hot" },
@@ -88,6 +80,19 @@ const dict: Record<string, Record<Lang, string>> = {
   detail_timeline_3s:  { zh: "5-7 天",   ja: "5-7日",      en: "5-7 days" },
   detail_preorder_date:{ zh: "预计发货日：", ja: "発送予定日：", en: "Expected ship date: " },
 
+  // 购物车
+  cart_title:           { zh: "购物车",          ja: "カート",              en: "Cart" },
+  cart_loading:         { zh: "加载中…",          ja: "読み込み中…",         en: "Loading…" },
+  cart_empty:           { zh: "购物车是空的",     ja: "カートは空です",      en: "Your cart is empty" },
+  cart_go_shop:         { zh: "去逛逛",           ja: "商品を見る",          en: "Browse Products" },
+  cart_remove:          { zh: "删除",             ja: "削除",                en: "Remove" },
+  cart_total:           { zh: "合计",             ja: "合計",                en: "Total" },
+  cart_shipping_note:   { zh: "运费将在结账时显示", ja: "送料はチェックアウト時に表示されます", en: "Shipping calculated at checkout" },
+  cart_checkout:        { zh: "前往结算",         ja: "レジへ進む",          en: "Checkout" },
+  cart_checkout_loading:{ zh: "跳转中…",          ja: "処理中…",             en: "Redirecting…" },
+  cart_checkout_error:  { zh: "结算失败，请重试", ja: "決済に失敗しました", en: "Checkout failed, please try again" },
+  cart_network_error:   { zh: "网络错误，请检查连接", ja: "ネットワークエラー", en: "Network error, please check your connection" },
+
   // 支付成功/取消
   checkout_success_title: { zh: "支付成功，感谢您的购买！", ja: "お支払いが完了しました！", en: "Payment successful, thank you!" },
   checkout_success_order: { zh: "订单编号：",     ja: "注文番号：",          en: "Order ID: " },
@@ -103,10 +108,8 @@ const dict: Record<string, Record<Lang, string>> = {
   footer_guide:    { zh: "购物指南",   ja: "ショッピングガイド",    en: "Shopping Guide" },
   footer_privacy:  { zh: "隐私政策",   ja: "プライバシーポリシー",  en: "Privacy Policy" },
   footer_terms:    { zh: "服务条款",   ja: "利用規約",              en: "Terms of Service" },
-  footer_tokusho:  { zh: "特定商取引法",ja: "特定商取引法に基づく表記", en: "Legal Disclosure" },
   footer_admin:    { zh: "管理后台",   ja: "管理画面",              en: "Admin" },
   footer_payment:  { zh: "支持 Visa / Mastercard / JCB 在线支付（测试模式）", ja: "Visa / Mastercard / JCB 対応（テストモード）", en: "Visa / Mastercard / JCB accepted (test mode)" },
-  footer_payment_live: { zh: "支持 Visa / Mastercard / JCB 在线支付", ja: "Visa / Mastercard / JCB 対応", en: "Visa / Mastercard / JCB accepted" },
 
   // 公告
   ann_title:  { zh: "最新公告", ja: "お知らせ", en: "Announcements" },
@@ -114,71 +117,6 @@ const dict: Record<string, Record<Lang, string>> = {
   ann_0:      { zh: "【新品预告】简中151 BOX 即将开启预售，敬请期待！", ja: "【新商品予告】中国語版151 BOX まもなく予約受付開始！", en: "[New Release] CN 151 BOX pre-order coming soon — stay tuned!" },
   ann_1:      { zh: "【发货通知】6/20 前下单的订单已于 6/25 全部发出", ja: "【発送通知】6/20までのご注文は6/25に全て発送済みです", en: "[Shipping Update] Orders placed before 6/20 have all shipped on 6/25" },
   ann_2:      { zh: "【正品保证】本店所有商品均为正规渠道进货，假一赔十", ja: "【正規品保証】当店の商品はすべて正規ルートより仕入れています", en: "[Authentic Guarantee] All items sourced from official channels" },
-
-  // 首页 Hero 公告栏
-  hero_tab_cards:    { zh: "最新卡牌", ja: "最新カード", en: "Latest Cards" },
-  hero_tab_notice:   { zh: "网站公告", ja: "お知らせ", en: "Notices" },
-  hero_tab_shipping: { zh: "发货规则", ja: "配送ルール", en: "Shipping Rules" },
-  hero_new_badge:    { zh: "有新消息", ja: "新着あり", en: "New updates" },
-  hero_motto:        { zh: "何幸得遇，共沐星辰", ja: "出会いに感謝を", en: "Nice to meet you — among the stars" },
-  hero_cards_headline:   { zh: "最新卡牌速递", ja: "最新カード情報", en: "Latest Card Arrivals" },
-  hero_notice_headline:  { zh: "网站公告", ja: "サイトからのお知らせ", en: "Store Announcements" },
-  hero_shipping_headline:{ zh: "发货与服务规则", ja: "配送とサービス規則", en: "Shipping & Service Policy" },
-  hero_ship_link:    { zh: "查看完整发货说明", ja: "配送詳細を見る", en: "Full shipping details" },
-  hero_card_0:       { zh: "【海贼王简中】OPC-01〜OPC-11 原盒现货上架，数量有限", ja: "【ワンピース簡中】OPC-01〜OPC-11 原盒在庫あり、数量限定", en: "[One Piece CN] OPC-01–OPC-11 booster boxes now in stock, limited qty" },
-  hero_card_1:       { zh: "【宝可梦简中】151 收藏家套装、朱紫 ex 强化包热销中", ja: "【ポケモン簡中】151 コレクターズセット、SV ex 強化パック好評発売中", en: "[Pokémon CN] 151 Collector Set & SV ex packs — hot sellers" },
-  hero_card_2:       { zh: "【火影忍者】威化卡 BOX 及入门套装到货，欢迎选购", ja: "【NARUTO】ウエハース BOX 及びスターターセット入荷", en: "[Naruto] Wafer card boxes & starter sets now available" },
-  hero_ship_0:       { zh: "日本仓现货：付款确认后 3 个工作日内发货", ja: "日本倉庫現物：ご入金確認後 3 営業日以内に発送", en: "Japan warehouse: ships within 3 business days after payment" },
-  hero_ship_1:       { zh: "中国海外直邮：付款确认后 7〜14 个工作日送达，关税买家承担", ja: "中国より海外直送：ご入金確認後 7〜14 営業日、関税はお客様負担", en: "China direct ship: 7–14 business days; customs duties paid by buyer" },
-  hero_ship_2:       { zh: "盲盒/卡包类商品下单后不可退换；破损错发 7 天内联系客服", ja: "ブラインド商品は注文確定後返品不可；破損・誤送は 7 日以内にご連絡", en: "Blind products non-returnable; report damage/wrong item within 7 days" },
-
-  // 品牌
-  brand_tagline: { zh: "日本·中国正版TCG卡牌 / PSA评级 / 批发", ja: "日本・中国正規TCGカード / PSA鑑定 / 卸売", en: "Japanese & Chinese TCG Sealed Boxes / PSA / Wholesale" },
-  brand_hero_tag: { zh: "正版授权 · 日本直发", ja: "正規品 · 日本直送", en: "Authentic · Ships from Japan" },
-  brand_cta_pokemon: { zh: "浏览宝可梦", ja: "ポケモンを見る", en: "Shop Pokémon" },
-  brand_cta_wholesale: { zh: "批发询价", ja: "卸売お問い合わせ", en: "Wholesale Inquiry" },
-  brand_cta_new: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
-
-  // 导航扩展
-  nav_one_piece:   { zh: "海贼王",    ja: "ワンピース",      en: "One Piece" },
-  nav_other_tcg:   { zh: "其他TCG",   ja: "その他TCG",       en: "Other TCG" },
-  nav_shipping_link:{ zh: "发货说明", ja: "配送について",    en: "Shipping" },
-  nav_contact_link:{ zh: "联系方式",  ja: "お問い合わせ",    en: "Contact" },
-  nav_sealed:      { zh: "原盒",      ja: "シールドBOX",     en: "Sealed Box" },
-  nav_loose:       { zh: "散包",      ja: "バラパック",      en: "Loose Packs" },
-  nav_singles:     { zh: "单卡",      ja: "シングル",        en: "Singles" },
-  nav_all:         { zh: "全部",      ja: "すべて",          en: "All" },
-  nav_gundam:      { zh: "高达",      ja: "ガンダム",        en: "Gundam" },
-  nav_dragonball:  { zh: "龙珠",      ja: "ドラゴンボール",  en: "Dragon Ball" },
-
-  // 首页区块
-  section_new_arrivals: { zh: "新品上架", ja: "新着商品",   en: "New Arrivals" },
-  section_best_sellers: { zh: "热销商品", ja: "人気商品",   en: "Best Sellers" },
-  section_preorder:     { zh: "预售商品", ja: "予約商品",   en: "Pre-order" },
-  section_psa:          { zh: "PSA评级卡",ja: "PSA鑑定カード", en: "PSA Graded Cards" },
-  section_view_all:     { zh: "查看全部", ja: "すべて見る", en: "View All" },
-
-  // 信任区块
-  trust_auth_title:  { zh: "正品保证",  ja: "正規品保証",     en: "Authentic Guarantee" },
-  trust_auth_desc:   { zh: "全渠道正规进货，官方授权", ja: "正規ルート仕入れ", en: "Official channels only" },
-  trust_pack_title:  { zh: "安全包装",  ja: "安全梱包",       en: "Safe Packaging" },
-  trust_pack_desc:   { zh: "气泡膜+硬壳双重保护", ja: "プチプチ+ハードケース", en: "Bubble wrap + hard case" },
-  trust_ship_title:  { zh: "快速发货",  ja: "迅速発送",       en: "Fast Shipping" },
-  trust_ship_desc:   { zh: "5-7个工作日", ja: "5〜7営業日",  en: "5-7 business days" },
-  trust_world_title: { zh: "全球配送",  ja: "国際配送",       en: "Worldwide Shipping" },
-  trust_world_desc:  { zh: "支持全球配送", ja: "世界中に対応", en: "Delivered worldwide" },
-  trust_pay_title:   { zh: "安全支付",  ja: "安全決済",       en: "Secure Payment" },
-  trust_pay_desc:    { zh: "Visa / MC / JCB", ja: "Visa / MC / JCB", en: "Visa / MC / JCB" },
-  trust_japan_title: { zh: "日本直发",  ja: "日本直送",       en: "Ships from Japan" },
-  trust_japan_desc:  { zh: "日本仓库直接发货", ja: "日本倉庫から直接発送", en: "Direct from Japan warehouse" },
-
-  // 批发区块
-  wholesale_title:   { zh: "批发 / B2B 询价", ja: "卸売 / B2B お問い合わせ", en: "Wholesale / B2B Inquiry" },
-  wholesale_desc:    { zh: "我们提供日本及中国TCG原盒批发，欢迎实体店、电商及经销商合作。", ja: "日本・中国TCGシールドBOXの卸売を提供。実店舗・EC・ディーラー様歓迎。", en: "We offer wholesale TCG sealed boxes from Japan & China. Open to retail stores, e-commerce, and distributors." },
-  wholesale_f1:      { zh: "起批量折扣", ja: "ロット割引", en: "Bulk discounts" },
-  wholesale_f2:      { zh: "长期合作价", ja: "長期取引価格", en: "Partnership pricing" },
-  wholesale_f3:      { zh: "专属客服", ja: "専任担当者", en: "Dedicated support" },
-  wholesale_cta:     { zh: "立即联系", ja: "お問い合わせ", en: "Contact Us" },
 
   // Hero 幻灯片
   hero_0_tag:   { zh: "宝可梦原盒", ja: "ポケモンBOX", en: "Pokémon Boxes" },
@@ -196,26 +134,6 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_2_desc:  { zh: "预售商品到货后优先安排发货，全程正规包装，假一赔十", ja: "予約商品は入荷次第優先発送、正規梱包、品質保証", en: "Pre-order items shipped first upon arrival, secure packaging, authentic guarantee" },
   hero_2_cta:   { zh: "查看预售商品", ja: "予約商品を見る",  en: "View Pre-orders" },
   hero_2_cta2:  { zh: "查看现货",     ja: "現物を見る",      en: "View In Stock" },
-
-  // 购物车
-  cart_title:            { zh: "购物车",               ja: "カート",                 en: "Cart" },
-  cart_loading:          { zh: "加载中...",            ja: "読み込み中...",          en: "Loading..." },
-  cart_empty:            { zh: "购物车是空的",         ja: "カートは空です",         en: "Your cart is empty" },
-  cart_go_shop:          { zh: "去逛逛",               ja: "買い物を続ける",         en: "Continue shopping" },
-  cart_remove:           { zh: "移除",                 ja: "削除",                   en: "Remove" },
-  cart_total:            { zh: "合计",                 ja: "合計",                   en: "Total" },
-  cart_shipping_note:    { zh: "现货商品下单后 5-7 个工作日发货，预售商品以详情页标注为准。", ja: "現物は5〜7営業日、予約商品は商品ページの案内に従います。", en: "In-stock items ship in 5-7 business days. Pre-orders follow the product page." },
-  cart_checkout:         { zh: "去结算",               ja: "レジに進む",             en: "Checkout" },
-  cart_checkout_loading: { zh: "正在跳转结算...",      ja: "決済ページへ...",        en: "Redirecting..." },
-  cart_checkout_error:   { zh: "结算失败，请稍后重试", ja: "決済に失敗しました",     en: "Checkout failed, please try again" },
-  cart_network_error:    { zh: "网络错误，请稍后重试", ja: "ネットワークエラー",     en: "Network error, please try again" },
-
-  // 加购按钮
-  btn_quantity:   { zh: "数量",           ja: "数量",           en: "Qty" },
-  btn_stock:      { zh: "库存",           ja: "在庫",           en: "Stock" },
-  btn_add_cart:   { zh: "加入购物车",     ja: "カートに追加",   en: "Add to Cart" },
-  btn_buy_now:    { zh: "立即购买",       ja: "今すぐ購入",     en: "Buy Now" },
-  btn_added_cart: { zh: "已加入购物车 ✓", ja: "追加済 ✓",       en: "Added ✓" },
 
   filter_count_unit: { zh: "件", ja: "件", en: "" },
 };

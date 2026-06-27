@@ -10,25 +10,34 @@ datasource db {
   provider = "sqlite"
 }
 
-// 商品（原盒 / 周边）
+// 商品（原盒 / 周边 / 卡牌）
 model Product {
-  id           String      @id @default(cuid())
-  name         String
-  slug         String      @unique
-  category     String // 宝可梦原盒 / 火影忍者
-  series       String? // 系列名，如 "朱・紫ex" / "疾風伝"
-  description  String?
-  priceJpy     Int
-  stock        Int         @default(0)
-  images       String // 图片URL，逗号分隔
-  boxType      String      @default("") // 肥盒/瘦盒/宝石包/礼盒
-  featured     Boolean     @default(false)
-  isPreorder   Boolean     @default(false) // 是否为预售商品
-  shippingDays Int         @default(6) // 预计发货天数（5-7）
-  releaseDate  DateTime? // 预售发货日（可选）
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  orderItems   OrderItem[]
+  id             String      @id @default(cuid())
+  name           String
+  slug           String      @unique
+  category       String
+  series         String?
+  cardNumber     String? // 卡号，如 SV10-109
+  rarity         String? // 稀有度，如 SR / SAR
+  language       String? // 语言版本，如 简中 / 日版
+  description    String?
+  priceJpy       Int
+  stock          Int         @default(0)
+  images         String
+  boxType        String      @default("")
+  featured       Boolean     @default(false)
+  isPreorder     Boolean     @default(false)
+  shippingDays   Int         @default(6)
+  releaseDate    DateTime?
+  costPrice      Int?
+  marketRefPrice Int?
+  minPrice       Int?
+  status         String      @default("上架") // 上架 / 下架
+  researchStatus String?
+  priceUpdatedAt DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  orderItems     OrderItem[]
 }
 
 // 订单

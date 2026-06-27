@@ -1,34 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
+import { Inter, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { CartProvider } from "@/lib/cart-context";
 import { LangProvider } from "@/lib/lang-context";
-import { HeaderShell } from "@/components/HeaderShell";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { NewsletterBar } from "@/components/NewsletterBar";
 import type { Lang } from "@/lib/translations";
 import { HTML_LANG } from "@/lib/translations";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSansSC = Noto_Sans_SC({
+  variable: "--font-noto-sc",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-jp",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "PIMART CARD | 日本·中国正版TCG卡牌 / PSA评级 / 批发",
-  description: "日本·中国正版TCG卡牌，宝可梦/海贼王/火影忍者等原盒现货与预售，PSA评级，B2B批发，5-7天发货",
+  title: "PIMART CARD | Global Trading Card Marketplace",
+  description:
+    "Japanese & Chinese TCG Sealed Boxes, PSA Cards & Wholesale Supply. Authentic guarantee, ships from Japan.",
 };
 
 export default async function RootLayout({
@@ -43,14 +45,18 @@ export default async function RootLayout({
   return (
     <html
       lang={HTML_LANG[lang]}
-      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
-      suppressHydrationWarning
+      className={`${inter.variable} ${notoSansSC.variable} ${notoSansJP.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <div className="page-texture" aria-hidden="true" />
+      <body
+        className="min-h-full flex flex-col bg-white text-[#111827]"
+        style={{
+          fontFamily:
+            'var(--font-inter), var(--font-noto-sc), var(--font-noto-jp), system-ui, sans-serif',
+        }}
+      >
         <LangProvider initial={lang}>
           <CartProvider>
-            <HeaderShell />
+            <Header />
             <main className="flex-1">{children}</main>
             <NewsletterBar />
             <Footer />

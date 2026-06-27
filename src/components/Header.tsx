@@ -1,297 +1,231 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { useLang, useT } from "@/lib/lang-context";
 import { LANGS, LANG_LABELS } from "@/lib/translations";
 
-type SubItem = { labelKey: string; href: string; category?: string };
-type NavItem = { labelKey: string; href?: string; sub?: SubItem[]; category?: string };
+const SHOP_MENU = [
+  { label: "Pokémon", href: "/?category=宝可梦原盒" },
+  { label: "One Piece", href: "/?q=One%20Piece" },
+  { label: "Dragon Ball", href: "/?q=Dragon%20Ball" },
+  { label: "Sealed Boxes", href: "/?inStock=1" },
+  { label: "PSA Cards", href: "/?q=PSA" },
+];
 
-const NAV_CATEGORY: Record<string, string> = {
-  nav_pokemon: "宝可梦原盒",
-  nav_one_piece: "海贼王",
-  nav_naruto: "火影忍者",
-};
+const MORE_MENU = [
+  { label: "New Arrivals", href: "/?sort=newest&inStock=1" },
+  { label: "Wholesale", href: "/contact" },
+  { label: "Shipping", href: "/shipping" },
+  { label: "Guide", href: "/guide" },
+];
 
-const READ_KEY = "pimart-hero-tab-read";
+function NavDropdown({
+  label,
+  items,
+  onNavigate,
+}: {
+  label: string;
+  items: { label: string; href: string }[];
+  onNavigate?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-function buildNav(categoryCounts: Record<string, number>): NavItem[] {
-  const count = (cat: string) => categoryCounts[cat] ?? 0;
-  const hasProducts = (cat: string) => count(cat) > 0;
-
-  const all: NavItem[] = [
-    { labelKey: "nav_home", href: "/" },
-    {
-      labelKey: "nav_pokemon",
-      category: "宝可梦原盒",
-      sub: [
-        { labelKey: "nav_all",     href: "/?category=%E5%AE%9D%E5%8F%AF%E6%A2%A6%E5%8E%9F%E7%9B%92", category: "宝可梦原盒" },
-        { labelKey: "nav_sealed",  href: "/?category=%E5%AE%9D%E5%8F%AF%E6%A2%A6%E5%8E%9F%E7%9B%92&boxType=%E8%82%A5%E7%9B%92", category: "宝可梦原盒" },
-        { labelKey: "nav_loose",   href: "/?category=%E5%AE%9D%E5%8F%AF%E6%A2%A6%E5%8E%9F%E7%9B%92&boxType=%E7%98%A6%E7%9B%92", category: "宝可梦原盒" },
-        { labelKey: "nav_singles", href: "/?category=%E5%AE%9D%E5%8F%AF%E6%A2%A6%E5%8E%9F%E7%9B%92&boxType=%E5%8D%95%E5%8D%A1", category: "宝可梦原盒" },
-      ],
-    },
-    {
-      labelKey: "nav_one_piece",
-      category: "海贼王",
-      sub: [
-        { labelKey: "nav_all",     href: "/?category=%E6%B5%B7%E8%B4%BC%E7%8E%8B", category: "海贼王" },
-        { labelKey: "nav_sealed",  href: "/?category=%E6%B5%B7%E8%B4%BC%E7%8E%8B&boxType=%E8%82%A5%E7%9B%92", category: "海贼王" },
-        { labelKey: "nav_loose",   href: "/?category=%E6%B5%B7%E8%B4%BC%E7%8E%8B&boxType=%E7%98%A6%E7%9B%92", category: "海贼王" },
-        { labelKey: "nav_singles", href: "/?category=%E6%B5%B7%E8%B4%BC%E7%8E%8B&boxType=%E5%8D%95%E5%8D%A1", category: "海贼王" },
-      ],
-    },
-    {
-      labelKey: "nav_naruto",
-      category: "火影忍者",
-      sub: [
-        { labelKey: "nav_all",     href: "/?category=%E7%81%AB%E5%BD%B1%E5%BF%8D%E8%80%85", category: "火影忍者" },
-        { labelKey: "nav_sealed",  href: "/?category=%E7%81%AB%E5%BD%B1%E5%BF%8D%E8%80%85&boxType=%E8%82%A5%E7%9B%92", category: "火影忍者" },
-        { labelKey: "nav_loose",   href: "/?category=%E7%81%AB%E5%BD%B1%E5%BF%8D%E8%80%85&boxType=%E7%98%A6%E7%9B%92", category: "火影忍者" },
-        { labelKey: "nav_singles", href: "/?category=%E7%81%AB%E5%BD%B1%E5%BF%8D%E8%80%85&boxType=%E5%8D%95%E5%8D%A1", category: "火影忍者" },
-      ],
-    },
-    {
-      labelKey: "nav_other_tcg",
-      sub: [
-        { labelKey: "nav_gundam",     href: "/?category=%E9%AB%98%E8%BE%BE", category: "高达" },
-        { labelKey: "nav_dragonball", href: "/?category=%E9%BE%99%E7%8F%A0", category: "龙珠" },
-      ],
-    },
-    { labelKey: "nav_shipping_link", href: "/shipping" },
-    { labelKey: "nav_contact_link",  href: "/contact" },
-  ];
-
-  return all.filter((item) => {
-    if (!item.sub) return true;
-    const mainCat = item.category ?? NAV_CATEGORY[item.labelKey];
-    if (mainCat && !hasProducts(mainCat)) return false;
-    if (item.labelKey === "nav_other_tcg") {
-      const visibleSubs = item.sub.filter((s) => s.category && hasProducts(s.category));
-      if (visibleSubs.length === 0) return false;
-      item.sub = visibleSubs;
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
-    return true;
-  });
-}
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
 
-function DesktopDropdown({ items, onClose }: { items: SubItem[]; onClose: () => void }) {
-  const T = useT();
   return (
-    <div className="absolute left-0 top-full z-50 mt-0.5 min-w-[148px] rounded-lg border border-white/10 bg-black py-1 shadow-2xl">
-      {items.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          onClick={onClose}
-          className="block px-4 py-2.5 text-sm text-gray-300 transition hover:bg-white/5 hover:text-white"
-        >
-          {T(item.labelKey)}
-        </Link>
-      ))}
+    <div ref={ref} className="relative hidden lg:block">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-medium text-[#374151] transition hover:bg-[#f7f8fa] hover:text-[#111827]"
+        aria-expanded={open}
+      >
+        {label}
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+          <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </button>
+      {open && (
+        <div className="glass-dropdown absolute left-0 top-full z-50 mt-2 min-w-[220px] p-2">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => {
+                setOpen(false);
+                onNavigate?.();
+              }}
+              className="block rounded-[14px] px-4 py-3 text-sm text-[#374151] transition hover:bg-[#f7f8fa] hover:text-[#111827]"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string, number> }) {
+export function Header() {
   const { totalCount } = useCart();
   const { lang, setLang } = useLang();
   const T = useT();
   const [mounted, setMounted] = useState(false);
-  const [hasNotify, setHasNotify] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDrop, setOpenDrop] = useState<string | null>(null);
-  const [mobileExp, setMobileExp] = useState<string | null>(null);
-  const navRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const read = localStorage.getItem(READ_KEY);
-    setHasNotify(read !== "1");
-  }, []);
-
-  useEffect(() => {
-    function onOutside(e: MouseEvent) {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        setOpenDrop(null);
-      }
+    setMounted(true);
+    if (!document.cookie.includes("lang=")) {
+      document.cookie = `lang=zh; path=/; max-age=${365 * 24 * 3600}`;
     }
-    document.addEventListener("mousedown", onOutside);
-    return () => document.removeEventListener("mousedown", onOutside);
   }, []);
 
-  const NAV = buildNav(categoryCounts);
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border-subtle)] bg-black/92 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8" style={{ height: 56 }}>
-
-        {/* Logo */}
+    <header className="glass-header sticky top-0 z-50">
+      <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 leading-none"
-          onClick={() => { setMenuOpen(false); setOpenDrop(null); }}
+          className="shrink-0 text-lg font-semibold tracking-tight text-[#111827] sm:text-xl"
+          onClick={() => setMenuOpen(false)}
         >
-          <Image src="/logo.svg" alt="PIMART CARD" width={110} height={28} className="h-6 w-auto opacity-95" priority />
+          PIMART CARD
         </Link>
 
-        {/* 桌面导航 */}
-        <nav ref={navRef} className="ml-4 hidden items-center sm:flex">
-          {NAV.map((item) => {
-            const hasSub = !!item.sub;
-            const isOpen = openDrop === item.labelKey;
-            return (
-              <div key={item.labelKey} className="relative">
-                {hasSub ? (
-                  <button
-                    type="button"
-                    onClick={() => setOpenDrop(isOpen ? null : item.labelKey)}
-                    className={`flex items-center gap-0.5 px-3 py-0 text-[11px] font-medium uppercase tracking-[0.12em] transition ${isOpen ? "text-[var(--ivory)]" : "text-neutral-500 hover:text-[var(--ivory)]"}`}
-                    style={{ height: 56 }}
-                  >
-                    {T(item.labelKey)}
-                    <svg className={`h-3 w-3 transition-transform ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href!}
-                    onClick={() => setOpenDrop(null)}
-                    className="flex items-center px-3 text-[11px] font-medium uppercase tracking-[0.12em] text-neutral-500 transition hover:text-[var(--ivory)]"
-                    style={{ height: 56 }}
-                  >
-                    {T(item.labelKey)}
-                  </Link>
-                )}
-                {hasSub && isOpen && (
-                  <DesktopDropdown items={item.sub!} onClose={() => setOpenDrop(null)} />
-                )}
-              </div>
-            );
-          })}
+        <nav className="hidden flex-1 items-center gap-1 lg:flex">
+          <Link
+            href="/"
+            className="flex min-h-11 items-center rounded-full px-3 text-sm font-medium text-[#374151] transition hover:bg-[#f7f8fa]"
+          >
+            {T("nav_home")}
+          </Link>
+          <NavDropdown label="Shop" items={SHOP_MENU} />
+          <NavDropdown label="More" items={MORE_MENU} />
         </nav>
 
-        {/* 右侧 */}
-        <div className="ml-auto flex items-center gap-1">
-          {/* 语言切换 */}
-          <div className="flex items-center overflow-hidden rounded border border-white/10">
+        <form action="/" className="hidden flex-1 max-w-xs md:flex">
+          <input
+            type="text"
+            name="q"
+            placeholder={T("nav_search")}
+            className="input-field py-2 text-sm"
+          />
+        </form>
+
+        <div className="ml-auto flex items-center gap-1 sm:gap-2">
+          <div className="hidden items-center gap-1 rounded-full border border-[rgba(17,24,39,0.08)] bg-white p-1 sm:flex">
             {LANGS.map((l) => (
               <button
                 key={l}
                 type="button"
                 onClick={() => setLang(l)}
-                className={`px-2 text-xs font-bold transition touch-manipulation ${lang === l ? "bg-white text-black" : "text-neutral-500 hover:text-neutral-300"}`}
-                style={{ height: 30 }}
+                className={`touch-target rounded-full px-3 text-xs font-semibold transition ${
+                  lang === l
+                    ? "bg-[#111827] text-white"
+                    : "text-[#6b7280] hover:text-[#111827]"
+                }`}
               >
                 {LANG_LABELS[l]}
               </button>
             ))}
           </div>
 
-          {/* 消息提醒 */}
-          <Link
-            href="/"
-            className="relative flex items-center justify-center text-neutral-300 transition hover:text-white touch-manipulation"
-            style={{ height: 44, width: 44 }}
-            title={T("hero_new_badge")}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-5 w-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
-            {mounted && hasNotify && (
-              <span className="badge-notify right-2 top-2 h-2 w-2 min-w-0 p-0 badge-notify-pulse" />
-            )}
-          </Link>
-
-          {/* 购物车 */}
           <Link
             href="/cart"
-            className="relative flex items-center justify-center text-neutral-300 transition hover:text-white touch-manipulation"
-            style={{ height: 44, width: 44 }}
+            className="touch-target relative rounded-full text-[#374151] transition hover:bg-[#f7f8fa]"
+            aria-label={T("nav_cart")}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.94-4.706 2.43-7.184.078-.394-.226-.766-.628-.766H5.106M7.5 14.25 5.106 5.106M9.75 18.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm9 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
             </svg>
             {mounted && totalCount > 0 && (
-              <span className="badge-notify right-1 top-1 badge-notify-pulse">
-                {totalCount > 99 ? "99+" : totalCount}
+              <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#111827] px-1 text-[10px] font-bold text-white">
+                {totalCount}
               </span>
             )}
           </Link>
 
-          {/* 汉堡 */}
           <button
             type="button"
-            className="flex flex-col items-center justify-center gap-1 sm:hidden touch-manipulation"
-            style={{ height: 44, width: 44 }}
-            onClick={() => { setMenuOpen((o) => !o); setMobileExp(null); }}
+            className="touch-target rounded-full text-[#374151] lg:hidden"
+            onClick={() => setMenuOpen((o) => !o)}
             aria-label="菜单"
+            aria-expanded={menuOpen}
           >
-            <span className={`block h-0.5 w-5 bg-gray-300 transition-transform ${menuOpen ? "translate-y-1.5 rotate-45" : ""}`} />
-            <span className={`block h-0.5 w-5 bg-gray-300 transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 w-5 bg-gray-300 transition-transform ${menuOpen ? "-translate-y-1.5 -rotate-45" : ""}`} />
+            <span className={`block h-0.5 w-6 bg-[#374151] transition-transform ${menuOpen ? "translate-y-1.5 rotate-45" : ""}`} />
+            <span className={`my-1.5 block h-0.5 w-6 bg-[#374151] transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 w-6 bg-[#374151] transition-transform ${menuOpen ? "-translate-y-1.5 -rotate-45" : ""}`} />
           </button>
         </div>
       </div>
 
-      {/* 移动端展开菜单 */}
       {menuOpen && (
-        <div className="border-t border-white/10 bg-black px-4 pb-4 sm:hidden">
-          <form action="/" className="mb-2 pt-3">
-            <input type="text" name="q" placeholder={T("nav_search")} className="input-field py-2" />
-          </form>
-          <nav>
-            {NAV.map((item) => {
-              const hasSub = !!item.sub;
-              const isExp = mobileExp === item.labelKey;
-              return (
-                <div key={item.labelKey} className="border-b border-white/5 last:border-0">
-                  {hasSub ? (
-                    <>
-                      <button
-                        type="button"
-                        className="flex w-full items-center justify-between py-3 text-sm font-medium text-gray-300 touch-manipulation"
-                        onClick={() => setMobileExp(isExp ? null : item.labelKey)}
-                      >
-                        {T(item.labelKey)}
-                        <svg className={`h-4 w-4 transition-transform ${isExp ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                      {isExp && (
-                        <div className="mb-2 ml-3 flex flex-col border-l border-white/10 pl-3">
-                          {item.sub!.map((sub) => (
-                            <Link
-                              key={sub.href}
-                              href={sub.href}
-                              className="py-2 text-sm text-gray-400 hover:text-white touch-manipulation"
-                              style={{ minHeight: 40 }}
-                              onClick={() => { setMenuOpen(false); setMobileExp(null); }}
-                            >
-                              {T(sub.labelKey)}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      href={item.href!}
-                      className="flex items-center py-3 text-sm font-medium text-gray-300 hover:text-white touch-manipulation"
-                      onClick={() => { setMenuOpen(false); setMobileExp(null); }}
-                    >
-                      {T(item.labelKey)}
-                    </Link>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
+        <div className="fixed inset-0 top-[60px] z-40 overflow-y-auto bg-white/95 backdrop-blur-md lg:hidden">
+          <div className="border-t border-[rgba(17,24,39,0.08)] px-4 py-4">
+            <form action="/" className="mb-4">
+              <input type="text" name="q" placeholder={T("nav_search")} className="input-field" />
+            </form>
+
+            <div className="glass-dropdown mb-4 p-2">
+              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">Shop</p>
+              {SHOP_MENU.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block min-h-11 rounded-[14px] px-3 py-3 text-sm text-[#374151] hover:bg-[#f7f8fa]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="glass-dropdown mb-4 p-2">
+              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">More</p>
+              {MORE_MENU.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block min-h-11 rounded-[14px] px-3 py-3 text-sm text-[#374151] hover:bg-[#f7f8fa]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex gap-2 border-t border-[rgba(17,24,39,0.08)] pt-4">
+              {LANGS.map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => setLang(l)}
+                  className={`touch-target flex-1 rounded-full border text-sm font-semibold ${
+                    lang === l
+                      ? "border-[#111827] bg-[#111827] text-white"
+                      : "border-[rgba(17,24,39,0.08)] text-[#6b7280]"
+                  }`}
+                >
+                  {LANG_LABELS[l]}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </header>

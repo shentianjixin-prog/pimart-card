@@ -20,11 +20,11 @@ function CheckoutSuccessContent() {
   return (
     <div className="mx-auto max-w-lg px-4 py-24 text-center">
       <div className="mb-6 text-5xl">✅</div>
-      <h1 className="text-2xl font-bold text-white">{T("checkout_success_title")}</h1>
+      <h1 className="section-title">{T("checkout_success_title")}</h1>
       {orderId && (
-        <p className="mt-2 text-sm text-gray-500">{T("checkout_success_order")}{orderId}</p>
+        <p className="mt-2 text-sm text-[#6b7280]">{T("checkout_success_order")}{orderId}</p>
       )}
-      <p className="mt-4 text-sm text-gray-500">{T("checkout_success_desc")}</p>
+      <p className="mt-4 text-sm text-[#6b7280]">{T("checkout_success_desc")}</p>
       <Link href="/" className="btn-primary mt-8 inline-flex">
         {T("checkout_success_cta")}
       </Link>

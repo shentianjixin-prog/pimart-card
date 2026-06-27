@@ -45,15 +45,15 @@ const SECTIONS = [
 export default function GuidePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="gradient-text mb-8 text-2xl font-bold">购物指南</h1>
+      <h1 className="section-title mb-8">购物指南</h1>
 
       <div className="space-y-10">
         {SECTIONS.map((section) => (
           <section key={section.title}>
-            <h2 className="mb-3 text-lg font-semibold text-white">
+            <h2 className="mb-3 text-lg font-semibold text-[#111827]">
               {section.title}
             </h2>
-            <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-gray-400">
+            <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-[#6b7280]">
               {section.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -62,17 +62,17 @@ export default function GuidePage() {
         ))}
       </div>
 
-      <div className="surface mt-12 p-5 text-sm text-gray-400">
+      <div className="surface mt-12 p-5 text-sm text-[#6b7280]">
         还有其他疑问？欢迎查看
-        <Link href="/contact" className="mx-1 font-medium text-cyan-300 hover:text-cyan-200">
+        <Link href="/contact" className="mx-1 font-medium text-[#111827] hover:underline">
           联系方式
         </Link>
         或
-        <Link href="/shipping" className="mx-1 font-medium text-cyan-300 hover:text-cyan-200">
+        <Link href="/shipping" className="mx-1 font-medium text-[#111827] hover:underline">
           发货说明
         </Link>
         ，也可以
-        <Link href="/" className="mx-1 font-medium text-cyan-300 hover:text-cyan-200">
+        <Link href="/" className="mx-1 font-medium text-[#111827] hover:underline">
           返回首页
         </Link>
         继续选购。
