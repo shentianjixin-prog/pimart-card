@@ -4,8 +4,29 @@ import { formatJpy } from "@/lib/format";
 import { deleteProductAction } from "../../actions";
 import { QuickStockEdit } from "@/components/admin/QuickStockEdit";
 
-export default async function AdminProductsPage() {
+const STATUS_TABS = [
+  { label: "全部", value: "" },
+  { label: "上架", value: "上架" },
+  { label: "下架", value: "下架" },
+  { label: "草稿", value: "草稿" },
+];
+
+const STATUS_COLOR: Record<string, string> = {
+  上架: "text-emerald-400",
+  下架: "text-gray-400",
+  草稿: "text-amber-400",
+};
+
+export default async function AdminProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string }>;
+}) {
+  const sp = await searchParams;
+  const statusFilter = sp.status ?? "";
+
   const products = await prisma.product.findMany({
+    where: statusFilter ? { status: statusFilter } : undefined,
     orderBy: { createdAt: "desc" },
     include: { _count: { select: { orderItems: true } } },
   });
@@ -17,6 +38,29 @@ export default async function AdminProductsPage() {
         <Link href="/admin/products/new" className="btn-primary">
           + 新增商品
         </Link>
+      </div>
+
+      {/* 状态 tab */}
+      <div className="mb-4 flex gap-1">
+        {STATUS_TABS.map((tab) => {
+          const active = statusFilter === tab.value;
+          return (
+            <Link
+              key={tab.value}
+              href={tab.value ? `/admin/products?status=${tab.value}` : "/admin/products"}
+              className={`rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+                active
+                  ? "bg-white/15 text-white"
+                  : "text-gray-400 hover:bg-white/10 hover:text-gray-200"
+              }`}
+            >
+              {tab.label}
+            </Link>
+          );
+        })}
+        <span className="ml-2 self-center text-sm text-gray-500">
+          {products.length} 件
+        </span>
       </div>
 
       <div className="surface overflow-x-auto">
@@ -38,20 +82,25 @@ export default async function AdminProductsPage() {
             {products.map((p) => {
               const hasOrders = p._count.orderItems > 0;
               const isArchived = p.status === "下架";
+              const isDraft = p.status === "草稿";
               return (
-                <tr key={p.id} className={isArchived ? "opacity-60" : undefined}>
-                  <td className="px-4 py-2 font-medium text-white">{p.name}</td>
+                <tr
+                  key={p.id}
+                  className={isArchived || isDraft ? "opacity-60" : undefined}
+                >
+                  <td className="px-4 py-2 font-medium text-white">
+                    {p.name}
+                    {p.isPreorder && (
+                      <span className="ml-2 rounded bg-orange-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-orange-400">
+                        预售
+                      </span>
+                    )}
+                  </td>
                   <td className="px-4 py-2">{p.cardNumber || "—"}</td>
                   <td className="px-4 py-2">{p.rarity || "—"}</td>
                   <td className="px-4 py-2">{p.language || "—"}</td>
-                  <td className="px-4 py-2">
-                    {isArchived ? (
-                      <span className="text-gray-400">已下架</span>
-                    ) : p.isPreorder ? (
-                      <span className="text-orange-400">预售</span>
-                    ) : (
-                      <span className="text-cyan-400">{p.status || "上架"}</span>
-                    )}
+                  <td className={`px-4 py-2 ${STATUS_COLOR[p.status] ?? "text-gray-300"}`}>
+                    {p.status || "上架"}
                   </td>
                   <td className="px-4 py-2 text-cyan-300">{formatJpy(p.priceJpy)}</td>
                   <td className="px-4 py-2">
