@@ -13,7 +13,7 @@ export type HeroStackProduct = {
 };
 
 const SLIDE_COUNT = 3;
-const AUTOPLAY_MS = 5000;
+const AUTOPLAY_MS = 10000;
 const TRANSITION_MS = 600;
 
 const SLIDE_GRADIENTS = [
