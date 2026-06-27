@@ -1,40 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { CardPlaceholder, PsaSlabPlaceholder } from "@/components/HeroPlaceholders";
+import { useState } from "react";
+import { CardPlaceholder } from "@/components/HeroPlaceholders";
 import type { HeroStackProduct } from "@/components/HomeHero";
 
-/** Verified product box images (exclude HTML placeholder files) */
-const B2B_BOX_POOL = [
-  "/products/151-box.png",
-  "/products/cbb1c-box.png",
-  "/products/cbb2c-box.png",
-  "/products/cbb4c-box.png",
-  "/products/cbb5c-box.png",
-  "/products/cs1a-box.png",
-  "/products/cs1b-box.png",
-  "/products/cs2a-box.png",
-  "/products/cs2b-box.png",
-  "/products/cs5-box.png",
-  "/products/csv7c-box.png",
-  "/products/csv8c-box.png",
-  "/products/csv9c-box.png",
-  "/products/ylsc-battle-box.png",
-  "/products/opc-15-box.png",
-  "/products/duanwu2026-box.png",
-  "/products/csv9c-box.png",
-  "/images/hero-pack-gengar.jpg",
-  "/images/hero-pack-terastal.jpg",
-] as const;
-
-function pickRandomBoxes(count: number): string[] {
-  const pool = [...B2B_BOX_POOL];
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  return pool.slice(0, count);
+function ProductFrameImage({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return <CardPlaceholder />;
+  return (
+    // Native img — avoids Next optimizer issues with large / mislabeled product files
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      className="absolute inset-0 h-full w-full object-contain p-1.5"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
 }
 
 function B2BBoxFrame({
@@ -58,7 +42,7 @@ function B2BBoxFrame({
             aspect === "square" ? "aspect-square" : "aspect-[5/7]"
           }`}
         >
-          <Image src={src} alt={alt} fill sizes="160px" className="object-contain p-1.5" />
+          <ProductFrameImage src={src} alt={alt} />
         </div>
       </div>
     </div>
@@ -76,25 +60,13 @@ const STACK = [
 const HERO_BRAND_SLOTS: { src: string; alt: string }[] = [
   { src: "/products/151-box.png", alt: "宝可梦 151" },
   { src: "/images/hero-pack-gengar.jpg", alt: "宝可梦 宝石包 VOL.3" },
-  { src: "/products/csv9c-box.png", alt: "宝可梦 星彩晶璃" },
+  { src: "/products/csv8c-box.png", alt: "宝可梦 星彩晶璃" },
   { src: "/images/hero-pack-terastal.jpg", alt: "宝可梦 太晶盛聚" },
   { src: "/images/hero-card-brock.png", alt: "小刚的发掘 SAR" },
 ];
 
 function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
-  const [failed, setFailed] = useState(false);
-  if (failed) return <CardPlaceholder />;
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      sizes="130px"
-      className="object-contain p-1.5"
-      onError={() => setFailed(true)}
-      unoptimized={src.endsWith(".png") || src.includes("/products/")}
-    />
-  );
+  return <ProductFrameImage src={src} alt={alt} />;
 }
 
 export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
@@ -169,44 +141,44 @@ const B2B_FRAME =
 const B2B_FRAME_SM =
   "rounded-[18px] border border-[rgba(15,23,42,0.08)] bg-white/90 p-2 shadow-[0_16px_40px_rgba(15,23,42,0.06)] backdrop-blur-sm";
 
+/** Fixed hero B2B frames — no random/placeholder slots */
+const B2B_HERO_FRAMES = [
+  {
+    src: "/images/hero-pack-gengar.jpg",
+    alt: "宝可梦 宝石包 VOL.3",
+    wrapperClassName: "hero-float-slow absolute left-[4%] top-[10%] w-[36%]",
+    frameClassName: B2B_FRAME,
+    aspect: "5/7" as const,
+  },
+  {
+    src: "/images/psa-zekrom.jpg",
+    alt: "捷克罗姆 PSA 10",
+    wrapperClassName: "hero-float-delay absolute right-[2%] top-[14%] w-[34%]",
+    frameClassName: B2B_FRAME,
+    aspect: "5/7" as const,
+  },
+  {
+    src: "/images/hero-pack-terastal.jpg",
+    alt: "宝可梦 太晶盛聚",
+    wrapperClassName: "hero-float-slow absolute bottom-[6%] left-[18%] w-[32%]",
+    frameClassName: B2B_FRAME_SM,
+    aspect: "5/7" as const,
+  },
+  {
+    src: "/products/cbb5c-box.png",
+    alt: "宝可梦 原盒",
+    wrapperClassName: "hero-float-delay absolute bottom-[10%] right-[12%] w-[38%]",
+    frameClassName: B2B_FRAME,
+    aspect: "square" as const,
+  },
+] as const;
+
 export function HeroB2BVisual() {
-  const [boxImages, setBoxImages] = useState<string[]>(() =>
-    B2B_BOX_POOL.slice(0, 3),
-  );
-
-  useEffect(() => {
-    setBoxImages(pickRandomBoxes(3));
-  }, []);
-
-  const frameClass = B2B_FRAME;
-  const frameClassSm = B2B_FRAME_SM;
-
   return (
     <div className="hero-v2-visual hero-float-group relative mx-auto h-[220px] w-full max-w-[400px] sm:h-[260px] lg:h-[300px]">
-      <B2BBoxFrame
-        src={boxImages[0] ?? B2B_BOX_POOL[0]}
-        alt="TCG sealed box"
-        wrapperClassName="hero-float-slow absolute left-[4%] top-[10%] w-[36%]"
-        frameClassName={frameClass}
-      />
-      <div className="hero-float-delay absolute right-[2%] top-[14%] w-[34%]">
-        <div className={frameClass}>
-          <PsaSlabPlaceholder />
-        </div>
-      </div>
-      <B2BBoxFrame
-        src={boxImages[1] ?? B2B_BOX_POOL[1]}
-        alt="TCG sealed box"
-        wrapperClassName="hero-float-slow absolute bottom-[6%] left-[18%] w-[32%]"
-        frameClassName={frameClassSm}
-      />
-      <B2BBoxFrame
-        src={boxImages[2] ?? B2B_BOX_POOL[2]}
-        alt="TCG sealed box"
-        wrapperClassName="hero-float-delay absolute bottom-[10%] right-[12%] w-[38%]"
-        frameClassName={frameClass}
-        aspect="square"
-      />
+      {B2B_HERO_FRAMES.map((frame) => (
+        <B2BBoxFrame key={frame.src} {...frame} />
+      ))}
     </div>
   );
 }
