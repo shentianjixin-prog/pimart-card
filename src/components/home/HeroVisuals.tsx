@@ -23,8 +23,8 @@ const B2B_BOX_POOL = [
   "/products/ylsc-battle-box.png",
   "/products/opc-15-box.png",
   "/products/duanwu2026-box.png",
+  "/products/csv9c-box.png",
   "/images/hero-pack-gengar.jpg",
-  "/images/hero-pack-stellar-crown.jpg",
   "/images/hero-pack-terastal.jpg",
 ] as const;
 
@@ -73,13 +73,29 @@ const STACK = [
   { r: 13, x: 68, y: 18, z: 2, bg: "linear-gradient(135deg,#EAF4FF,#FFF0F5)" },
 ];
 
-const HERO_BRAND_SLOTS: ({ src: string; alt: string } | null)[] = [
-  null,
+const HERO_BRAND_SLOTS: { src: string; alt: string }[] = [
+  { src: "/products/151-box.png", alt: "宝可梦 151" },
   { src: "/images/hero-pack-gengar.jpg", alt: "宝可梦 宝石包 VOL.3" },
-  { src: "/images/hero-pack-stellar-crown.jpg", alt: "宝可梦 星彩晶璃" },
+  { src: "/products/csv9c-box.png", alt: "宝可梦 星彩晶璃" },
   { src: "/images/hero-pack-terastal.jpg", alt: "宝可梦 太晶盛聚" },
-  null,
+  { src: "/images/hero-card-brock.png", alt: "小刚的发掘 SAR" },
 ];
+
+function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return <CardPlaceholder />;
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes="130px"
+      className="object-contain p-1.5"
+      onError={() => setFailed(true)}
+      unoptimized={src.endsWith(".png") || src.includes("/products/")}
+    />
+  );
+}
 
 export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
   return (
@@ -103,17 +119,7 @@ export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
                 style={{ background: s.bg }}
               >
                 <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[14px] bg-white">
-                  {slot ? (
-                    <Image
-                      src={slot.src}
-                      alt={slot.alt}
-                      fill
-                      sizes="130px"
-                      className="object-contain p-1.5"
-                    />
-                  ) : (
-                    <CardPlaceholder />
-                  )}
+                  <HeroBrandImage src={slot.src} alt={slot.alt} />
                 </div>
               </div>
             </div>
