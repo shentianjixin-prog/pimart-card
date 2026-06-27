@@ -2,11 +2,13 @@ type Props = {
   height?: number;
   className?: string;
   variant?: "full" | "compact" | "wordmark";
+  tone?: "dark" | "light";
 };
 
 const BLACK = "#111827";
+const WHITE = "#FFFFFF";
 
-function Wordmark({ x = 0, size = 19 }: { x?: number; size?: number }) {
+function Wordmark({ x = 0, size = 19, fill = BLACK }: { x?: number; size?: number; fill?: string }) {
   return (
     <text
       x={x}
@@ -14,7 +16,7 @@ function Wordmark({ x = 0, size = 19 }: { x?: number; size?: number }) {
       fontFamily="var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif"
       fontSize={size}
       fontWeight="800"
-      fill={BLACK}
+      fill={fill}
       letterSpacing="0.08em"
     >
       PIMARTCARD
@@ -22,7 +24,14 @@ function Wordmark({ x = 0, size = 19 }: { x?: number; size?: number }) {
   );
 }
 
-export function PimartLogo({ height = 36, className = "", variant = "full" }: Props) {
+export function PimartLogo({
+  height = 36,
+  className = "",
+  variant = "full",
+  tone = "dark",
+}: Props) {
+  const fill = tone === "light" ? WHITE : BLACK;
+
   if (variant === "compact") {
     const width = height * 5.4;
     return (
@@ -35,7 +44,7 @@ export function PimartLogo({ height = 36, className = "", variant = "full" }: Pr
         role="img"
         aria-label="PIMARTCARD"
       >
-        <Wordmark size={18} />
+        <Wordmark size={18} fill={fill} />
       </svg>
     );
   }
@@ -52,7 +61,7 @@ export function PimartLogo({ height = 36, className = "", variant = "full" }: Pr
       role="img"
       aria-label="PIMARTCARD"
     >
-      <Wordmark size={variant === "wordmark" ? 22 : 19} />
+      <Wordmark size={variant === "wordmark" ? 22 : 19} fill={fill} />
     </svg>
   );
 }

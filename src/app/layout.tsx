@@ -49,7 +49,7 @@ export default async function RootLayout({
       className={`${inter.variable} ${notoSansSC.variable} ${notoSansJP.variable} h-full antialiased`}
     >
       <body
-        className="min-h-full flex flex-col bg-white text-[#111827]"
+        className="site-shell min-h-full"
         style={{
           fontFamily:
             'var(--font-inter), var(--font-noto-sc), var(--font-noto-jp), system-ui, sans-serif',
@@ -57,8 +57,10 @@ export default async function RootLayout({
       >
         <LangProvider initial={lang}>
           <CartProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
+            <div className="site-frame">
+              <Header />
+              <main className="flex-1">{children}</main>
+            </div>
             <Footer />
           </CartProvider>
         </LangProvider>
