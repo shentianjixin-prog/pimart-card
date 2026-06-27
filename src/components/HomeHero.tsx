@@ -4,6 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useT } from "@/lib/lang-context";
+import {
+  BoxPlaceholder,
+  CardPlaceholder,
+  isUsableProductImage,
+  PsaSlabPlaceholder,
+} from "@/components/HeroPlaceholders";
 
 export type HeroStackProduct = {
   name: string;
@@ -23,45 +29,47 @@ const SLIDE_GRADIENTS = [
 ];
 
 const STACK_STYLES = [
-  { rotate: -14, x: -72, y: 22, z: 1, bg: "linear-gradient(135deg, #EAF4FF 0%, #ffffff 100%)" },
-  { rotate: -5, x: -26, y: -6, z: 2, bg: "linear-gradient(135deg, #F3EEFF 0%, #ffffff 100%)" },
+  { rotate: -12, x: -56, y: 16, z: 1, bg: "linear-gradient(135deg, #EAF4FF 0%, #ffffff 100%)" },
+  { rotate: -4, x: -20, y: -4, z: 2, bg: "linear-gradient(135deg, #F3EEFF 0%, #ffffff 100%)" },
   { rotate: 0, x: 0, y: 0, z: 3, bg: "linear-gradient(135deg, #FFF7D6 0%, #ffffff 100%)" },
-  { rotate: 7, x: 28, y: -12, z: 2, bg: "linear-gradient(135deg, #FFF0F5 0%, #ffffff 100%)" },
-  { rotate: 14, x: 68, y: 22, z: 1, bg: "linear-gradient(135deg, #EAF4FF 0%, #FFF0F5 100%)" },
+  { rotate: 5, x: 22, y: -8, z: 2, bg: "linear-gradient(135deg, #FFF0F5 0%, #ffffff 100%)" },
+  { rotate: 11, x: 52, y: 16, z: 1, bg: "linear-gradient(135deg, #EAF4FF 0%, #FFF0F5 100%)" },
 ];
 
-function ChevronLeft() {
+function StackCardImage({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (!isUsableProductImage(src) || failed) {
+    return <CardPlaceholder />;
+  }
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-      <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ChevronRight() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-      <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      unoptimized={src.endsWith(".svg")}
+      sizes="120px"
+      className="object-contain p-2"
+      onError={() => setFailed(true)}
+    />
   );
 }
 
 function CardStack({ products }: { products: HeroStackProduct[] }) {
   const stack = products.slice(0, 5);
   while (stack.length < 5) {
-    stack.push({ name: "TCG Box", images: "/products/placeholder.svg", slug: "#" });
+    stack.push({ name: "TCG Box", images: "", slug: "#" });
   }
 
   return (
-    <div className="hero-visual-stack relative mx-auto flex h-[300px] w-[320px] max-w-[85vw] items-center justify-center sm:h-[380px] lg:h-[420px] lg:w-[460px] lg:max-w-[50vw]">
+    <div className="hero-visual-stack relative mx-auto flex h-[180px] w-[280px] max-w-[85vw] items-center justify-center sm:h-[200px] sm:w-[300px] lg:h-[220px] lg:w-[360px] lg:max-w-[50vw]">
       {stack.map((product, i) => {
         const style = STACK_STYLES[i];
-        const image = product.images.split(",")[0]?.trim() || "/products/placeholder.svg";
+        const image = product.images.split(",")[0]?.trim();
         return (
           <Link
             key={`${product.slug}-${i}`}
             href={product.slug === "#" ? "/" : `/products/${product.slug}`}
-            className="hero-stack-card group absolute w-[38%] max-w-[140px] cursor-pointer sm:max-w-[160px] lg:max-w-[180px]"
+            className="hero-stack-card group absolute w-[34%] max-w-[110px] cursor-pointer lg:max-w-[120px]"
             style={{
               zIndex: style.z,
               ["--stack-x" as string]: `${style.x}`,
@@ -70,19 +78,11 @@ function CardStack({ products }: { products: HeroStackProduct[] }) {
             }}
           >
             <div
-              className="hero-stack-inner overflow-hidden rounded-[20px] border border-[rgba(17,24,39,0.08)] p-2.5 sm:p-3"
+              className="hero-stack-inner overflow-hidden rounded-[16px] border border-[rgba(17,24,39,0.08)] p-2"
               style={{ background: style.bg }}
             >
-              <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[14px] bg-white">
-                <Image
-                  src={image}
-                  alt={product.name}
-                  fill
-                  unoptimized={image.endsWith(".svg")}
-                  sizes="(max-width: 1024px) 140px, 180px"
-                  className="object-contain p-2 transition duration-300 group-hover:scale-105"
-                  priority={i === 2}
-                />
+              <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[12px] bg-white">
+                <StackCardImage src={image} alt={product.name} />
               </div>
             </div>
           </Link>
@@ -92,19 +92,15 @@ function CardStack({ products }: { products: HeroStackProduct[] }) {
   );
 }
 
-function PlaceholderVisual({ slideIndex }: { slideIndex: number }) {
-  const images = [
-    "/products/cs65-box.png",
-    "/products/ylsc-collect-box.png",
-    "/products/cbb3c-box.png",
-  ];
-  const img = images[(slideIndex - 1) % images.length];
+function SlideVisual({ slideIndex, products }: { slideIndex: number; products: HeroStackProduct[] }) {
+  if (slideIndex === 0) {
+    return <CardStack products={products} />;
+  }
+  const variant = slideIndex === 2 ? "psa" : "box";
   return (
-    <div className="hero-visual-single mx-auto flex w-[320px] max-w-[85vw] items-center justify-center lg:w-[460px] lg:max-w-[50vw]">
-      <div className="hero-visual-card w-full cursor-pointer overflow-hidden rounded-[24px] border border-[rgba(17,24,39,0.08)] bg-white p-4 shadow-[0_28px_70px_rgba(17,24,39,0.12)] transition duration-300 hover:-translate-y-1 hover:rotate-1">
-        <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[18px] bg-[#f7f8fa]">
-          <Image src={img} alt="" fill className="object-contain p-4" sizes="460px" />
-        </div>
+    <div className="hero-visual-single mx-auto w-[240px] max-w-[85vw] sm:w-[280px] lg:w-[320px] lg:max-w-[50vw]">
+      <div className="hero-visual-card overflow-hidden rounded-[20px] border border-[rgba(17,24,39,0.08)] bg-white p-3 shadow-[0_20px_50px_rgba(17,24,39,0.1)]">
+        {variant === "psa" ? <PsaSlabPlaceholder /> : <BoxPlaceholder />}
       </div>
     </div>
   );
@@ -117,7 +113,6 @@ type SlideConfig = {
   descKey: string;
   subtitleKey?: string;
   ctas: { key: string; href: string; primary?: boolean }[];
-  visual: "stack" | "placeholder";
 };
 
 const SLIDES: SlideConfig[] = [
@@ -132,7 +127,6 @@ const SLIDES: SlideConfig[] = [
       { key: "hero_cta_wholesale", href: "/contact" },
       { key: "hero_cta_psa", href: "/?q=PSA" },
     ],
-    visual: "stack",
   },
   {
     id: 1,
@@ -140,7 +134,6 @@ const SLIDES: SlideConfig[] = [
     descKey: "hero_slide2_desc",
     subtitleKey: "hero_slide2_sub",
     ctas: [{ key: "hero_slide2_cta", href: "/?sort=newest&inStock=1", primary: true }],
-    visual: "placeholder",
   },
   {
     id: 2,
@@ -148,7 +141,6 @@ const SLIDES: SlideConfig[] = [
     descKey: "hero_slide3_desc",
     subtitleKey: "hero_slide3_sub",
     ctas: [{ key: "hero_slide3_cta", href: "/?q=PSA", primary: true }],
-    visual: "placeholder",
   },
   {
     id: 3,
@@ -156,7 +148,6 @@ const SLIDES: SlideConfig[] = [
     descKey: "hero_slide4_desc",
     subtitleKey: "hero_slide4_sub",
     ctas: [{ key: "hero_slide4_cta", href: "/contact", primary: true }],
-    visual: "placeholder",
   },
 ];
 
@@ -167,7 +158,6 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const touchStartX = useRef(0);
-  const viewportRef = useRef<HTMLDivElement>(null);
 
   const goTo = useCallback((index: number) => {
     setActive(((index % SLIDE_COUNT) + SLIDE_COUNT) % SLIDE_COUNT);
@@ -190,8 +180,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
 
   function handleTouchMove(e: React.TouchEvent) {
     if (!isDragging) return;
-    const dx = e.touches[0].clientX - touchStartX.current;
-    setDragOffset(dx);
+    setDragOffset(e.touches[0].clientX - touchStartX.current);
   }
 
   function handleTouchEnd() {
@@ -204,7 +193,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
 
   return (
     <section
-      className="hero-banner-root relative"
+      className="hero-banner-root"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => {
         setPaused(false);
@@ -213,7 +202,6 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
       }}
     >
       <div
-        ref={viewportRef}
         className="hero-banner-viewport hero-panel relative overflow-hidden rounded-[28px] border border-[rgba(17,24,39,0.08)] shadow-[0_8px_30px_rgba(17,24,39,0.06)]"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -227,56 +215,38 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
           }}
         >
           {SLIDES.map((slide, slideIndex) => (
-            <div
-              key={slide.id}
-              className="hero-banner-slide relative min-w-full shrink-0 px-6 py-12 sm:px-10 sm:py-16 lg:px-14 lg:py-20"
-            >
+            <div key={slide.id} className="hero-banner-slide relative min-w-full shrink-0">
+              <div className="pointer-events-none absolute inset-0 bg-white" />
               <div
-                className="pointer-events-none absolute inset-0 bg-white"
-                style={{ background: `#ffffff` }}
-              />
-              <div
-                className="pointer-events-none absolute inset-0 opacity-100"
+                className="pointer-events-none absolute inset-0"
                 style={{ background: SLIDE_GRADIENTS[slideIndex] }}
               />
 
-              <div className="relative grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+              <div className="relative flex h-full flex-col justify-center px-5 py-6 sm:px-8 sm:py-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8 lg:px-10 lg:py-8">
                 <div className="text-center lg:text-left">
-                  <h1 className="text-4xl font-semibold tracking-tight text-[#111827] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">
+                  <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
                     {slide.useBrandTitle ? "PIMART CARD" : T(slide.titleKey)}
                   </h1>
-
-                  <p className="hero-desc mx-auto mt-5 max-w-xl lg:mx-0">
-                    {T(slide.descKey)}
-                  </p>
-
+                  <p className="hero-desc mx-auto mt-3 max-w-xl lg:mx-0">{T(slide.descKey)}</p>
                   {slide.subtitleKey && (
-                    <p className="mt-3 text-sm font-medium tracking-tight text-[#9ca3af] sm:text-base">
-                      {T(slide.subtitleKey)}
-                    </p>
+                    <p className="mt-2 text-sm font-medium text-[#9ca3af]">{T(slide.subtitleKey)}</p>
                   )}
-
-                  <div className="mt-8 flex flex-wrap justify-center gap-3 lg:mt-10 lg:justify-start">
+                  <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
                     {slide.ctas.map((cta) =>
                       cta.primary ? (
-                        <Link key={cta.href} href={cta.href} className="btn-primary min-h-11">
+                        <Link key={cta.href} href={cta.href} className="btn-primary min-h-11 px-5 text-sm">
                           {T(cta.key)}
                         </Link>
                       ) : (
-                        <Link key={cta.href} href={cta.href} className="btn-secondary min-h-11">
+                        <Link key={cta.href} href={cta.href} className="btn-secondary min-h-11 px-5 text-sm">
                           {T(cta.key)}
                         </Link>
                       )
                     )}
                   </div>
                 </div>
-
-                <div className="flex items-center justify-center">
-                  {slide.visual === "stack" ? (
-                    <CardStack products={products} />
-                  ) : (
-                    <PlaceholderVisual slideIndex={slideIndex} />
-                  )}
+                <div className="mt-6 flex justify-center lg:mt-0">
+                  <SlideVisual slideIndex={slideIndex} products={products} />
                 </div>
               </div>
             </div>
@@ -286,29 +256,27 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
         <button
           type="button"
           onClick={goPrev}
-          className="hero-banner-arrow absolute left-3 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-[rgba(17,24,39,0.08)] bg-white/90 p-2.5 text-[#374151] shadow-sm backdrop-blur-sm transition hover:bg-white lg:flex touch-target"
+          className="hero-banner-arrow absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 lg:flex"
           aria-label="Previous slide"
         >
-          <ChevronLeft />
+          ‹
         </button>
         <button
           type="button"
           onClick={goNext}
-          className="hero-banner-arrow absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-[rgba(17,24,39,0.08)] bg-white/90 p-2.5 text-[#374151] shadow-sm backdrop-blur-sm transition hover:bg-white lg:flex touch-target"
+          className="hero-banner-arrow absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 lg:flex"
           aria-label="Next slide"
         >
-          <ChevronRight />
+          ›
         </button>
 
-        <div className="absolute bottom-4 left-0 right-0 z-20 flex items-center justify-center gap-1.5 sm:bottom-5">
+        <div className="hero-dots flex items-center justify-center gap-1.5 pb-3 pt-1 lg:absolute lg:bottom-3 lg:left-0 lg:right-0 lg:pb-0 lg:pt-0">
           {SLIDES.map((slide, i) => (
             <button
               key={slide.id}
               type="button"
               onClick={() => goTo(i)}
-              className={`hero-dot rounded-full transition-all duration-300 ${
-                i === active ? "hero-dot-active" : "hero-dot-inactive"
-              }`}
+              className={`hero-dot ${i === active ? "hero-dot-active" : "hero-dot-inactive"}`}
               aria-label={`Slide ${i + 1}`}
               aria-current={i === active ? "true" : undefined}
             />

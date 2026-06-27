@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { FilterSidebar } from "@/components/FilterSidebar";
 import { Pagination } from "@/components/Pagination";
 import { HomeHero } from "@/components/HomeHero";
+import { HomeInfoBar } from "@/components/HomeInfoBar";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductSection } from "@/components/ProductSection";
 import { WhyPimart } from "@/components/WhyPimart";
@@ -186,6 +187,8 @@ export default async function Home({
         <div className="hero-section-spacing">
           <HomeHero products={heroProducts} />
         </div>
+
+        <HomeInfoBar />
 
         <ProductSection
           title={T("section_popular")}

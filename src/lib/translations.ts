@@ -24,6 +24,13 @@ const dict: Record<string, Record<Lang, string>> = {
   nav_cart:       { zh: "购物车",     ja: "カート",        en: "Cart" },
   nav_search:     { zh: "搜索商品名称", ja: "商品名を検索", en: "Search products" },
   nav_search_products: { zh: "搜索商品…", ja: "商品を検索…", en: "Search Products..." },
+  // 顶部公告栏（静态，非滚动）
+  info_global:    { zh: "全球直供", ja: "世界直送", en: "Global Direct Supply" },
+  info_authentic: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
+  info_wholesale: { zh: "支持批发", ja: "卸売対応", en: "Wholesale Available" },
+  info_weekly:    { zh: "每周上新", ja: "毎週新着", en: "New Weekly" },
+
+  nav_lang_label: { zh: "语言", ja: "言語", en: "Language" },
 
   menu_pokemon:     { zh: "宝可梦",     ja: "ポケモン",         en: "Pokémon" },
   menu_one_piece:   { zh: "海贼王",     ja: "ワンピース",       en: "One Piece" },
