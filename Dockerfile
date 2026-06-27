@@ -10,6 +10,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 # postinstall 会跑 prisma generate，此时尚未 COPY schema，必须跳过
 RUN npm ci --ignore-scripts
+# npm ci 跳过脚本后，需要手动编译 better-sqlite3 原生绑定
+RUN npm rebuild better-sqlite3
 
 COPY . .
 
