@@ -9,6 +9,9 @@ type Props = {
     name: string;
     category: string;
     series: string | null;
+    cardNumber?: string | null;
+    rarity?: string | null;
+    language?: string | null;
     description: string | null;
     priceJpy: number;
     stock: number;
@@ -57,6 +60,35 @@ export function ProductForm({ action, initial, submitLabel }: Props) {
             name="series"
             defaultValue={initial?.series || ""}
             placeholder="朱・紫ex / 疾風伝"
+            className="input-field"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-3">
+        <div>
+          <label className="mb-1 block text-sm text-gray-400">卡号</label>
+          <input
+            name="cardNumber"
+            defaultValue={initial?.cardNumber || ""}
+            placeholder="SV10-109"
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm text-gray-400">稀有度</label>
+          <input
+            name="rarity"
+            defaultValue={initial?.rarity || ""}
+            placeholder="SR / SAR / PSA 10"
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm text-gray-400">语言</label>
+          <input
+            name="language"
+            defaultValue={initial?.language || ""}
+            placeholder="简中 / 日版"
             className="input-field"
           />
         </div>

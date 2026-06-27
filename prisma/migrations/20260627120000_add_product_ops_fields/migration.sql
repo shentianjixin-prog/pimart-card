@@ -1,4 +1,6 @@
--- AlterTable: 卡牌运营字段与上下架状态（boxType 可能已由旧库手动存在，启动脚本 ensure-db-schema 会幂等补齐）
+-- AlterTable: 卡牌运营字段与上下架状态
+-- boxType 若旧库已存在则跳过；Railway 启动脚本 scripts/ensure-db-schema.mjs 会幂等补齐
+-- ALTER TABLE "Product" ADD COLUMN "boxType" TEXT NOT NULL DEFAULT '';
 ALTER TABLE "Product" ADD COLUMN "cardNumber" TEXT;
 ALTER TABLE "Product" ADD COLUMN "rarity" TEXT;
 ALTER TABLE "Product" ADD COLUMN "language" TEXT;

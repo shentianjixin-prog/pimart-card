@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { createAdminSession, destroyAdminSession, getAdminSession } from "@/lib/session";
-import { isProductArchived } from "@/lib/product-status";
 
 export type LoginState = { error?: string } | undefined;
 
@@ -53,6 +52,9 @@ function parseProductForm(formData: FormData) {
   const name = String(formData.get("name") || "").trim();
   const category = String(formData.get("category") || "").trim();
   const series = String(formData.get("series") || "").trim();
+  const cardNumber = String(formData.get("cardNumber") || "").trim();
+  const rarity = String(formData.get("rarity") || "").trim();
+  const language = String(formData.get("language") || "").trim();
   const description = String(formData.get("description") || "").trim();
   const priceJpy = Number(formData.get("priceJpy"));
   const stock = Number(formData.get("stock"));
@@ -88,6 +90,9 @@ function parseProductForm(formData: FormData) {
       name,
       category,
       series: series || null,
+      cardNumber: cardNumber || null,
+      rarity: rarity || null,
+      language: language || null,
       description: description || null,
       priceJpy: Math.round(priceJpy),
       stock: Math.round(stock),
@@ -158,8 +163,9 @@ export async function deleteProductAction(formData: FormData) {
   });
   if (!product) return;
 
-  if (product._count.orderItems > 0 || isProductArchived(product.status)) {
-    // 已有订单历史：禁止硬删除，改为下架归档，保留 OrderItem 关联
+  const hasOrderHistory = product._count.orderItems > 0;
+
+  async function archiveProduct() {
     await prisma.product.update({
       where: { id: productId },
       data: {
@@ -168,8 +174,18 @@ export async function deleteProductAction(formData: FormData) {
         featured: false,
       },
     });
+  }
+
+  if (hasOrderHistory) {
+    // 已有订单：禁止硬删除，保留 OrderItem 关联
+    await archiveProduct();
   } else {
-    await prisma.product.delete({ where: { id: productId } });
+    try {
+      await prisma.product.delete({ where: { id: productId } });
+    } catch {
+      // OrderItem 外键 RESTRICT 或其它约束触发时，回退为下架归档
+      await archiveProduct();
+    }
   }
 
   revalidatePath("/");

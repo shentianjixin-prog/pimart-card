@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatJpy } from "@/lib/format";
-import { deleteProductAction } from "../../actions";
+import { DeleteProductButton } from "@/components/admin/DeleteProductButton";
 import { QuickStockEdit } from "@/components/admin/QuickStockEdit";
 
 const STATUS_TABS = [
@@ -80,7 +80,6 @@ export default async function AdminProductsPage({
           </thead>
           <tbody className="divide-y divide-white/10 text-gray-300">
             {products.map((p) => {
-              const hasOrders = p._count.orderItems > 0;
               const isArchived = p.status === "下架";
               const isDraft = p.status === "草稿";
               return (
@@ -115,20 +114,11 @@ export default async function AdminProductsPage({
                       编辑
                     </Link>
                     {!isArchived && (
-                      <form action={deleteProductAction} className="inline">
-                        <input type="hidden" name="productId" value={p.id} />
-                        <button
-                          type="submit"
-                          className="text-red-400 hover:text-red-300"
-                          title={
-                            hasOrders
-                              ? "该商品有订单历史，将执行下架归档"
-                              : "无订单历史，将永久删除"
-                          }
-                        >
-                          {hasOrders ? "下架" : "删除"}
-                        </button>
-                      </form>
+                      <DeleteProductButton
+                        productId={p.id}
+                        productName={p.name}
+                        orderCount={p._count.orderItems}
+                      />
                     )}
                   </td>
                 </tr>
