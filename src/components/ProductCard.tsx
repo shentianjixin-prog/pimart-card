@@ -6,6 +6,7 @@ import { useState } from "react";
 import { formatJpy } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useT } from "@/lib/lang-context";
+import { CardPlaceholder, isUsableProductImage } from "@/components/HeroPlaceholders";
 
 const NEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -46,6 +47,8 @@ export function ProductCard({ product }: Props) {
   const [added, setAdded] = useState(false);
 
   const image = product.images.split(",")[0]?.trim();
+  const [imgFailed, setImgFailed] = useState(false);
+  const showPlaceholder = !isUsableProductImage(image) || imgFailed;
   const soldOut = product.stock <= 0;
   const isNew = Date.now() - new Date(product.createdAt).getTime() < NEW_THRESHOLD_MS;
   const isHot = product.featured === true;
@@ -83,15 +86,20 @@ export function ProductCard({ product }: Props) {
   return (
     <div className="product-card group flex h-full flex-col">
       <Link href={`/products/${product.slug}`} className="block flex-1">
-        <div className="relative aspect-[5/7] w-full overflow-hidden bg-[#f7f8fa]">
-          <Image
-            src={image}
-            alt={product.name}
-            fill
-            unoptimized={image?.endsWith(".svg")}
-            sizes="(max-width: 768px) 50vw, 25vw"
-            className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
-          />
+        <div className="relative aspect-[5/7] w-full overflow-hidden bg-[#FAFAFA]">
+          {showPlaceholder ? (
+            <CardPlaceholder className="h-full rounded-none" />
+          ) : (
+            <Image
+              src={image}
+              alt={product.name}
+              fill
+              unoptimized={image?.endsWith(".svg")}
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
+              onError={() => setImgFailed(true)}
+            />
+          )}
 
           {tagItems.length > 0 && (
             <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] flex-wrap gap-1">

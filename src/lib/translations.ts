@@ -329,6 +329,64 @@ const dict: Record<string, Record<Lang, string>> = {
   newsletter_done:          { zh: "订阅成功，感谢加入 PIMART CARD。", ja: "登録ありがとうございます。", en: "Subscribed — thank you for joining PIMART CARD." },
 
   filter_count_unit: { zh: "件", ja: "件", en: "" },
+
+  // Homepage V2
+  hero_v2_s1_title: { zh: "PIMART CARD", ja: "PIMART CARD", en: "PIMART CARD" },
+  hero_v2_s1_sub: { zh: "全球卡牌交易平台", ja: "グローバルトレーディングカードマーケット", en: "Global Trading Card Marketplace" },
+  hero_v2_s1_desc: { zh: "日本直采 · 全球配送 · 正品保证", ja: "日本直仕入れ · 世界配送 · 正規品保証", en: "Direct from Japan · Worldwide Shipping · Authentic Guarantee" },
+  hero_v2_s2_title: { zh: "PSA 精选", ja: "PSAピックアップ", en: "PSA Picks" },
+  hero_v2_s2_sub: { zh: "高端评级卡收藏", ja: "プレミアム鑑定品コレクション", en: "Premium Graded Card Collection" },
+  hero_v2_s2_desc: { zh: "精选评级卡 · 全球现货库存", ja: "厳選鑑定品 · 世界在庫", en: "Curated graded cards · Global in-stock inventory" },
+  hero_v2_s3_title: { zh: "B2B 批发供应链", ja: "B2B卸売サプライチェーン", en: "B2B Wholesale Supply Chain" },
+  hero_v2_s3_sub: { zh: "日本原盒长期供货", ja: "日本未開封BOX長期供給", en: "Long-term Japanese Sealed Box Supply" },
+  hero_v2_s3_desc: { zh: "原盒供货 · PSA库存 · 批量采购", ja: "未開封BOX · PSA在庫 · 大口仕入れ", en: "Sealed boxes · PSA inventory · Bulk purchasing" },
+  hero_v2_cta_new: { zh: "浏览新品", ja: "新着を見る", en: "Shop New Arrivals" },
+  hero_v2_cta_psa: { zh: "查看 PSA", ja: "PSAを見る", en: "View PSA" },
+  hero_v2_cta_contact: { zh: "联系我们", ja: "お問い合わせ", en: "Contact Us" },
+  hero_v2_cta_quote: { zh: "获取报价", ja: "見積もり", en: "Get a Quote" },
+  hero_v2_cta_wholesale: { zh: "批发咨询", ja: "卸売相談", en: "Wholesale Inquiry" },
+
+  announce_title: { zh: "公告", ja: "お知らせ", en: "Announcements" },
+  announce_sv: { zh: "SV 新品已到货", ja: "SV新着入荷", en: "SV new arrivals in stock" },
+  announce_op: { zh: "海贼王新品预售中", ja: "ワンピース予約受付中", en: "One Piece pre-orders open" },
+  announce_psa: { zh: "PSA 每周更新", ja: "PSA毎週更新", en: "PSA updated weekly" },
+  announce_b2b: { zh: "支持批发询价", ja: "卸売お問い合わせ受付", en: "Wholesale inquiries welcome" },
+
+  tab_all: { zh: "全部", ja: "すべて", en: "All" },
+  tab_pokemon: { zh: "宝可梦", ja: "ポケモン", en: "Pokémon" },
+  tab_onepiece: { zh: "海贼王", ja: "ワンピース", en: "One Piece" },
+  tab_psa: { zh: "PSA", ja: "PSA", en: "PSA" },
+  home_latest_arrivals: { zh: "Latest Arrivals", ja: "Latest Arrivals", en: "Latest Arrivals" },
+
+  b2b_v2_tag: { zh: "PIMART B2B", ja: "PIMART B2B", en: "PIMART B2B" },
+  b2b_v2_title: { zh: "全球卡牌批发供应链", ja: "グローバルTCG卸売サプライチェーン", en: "Global TCG Wholesale Supply Chain" },
+  b2b_v2_line1: { zh: "日本直采 · PSA库存 · 原盒供货", ja: "日本直仕入れ · PSA在庫 · 未開封BOX", en: "Direct from Japan · PSA stock · Sealed supply" },
+  b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
+
+  trusted_title: { zh: "Trusted Worldwide", ja: "Trusted Worldwide", en: "Trusted Worldwide" },
+  trusted_subtitle: { zh: "连接日本库存与全球收藏家", ja: "日本在庫と世界のコレクターをつなぐ", en: "Connecting Japanese inventory with collectors worldwide" },
+  trusted_f1_title: { zh: "全球配送", ja: "世界配送", en: "Worldwide Shipping" },
+  trusted_f1_desc: { zh: "覆盖中国、美国、东南亚等多个国家地区", ja: "中国・米国・東南アジアなど多国対応", en: "China, US, Southeast Asia and more" },
+  trusted_f2_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
+  trusted_f2_desc: { zh: "所有商品均来自可溯源渠道", ja: "すべてトレーサブルな正規ルート", en: "All products from traceable sources" },
+  trusted_f3_title: { zh: "日本现货", ja: "日本在庫", en: "Japan In Stock" },
+  trusted_f3_desc: { zh: "日本仓库存储，快速发货", ja: "日本倉庫から迅速発送", en: "Stored in Japan, shipped quickly" },
+  trusted_f4_title: { zh: "安全支付", ja: "安全な決済", en: "Secure Payment" },
+  trusted_f4_desc: { zh: "Stripe 加密结算，安心付款", ja: "Stripe暗号化決済", en: "Stripe encrypted checkout" },
+
+  stats_countries: { zh: "发货国家", ja: "配送国", en: "Countries Shipped" },
+  stats_orders: { zh: "累计订单", ja: "累計注文", en: "Orders Fulfilled" },
+  stats_collectors: { zh: "收藏用户", ja: "コレクター", en: "Collectors" },
+  stats_rating: { zh: "好评率", ja: "高評価率", en: "Positive Rating" },
+
+  world_title: { zh: "Trusted by Collectors Worldwide", ja: "Trusted by Collectors Worldwide", en: "Trusted by Collectors Worldwide" },
+  world_subtitle: { zh: "从日本发往世界各地的收藏家与经销商", ja: "日本から世界のコレクター・業者へ", en: "From Japan to collectors and dealers worldwide" },
+  region_jp: { zh: "日本", ja: "日本", en: "Japan" },
+  region_cn: { zh: "中国", ja: "中国", en: "China" },
+  region_us: { zh: "美国", ja: "米国", en: "United States" },
+  region_sg: { zh: "新加坡", ja: "シンガポール", en: "Singapore" },
+  region_my: { zh: "马来西亚", ja: "マレーシア", en: "Malaysia" },
+  region_th: { zh: "泰国", ja: "タイ", en: "Thailand" },
 };
 
 export function t(key: string, lang: Lang): string {

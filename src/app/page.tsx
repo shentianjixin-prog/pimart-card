@@ -4,12 +4,14 @@ import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductListingControls } from "@/components/ProductListingControls";
 import { Pagination } from "@/components/Pagination";
-import { HomeHero, type SlideStacks } from "@/components/HomeHero";
-import { HomeInfoBar } from "@/components/HomeInfoBar";
+import { HomeHero } from "@/components/HomeHero";
+import { HomeAnnounceBar } from "@/components/HomeAnnounceBar";
+import { HomeProductTabs } from "@/components/HomeProductTabs";
+import { HomeB2B } from "@/components/HomeB2B";
+import { TrustedFeatures } from "@/components/TrustedFeatures";
+import { HomeStats } from "@/components/HomeStats";
+import { HomeWorldTrust } from "@/components/HomeWorldTrust";
 import { SearchBar } from "@/components/SearchBar";
-import { ProductSection } from "@/components/ProductSection";
-import { WhyPimart } from "@/components/WhyPimart";
-import { WholesaleBanner } from "@/components/WholesaleBanner";
 import { t, resolveLang } from "@/lib/translations";
 import { fetchFilterFacets, fetchSubGameCounts } from "@/lib/product-facets";
 import {
@@ -22,7 +24,34 @@ import {
 } from "@/lib/product-filters";
 import type { Prisma } from "@/generated/prisma/client";
 
-const POPULAR_TARGET = 10;
+const POPULAR_TARGET = 8;
+
+const POKEMON_WHERE: Prisma.ProductWhereInput = {
+  OR: [
+    { category: { contains: "宝可梦" } },
+    { category: { contains: "ポケモン" } },
+    { name: { contains: "宝可梦" } },
+    { name: { contains: "Pokemon" } },
+    { name: { contains: "ポケモン" } },
+  ],
+};
+
+const ONEPIECE_WHERE: Prisma.ProductWhereInput = {
+  OR: [
+    { name: { contains: "One Piece" } },
+    { name: { contains: "海贼王" } },
+    { name: { contains: "ワンピース" } },
+  ],
+};
+
+const PSA_WHERE: Prisma.ProductWhereInput = {
+  OR: [
+    { name: { contains: "PSA" } },
+    { series: { contains: "PSA" } },
+    { category: { contains: "PSA" } },
+    { rarity: { contains: "PSA" } },
+  ],
+};
 
 const ACTIVE_PRODUCT: Prisma.ProductWhereInput = { status: "上架" };
 
@@ -67,8 +96,9 @@ export default async function Home({
     heroProducts,
     featuredProducts,
     recentInStock,
-    newArrivals,
-    psaPicks,
+    pokemonProducts,
+    onepieceProducts,
+    psaTabProducts,
   ] = await Promise.all([
     showMarketing
       ? Promise.resolve([])
@@ -105,24 +135,23 @@ export default async function Home({
       : Promise.resolve([]),
     showMarketing
       ? prisma.product.findMany({
-          where: stockFilter,
+          where: { AND: [stockFilter, POKEMON_WHERE] },
           orderBy: { createdAt: "desc" },
-          take: 4,
+          take: 8,
         })
       : Promise.resolve([]),
     showMarketing
       ? prisma.product.findMany({
-          where: {
-            ...stockFilter,
-            OR: [
-              { name: { contains: "PSA" } },
-              { series: { contains: "PSA" } },
-              { category: { contains: "PSA" } },
-              { rarity: { contains: "PSA" } },
-            ],
-          },
+          where: { AND: [stockFilter, ONEPIECE_WHERE] },
+          orderBy: { createdAt: "desc" },
+          take: 8,
+        })
+      : Promise.resolve([]),
+    showMarketing
+      ? prisma.product.findMany({
+          where: { AND: [stockFilter, PSA_WHERE] },
           orderBy: { priceJpy: "desc" },
-          take: 4,
+          take: 8,
         })
       : Promise.resolve([]),
   ]);
@@ -131,57 +160,29 @@ export default async function Home({
 
   if (showMarketing) {
     const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET);
-    const toStack = (arr: Array<{ name: string; images: string; slug: string }>) =>
-      arr.map((p) => ({ name: p.name, images: p.images, slug: p.slug }));
-    const slideStacks: SlideStacks = [
-      toStack(newArrivals),
-      toStack(psaPicks),
-      toStack(popular.slice(0, 5)),
-    ];
 
     return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="hero-section-spacing">
-          <HomeHero products={heroProducts} slideStacks={slideStacks} />
+      <>
+        <HomeHero products={heroProducts} />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <HomeAnnounceBar />
+
+          <HomeProductTabs
+            productsByTab={{
+              all: popular,
+              pokemon: pokemonProducts,
+              onepiece: onepieceProducts,
+              psa: psaTabProducts,
+            }}
+          />
+
+          <HomeB2B />
+          <TrustedFeatures />
+          <HomeStats />
+          <HomeWorldTrust />
         </div>
-
-        <HomeInfoBar />
-
-        <ProductSection
-          title={T("section_popular")}
-          subtitle={T("section_popular_sub")}
-          products={popular}
-          viewAllHref="/?stock=instock"
-          viewAllLabel={T("section_view_all")}
-          tone="default"
-        />
-
-        <ProductSection
-          title={T("section_new_arrivals")}
-          subtitle={T("section_new_sub")}
-          products={newArrivals}
-          viewAllHref="/?sort=newest&stock=instock"
-          viewAllLabel={T("section_shop_all")}
-          tone="blue"
-        />
-
-        <ProductSection
-          title={T("section_psa_picks")}
-          subtitle={T("section_psa_sub")}
-          products={psaPicks}
-          viewAllHref="/?type=psa"
-          viewAllLabel={T("section_view_psa")}
-          tone="sky"
-        />
-
-        <div className="py-10 sm:py-14 lg:py-16">
-          <WholesaleBanner />
-        </div>
-
-        <div className="pb-10 sm:pb-14 lg:pb-16">
-          <WhyPimart />
-        </div>
-      </div>
+      </>
     );
   }
 
