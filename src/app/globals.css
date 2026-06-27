@@ -279,6 +279,20 @@ button:not(:disabled),
     animation: hero-float 5s ease-in-out 1.2s infinite;
   }
 
+  /* Hero brand slide — poster background under card fan */
+  .hero-brand-visual {
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+  }
+
+  .hero-brand-poster-overlay {
+    background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.12) 45%,
+      rgba(255, 255, 255, 0.32) 100%
+    );
+  }
+
   /* PSA Hero fan stack */
   .hero-psa-stack-wrap {
     @apply relative mx-auto flex w-full items-center justify-center;

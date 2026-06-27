@@ -99,32 +99,47 @@ function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
 
 export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
   return (
-    <div className="hero-v2-visual hero-float-group relative mx-auto h-[220px] w-full max-w-[420px] sm:h-[260px] lg:h-[320px] lg:max-w-[480px]">
-      <div className="absolute left-1/2 top-1/2 w-[88%] -translate-x-1/2 -translate-y-1/2">
-        {HERO_BRAND_SLOTS.map((slot, i) => {
-          const s = STACK[i];
-          return (
-            <div
-              key={`hero-brand-slot-${i}`}
-              className="hero-stack-card absolute w-[36%] max-w-[130px]"
-              style={{
-                zIndex: s.z,
-                left: "50%",
-                top: "50%",
-                transform: `translate(calc(-50% + ${s.x}px), calc(-50% + ${s.y}px)) rotate(${s.r}deg)`,
-              }}
-            >
+    <div className="hero-v2-visual hero-brand-visual relative mx-auto h-[220px] w-full max-w-[420px] overflow-hidden rounded-[28px] sm:h-[260px] lg:h-[320px] lg:max-w-[480px]">
+      <div className="hero-brand-poster absolute inset-0 z-0" aria-hidden>
+        <Image
+          src="/images/hero-brand-poster.png"
+          alt=""
+          fill
+          sizes="(max-width: 480px) 100vw, 480px"
+          className="object-cover object-center"
+          priority
+          unoptimized
+        />
+        <div className="hero-brand-poster-overlay absolute inset-0" />
+      </div>
+
+      <div className="hero-float-group relative z-[1] h-full w-full">
+        <div className="absolute left-1/2 top-1/2 w-[88%] -translate-x-1/2 -translate-y-1/2">
+          {HERO_BRAND_SLOTS.map((slot, i) => {
+            const s = STACK[i];
+            return (
               <div
-                className="overflow-hidden rounded-[18px] border border-[rgba(15,23,42,0.08)] p-2 shadow-[0_16px_40px_rgba(15,23,42,0.08)]"
-                style={{ background: s.bg }}
+                key={`hero-brand-slot-${i}`}
+                className="hero-stack-card absolute w-[36%] max-w-[130px]"
+                style={{
+                  zIndex: s.z,
+                  left: "50%",
+                  top: "50%",
+                  transform: `translate(calc(-50% + ${s.x}px), calc(-50% + ${s.y}px)) rotate(${s.r}deg)`,
+                }}
               >
-                <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[14px] bg-white">
-                  <HeroBrandImage src={slot.src} alt={slot.alt} />
+                <div
+                  className="overflow-hidden rounded-[18px] border border-[rgba(15,23,42,0.08)] p-2 shadow-[0_16px_40px_rgba(15,23,42,0.08)]"
+                  style={{ background: s.bg }}
+                >
+                  <div className="relative aspect-[5/7] w-full overflow-hidden rounded-[14px] bg-white">
+                    <HeroBrandImage src={slot.src} alt={slot.alt} />
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
