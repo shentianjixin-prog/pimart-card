@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #060810;
-  --surface: #0d0f1a;
-  --foreground: #f4f5f7;
-  --accent-from: #22d3ee;
-  --accent-to: #a855f7;
+  --background: #000000;
+  --surface: #0a0a0a;
+  --surface-elevated: #111111;
+  --foreground: #fafafa;
+  --muted: #a3a3a3;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent-sky: #38bdf8;
+  --accent-sky-hover: #0ea5e9;
+  --notify-red: #ef4444;
 }
 
 @theme inline {
@@ -38,59 +42,58 @@ button:not(:disabled),
   cursor: pointer;
 }
 
-/* 固定的渐变光斑背景，营造科技感氛围，不随内容滚动 */
 .ambient-glow {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-.ambient-glow::before,
-.ambient-glow::after {
-  content: "";
-  position: absolute;
-  width: 60vw;
-  height: 60vw;
-  border-radius: 9999px;
-  filter: blur(120px);
-  opacity: 0.18;
-}
-.ambient-glow::before {
-  top: -20vw;
-  left: -10vw;
-  background: var(--accent-from);
-}
-.ambient-glow::after {
-  bottom: -25vw;
-  right: -15vw;
-  background: var(--accent-to);
+  display: none;
 }
 
 @layer components {
   .surface {
-    @apply rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+    @apply rounded-xl border border-white/10 bg-[#0a0a0a];
   }
   .surface-solid {
-    @apply rounded-xl border border-white/10 bg-[#0d0f1a];
+    @apply rounded-xl border border-white/10 bg-[#111111];
   }
   .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-lg bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-110 active:brightness-90 disabled:cursor-not-allowed disabled:opacity-40 touch-manipulation;
-    box-shadow: 0 0 24px -6px rgba(34, 211, 238, 0.5);
+    @apply inline-flex min-h-11 items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold text-black transition active:brightness-90 disabled:cursor-not-allowed disabled:opacity-40 touch-manipulation;
+    background: var(--accent-sky);
+  }
+  .btn-primary:hover {
+    background: var(--accent-sky-hover);
+  }
+  .btn-buy {
+    @apply inline-flex min-h-10 w-full items-center justify-center rounded-md px-4 py-2 text-xs font-semibold text-black transition active:brightness-90 touch-manipulation;
+    background: var(--accent-sky);
+  }
+  .btn-buy:hover {
+    background: var(--accent-sky-hover);
   }
   .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-gray-200 transition hover:border-white/25 hover:bg-white/10 active:bg-white/15 touch-manipulation;
+    @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-white/20 bg-transparent px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/40 hover:bg-white/5 active:bg-white/10 touch-manipulation;
   }
   .input-field {
-    @apply w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base text-white placeholder:text-gray-500 focus:border-cyan-400/60 focus:outline-none focus:ring-1 focus:ring-cyan-400/40;
+    @apply w-full rounded-lg border border-white/15 bg-black px-3 py-2 text-base text-white placeholder:text-neutral-500 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20;
   }
   .badge-soft {
-    @apply rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-xs font-medium text-gray-300;
+    @apply rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium text-neutral-300;
   }
   .gradient-text {
-    @apply bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent;
+    @apply text-white;
   }
   .link-muted {
-    @apply text-gray-400 transition hover:text-white;
+    @apply text-neutral-400 transition hover:text-white;
   }
+  .badge-notify {
+    @apply absolute flex items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-black;
+    min-width: 1.125rem;
+    height: 1.125rem;
+    padding: 0 0.25rem;
+  }
+  .badge-notify-pulse {
+    animation: notify-pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes notify-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
 }

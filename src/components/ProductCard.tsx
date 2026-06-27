@@ -12,10 +12,10 @@ import { useLang } from "@/lib/lang-context";
 const NEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
 
 const BOX_TYPE_STYLE: Record<string, string> = {
-  肥盒: "bg-cyan-700 text-cyan-100",
-  瘦盒: "bg-violet-700 text-violet-100",
-  宝石包: "bg-amber-600 text-amber-100",
-  礼盒: "bg-pink-700 text-pink-100",
+  肥盒: "border border-white/20 bg-white/10 text-white",
+  瘦盒: "border border-white/20 bg-white/10 text-neutral-300",
+  宝石包: "border border-white/20 bg-white/10 text-neutral-300",
+  礼盒: "border border-white/20 bg-white/10 text-neutral-300",
 };
 
 type Props = {
@@ -67,7 +67,7 @@ export function ProductCard({ product }: Props) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group surface relative block overflow-hidden transition hover:border-cyan-400/30 hover:shadow-[0_0_30px_-12px_rgba(34,211,238,0.5)]"
+      className="group surface relative block overflow-hidden transition hover:border-white/25"
     >
       <div className="relative aspect-[5/7] w-full overflow-hidden bg-white/[0.02]">
         <Image
@@ -109,7 +109,7 @@ export function ProductCard({ product }: Props) {
             <button
               type="button"
               onClick={handleQuickAdd}
-              className="w-full touch-manipulation bg-gradient-to-r from-cyan-500 to-violet-500 py-2.5 text-xs font-semibold text-black transition hover:brightness-110 active:brightness-90"
+              className="btn-buy"
             >
               {added ? T("card_added") : T("card_add_cart")}
             </button>
@@ -123,7 +123,7 @@ export function ProductCard({ product }: Props) {
           <p className="mt-1 text-xs text-gray-500">{product.series}</p>
         )}
         <div className="mt-2 flex items-end justify-between">
-          <p className="text-base font-bold text-cyan-300">{formatJpy(product.priceJpy)}</p>
+          <p className="text-base font-bold text-white">{formatJpy(product.priceJpy)}</p>
           {!soldOut && product.stock <= 3 && (
             <p className="text-xs font-medium text-orange-400">
               {T("card_remaining_pre")}{product.stock}{T("card_remaining_suf")}

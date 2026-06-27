@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart-context";
@@ -14,6 +15,8 @@ const NAV_CATEGORY: Record<string, string> = {
   nav_one_piece: "海贼王",
   nav_naruto: "火影忍者",
 };
+
+const READ_KEY = "pimart-hero-tab-read";
 
 function buildNav(categoryCounts: Record<string, number>): NavItem[] {
   const count = (cat: string) => categoryCounts[cat] ?? 0;
@@ -78,7 +81,7 @@ function buildNav(categoryCounts: Record<string, number>): NavItem[] {
 function DesktopDropdown({ items, onClose }: { items: SubItem[]; onClose: () => void }) {
   const T = useT();
   return (
-    <div className="absolute left-0 top-full z-50 mt-0.5 min-w-[148px] rounded-lg border border-white/10 bg-[#0d1120] py-1 shadow-2xl">
+    <div className="absolute left-0 top-full z-50 mt-0.5 min-w-[148px] rounded-lg border border-white/10 bg-black py-1 shadow-2xl">
       {items.map((item) => (
         <Link
           key={item.href}
@@ -98,12 +101,18 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
   const { lang, setLang } = useLang();
   const T = useT();
   const [mounted, setMounted] = useState(false);
+  const [hasNotify, setHasNotify] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [mobileExp, setMobileExp] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const read = localStorage.getItem(READ_KEY);
+    setHasNotify(read !== "1");
+  }, []);
 
   useEffect(() => {
     function onOutside(e: MouseEvent) {
@@ -118,17 +127,16 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
   const NAV = buildNav(categoryCounts);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#060810]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8" style={{ height: 56 }}>
 
         {/* Logo */}
         <Link
           href="/"
-          className="shrink-0 leading-none"
+          className="flex shrink-0 items-center gap-2 leading-none"
           onClick={() => { setMenuOpen(false); setOpenDrop(null); }}
         >
-          <span className="gradient-text text-lg font-bold tracking-tight">PIMART</span>
-          <span className="ml-0.5 text-sm font-medium text-gray-400">CARD</span>
+          <Image src="/logo.svg" alt="PIMART CARD" width={120} height={30} className="h-7 w-auto" priority />
         </Link>
 
         {/* 桌面导航 */}
@@ -177,7 +185,7 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
                 key={l}
                 type="button"
                 onClick={() => setLang(l)}
-                className={`px-2 text-xs font-bold transition touch-manipulation ${lang === l ? "bg-cyan-500/20 text-cyan-300" : "text-gray-500 hover:text-gray-300"}`}
+                className={`px-2 text-xs font-bold transition touch-manipulation ${lang === l ? "bg-white text-black" : "text-neutral-500 hover:text-neutral-300"}`}
                 style={{ height: 30 }}
               >
                 {LANG_LABELS[l]}
@@ -185,18 +193,33 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
             ))}
           </div>
 
+          {/* 消息提醒 */}
+          <Link
+            href="/"
+            className="relative flex items-center justify-center text-neutral-300 transition hover:text-white touch-manipulation"
+            style={{ height: 44, width: 44 }}
+            title={T("hero_new_badge")}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-5 w-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+            {mounted && hasNotify && (
+              <span className="badge-notify right-2 top-2 h-2 w-2 min-w-0 p-0 badge-notify-pulse" />
+            )}
+          </Link>
+
           {/* 购物车 */}
           <Link
             href="/cart"
-            className="relative flex items-center justify-center text-gray-300 transition hover:text-white touch-manipulation"
+            className="relative flex items-center justify-center text-neutral-300 transition hover:text-white touch-manipulation"
             style={{ height: 44, width: 44 }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.94-4.706 2.43-7.184.078-.394-.226-.766-.628-.766H5.106M7.5 14.25 5.106 5.106M9.75 18.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm9 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
             </svg>
             {mounted && totalCount > 0 && (
-              <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 text-[9px] font-bold text-black">
-                {totalCount}
+              <span className="badge-notify right-1 top-1 badge-notify-pulse">
+                {totalCount > 99 ? "99+" : totalCount}
               </span>
             )}
           </Link>
@@ -218,7 +241,7 @@ export function Header({ categoryCounts = {} }: { categoryCounts?: Record<string
 
       {/* 移动端展开菜单 */}
       {menuOpen && (
-        <div className="border-t border-white/10 bg-[#060810] px-4 pb-4 sm:hidden">
+        <div className="border-t border-white/10 bg-black px-4 pb-4 sm:hidden">
           <form action="/" className="mb-2 pt-3">
             <input type="text" name="q" placeholder={T("nav_search")} className="input-field py-2" />
           </form>

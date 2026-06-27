@@ -115,6 +115,19 @@ const dict: Record<string, Record<Lang, string>> = {
   ann_1:      { zh: "【发货通知】6/20 前下单的订单已于 6/25 全部发出", ja: "【発送通知】6/20までのご注文は6/25に全て発送済みです", en: "[Shipping Update] Orders placed before 6/20 have all shipped on 6/25" },
   ann_2:      { zh: "【正品保证】本店所有商品均为正规渠道进货，假一赔十", ja: "【正規品保証】当店の商品はすべて正規ルートより仕入れています", en: "[Authentic Guarantee] All items sourced from official channels" },
 
+  // 首页 Hero 公告栏
+  hero_tab_cards:    { zh: "最新卡牌", ja: "最新カード", en: "Latest Cards" },
+  hero_tab_notice:   { zh: "网站公告", ja: "お知らせ", en: "Notices" },
+  hero_tab_shipping: { zh: "发货规则", ja: "配送ルール", en: "Shipping Rules" },
+  hero_new_badge:    { zh: "有新消息", ja: "新着あり", en: "New updates" },
+  hero_ship_link:    { zh: "查看完整发货说明", ja: "配送詳細を見る", en: "Full shipping details" },
+  hero_card_0:       { zh: "【海贼王简中】OPC-01〜OPC-11 原盒现货上架，数量有限", ja: "【ワンピース簡中】OPC-01〜OPC-11 原盒在庫あり、数量限定", en: "[One Piece CN] OPC-01–OPC-11 booster boxes now in stock, limited qty" },
+  hero_card_1:       { zh: "【宝可梦简中】151 收藏家套装、朱紫 ex 强化包热销中", ja: "【ポケモン簡中】151 コレクターズセット、SV ex 強化パック好評発売中", en: "[Pokémon CN] 151 Collector Set & SV ex packs — hot sellers" },
+  hero_card_2:       { zh: "【火影忍者】威化卡 BOX 及入门套装到货，欢迎选购", ja: "【NARUTO】ウエハース BOX 及びスターターセット入荷", en: "[Naruto] Wafer card boxes & starter sets now available" },
+  hero_ship_0:       { zh: "日本仓现货：付款确认后 3 个工作日内发货", ja: "日本倉庫現物：ご入金確認後 3 営業日以内に発送", en: "Japan warehouse: ships within 3 business days after payment" },
+  hero_ship_1:       { zh: "中国海外直邮：付款确认后 7〜14 个工作日送达，关税买家承担", ja: "中国より海外直送：ご入金確認後 7〜14 営業日、関税はお客様負担", en: "China direct ship: 7–14 business days; customs duties paid by buyer" },
+  hero_ship_2:       { zh: "盲盒/卡包类商品下单后不可退换；破损错发 7 天内联系客服", ja: "ブラインド商品は注文確定後返品不可；破損・誤送は 7 日以内にご連絡", en: "Blind products non-returnable; report damage/wrong item within 7 days" },
+
   // 品牌
   brand_tagline: { zh: "日本·中国正版TCG卡牌 / PSA评级 / 批发", ja: "日本・中国正規TCGカード / PSA鑑定 / 卸売", en: "Japanese & Chinese TCG Sealed Boxes / PSA / Wholesale" },
   brand_hero_tag: { zh: "正版授权 · 日本直发", ja: "正規品 · 日本直送", en: "Authentic · Ships from Japan" },

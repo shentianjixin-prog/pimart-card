@@ -6,7 +6,6 @@ import { FilterSidebar } from "@/components/FilterSidebar";
 import { Pagination } from "@/components/Pagination";
 import { HomeHero } from "@/components/HomeHero";
 import { TrustBadges } from "@/components/TrustBadges";
-import { Announcements } from "@/components/Announcements";
 import { WholesaleSection } from "@/components/WholesaleSection";
 import { t, type Lang } from "@/lib/translations";
 import { translateProduct } from "@/lib/translate-api";
@@ -155,13 +154,12 @@ export default async function Home({
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {showHero && <HomeHero />}
       {showHero && <TrustBadges />}
-      {showHero && <Announcements />}
 
       {showHero && newProducts.length > 0 && (
         <section className="mb-10">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-white">{T("section_new_arrivals")}</h2>
-            <Link href="/?sort=newest" className="text-sm text-cyan-300 hover:text-cyan-200">{T("section_view_all")}</Link>
+            <Link href="/?sort=newest" className="text-sm text-neutral-400 hover:text-white">{T("section_view_all")}</Link>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {newProducts.map((p) => <ProductCard key={p.id} product={p} />)}
@@ -173,7 +171,7 @@ export default async function Home({
         <section className="mb-10">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-white">{T("section_best_sellers")}</h2>
-            <Link href="/?isPreorder=0&inStock=1" className="text-sm text-cyan-300 hover:text-cyan-200">{T("section_view_all")}</Link>
+            <Link href="/?isPreorder=0&inStock=1" className="text-sm text-neutral-400 hover:text-white">{T("section_view_all")}</Link>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {hotProducts.map((p) => (
@@ -192,7 +190,7 @@ export default async function Home({
         <section className="mb-10">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-white">{T("section_preorder")}</h2>
-            <Link href="/?isPreorder=1" className="text-sm text-cyan-300 hover:text-cyan-200">{T("section_view_all")}</Link>
+            <Link href="/?isPreorder=1" className="text-sm text-neutral-400 hover:text-white">{T("section_view_all")}</Link>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {preorderProducts.map((p) => <ProductCard key={p.id} product={p} />)}
@@ -227,7 +225,7 @@ export default async function Home({
             {showHero && sp.inStock !== "0" && (
               <>
                 {" · "}
-                <Link href="/?inStock=0" className="text-cyan-400 hover:text-cyan-300">
+                <Link href="/?inStock=0" className="text-neutral-400 hover:text-white">
                   {T("page_show_sold_out")}
                 </Link>
               </>

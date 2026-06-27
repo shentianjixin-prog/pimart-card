@@ -7,14 +7,12 @@ export function Footer() {
   const T = useT();
 
   return (
-    <footer className="mt-16 border-t border-white/10 bg-[#060810]">
+    <footer className="mt-16 border-t border-white/10 bg-black">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
           {/* 品牌 */}
           <div className="col-span-2 sm:col-span-1">
-            <p className="text-base font-bold text-white">
-              <span className="gradient-text">PIMART</span> CARD
-            </p>
+            <p className="text-base font-bold text-white">PIMART CARD</p>
             <p className="mt-2 text-xs leading-relaxed text-gray-500">{T("brand_tagline")}</p>
           </div>
 
