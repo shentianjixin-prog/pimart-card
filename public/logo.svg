@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 88" fill="none" role="img" aria-label="PIMART CARD">
-  <rect x="0.5" y="0.5" width="87" height="87" stroke="#c4a574" stroke-width="0.75" opacity="0.85"/>
-  <path d="M14 58 Q 28 22 44 42 T 74 58" stroke="#c4a574" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-  <path d="M18 62 L 32 38 L 46 52 L 58 32 L 70 62" stroke="#e8e4dc" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-  <text x="102" y="38" fill="#f5f3ef" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="400" letter-spacing="8">PIMART</text>
-  <text x="102" y="68" fill="#c4a574" font-family="Georgia, 'Times New Roman', serif" font-size="14" font-weight="400" letter-spacing="12">CARD</text>
-  <line x1="102" y1="76" x2="280" y2="76" stroke="#c4a574" stroke-width="0.5" opacity="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" role="img" aria-label="PIMART CARD">
+  <rect width="280" height="64" rx="14" fill="#FFFFFF"/>
+  <rect x="0.75" y="0.75" width="278.5" height="62.5" rx="13.25" stroke="rgba(15,23,42,0.08)" stroke-width="1.5"/>
+  <rect x="16" y="16" width="24" height="32" rx="4" fill="#16A34A" fill-opacity="0.12"/>
+  <rect x="18" y="18" width="20" height="28" rx="3" stroke="#15803D" stroke-width="1.75"/>
+  <path d="M22 38 L28 26 L34 32 L40 24" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="52" y="40" fill="#15803D" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="700" letter-spacing="0.5">PIMART</text>
+  <text x="178" y="40" fill="#16A34A" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4">CARD</text>
 </svg>

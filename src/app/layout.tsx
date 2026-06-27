@@ -29,6 +29,10 @@ export const metadata: Metadata = {
   title: "PIMART CARD | グローバルトレーディングカードマーケット",
   description:
     "日版・中国語版 TCG 未開封BOX、PSA鑑定品、卸売対応。正規品保証、日本から発送。",
+  icons: {
+    icon: "/logo-icon.svg",
+    apple: "/logo-icon.svg",
+  },
 };
 
 export default async function RootLayout({
