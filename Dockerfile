@@ -8,7 +8,8 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci
+# postinstall 会跑 prisma generate，此时尚未 COPY schema，必须跳过
+RUN npm ci --ignore-scripts
 
 COPY . .
 
