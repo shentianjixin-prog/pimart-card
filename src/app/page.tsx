@@ -180,8 +180,9 @@ export default async function Home({
           <HomeB2B />
           <TrustedFeatures />
           <HomeStats />
-          <HomeWorldTrust />
         </div>
+
+        <HomeWorldTrust />
       </>
     );
   }

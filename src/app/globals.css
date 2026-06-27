@@ -750,7 +750,236 @@ button:not(:disabled),
     transform: translateY(0);
   }
 
-  /* World trust */
+  /* World trust — bento waterfall layout */
+  .home-world-bento-section {
+    padding: 0 10px;
+  }
+
+  @media (min-width: 640px) {
+    .home-world-bento-section {
+      padding: 0 14px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-world-bento-section {
+      padding: 0 18px;
+    }
+  }
+
+  .home-world-bento-shell {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5px;
+    background: #0a0a0a;
+    border-radius: 28px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .home-world-bento-grid {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "head"
+      "waterfall"
+      "map"
+      "rail";
+    border-radius: 22px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .home-world-bento-grid {
+      grid-template-columns: minmax(140px, 0.85fr) minmax(0, 1.65fr);
+      grid-template-rows: auto 1fr 1fr auto;
+      grid-template-areas:
+        "head head"
+        "waterfall map"
+        "waterfall map"
+        "rail rail";
+      min-height: 420px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-world-bento-grid {
+      grid-template-columns: minmax(160px, 0.75fr) minmax(0, 1.55fr) minmax(140px, 0.7fr);
+      grid-template-areas:
+        "head head head"
+        "waterfall map rail"
+        "waterfall map rail";
+      min-height: 460px;
+    }
+  }
+
+  .home-world-bento-cell {
+    min-height: 0;
+  }
+
+  .home-world-bento-head {
+    grid-area: head;
+    padding: 1.5rem 1.25rem 1.25rem;
+    background: linear-gradient(135deg, #eaf4ff 0%, #dbeafe 55%, #c7d2fe 100%);
+    color: #111827;
+  }
+
+  @media (min-width: 640px) {
+    .home-world-bento-head {
+      padding: 2rem 1.75rem 1.5rem;
+    }
+  }
+
+  .home-world-bento-waterfall {
+    grid-area: waterfall;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .home-world-bento-map-wrap {
+    grid-area: map;
+    background: linear-gradient(180deg, #fafafa 0%, #f8fafc 100%);
+    padding: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .home-world-bento-map-wrap {
+      padding: 1rem;
+    }
+  }
+
+  .home-world-bento-rail {
+    grid-area: rail;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  @media (max-width: 767px) {
+    .home-world-bento-rail {
+      grid-template-columns: 1fr;
+    }
+
+    .home-world-bento-waterfall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .home-world-bento-tile {
+    position: relative;
+    flex: 1;
+    min-height: 108px;
+    overflow: hidden;
+    transition: filter 0.25s ease;
+  }
+
+  .home-world-bento-tile::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 28%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+    pointer-events: none;
+  }
+
+  .home-world-bento-tile-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 0.15rem;
+    padding: 1rem 1rem 0.9rem;
+  }
+
+  .home-world-bento-flag {
+    font-size: 1.45rem;
+    line-height: 1;
+  }
+
+  .home-world-bento-pokemon {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.18));
+    opacity: 0.92;
+  }
+
+  .home-world-bento-tile-label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #111827;
+  }
+
+  .home-world-bento-hub-tag {
+    margin-top: 0.15rem;
+    border-radius: 999px;
+    background: rgba(17, 24, 39, 0.82);
+    padding: 0.12rem 0.45rem;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+  }
+
+  .home-world-bento-tile--us {
+    background: linear-gradient(165deg, #fff7d6 0%, #fde68a 100%);
+  }
+
+  .home-world-bento-tile--cn {
+    background: linear-gradient(165deg, #fff0f5 0%, #fbcfe8 100%);
+  }
+
+  .home-world-bento-tile--jp {
+    background: linear-gradient(165deg, #f3eeff 0%, #ddd6fe 100%);
+  }
+
+  .home-world-bento-tile--sg {
+    background: linear-gradient(165deg, #eaf4ff 0%, #93c5fd 100%);
+  }
+
+  .home-world-bento-tile--my {
+    background: linear-gradient(165deg, #dcfce7 0%, #86efac 100%);
+  }
+
+  .home-world-bento-tile--th {
+    background: linear-gradient(165deg, #ffedd5 0%, #fdba74 100%);
+  }
+
+  /* Vertical waterfall seam — colors blend at shared edges */
+  .home-world-bento-waterfall .home-world-bento-tile + .home-world-bento-tile {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .home-world-bento-rail .home-world-bento-tile + .home-world-bento-tile {
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.35);
+  }
+
+  @media (max-width: 767px) {
+    .home-world-bento-waterfall .home-world-bento-tile + .home-world-bento-tile {
+      box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-world-bento-rail {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-world-bento-rail .home-world-bento-tile + .home-world-bento-tile {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+  }
+
   .home-world-lines {
     pointer-events: none;
     z-index: 1;
