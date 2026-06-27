@@ -362,7 +362,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   b2b_v2_tag: { zh: "PIMART B2B", ja: "PIMART B2B", en: "PIMART B2B" },
   b2b_v2_title: { zh: "全球卡牌批发供应链", ja: "グローバルTCG卸売サプライチェーン", en: "Global TCG Wholesale Supply Chain" },
-  b2b_v2_line1: { zh: "日本直采 · PSA库存 · 原盒供货", ja: "日本直仕入れ · PSA在庫 · 未開封BOX", en: "Direct from Japan · PSA stock · Sealed supply" },
+  b2b_v2_line1: { zh: "当地直采，全球供应，正品保障", ja: "現地直仕入れ · 世界供給 · 正規品保証", en: "Local sourcing · Global supply · Authentic guarantee" },
   b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
 
   trusted_title: { zh: "Trusted Worldwide", ja: "Trusted Worldwide", en: "Trusted Worldwide" },
