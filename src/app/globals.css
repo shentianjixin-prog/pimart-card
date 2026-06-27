@@ -280,17 +280,104 @@ button:not(:disabled),
   }
 
   /* Hero brand slide — poster background under card fan */
+  .hero-brand-stage {
+    position: relative;
+  }
+
   .hero-brand-visual {
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    box-shadow:
+      0 20px 60px rgba(15, 23, 42, 0.1),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  }
+
+  .hero-brand-poster-img {
+    transform: scale(1.32);
+    transform-origin: center 42%;
+  }
+
+  .hero-brand-poster-vignette {
+    background:
+      radial-gradient(ellipse 85% 70% at 50% 45%, transparent 35%, rgba(248, 250, 252, 0.55) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.45) 0%, transparent 14%, transparent 86%, rgba(255, 255, 255, 0.45) 100%);
+    pointer-events: none;
   }
 
   .hero-brand-poster-overlay {
     background: linear-gradient(
-      165deg,
-      rgba(255, 255, 255, 0.42) 0%,
-      rgba(255, 255, 255, 0.12) 45%,
-      rgba(255, 255, 255, 0.32) 100%
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 42%,
+      rgba(255, 247, 214, 0.28) 100%
     );
+    pointer-events: none;
+  }
+
+  .hero-brand-mirror {
+    position: relative;
+    height: 52px;
+    margin-top: -6px;
+    overflow: hidden;
+    border-radius: 0 0 28px 28px;
+    opacity: 0.72;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 88%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 88%);
+    background: linear-gradient(to bottom, rgba(255, 247, 214, 0.35), rgba(248, 250, 252, 0.05));
+  }
+
+  @media (min-width: 640px) {
+    .hero-brand-mirror {
+      height: 64px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-brand-mirror {
+      height: 76px;
+    }
+  }
+
+  .hero-brand-mirror-inner {
+    position: absolute;
+    inset: 0;
+    transform: scaleY(-1);
+  }
+
+  .hero-brand-mirror-inner .hero-brand-poster-img {
+    transform: scale(1.32);
+    transform-origin: center 58%;
+  }
+
+  .hero-crystal-frame {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(224, 242, 254, 0.45) 22%,
+      rgba(255, 255, 255, 0.28) 48%,
+      rgba(243, 232, 255, 0.42) 72%,
+      rgba(255, 255, 255, 0.65) 100%
+    );
+    backdrop-filter: blur(14px) saturate(1.35);
+    -webkit-backdrop-filter: blur(14px) saturate(1.35);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 14px 36px rgba(15, 23, 42, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+      0 0 20px rgba(147, 197, 253, 0.12);
+  }
+
+  .hero-crystal-frame-inner {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 0 24px rgba(186, 230, 253, 0.08);
+  }
+
+  .hero-crystal-frame-inner img {
+    padding: 0.25rem;
   }
 
   /* PSA Hero fan stack */
