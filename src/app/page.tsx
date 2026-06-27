@@ -11,7 +11,7 @@ import { ProductSection } from "@/components/ProductSection";
 import { WhyPimart } from "@/components/WhyPimart";
 import { WholesaleBanner } from "@/components/WholesaleBanner";
 import { t, resolveLang } from "@/lib/translations";
-import { fetchFilterFacets } from "@/lib/product-facets";
+import { fetchFilterFacets, fetchSubGameCounts } from "@/lib/product-facets";
 import {
   PAGE_SIZE,
   buildOrderBy,
@@ -63,6 +63,7 @@ export default async function Home({
     products,
     total,
     facets,
+    subGameCounts,
     heroProducts,
     featuredProducts,
     recentInStock,
@@ -79,6 +80,7 @@ export default async function Home({
         }),
     showMarketing ? Promise.resolve(0) : prisma.product.count({ where }),
     showMarketing ? Promise.resolve(null) : fetchFilterFacets(),
+    showMarketing ? Promise.resolve({}) : fetchSubGameCounts(),
     showMarketing
       ? prisma.product.findMany({
           where: stockFilter,
@@ -191,7 +193,12 @@ export default async function Home({
       </div>
 
       {facets && (
-        <ProductListingControls state={filterState} facets={facets} total={total}>
+        <ProductListingControls
+          state={filterState}
+          facets={facets}
+          subGameCounts={subGameCounts}
+          total={total}
+        >
           {products.length === 0 ? (
             <p className="py-20 text-center text-[#9ca3af]">{T("page_no_products")}</p>
           ) : (

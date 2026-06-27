@@ -288,19 +288,20 @@ button:not(:disabled),
   .filter-panel-inner {
     @apply rounded-[24px] border p-5;
     background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-color: var(--border);
-    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
   }
 
   .filter-section {
-    @apply border-b py-3 last:border-b-0;
-    border-color: var(--border);
+    @apply border-b py-3.5 last:border-b-0;
+    border-color: rgba(15, 23, 42, 0.08);
   }
 
   .filter-section-head {
-    @apply flex min-h-11 w-full items-center justify-between gap-2 text-sm font-semibold text-[#111827];
+    @apply flex min-h-11 w-full items-center justify-between gap-2 font-semibold text-[#111827];
+    font-size: 14px;
   }
 
   .filter-section-body {
@@ -308,7 +309,64 @@ button:not(:disabled),
   }
 
   .filter-option {
-    @apply flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-2 py-1.5 text-sm text-[#374151] transition hover:bg-[#f7f8fa];
+    @apply flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-transparent px-2 py-1.5 text-sm text-[#374151] transition;
+  }
+  .filter-option:hover {
+    border-color: rgba(15, 23, 42, 0.1);
+    background: #f8fafc;
+  }
+  .filter-option-selected {
+    background: #eef4ff;
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+
+  .filter-pill {
+    @apply inline-flex min-h-9 items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium text-[#374151] transition;
+    border-color: rgba(15, 23, 42, 0.08);
+    background: #fff;
+  }
+  .filter-pill:hover {
+    border-color: rgba(15, 23, 42, 0.16);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .filter-pill-selected {
+    background: #eef4ff;
+    border-color: rgba(59, 130, 246, 0.28);
+    color: #1e3a5f;
+  }
+  .filter-pill-sub {
+    font-size: 11px;
+    min-height: 32px;
+    padding-inline: 12px;
+    border-color: rgba(15, 23, 42, 0.06);
+    background: #fafbfc;
+  }
+  .filter-pill-count {
+    @apply text-[10px] text-[#9ca3af];
+  }
+
+  .filter-other-toggle {
+    @apply flex min-h-11 w-full items-center justify-between gap-2 rounded-full border px-4 py-2 text-xs font-semibold text-[#374151] transition;
+    border-color: rgba(15, 23, 42, 0.08);
+    background: #fff;
+  }
+  .filter-other-toggle:hover {
+    border-color: rgba(15, 23, 42, 0.16);
+  }
+
+  .filter-subgame-list {
+    @apply mt-2 space-y-2 border-l-2 pl-3 pt-1;
+    border-color: rgba(15, 23, 42, 0.06);
+  }
+  .filter-subgame-list .flex {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-series-hint {
+    @apply rounded-xl border px-3 py-2.5 text-xs text-[#6b7280];
+    border-color: rgba(15, 23, 42, 0.06);
+    background: #f8fafc;
   }
 
   .filter-checkbox {
@@ -396,6 +454,17 @@ button:not(:disabled),
 
   .filter-sheet-body {
     @apply overflow-y-auto px-5 py-4;
+    flex: 1;
+  }
+
+  .filter-sheet-footer {
+    @apply shrink-0 border-t px-5 py-4;
+    border-color: rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .filter-sheet-actions {
+    @apply flex gap-3;
   }
 
   .filter-sort-option {

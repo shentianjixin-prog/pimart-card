@@ -100,7 +100,16 @@ const dict: Record<string, Record<Lang, string>> = {
   filter_game_naruto:  { zh: "火影忍者",       ja: "NARUTO",       en: "Naruto" },
   filter_game_yugioh:  { zh: "游戏王",         ja: "遊戯王",       en: "Yu-Gi-Oh!" },
   filter_game_dragonball:{ zh: "龙珠",         ja: "ドラゴンボール", en: "Dragon Ball" },
-  filter_game_other:   { zh: "其他",           ja: "その他",       en: "Other" },
+  filter_game_other:   { zh: "其他 TCG",       ja: "その他TCG",    en: "Other TCG" },
+  filter_subgame_dragon_ball: { zh: "龙珠", ja: "ドラゴンボール", en: "Dragon Ball" },
+  filter_subgame_naruto:      { zh: "火影", ja: "NARUTO", en: "Naruto" },
+  filter_subgame_yugioh:      { zh: "游戏王", ja: "遊戯王", en: "Yu-Gi-Oh!" },
+  filter_subgame_gundam:      { zh: "高达", ja: "ガンダム", en: "Gundam" },
+  filter_subgame_union_arena: { zh: "Union Arena", ja: "Union Arena", en: "Union Arena" },
+  filter_subgame_weiss:       { zh: "Weiss Schwarz", ja: "Weiss Schwarz", en: "Weiss Schwarz" },
+  filter_series_select_game:  { zh: "请先选择游戏", ja: "タイトルを選択してください", en: "Select a game first" },
+  filter_series_select_subgame:{ zh: "请选择具体 TCG", ja: "TCGを選択してください", en: "Select a specific TCG" },
+  filter_series_empty:        { zh: "暂无可用系列", ja: "利用可能なシリーズがありません", en: "No series available" },
 
   // 首页
   page_featured:       { zh: "推荐商品",    ja: "おすすめ商品",  en: "Featured" },
