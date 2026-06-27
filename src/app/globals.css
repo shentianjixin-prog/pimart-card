@@ -12,7 +12,7 @@
   --accent-gold: #fff7d6;
   --accent-pink: #fff0f5;
   --glass-bg: rgba(255, 255, 255, 0.78);
-  --glass-header: rgba(255, 255, 255, 0.82);
+  --glass-header: rgba(255, 255, 255, 0.78);
   --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.04);
   --shadow-md: 0 8px 30px rgba(17, 24, 39, 0.06);
   --shadow-lg: 0 20px 50px rgba(17, 24, 39, 0.08);
@@ -85,13 +85,64 @@ button:not(:disabled),
   }
 
   .product-card {
-    @apply block overflow-hidden rounded-[20px] border bg-white transition duration-300;
+    @apply flex overflow-hidden rounded-[20px] border bg-white;
     border-color: var(--border);
     box-shadow: var(--shadow-sm);
+    transition: transform 280ms ease, box-shadow 280ms ease;
   }
   .product-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
+  }
+
+  .category-showcase-card {
+    @apply block rounded-[20px] border p-4 sm:p-5;
+    border-color: var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: transform 280ms ease, box-shadow 280ms ease;
+  }
+  .category-showcase-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero-panel {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  .hero-stack-inner {
+    box-shadow: 0 20px 50px rgba(17, 24, 39, 0.08);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .hero-stack-card:hover .hero-stack-inner {
+    transform: translateY(-6px) rotate(0deg);
+    box-shadow: 0 28px 60px rgba(17, 24, 39, 0.12);
+  }
+
+  .section-tone-default {
+    @apply rounded-[28px];
+  }
+  .section-tone-blue {
+    @apply rounded-[28px] bg-[#F8FAFC] px-5 sm:px-8 lg:px-10;
+  }
+  .section-tone-purple {
+    @apply rounded-[28px] bg-[#F8F5FF] px-5 sm:px-8 lg:px-10;
+  }
+  .section-tone-sky {
+    @apply rounded-[28px] bg-[#F0F9FF] px-5 sm:px-8 lg:px-10;
+  }
+
+  .announcement-bar {
+    overflow: hidden;
+  }
+  .announcement-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
+  .announcement-content {
+    white-space: nowrap;
+    padding-inline: 1rem;
   }
 
   .btn-primary {
@@ -172,7 +223,7 @@ button:not(:disabled),
   transform: translateX(calc(var(--stack-x, 0) * 0.45px))
     translateY(calc(var(--stack-y, 0) * 0.45px))
     rotate(calc(var(--stack-r, 0) * 1deg));
-  transition: transform 0.5s ease;
+  transition: transform 300ms ease;
 }
 
 @media (min-width: 640px) {
@@ -185,14 +236,23 @@ button:not(:disabled),
 
 .hero-stack-card:hover {
   transform: translateX(calc(var(--stack-x, 0) * 0.45px))
-    translateY(calc((var(--stack-y, 0) - 10) * 0.45px))
-    rotate(calc(var(--stack-r, 0) * 0.35deg));
+    translateY(calc((var(--stack-y, 0) - 12) * 0.45px))
+    rotate(calc(var(--stack-r, 0) * 0.25deg));
 }
 
 @media (min-width: 640px) {
   .hero-stack-card:hover {
     transform: translateX(calc(var(--stack-x, 0) * 1px))
-      translateY(calc((var(--stack-y, 0) - 10) * 1px))
-      rotate(calc(var(--stack-r, 0) * 0.35deg));
+      translateY(calc((var(--stack-y, 0) - 12) * 1px))
+      rotate(calc(var(--stack-r, 0) * 0.25deg));
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }

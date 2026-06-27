@@ -23,6 +23,7 @@ const dict: Record<string, Record<Lang, string>> = {
   nav_naruto:     { zh: "火影忍者",   ja: "NARUTO",        en: "Naruto" },
   nav_cart:       { zh: "购物车",     ja: "カート",        en: "Cart" },
   nav_search:     { zh: "搜索商品名称", ja: "商品名を検索", en: "Search products" },
+  nav_search_products: { zh: "搜索商品…", ja: "商品を検索…", en: "Search Products..." },
 
   menu_pokemon:     { zh: "宝可梦",     ja: "ポケモン",         en: "Pokémon" },
   menu_one_piece:   { zh: "海贼王",     ja: "ワンピース",       en: "One Piece" },
@@ -75,6 +76,14 @@ const dict: Record<string, Record<Lang, string>> = {
   card_preorder:       { zh: "预售",         ja: "予約",          en: "Pre-order" },
   card_sold_out:       { zh: "售罄",         ja: "売切",          en: "Sold Out" },
   card_new:            { zh: "新品",         ja: "NEW",           en: "New" },
+  card_hot:            { zh: "热销",         ja: "HOT",           en: "Hot" },
+  card_psa:            { zh: "PSA",          ja: "PSA",           en: "PSA" },
+  card_wholesale:      { zh: "批发",         ja: "卸売",          en: "Wholesale" },
+  card_label_language: { zh: "语言",         ja: "言語",          en: "Language" },
+  card_label_series:   { zh: "系列",         ja: "シリーズ",      en: "Series" },
+  card_label_number:   { zh: "编号",         ja: "カードNo.",     en: "No." },
+  card_label_rarity:   { zh: "稀有度",       ja: "レアリティ",    en: "Rarity" },
+  card_label_stock:    { zh: "库存",         ja: "在庫",          en: "Stock" },
   card_remaining_pre:  { zh: "仅剩 ",        ja: "残り ",         en: "Only " },
   card_remaining_suf:  { zh: " 件",          ja: " 点",           en: " left" },
 
@@ -160,7 +169,15 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_2_cta:   { zh: "查看预售商品", ja: "予約商品を見る",  en: "View Pre-orders" },
   hero_2_cta2:  { zh: "查看现货",     ja: "現物を見る",      en: "View In Stock" },
 
-  filter_count_unit: { zh: "件", ja: "件", en: "" },
+  // 顶部公告栏
+  banner_worldwide: { zh: "日本发货 · 全球配送", ja: "日本から世界へ発送", en: "Ships Worldwide from Japan" },
+  banner_wholesale: { zh: "支持批发询价", ja: "卸売対応", en: "Wholesale Available" },
+  banner_psa:       { zh: "每周 PSA 新品上架", ja: "毎週PSA新着入荷", en: "New PSA Arrivals Every Week" },
+
+  // 分类展示
+  showcase_title:    { zh: "探索分类", ja: "カテゴリー", en: "Shop by Category" },
+  showcase_subtitle: { zh: "从人气 IP 到评级卡与批发", ja: "人気IPから鑑定品・卸売まで", en: "From fan-favorite IPs to graded cards and wholesale" },
+  showcase_explore:  { zh: "浏览 →", ja: "見る →", en: "Explore →" },
 
   // Hero（首页主视觉）
   hero_tag:         { zh: "高端 TCG 交易平台", ja: "プレミアムTCGマーケット", en: "Premium TCG Marketplace" },
@@ -213,6 +230,23 @@ const dict: Record<string, Record<Lang, string>> = {
   footer_support:  { zh: "支持", ja: "サポート", en: "Support" },
   footer_legal:    { zh: "法律信息", ja: "法的情報", en: "Legal" },
   footer_link_psa: { zh: "PSA 精选", ja: "PSA商品", en: "PSA Picks" },
+  footer_about:    { zh: "关于我们", ja: "会社概要", en: "About Us" },
+  footer_company:  { zh: "公司", ja: "Company", en: "Company" },
+  footer_shipping_policy: { zh: "配送政策", ja: "配送ポリシー", en: "Shipping Policy" },
+  footer_condition: { zh: "品相指南", ja: "コンディションガイド", en: "Condition Guide" },
+  footer_faq:      { zh: "常见问题", ja: "FAQ", en: "FAQ" },
+  footer_tokusho:  { zh: "特定商取引法", ja: "特定商取引法", en: "Legal Notice" },
+
+  about_p1: { zh: "PIMART CARD 是面向全球收藏者与经销商的 TCG 交易平台，提供日版与中国语版未开封原盒、PSA 评级卡及批发供货。", ja: "PIMART CARDは、コレクターと業者向けのグローバルTCGマーケットです。日版・中国語版の未開封BOX、PSA鑑定品、卸売に対応しています。", en: "PIMART CARD is a global TCG marketplace for collectors and resellers, offering Japanese and Chinese sealed boxes, PSA graded cards, and wholesale supply." },
+  about_p2: { zh: "我们从日本发货，坚持正品渠道、安全支付与可靠包装。", ja: "日本から発送。正規ルート仕入れ、安全な決済、丁寧な梱包を徹底しています。", en: "We ship from Japan with authentic sourcing, secure checkout, and careful packaging." },
+
+  faq_q1: { zh: "是否支持国际配送？", ja: "海外配送は可能ですか？", en: "Do you ship internationally?" },
+  faq_a1: { zh: "支持。我们从日本发货，具体时效与费用以结账页为准。", ja: "はい。日本から世界各国へ発送しています。詳細はチェックアウト時にご確認ください。", en: "Yes. We ship worldwide from Japan. Rates and delivery times are shown at checkout." },
+  faq_q2: { zh: "商品是否为正品？", ja: "正規品ですか？", en: "Are products authentic?" },
+  faq_a2: { zh: "所有商品均来自可溯源的正规渠道。", ja: "すべて正規ルートから仕入れた商品です。", en: "All items are sourced through verified authentic channels." },
+  faq_q3: { zh: "如何咨询批发？", ja: "卸売の問い合わせは？", en: "How do I inquire about wholesale?" },
+  faq_a3: { zh: "请通过 Contact 页面或 Footer 中的 Wholesale 链接联系我们。", ja: "ContactページまたはフッターのWholesaleリンクよりお問い合わせください。", en: "Contact us via the Contact page or the Wholesale link in the footer." },
+  faq_contact_pre: { zh: "还有其他问题？", ja: "他にご質問は？", en: "More questions?" },
 
   // 邮件订阅
   newsletter_title:       { zh: "订阅更新", ja: "最新情報を受け取る", en: "Stay updated" },
@@ -220,6 +254,8 @@ const dict: Record<string, Record<Lang, string>> = {
   newsletter_placeholder: { zh: "your@email.com", ja: "your@email.com", en: "your@email.com" },
   newsletter_btn:         { zh: "订阅", ja: "登録する", en: "Subscribe" },
   newsletter_done:          { zh: "订阅成功，感谢加入 PIMART CARD。", ja: "登録ありがとうございます。", en: "Subscribed — thank you for joining PIMART CARD." },
+
+  filter_count_unit: { zh: "件", ja: "件", en: "" },
 };
 
 export function t(key: string, lang: Lang): string {

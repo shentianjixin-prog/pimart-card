@@ -5,7 +5,8 @@ import { ProductCard } from "@/components/ProductCard";
 import { FilterSidebar } from "@/components/FilterSidebar";
 import { Pagination } from "@/components/Pagination";
 import { HomeHero } from "@/components/HomeHero";
-import { CategoryPills } from "@/components/CategoryPills";
+import { CategoryShowcase } from "@/components/CategoryShowcase";
+import { SearchBar } from "@/components/SearchBar";
 import { ProductSection } from "@/components/ProductSection";
 import { WhyPimart } from "@/components/WhyPimart";
 import { WholesaleBanner } from "@/components/WholesaleBanner";
@@ -156,16 +157,23 @@ export default async function Home({
   if (showMarketing) {
     return (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="py-6 sm:py-8">
+        <div className="py-8 sm:py-10 lg:py-12">
           <HomeHero products={heroProducts} />
         </div>
-        <CategoryPills />
+
+        <div className="section-block pb-8 sm:pb-10">
+          <SearchBar large className="mx-auto max-w-2xl" />
+        </div>
+
+        <CategoryShowcase />
+
         <ProductSection
           title={T("section_new_arrivals")}
           subtitle={T("section_new_sub")}
           products={newArrivals}
           viewAllHref="/?sort=newest&inStock=1"
           viewAllLabel={T("section_shop_all")}
+          tone="blue"
         />
         <ProductSection
           title={T("section_best_sellers")}
@@ -173,7 +181,7 @@ export default async function Home({
           products={bestSellers}
           viewAllHref="/?inStock=1"
           viewAllLabel={T("section_view_all")}
-          badge={T("page_hot_badge")}
+          tone="purple"
         />
         <ProductSection
           title={T("section_psa_picks")}
@@ -181,8 +189,9 @@ export default async function Home({
           products={psaPicks}
           viewAllHref="/?q=PSA"
           viewAllLabel={T("section_view_psa")}
+          tone="sky"
         />
-        <div className="space-y-8 py-8 sm:py-10">
+        <div className="space-y-10 py-10 sm:space-y-12 sm:py-14 lg:py-16">
           <WhyPimart />
           <WholesaleBanner />
         </div>
@@ -191,14 +200,17 @@ export default async function Home({
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-6">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+      <div className="mb-8">
         <h1 className="section-title">
           {sp.q
             ? `${T("page_search_pre")}${sp.q}"`
             : sp.category || T("page_all_products")}
         </h1>
         <p className="section-subtitle">{T("page_shipping_desc")}</p>
+        <div className="mt-6 max-w-xl">
+          <SearchBar defaultValue={sp.q ?? ""} />
+        </div>
       </div>
 
       <div className="flex flex-col gap-8 lg:flex-row">
@@ -216,7 +228,7 @@ export default async function Home({
           {products.length === 0 ? (
             <p className="py-20 text-center text-[#9ca3af]">{T("page_no_products")}</p>
           ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-7">
               {products.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

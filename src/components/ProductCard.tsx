@@ -6,17 +6,8 @@ import { useState } from "react";
 import { formatJpy } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useT } from "@/lib/lang-context";
-import { translateBoxType } from "@/lib/translations";
-import { useLang } from "@/lib/lang-context";
 
 const NEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
-
-const BOX_TYPE_STYLE: Record<string, string> = {
-  肥盒: "bg-[#EAF4FF] text-[#1e40af]",
-  瘦盒: "bg-[#F3EEFF] text-[#6d28d9]",
-  宝石包: "bg-[#FFF7D6] text-[#92400e]",
-  礼盒: "bg-[#FFF0F5] text-[#be185d]",
-};
 
 type Props = {
   product: {
@@ -29,6 +20,7 @@ type Props = {
     stock: number;
     images: string;
     isPreorder: boolean;
+    featured?: boolean;
     createdAt: Date;
     cardNumber?: string | null;
     rarity?: string | null;
@@ -36,20 +28,40 @@ type Props = {
   };
 };
 
+function isPsaProduct(product: Props["product"]) {
+  const haystack = [product.name, product.series, product.cardNumber, product.rarity]
+    .filter(Boolean)
+    .join(" ");
+  return /psa/i.test(haystack);
+}
+
+function isWholesaleProduct(product: Props["product"]) {
+  const haystack = `${product.name} ${product.series ?? ""}`;
+  return /wholesale|批发|卸売|b2b/i.test(haystack);
+}
+
 export function ProductCard({ product }: Props) {
   const { addItem } = useCart();
-  const { lang } = useLang();
   const T = useT();
   const [added, setAdded] = useState(false);
 
   const image = product.images.split(",")[0]?.trim();
   const soldOut = product.stock <= 0;
   const isNew = Date.now() - new Date(product.createdAt).getTime() < NEW_THRESHOLD_MS;
+  const isHot = product.featured === true;
+  const isPsa = isPsaProduct(product);
+  const isWholesale = isWholesaleProduct(product);
 
-  const metaParts = [product.cardNumber, product.rarity, product.language].filter(Boolean);
+  const stockLabel = soldOut
+    ? T("card_sold_out")
+    : product.isPreorder
+      ? T("card_preorder")
+      : T("filter_instock");
 
   function handleQuickAdd(e: React.MouseEvent) {
     e.preventDefault();
+    e.stopPropagation();
+    if (soldOut) return;
     addItem({
       productId: product.id,
       name: product.name,
@@ -62,68 +74,110 @@ export function ProductCard({ product }: Props) {
     setTimeout(() => setAdded(false), 1500);
   }
 
+  const tagItems: { label: string; className: string }[] = [];
+  if (isNew && !soldOut) tagItems.push({ label: T("card_new"), className: "bg-[#111827] text-white" });
+  if (isHot) tagItems.push({ label: T("card_hot"), className: "bg-[#FFF7D6] text-[#92400e]" });
+  if (isPsa) tagItems.push({ label: T("card_psa"), className: "bg-[#FFF0F5] text-[#be185d]" });
+  if (isWholesale) tagItems.push({ label: T("card_wholesale"), className: "bg-[#F3EEFF] text-[#6d28d9]" });
+
   return (
-    <Link href={`/products/${product.slug}`} className="product-card group relative block">
-      <div className="relative aspect-[5/7] w-full overflow-hidden bg-[#f7f8fa]">
-        <Image
-          src={image}
-          alt={product.name}
-          fill
-          unoptimized={image?.endsWith(".svg")}
-          sizes="(max-width: 768px) 50vw, 25vw"
-          className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
-        />
+    <div className="product-card group flex h-full flex-col">
+      <Link href={`/products/${product.slug}`} className="block flex-1">
+        <div className="relative aspect-[5/7] w-full overflow-hidden bg-[#f7f8fa]">
+          <Image
+            src={image}
+            alt={product.name}
+            fill
+            unoptimized={image?.endsWith(".svg")}
+            sizes="(max-width: 768px) 50vw, 25vw"
+            className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
+          />
 
-        {isNew && !soldOut ? (
-          <span className="absolute left-3 top-3 rounded-full bg-[#111827] px-2.5 py-1 text-[10px] font-semibold text-white">
-            {T("card_new")}
-          </span>
-        ) : BOX_TYPE_STYLE[product.boxType] ? (
-          <span className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold ${BOX_TYPE_STYLE[product.boxType]}`}>
-            {translateBoxType(product.boxType, lang)}
-          </span>
-        ) : null}
+          {tagItems.length > 0 && (
+            <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] flex-wrap gap-1">
+              {tagItems.slice(0, 3).map((tag) => (
+                <span
+                  key={tag.label}
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${tag.className}`}
+                >
+                  {tag.label}
+                </span>
+              ))}
+            </div>
+          )}
 
-        {product.isPreorder && (
-          <span className="absolute right-3 top-3 rounded-full bg-[#FFF7D6] px-2.5 py-1 text-[10px] font-semibold text-[#92400e]">
-            {T("card_preorder")}
-          </span>
-        )}
-
-        {soldOut && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/72 backdrop-blur-[2px]">
-            <span className="rounded-full border border-[rgba(17,24,39,0.08)] bg-white px-3 py-1 text-xs font-semibold text-[#6b7280]">
-              {T("card_sold_out")}
-            </span>
-          </div>
-        )}
-
-        {!soldOut && !product.isPreorder && (
-          <div className="absolute inset-x-0 bottom-0 translate-y-0 p-3 transition-transform duration-300 sm:translate-y-full sm:group-hover:translate-y-0">
-            <button onClick={handleQuickAdd} className="btn-buy rounded-full">
-              {added ? T("card_added") : T("card_add_cart")}
-            </button>
-          </div>
-        )}
-      </div>
-
-      <div className="border-t border-[rgba(17,24,39,0.06)] p-4">
-        <p className="line-clamp-2 text-sm font-medium text-[#111827]">{product.name}</p>
-        {product.series && (
-          <p className="mt-1 text-xs text-[#6b7280]">{product.series}</p>
-        )}
-        {metaParts.length > 0 && (
-          <p className="mt-1 text-xs text-[#9ca3af]">{metaParts.join(" · ")}</p>
-        )}
-        <div className="mt-3 flex items-end justify-between gap-2">
-          <p className="text-base font-semibold text-[#111827]">{formatJpy(product.priceJpy)}</p>
-          {!soldOut && product.stock <= 3 && (
-            <p className="text-xs font-medium text-[#92400e]">
-              {T("card_remaining_pre")}{product.stock}{T("card_remaining_suf")}
-            </p>
+          {soldOut && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/72 backdrop-blur-[2px]">
+              <span className="rounded-full border border-[rgba(17,24,39,0.08)] bg-white px-3 py-1 text-xs font-semibold text-[#6b7280]">
+                {T("card_sold_out")}
+              </span>
+            </div>
           )}
         </div>
+
+        <div className="border-t border-[rgba(17,24,39,0.06)] p-4">
+          <p className="line-clamp-2 min-h-[2.5rem] text-sm font-medium leading-snug text-[#111827]">
+            {product.name}
+          </p>
+
+          <dl className="mt-3 space-y-1 text-[11px] text-[#6b7280]">
+            {product.language && (
+              <div className="flex gap-2">
+                <dt className="shrink-0 text-[#9ca3af]">{T("card_label_language")}</dt>
+                <dd className="truncate text-[#374151]">{product.language}</dd>
+              </div>
+            )}
+            {product.series && (
+              <div className="flex gap-2">
+                <dt className="shrink-0 text-[#9ca3af]">{T("card_label_series")}</dt>
+                <dd className="truncate text-[#374151]">{product.series}</dd>
+              </div>
+            )}
+            {product.cardNumber && (
+              <div className="flex gap-2">
+                <dt className="shrink-0 text-[#9ca3af]">{T("card_label_number")}</dt>
+                <dd className="truncate font-medium text-[#374151]">{product.cardNumber}</dd>
+              </div>
+            )}
+            {product.rarity && (
+              <div className="flex gap-2">
+                <dt className="shrink-0 text-[#9ca3af]">{T("card_label_rarity")}</dt>
+                <dd>
+                  <span className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold text-violet-700">
+                    {product.rarity}
+                  </span>
+                </dd>
+              </div>
+            )}
+            <div className="flex gap-2">
+              <dt className="shrink-0 text-[#9ca3af]">{T("card_label_stock")}</dt>
+              <dd className={soldOut ? "text-[#9ca3af]" : product.stock <= 3 ? "font-medium text-[#92400e]" : "text-emerald-700"}>
+                {stockLabel}
+                {!soldOut && product.stock <= 3 && (
+                  <span className="ml-1 text-[#92400e]">
+                    ({T("card_remaining_pre")}{product.stock}{T("card_remaining_suf")})
+                  </span>
+                )}
+              </dd>
+            </div>
+          </dl>
+
+          <div className="mt-4 flex items-end justify-between gap-2">
+            <p className="text-lg font-semibold tracking-tight text-[#111827]">{formatJpy(product.priceJpy)}</p>
+          </div>
+        </div>
+      </Link>
+
+      <div className="border-t border-[rgba(17,24,39,0.06)] px-4 pb-4 pt-3">
+        <button
+          type="button"
+          onClick={handleQuickAdd}
+          disabled={soldOut}
+          className="btn-buy min-h-11 rounded-full text-sm disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {soldOut ? T("card_sold_out") : added ? T("card_added") : T("card_add_cart")}
+        </button>
       </div>
-    </Link>
+    </div>
   );
 }

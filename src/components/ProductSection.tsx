@@ -9,7 +9,14 @@ type Props = {
   products: Product[];
   viewAllHref?: string;
   viewAllLabel?: string;
-  badge?: string;
+  tone?: "default" | "blue" | "purple" | "sky";
+};
+
+const TONE_CLASS: Record<NonNullable<Props["tone"]>, string> = {
+  default: "section-tone-default",
+  blue: "section-tone-blue",
+  purple: "section-tone-purple",
+  sky: "section-tone-sky",
 };
 
 export function ProductSection({
@@ -18,33 +25,26 @@ export function ProductSection({
   products,
   viewAllHref,
   viewAllLabel = "View all",
-  badge,
+  tone = "default",
 }: Props) {
   if (products.length === 0) return null;
 
   return (
-    <section className="py-8 sm:py-10">
-      <div className="mb-6 flex items-end justify-between gap-4">
+    <section className={`section-block py-12 sm:py-16 lg:py-20 ${TONE_CLASS[tone]}`}>
+      <div className="mb-8 flex items-end justify-between gap-4">
         <div>
           <h2 className="section-title">{title}</h2>
           {subtitle && <p className="section-subtitle">{subtitle}</p>}
         </div>
         {viewAllHref && (
-          <Link href={viewAllHref} className="shrink-0 text-sm font-medium text-[#374151] hover:text-[#111827]">
+          <Link href={viewAllHref} className="shrink-0 text-sm font-medium text-[#374151] transition hover:text-[#111827]">
             {viewAllLabel} →
           </Link>
         )}
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4 lg:gap-7">
         {products.map((p) => (
-          <div key={p.id} className="relative">
-            {badge && (
-              <span className="absolute -right-1 -top-1 z-10 rounded-full bg-[#111827] px-2 py-0.5 text-[10px] font-semibold text-white">
-                {badge}
-              </span>
-            )}
-            <ProductCard product={p} />
-          </div>
+          <ProductCard key={p.id} product={p} />
         ))}
       </div>
     </section>
