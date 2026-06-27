@@ -84,22 +84,19 @@ export function HeroBrandVisual({ products }: { products: HeroStackProduct[] }) 
 }
 
 export function HeroPsaVisual() {
+  const cards = [
+    { src: "/images/psa-zekrom.jpg", alt: "Zekrom PSA 10 Gold", className: "hero-psa-card hero-psa-left" },
+    { src: "/images/psa-gyarados.jpg", alt: "Gyarados EX PSA 10", className: "hero-psa-card hero-psa-center" },
+    { src: "/images/psa-reshiram.jpg", alt: "Reshiram PSA 10 Gold", className: "hero-psa-card hero-psa-right" },
+  ] as const;
+
   return (
-    <div className="hero-v2-visual hero-float-group relative mx-auto flex h-[220px] w-full max-w-[380px] items-center justify-center sm:h-[260px] lg:h-[300px]">
-      <div className="hero-float-slow absolute left-[8%] top-[12%] w-[42%] rotate-[-8deg]">
-        <div className="rounded-[22px] border border-[rgba(15,23,42,0.08)] bg-white p-2.5 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-          <PsaSlabPlaceholder />
-        </div>
-      </div>
-      <div className="hero-float-delay absolute right-[6%] top-[18%] z-10 w-[44%] rotate-[6deg]">
-        <div className="rounded-[22px] border border-[rgba(15,23,42,0.08)] bg-white p-2.5 shadow-[0_24px_64px_rgba(15,23,42,0.1)]">
-          <PsaSlabPlaceholder />
-        </div>
-      </div>
-      <div className="hero-float-slow absolute bottom-[8%] left-1/2 z-20 w-[48%] -translate-x-1/2 rotate-[2deg]">
-        <div className="rounded-[22px] border border-[rgba(15,23,42,0.08)] bg-white p-2.5 shadow-[0_28px_70px_rgba(15,23,42,0.12)]">
-          <PsaSlabPlaceholder />
-        </div>
+    <div className="hero-v2-visual hero-psa-stack-wrap">
+      <div className="hero-psa-stack">
+        {cards.map((card) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={card.src} src={card.src} alt={card.alt} className={card.className} />
+        ))}
       </div>
     </div>
   );

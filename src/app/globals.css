@@ -279,6 +279,106 @@ button:not(:disabled),
     animation: hero-float 5s ease-in-out 1.2s infinite;
   }
 
+  /* PSA Hero fan stack */
+  .hero-psa-stack-wrap {
+    @apply relative mx-auto flex w-full items-center justify-center;
+    height: 240px;
+    max-width: 420px;
+  }
+
+  @media (min-width: 640px) {
+    .hero-psa-stack-wrap {
+      height: 280px;
+      max-width: 460px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-psa-stack-wrap {
+      height: 320px;
+      max-width: 520px;
+    }
+  }
+
+  .hero-psa-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-psa-card {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 36%;
+    max-width: 168px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.45s ease;
+    transform-origin: center bottom;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .hero-psa-left {
+    z-index: 1;
+    transform: translateX(calc(-50% - 72%)) rotate(-12deg);
+  }
+
+  .hero-psa-center {
+    z-index: 3;
+    width: 42%;
+    max-width: 200px;
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  .hero-psa-right {
+    z-index: 2;
+    transform: translateX(calc(-50% + 72%)) rotate(12deg);
+  }
+
+  .hero-psa-stack:hover .hero-psa-left {
+    transform: translateX(calc(-50% - 72%)) rotate(-12deg) translateY(-12px) scale(1.03);
+  }
+
+  .hero-psa-stack:hover .hero-psa-center {
+    transform: translateX(-50%) rotate(0deg) translateY(-12px) scale(1.03);
+    box-shadow: 0 36px 90px rgba(0, 0, 0, 0.16);
+  }
+
+  .hero-psa-stack:hover .hero-psa-right {
+    transform: translateX(calc(-50% + 72%)) rotate(12deg) translateY(-12px) scale(1.03);
+  }
+
+  @media (max-width: 1023px) {
+    .hero-psa-stack-wrap {
+      width: 80%;
+      max-width: 300px;
+      height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-psa-card {
+      max-width: 120px;
+    }
+
+    .hero-psa-center {
+      max-width: 140px;
+      width: 44%;
+    }
+
+    .hero-psa-left {
+      transform: translateX(calc(-50% - 68%)) rotate(-12deg);
+    }
+
+    .hero-psa-right {
+      transform: translateX(calc(-50% + 68%)) rotate(12deg);
+    }
+  }
+
   /* Announce bar */
   .home-announce-inner {
     @apply flex min-h-14 items-center gap-4 overflow-hidden rounded-[24px] border bg-white px-4 sm:px-5;
