@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" aria-hidden="true">
+  <defs>
+    <linearGradient id="ocean" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef4fb" />
+      <stop offset="100%" stop-color="#e2ebf5" />
+    </linearGradient>
+    <linearGradient id="landGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dfe6ef" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="500" fill="url(#ocean)" />
+  <g fill="url(#landGrad)" stroke="#94a3b8" stroke-width="0.8" stroke-linejoin="round">
+    <path class="land" d="M 33.3 69.4 L 111.1 50.0 L 236.1 50.0 L 291.7 61.1 L 333.3 105.6 L 272.2 172.2 L 208.3 188.9 L 172.2 161.1 L 152.8 116.7 L 69.4 88.9 L 33.3 69.4 Z" />
+    <path class="land" d="M 272.2 216.7 L 300.0 244.4 L 338.9 263.9 L 366.7 311.1 L 338.9 355.6 L 300.0 394.4 L 294.4 366.7 L 305.6 300.0 L 283.3 250.0 L 272.2 216.7 Z" />
+    <path class="land" d="M 472.2 150.0 L 569.4 144.4 L 652.8 133.3 L 763.9 105.6 L 888.9 116.7 L 902.8 144.4 L 861.1 166.7 L 791.7 188.9 L 708.3 227.8 L 652.8 216.7 L 569.4 216.7 L 500.0 200.0 L 472.2 150.0 Z" />
+    <path class="land" d="M 450.0 161.1 L 533.3 144.4 L 616.7 216.7 L 644.4 255.6 L 616.7 327.8 L 550.0 344.4 L 533.3 272.2 L 477.8 227.8 L 450.0 161.1 Z" />
+    <path class="land" d="M 763.9 188.9 L 800.0 227.8 L 827.8 244.4 L 838.9 227.8 L 805.6 200.0 L 763.9 188.9 Z" />
+    <path class="land" d="M 861.1 161.1 L 877.8 150.0 L 894.4 138.9 L 902.8 130.6 L 891.7 152.8 L 861.1 161.1 Z" />
+    <path class="land" d="M 819.4 283.3 L 861.1 283.3 L 922.2 316.7 L 916.7 355.6 L 861.1 347.2 L 819.4 311.1 L 819.4 283.3 Z" />
+  </g>
+</svg>

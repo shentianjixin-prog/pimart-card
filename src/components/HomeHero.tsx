@@ -4,7 +4,12 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useT } from "@/lib/lang-context";
 import { PimartLogo } from "@/components/PimartLogo";
-import { HeroB2BVisual, HeroBrandVisual, HeroPsaVisual } from "@/components/home/HeroVisuals";
+import {
+  HeroB2BVisual,
+  HeroBrandVisual,
+  HeroPsaSlideBackground,
+  HeroPsaVisual,
+} from "@/components/home/HeroVisuals";
 
 export type HeroStackProduct = {
   name: string;
@@ -134,13 +139,19 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
         >
           {SLIDES.map((slide, slideIndex) => (
             <div key={slide.id} className="hero-v2-slide relative min-w-full shrink-0">
-              <div className="pointer-events-none absolute inset-0 bg-[#FAFAFA]" />
-              <div
-                className="pointer-events-none absolute inset-0"
-                style={{ background: SLIDE_GRADIENTS[slideIndex] }}
-              />
+              {slide.visual === "psa" ? (
+                <HeroPsaSlideBackground />
+              ) : (
+                <>
+                  <div className="pointer-events-none absolute inset-0 bg-[#FAFAFA]" />
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: SLIDE_GRADIENTS[slideIndex] }}
+                  />
+                </>
+              )}
 
-              <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-center px-5 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:px-8 xl:px-10">
+              <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8 xl:gap-12 xl:px-10">
                 <div className="text-center lg:text-left">
                   {slide.brand ? (
                     <div className="mb-5 flex justify-center lg:justify-start">
@@ -189,7 +200,15 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                   </div>
                 </div>
 
-                <div className="mt-8 flex justify-center lg:mt-0">
+                <div
+                  className={
+                    slide.brand
+                      ? "hero-brand-column mt-8 lg:mt-0"
+                      : slide.visual === "psa"
+                        ? "hero-psa-column mt-8 lg:mt-0"
+                        : "mt-8 flex justify-center lg:mt-0"
+                  }
+                >
                   {slide.visual === "brand" && <HeroBrandVisual products={products} />}
                   {slide.visual === "psa" && <HeroPsaVisual />}
                   {slide.visual === "b2b" && <HeroB2BVisual />}

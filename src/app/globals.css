@@ -363,72 +363,75 @@ button:not(:disabled),
     animation: hero-float 5s ease-in-out 1.2s infinite;
   }
 
-  /* Hero brand slide — poster background under card fan */
-  .hero-brand-stage {
-    position: relative;
-  }
-
-  .hero-brand-visual {
-    box-shadow:
-      0 20px 60px rgba(15, 23, 42, 0.1),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-  }
-
-  .hero-brand-poster-img {
-    transform: scale(1.32);
-    transform-origin: center 42%;
-  }
-
-  .hero-brand-poster-vignette {
-    background:
-      radial-gradient(ellipse 85% 70% at 50% 45%, transparent 35%, rgba(248, 250, 252, 0.55) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.45) 0%, transparent 14%, transparent 86%, rgba(255, 255, 255, 0.45) 100%);
-    pointer-events: none;
-  }
-
-  .hero-brand-poster-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.02) 42%,
-      rgba(255, 247, 214, 0.28) 100%
-    );
-    pointer-events: none;
-  }
-
-  .hero-brand-mirror {
-    position: relative;
-    height: 52px;
-    margin-top: -6px;
-    overflow: hidden;
-    border-radius: 0 0 28px 28px;
-    opacity: 0.72;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 88%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 88%);
-    background: linear-gradient(to bottom, rgba(255, 247, 214, 0.35), rgba(248, 250, 252, 0.05));
+  /* Hero brand slide — card fan only (no poster background) */
+  .hero-brand-column {
+    @apply relative flex w-full items-center justify-center;
+    min-height: 260px;
   }
 
   @media (min-width: 640px) {
-    .hero-brand-mirror {
-      height: 64px;
+    .hero-brand-column {
+      min-height: 300px;
     }
   }
 
   @media (min-width: 1024px) {
-    .hero-brand-mirror {
-      height: 76px;
+    .hero-brand-column {
+      min-height: 380px;
     }
   }
 
-  .hero-brand-mirror-inner {
-    position: absolute;
-    inset: 0;
-    transform: scaleY(-1);
+  .hero-brand-stage {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 
-  .hero-brand-mirror-inner .hero-brand-poster-img {
-    transform: scale(1.32);
-    transform-origin: center 58%;
+  .hero-brand-visual {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 420px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    overflow: visible;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-brand-visual {
+      max-width: 480px;
+    }
+  }
+
+  .hero-brand-cards {
+    position: relative;
+    width: 100%;
+    min-height: 240px;
+  }
+
+  @media (min-width: 640px) {
+    .hero-brand-cards {
+      min-height: 280px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-brand-cards {
+      min-height: 340px;
+    }
+  }
+
+  .hero-brand-cards-inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(88%, 380px);
+    height: 72%;
+    transform: translate(-50%, -50%);
   }
 
   .hero-crystal-frame {
@@ -462,6 +465,153 @@ button:not(:disabled),
 
   .hero-crystal-frame-inner img {
     padding: 0.25rem;
+  }
+
+  /* PSA slide — sky background + cutout Charizard */
+  .hero-psa-slide-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(180deg, #5ec4ff 0%, #7ed0ff 42%, #9edcf8 100%);
+  }
+
+  .hero-psa-slide-bg-sky {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 0%, rgba(255, 255, 255, 0.45) 0%, transparent 62%),
+      linear-gradient(180deg, #48b8f5 0%, #62c4f8 35%, #84d4fb 68%, #a8e2ff 100%);
+    pointer-events: none;
+  }
+
+  .hero-psa-slide-bg-clouds {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 38% 22% at 72% 22%, rgba(255, 255, 255, 0.42) 0%, transparent 72%),
+      radial-gradient(ellipse 34% 20% at 28% 38%, rgba(255, 255, 255, 0.32) 0%, transparent 70%),
+      radial-gradient(ellipse 42% 24% at 55% 58%, rgba(255, 255, 255, 0.26) 0%, transparent 68%),
+      radial-gradient(ellipse 30% 16% at 85% 48%, rgba(255, 255, 255, 0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-psa-slide-bg-character {
+    position: absolute;
+    z-index: 1;
+    top: 10%;
+    left: 50%;
+    width: min(68vw, 360px);
+    height: min(58vh, 440px);
+    transform: translateX(-28%);
+    pointer-events: none;
+    animation: hero-float 6s ease-in-out infinite;
+  }
+
+  @media (min-width: 640px) {
+    .hero-psa-slide-bg-character {
+      width: min(58vw, 400px);
+      height: min(62vh, 480px);
+      transform: translateX(-18%);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-psa-slide-bg-character {
+      top: 8%;
+      left: 58%;
+      width: min(44vw, 460px);
+      height: min(68vh, 540px);
+      transform: translateX(-50%);
+    }
+  }
+
+  .hero-psa-slide-bg-cutout {
+    filter: drop-shadow(0 28px 48px rgba(30, 110, 170, 0.22));
+  }
+
+  .hero-psa-slide-bg-character-glow {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    width: 42%;
+    height: 18%;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: radial-gradient(ellipse at center, rgba(255, 180, 80, 0.28) 0%, transparent 72%);
+    pointer-events: none;
+  }
+
+  .hero-psa-slide-bg-ground {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 14%;
+    background: linear-gradient(
+      0deg,
+      rgba(250, 250, 250, 0.35) 0%,
+      rgba(240, 248, 252, 0.12) 55%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .hero-psa-slide-bg-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 130% 100% at 50% 55%, transparent 35%, rgba(250, 250, 250, 0.18) 72%, rgba(250, 250, 250, 0.45) 100%);
+    pointer-events: none;
+  }
+
+  .hero-psa-slide-bg-edge {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-psa-slide-bg-edge--top {
+    inset: 0 0 auto;
+    height: 18%;
+    background: linear-gradient(180deg, rgba(250, 250, 250, 0.94) 0%, rgba(250, 250, 250, 0.45) 45%, transparent 100%);
+  }
+
+  .hero-psa-slide-bg-edge--left {
+    inset: 0 auto 0 0;
+    width: 52%;
+    background: linear-gradient(
+      90deg,
+      rgba(250, 250, 250, 0.98) 0%,
+      rgba(250, 250, 250, 0.82) 28%,
+      rgba(250, 250, 250, 0.35) 58%,
+      transparent 100%
+    );
+  }
+
+  .hero-psa-slide-bg-edge--right {
+    inset: 0 0 0 auto;
+    width: 12%;
+    background: linear-gradient(270deg, rgba(250, 250, 250, 0.75) 0%, transparent 100%);
+  }
+
+  .hero-psa-slide-bg-edge--bottom {
+    inset: auto 0 0;
+    height: 16%;
+    background: linear-gradient(0deg, rgba(250, 250, 250, 0.72) 0%, rgba(250, 250, 250, 0.2) 55%, transparent 100%);
+  }
+
+  .hero-psa-column {
+    @apply relative flex w-full min-h-[240px] items-center justify-center sm:min-h-[280px] lg:min-h-[min(480px,58vh)];
+  }
+
+  .hero-psa-stage {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    align-items: center;
+    justify-content: center;
   }
 
   /* PSA Hero fan stack */
@@ -836,247 +986,106 @@ button:not(:disabled),
     transform: translateY(0);
   }
 
-  /* World trust — bento waterfall layout */
-  .home-world-bento-section {
+  /* World trust — enlarged map only */
+  .home-world-map-section {
     padding: 0 10px;
   }
 
   @media (min-width: 640px) {
-    .home-world-bento-section {
+    .home-world-map-section {
       padding: 0 14px;
     }
   }
 
   @media (min-width: 1024px) {
-    .home-world-bento-section {
+    .home-world-map-section {
       padding: 0 18px;
     }
   }
 
-  .home-world-bento-shell {
+  .home-world-map-shell {
     max-width: 80rem;
     margin: 0 auto;
-    padding: 5px;
-    background: #0a0a0a;
-    border-radius: 28px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   }
 
-  .home-world-bento-grid {
-    display: grid;
-    gap: 5px;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "head"
-      "waterfall"
-      "map"
-      "rail";
-    border-radius: 22px;
+  .home-world-map {
+    position: relative;
+    width: 100%;
+    min-height: 360px;
     overflow: hidden;
-  }
-
-  @media (min-width: 768px) {
-    .home-world-bento-grid {
-      grid-template-columns: minmax(140px, 0.85fr) minmax(0, 1.65fr);
-      grid-template-rows: auto 1fr 1fr auto;
-      grid-template-areas:
-        "head head"
-        "waterfall map"
-        "waterfall map"
-        "rail rail";
-      min-height: 420px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .home-world-bento-grid {
-      grid-template-columns: minmax(160px, 0.75fr) minmax(0, 1.55fr) minmax(140px, 0.7fr);
-      grid-template-areas:
-        "head head head"
-        "waterfall map rail"
-        "waterfall map rail";
-      min-height: 460px;
-    }
-  }
-
-  .home-world-bento-cell {
-    min-height: 0;
-  }
-
-  .home-world-bento-head {
-    grid-area: head;
-    padding: 1.5rem 1.25rem 1.25rem;
-    background: linear-gradient(135deg, #eaf4ff 0%, #dbeafe 55%, #c7d2fe 100%);
-    color: #111827;
+    border-radius: 28px;
+    background: #eef4fb;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
   }
 
   @media (min-width: 640px) {
-    .home-world-bento-head {
-      padding: 2rem 1.75rem 1.5rem;
-    }
-  }
-
-  .home-world-bento-waterfall {
-    grid-area: waterfall;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .home-world-bento-map-wrap {
-    grid-area: map;
-    background: linear-gradient(180deg, #fafafa 0%, #f8fafc 100%);
-    padding: 0.75rem;
-  }
-
-  @media (min-width: 768px) {
-    .home-world-bento-map-wrap {
-      padding: 1rem;
-    }
-  }
-
-  .home-world-bento-rail {
-    grid-area: rail;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0;
-  }
-
-  @media (max-width: 767px) {
-    .home-world-bento-rail {
-      grid-template-columns: 1fr;
-    }
-
-    .home-world-bento-waterfall {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .home-world-bento-tile {
-    position: relative;
-    flex: 1;
-    min-height: 108px;
-    overflow: hidden;
-    transition: filter 0.25s ease;
-  }
-
-  .home-world-bento-tile::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 28%;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
-    pointer-events: none;
-  }
-
-  .home-world-bento-tile-inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: 0.15rem;
-    padding: 1rem 1rem 0.9rem;
-  }
-
-  .home-world-bento-flag {
-    font-size: 1.45rem;
-    line-height: 1;
-  }
-
-  .home-world-bento-pokemon {
-    position: absolute;
-    top: 0.65rem;
-    right: 0.65rem;
-    width: 2.25rem;
-    height: 2.25rem;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.18));
-    opacity: 0.92;
-  }
-
-  .home-world-bento-tile-label {
-    font-size: 0.9rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: #111827;
-  }
-
-  .home-world-bento-hub-tag {
-    margin-top: 0.15rem;
-    border-radius: 999px;
-    background: rgba(17, 24, 39, 0.82);
-    padding: 0.12rem 0.45rem;
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: #ffffff;
-  }
-
-  .home-world-bento-tile--us {
-    background: linear-gradient(165deg, #fff7d6 0%, #fde68a 100%);
-  }
-
-  .home-world-bento-tile--cn {
-    background: linear-gradient(165deg, #fff0f5 0%, #fbcfe8 100%);
-  }
-
-  .home-world-bento-tile--jp {
-    background: linear-gradient(165deg, #f3eeff 0%, #ddd6fe 100%);
-  }
-
-  .home-world-bento-tile--sg {
-    background: linear-gradient(165deg, #eaf4ff 0%, #93c5fd 100%);
-  }
-
-  .home-world-bento-tile--my {
-    background: linear-gradient(165deg, #dcfce7 0%, #86efac 100%);
-  }
-
-  .home-world-bento-tile--th {
-    background: linear-gradient(165deg, #ffedd5 0%, #fdba74 100%);
-  }
-
-  /* Vertical waterfall seam — colors blend at shared edges */
-  .home-world-bento-waterfall .home-world-bento-tile + .home-world-bento-tile {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  }
-
-  .home-world-bento-rail .home-world-bento-tile + .home-world-bento-tile {
-    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.35);
-  }
-
-  @media (max-width: 767px) {
-    .home-world-bento-waterfall .home-world-bento-tile + .home-world-bento-tile {
-      box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.35);
+    .home-world-map {
+      min-height: 420px;
+      border-radius: 32px;
     }
   }
 
   @media (min-width: 1024px) {
-    .home-world-bento-rail {
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(3, minmax(0, 1fr));
+    .home-world-map {
+      min-height: 520px;
+      border-radius: 36px;
+    }
+  }
+
+  .home-world-map-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .home-world-map-code {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    fill: #111827;
+  }
+
+  .home-world-map-name {
+    font-size: 12px;
+    font-weight: 700;
+    fill: #374151;
+  }
+
+  @media (min-width: 1024px) {
+    .home-world-map-code {
+      font-size: 16px;
     }
 
-    .home-world-bento-rail .home-world-bento-tile + .home-world-bento-tile {
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    .home-world-map-name {
+      font-size: 13px;
     }
+  }
+
+  .home-world-map-flag {
+    font-size: 18px;
+    dominant-baseline: middle;
+  }
+
+  .home-world-map-marker--hub .home-world-map-flag {
+    font-size: 20px;
+  }
+
+  .home-world-map-pokemon {
+    pointer-events: none;
   }
 
   .home-world-lines {
     pointer-events: none;
-    z-index: 1;
   }
 
   .home-world-line {
     fill: none;
     stroke: url(#world-line-gradient);
-    stroke-width: 0.45;
+    stroke-width: 1.6;
     stroke-linecap: round;
-    stroke-dasharray: 3 2;
+    stroke-dasharray: 6 4;
     animation: world-line-flow 4s linear infinite;
   }
 
@@ -1086,67 +1095,15 @@ button:not(:disabled),
     }
   }
 
-  .home-world-marker {
-    z-index: 2;
-    transform: translate(-50%, -50%);
-  }
-
-  .home-world-marker--hub {
-    z-index: 3;
-  }
-
-  .home-world-marker-ring {
-    @apply absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full;
-    background: radial-gradient(circle, rgba(21, 128, 61, 0.18) 0%, transparent 70%);
+  .home-world-map-marker-ring {
     animation: world-pulse 2.5s ease-in-out infinite;
-  }
-
-  .home-world-marker--hub .home-world-marker-ring {
-    @apply h-14 w-14;
-  }
-
-  .home-world-marker-badge {
-    @apply relative flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-white sm:h-12 sm:w-12;
-    box-shadow:
-      0 8px 24px rgba(15, 23, 42, 0.12),
-      0 0 0 1px rgba(15, 23, 42, 0.06);
-  }
-
-  .home-world-marker--hub .home-world-marker-badge {
-    @apply h-12 w-12 sm:h-[3.25rem] sm:w-[3.25rem];
-    box-shadow:
-      0 12px 32px rgba(21, 128, 61, 0.2),
-      0 0 0 2px rgba(21, 128, 61, 0.15);
-  }
-
-  .home-world-flag {
-    font-size: 1.35rem;
-    line-height: 1;
-  }
-
-  .home-world-marker--hub .home-world-flag {
-    font-size: 1.5rem;
-  }
-
-  .home-world-pokemon {
-    @apply absolute -bottom-1.5 -right-2 h-7 w-7 object-contain sm:h-8 sm:w-8;
-    filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.18));
-    pointer-events: none;
-  }
-
-  .home-world-marker--hub .home-world-pokemon {
-    @apply -bottom-2 -right-2.5 h-8 w-8 sm:h-9 sm:w-9;
-  }
-
-  .home-world-label {
-    @apply absolute left-1/2 top-[calc(100%+6px)] hidden -translate-x-1/2 whitespace-nowrap rounded-full border bg-white px-2.5 py-1 text-[10px] font-bold text-[#374151] lg:block;
-    border-color: rgba(15, 23, 42, 0.08);
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    transform-box: fill-box;
+    transform-origin: center;
   }
 
   @keyframes world-pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
-    50% { transform: translate(-50%, -50%) scale(1.12); opacity: 0.45; }
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.12); opacity: 0.45; }
   }
 
   @media (min-width: 1024px) {

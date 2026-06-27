@@ -71,30 +71,16 @@ function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
 
 export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
   return (
-    <div className="hero-brand-stage mx-auto w-full max-w-[420px] sm:max-w-[480px]">
-      <div className="hero-v2-visual hero-brand-visual relative h-[220px] w-full overflow-hidden rounded-[28px] sm:h-[260px] lg:h-[320px]">
-        <div className="hero-brand-poster absolute inset-0 z-0 overflow-hidden" aria-hidden>
-          <Image
-            src="/images/hero-brand-poster.png"
-            alt=""
-            fill
-            sizes="(max-width: 480px) 100vw, 480px"
-            className="hero-brand-poster-img object-cover object-center"
-            priority
-            unoptimized
-          />
-          <div className="hero-brand-poster-vignette absolute inset-0" />
-          <div className="hero-brand-poster-overlay absolute inset-0" />
-        </div>
-
-        <div className="hero-float-group relative z-[1] h-full w-full">
-          <div className="absolute left-1/2 top-1/2 w-[88%] -translate-x-1/2 -translate-y-1/2">
+    <div className="hero-brand-stage">
+      <div className="hero-v2-visual hero-brand-visual">
+        <div className="hero-float-group hero-brand-cards">
+          <div className="hero-brand-cards-inner">
             {HERO_BRAND_SLOTS.map((slot, i) => {
               const s = STACK[i];
               return (
                 <div
                   key={`hero-brand-slot-${i}`}
-                  className="hero-stack-card absolute w-[36%] max-w-[130px]"
+                  className="hero-stack-card absolute w-[36%] max-w-[130px] sm:max-w-[140px] lg:max-w-[150px]"
                   style={{
                     zIndex: s.z,
                     left: "50%",
@@ -113,19 +99,34 @@ export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="hero-brand-mirror" aria-hidden>
-        <div className="hero-brand-mirror-inner">
-          <Image
-            src="/images/hero-brand-poster.png"
-            alt=""
-            fill
-            sizes="(max-width: 480px) 100vw, 480px"
-            className="hero-brand-poster-img object-cover object-center"
-            unoptimized
-          />
-        </div>
+/** PSA 轮播全幅背景 — 天空 + 抠图喷火龙 */
+export function HeroPsaSlideBackground() {
+  return (
+    <div className="hero-psa-slide-bg" aria-hidden>
+      <div className="hero-psa-slide-bg-sky" />
+      <div className="hero-psa-slide-bg-clouds" />
+      <div className="hero-psa-slide-bg-character">
+        <Image
+          src="/images/hero-psa-charizard-cutout.png"
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 70vw, 440px"
+          className="hero-psa-slide-bg-cutout object-contain object-[center_18%]"
+          priority={false}
+          unoptimized
+        />
+        <div className="hero-psa-slide-bg-character-glow" />
       </div>
+      <div className="hero-psa-slide-bg-ground" />
+      <div className="hero-psa-slide-bg-vignette" />
+      <div className="hero-psa-slide-bg-edge hero-psa-slide-bg-edge--top" />
+      <div className="hero-psa-slide-bg-edge hero-psa-slide-bg-edge--left" />
+      <div className="hero-psa-slide-bg-edge hero-psa-slide-bg-edge--right" />
+      <div className="hero-psa-slide-bg-edge hero-psa-slide-bg-edge--bottom" />
     </div>
   );
 }
@@ -138,12 +139,14 @@ export function HeroPsaVisual() {
   ] as const;
 
   return (
-    <div className="hero-v2-visual hero-psa-stack-wrap">
-      <div className="hero-psa-stack">
-        {cards.map((card) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={card.src} src={card.src} alt={card.alt} className={card.className} />
-        ))}
+    <div className="hero-psa-stage">
+      <div className="hero-v2-visual hero-psa-stack-wrap">
+        <div className="hero-psa-stack">
+          {cards.map((card) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={card.src} src={card.src} alt={card.alt} className={card.className} />
+          ))}
+        </div>
       </div>
     </div>
   );
