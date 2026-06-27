@@ -13,6 +13,7 @@ import { t, resolveLang } from "@/lib/translations";
 import type { Prisma } from "@/generated/prisma/client";
 
 const PAGE_SIZE = 12;
+const POPULAR_TARGET = 10;
 
 const ACTIVE_PRODUCT: Prisma.ProductWhereInput = {
   status: "上架",
@@ -41,6 +42,22 @@ function isDefaultView(sp: SearchParams) {
     !sp.q &&
     (!sp.page || sp.page === "1")
   );
+}
+
+function mergePopularProducts<T extends { id: string }>(
+  featured: T[],
+  recent: T[],
+  target: number
+): T[] {
+  const seen = new Set<string>();
+  const merged: T[] = [];
+  for (const p of [...featured, ...recent]) {
+    if (seen.has(p.id)) continue;
+    seen.add(p.id);
+    merged.push(p);
+    if (merged.length >= target) break;
+  }
+  return merged;
 }
 
 export default async function Home({
@@ -96,7 +113,8 @@ export default async function Home({
     total,
     categoryFacets,
     heroProducts,
-    popularProducts,
+    featuredProducts,
+    recentInStock,
     newArrivals,
     psaPicks,
   ] = await Promise.all([
@@ -124,7 +142,14 @@ export default async function Home({
       ? prisma.product.findMany({
           where: { ...stockFilter, featured: true },
           orderBy: { createdAt: "desc" },
-          take: 4,
+          take: 12,
+        })
+      : Promise.resolve([]),
+    showMarketing
+      ? prisma.product.findMany({
+          where: stockFilter,
+          orderBy: { createdAt: "desc" },
+          take: 12,
         })
       : Promise.resolve([]),
     showMarketing
@@ -154,17 +179,14 @@ export default async function Home({
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   if (showMarketing) {
-    const popular =
-      popularProducts.length > 0 ? popularProducts : newArrivals.slice(0, 4);
+    const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET);
 
     return (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Hero（动态轮播） */}
-        <div className="py-8 sm:py-10 lg:py-12">
+        <div className="hero-section-spacing">
           <HomeHero products={heroProducts} />
         </div>
 
-        {/* Popular Products */}
         <ProductSection
           title={T("section_popular")}
           subtitle={T("section_popular_sub")}
@@ -174,7 +196,6 @@ export default async function Home({
           tone="default"
         />
 
-        {/* New Arrivals */}
         <ProductSection
           title={T("section_new_arrivals")}
           subtitle={T("section_new_sub")}
@@ -184,7 +205,6 @@ export default async function Home({
           tone="blue"
         />
 
-        {/* PSA Picks */}
         <ProductSection
           title={T("section_psa_picks")}
           subtitle={T("section_psa_sub")}
@@ -194,12 +214,10 @@ export default async function Home({
           tone="sky"
         />
 
-        {/* Wholesale */}
         <div className="py-10 sm:py-14 lg:py-16">
           <WholesaleBanner />
         </div>
 
-        {/* Why PIMART CARD */}
         <div className="pb-10 sm:pb-14 lg:pb-16">
           <WhyPimart />
         </div>

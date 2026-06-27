@@ -202,6 +202,21 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_cta_wholesale:{ zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
   hero_cta_psa:     { zh: "查看 PSA 精选", ja: "PSA商品を見る", en: "View PSA Picks" },
 
+  hero_slide2_title: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
+  hero_slide2_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
+  hero_slide2_sub:   { zh: "最新未开封 BOX 持续更新", ja: "最新未開封BOXを随時更新", en: "Fresh sealed boxes added regularly" },
+  hero_slide2_cta:   { zh: "浏览新品", ja: "新着商品を見る", en: "Shop New Arrivals" },
+
+  hero_slide3_title: { zh: "PSA 精选", ja: "PSAピックアップ", en: "PSA Picks" },
+  hero_slide3_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
+  hero_slide3_sub:   { zh: "鉴定卡与高端库存", ja: "鑑定品とプレミアム在庫", en: "Graded cards & premium inventory" },
+  hero_slide3_cta:   { zh: "查看 PSA", ja: "PSA商品を見る", en: "View PSA Picks" },
+
+  hero_slide4_title: { zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
+  hero_slide4_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
+  hero_slide4_sub:   { zh: "B2B 与批量供货", ja: "B2B・大口仕入れ対応", en: "B2B & bulk supply" },
+  hero_slide4_cta:   { zh: "联系询价", ja: "お問い合わせ", en: "Contact Us" },
+
   // 首页分类胶囊
   cat_pokemon:      { zh: "宝可梦", ja: "ポケモン", en: "Pokémon" },
   cat_one_piece:    { zh: "海贼王", ja: "ワンピース", en: "One Piece" },
@@ -212,7 +227,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // 首页商品区块
   section_popular:      { zh: "人气商品", ja: "人気商品", en: "Popular Products" },
-  section_popular_sub:  { zh: "店铺热销与精选推荐", ja: "店舗の人気・おすすめ商品", en: "Top picks and customer favorites" },
+  section_popular_sub:  { zh: "热门商品推荐", ja: "おすすめ人気商品", en: "Top picks for collectors" },
   section_new_arrivals: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
   section_new_sub:      { zh: "最新原盒与评级卡", ja: "最新の未開封BOXと鑑定品", en: "Latest sealed boxes and graded picks" },
   section_best_sellers: { zh: "热销商品", ja: "人気商品", en: "Best Sellers" },
