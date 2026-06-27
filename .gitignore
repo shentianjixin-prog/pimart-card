@@ -50,3 +50,5 @@ next-env.d.ts
 *.db-journal
 *.db-wal
 *.db-shm
+# Railway 部署快照例外
+!prisma/data/initial.db
