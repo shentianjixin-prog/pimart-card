@@ -1,5 +1,5 @@
 import { copyFileSync, existsSync, mkdirSync } from "fs";
-import { spawn } from "child_process";
+import { spawn, execSync } from "child_process";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
@@ -25,6 +25,16 @@ if (!existsSync(dbPath)) {
 }
 
 process.env.DATABASE_URL = `file:${dbPath}`;
+
+try {
+  execSync(`node ${join(root, "scripts", "ensure-db-schema.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 数据库结构同步失败:", err);
+  process.exit(1);
+}
 
 const port = process.env.PORT || "3000";
 console.log(`[railway] 启动 Next.js，端口 ${port}`);

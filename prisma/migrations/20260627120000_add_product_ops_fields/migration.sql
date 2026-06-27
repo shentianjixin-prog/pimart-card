@@ -1,5 +1,4 @@
--- AlterTable: 卡牌运营字段与上下架状态（与线上一致，可安全重复执行前请先检查列是否已存在）
-ALTER TABLE "Product" ADD COLUMN "boxType" TEXT NOT NULL DEFAULT '';
+-- AlterTable: 卡牌运营字段与上下架状态（boxType 可能已由旧库手动存在，启动脚本 ensure-db-schema 会幂等补齐）
 ALTER TABLE "Product" ADD COLUMN "cardNumber" TEXT;
 ALTER TABLE "Product" ADD COLUMN "rarity" TEXT;
 ALTER TABLE "Product" ADD COLUMN "language" TEXT;
