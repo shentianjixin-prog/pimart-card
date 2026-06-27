@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// 商品（原盒 / 周边）
+model Product {
+  id           String      @id @default(cuid())
+  name         String
+  slug         String      @unique
+  category     String // 宝可梦原盒 / 火影忍者
+  series       String? // 系列名，如 "朱・紫ex" / "疾風伝"
+  description  String?
+  priceJpy     Int
+  stock        Int         @default(0)
+  images       String // 图片URL，逗号分隔
+  boxType      String      @default("") // 肥盒/瘦盒/宝石包/礼盒
+  featured     Boolean     @default(false)
+  isPreorder   Boolean     @default(false) // 是否为预售商品
+  shippingDays Int         @default(6) // 预计发货天数（5-7）
+  releaseDate  DateTime? // 预售发货日（可选）
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  orderItems   OrderItem[]
+}
+
+// 订单
+model Order {
+  id              String      @id @default(cuid())
+  stripeSessionId String?     @unique
+  customerEmail   String?
+  customerName    String?
+  status          String      @default("pending") // pending/paid/cancelled
+  totalJpy        Int
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+}
+
+// 订单明细
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  priceJpy  Int // 下单时单价快照
+}
+
+// 后台管理员
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}

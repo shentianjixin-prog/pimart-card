@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --background: #060810;
+  --surface: #0d0f1a;
+  --foreground: #f4f5f7;
+  --accent-from: #22d3ee;
+  --accent-to: #a855f7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+select,
+label {
+  touch-action: manipulation;
+}
+
+button:not(:disabled),
+.btn-primary,
+.btn-secondary {
+  cursor: pointer;
+}
+
+/* 固定的渐变光斑背景，营造科技感氛围，不随内容滚动 */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-glow::before,
+.ambient-glow::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.18;
+}
+.ambient-glow::before {
+  top: -20vw;
+  left: -10vw;
+  background: var(--accent-from);
+}
+.ambient-glow::after {
+  bottom: -25vw;
+  right: -15vw;
+  background: var(--accent-to);
+}
+
+@layer components {
+  .surface {
+    @apply rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+  }
+  .surface-solid {
+    @apply rounded-xl border border-white/10 bg-[#0d0f1a];
+  }
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-lg bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-110 active:brightness-90 disabled:cursor-not-allowed disabled:opacity-40 touch-manipulation;
+    box-shadow: 0 0 24px -6px rgba(34, 211, 238, 0.5);
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-gray-200 transition hover:border-white/25 hover:bg-white/10 active:bg-white/15 touch-manipulation;
+  }
+  .input-field {
+    @apply w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-base text-white placeholder:text-gray-500 focus:border-cyan-400/60 focus:outline-none focus:ring-1 focus:ring-cyan-400/40;
+  }
+  .badge-soft {
+    @apply rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-xs font-medium text-gray-300;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent;
+  }
+  .link-muted {
+    @apply text-gray-400 transition hover:text-white;
+  }
+}
