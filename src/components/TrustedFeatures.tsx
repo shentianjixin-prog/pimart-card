@@ -14,15 +14,15 @@ export function TrustedFeatures() {
 
   return (
     <section className="trusted-features mb-10 sm:mb-14 lg:mb-16">
-      <div className="mb-10 text-center">
-        <h2 className="section-title">{T("trusted_title")}</h2>
-        <p className="section-subtitle mx-auto max-w-2xl">{T("trusted_subtitle")}</p>
+      <div className="mb-10 text-center sm:mb-12">
+        <h2 className="trusted-section-title">{T("trusted_title")}</h2>
+        <p className="trusted-section-subtitle mx-auto max-w-2xl">{T("trusted_subtitle")}</p>
       </div>
       <div className="trusted-features-track">
         {FEATURES.map((f) => (
           <div key={f.titleKey} className="trusted-feature-card">
-            <h3 className="text-base font-semibold text-[#111827]">{T(f.titleKey)}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">{T(f.descKey)}</p>
+            <h3 className="trusted-feature-title">{T(f.titleKey)}</h3>
+            <p className="trusted-feature-desc">{T(f.descKey)}</p>
           </div>
         ))}
       </div>

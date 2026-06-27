@@ -371,8 +371,8 @@ const dict: Record<string, Record<Lang, string>> = {
   trusted_f1_desc: { zh: "覆盖中国、美国、东南亚等多个国家地区", ja: "中国・米国・東南アジアなど多国対応", en: "China, US, Southeast Asia and more" },
   trusted_f2_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
   trusted_f2_desc: { zh: "所有商品均来自可溯源渠道", ja: "すべてトレーサブルな正規ルート", en: "All products from traceable sources" },
-  trusted_f3_title: { zh: "日本现货", ja: "日本在庫", en: "Japan In Stock" },
-  trusted_f3_desc: { zh: "日本仓库存储，快速发货", ja: "日本倉庫から迅速発送", en: "Stored in Japan, shipped quickly" },
+  trusted_f3_title: { zh: "5仓秒发", ja: "5倉庫即出荷", en: "5-Warehouse Express" },
+  trusted_f3_desc: { zh: "卡牌无国界", ja: "カードに国境なし", en: "Cards without borders" },
   trusted_f4_title: { zh: "安全支付", ja: "安全な決済", en: "Secure Payment" },
   trusted_f4_desc: { zh: "Stripe 加密结算，安心付款", ja: "Stripe暗号化決済", en: "Stripe encrypted checkout" },
 
