@@ -32,6 +32,12 @@ export default async function AdminProtectedLayout({
         >
           订单管理
         </Link>
+        <Link
+          href="/admin/buyback"
+          className="block rounded-lg px-3 py-2 text-gray-300 hover:bg-white/10 hover:text-white"
+        >
+          买取申请
+        </Link>
         <form action={logoutAction}>
           <button
             type="submit"

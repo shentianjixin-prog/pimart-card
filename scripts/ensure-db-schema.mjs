@@ -59,15 +59,61 @@ if (!buybackTable) {
   db.exec(`
     CREATE TABLE "BuybackRequest" (
       "id" TEXT NOT NULL PRIMARY KEY,
+      "orderNo" TEXT NOT NULL,
       "name" TEXT NOT NULL,
       "nameKana" TEXT NOT NULL,
       "email" TEXT NOT NULL,
-      "message" TEXT NOT NULL,
+      "payload" TEXT NOT NULL,
       "status" TEXT NOT NULL DEFAULT 'new',
       "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
+    CREATE UNIQUE INDEX "BuybackRequest_orderNo_key" ON "BuybackRequest"("orderNo");
   `);
   console.log("[schema] BuybackRequest 表已创建");
+} else {
+  const buybackCols = new Set(
+    db.prepare('PRAGMA table_info("BuybackRequest")').all().map((row) => row.name)
+  );
+  if (!buybackCols.has("orderNo") || !buybackCols.has("payload")) {
+    db.exec(`
+      CREATE TABLE "new_BuybackRequest" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "orderNo" TEXT NOT NULL,
+        "name" TEXT NOT NULL,
+        "nameKana" TEXT NOT NULL,
+        "email" TEXT NOT NULL,
+        "payload" TEXT NOT NULL,
+        "status" TEXT NOT NULL DEFAULT 'new',
+        "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    const legacyRows = db.prepare('SELECT * FROM "BuybackRequest"').all();
+    const insert = db.prepare(`
+      INSERT INTO "new_BuybackRequest"
+      ("id", "orderNo", "name", "nameKana", "email", "payload", "status", "createdAt")
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    for (const row of legacyRows) {
+      const orderNo = `PIM-LEGACY-${String(row.id).slice(0, 8)}`;
+      const payload = row.message
+        ? JSON.stringify({ message: row.message, legacy: true })
+        : JSON.stringify({ legacy: true });
+      insert.run(
+        row.id,
+        orderNo,
+        row.name,
+        row.nameKana,
+        row.email,
+        payload,
+        row.status || "new",
+        row.createdAt
+      );
+    }
+    db.exec('DROP TABLE "BuybackRequest";');
+    db.exec('ALTER TABLE "new_BuybackRequest" RENAME TO "BuybackRequest";');
+    db.exec('CREATE UNIQUE INDEX IF NOT EXISTS "BuybackRequest_orderNo_key" ON "BuybackRequest"("orderNo");');
+    console.log("[schema] BuybackRequest 表已升级为承諾書结构");
+  }
 }
 
 db.close();

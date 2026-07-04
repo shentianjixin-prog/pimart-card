@@ -1417,9 +1417,10 @@ button:not(:disabled),
 }
 
 /* 买取页 */
-.buyback-page {
-  color: #111827;
-}
+  .buyback-page {
+    max-width: 920px;
+    margin-inline: auto;
+  }
 
 .buyback-panel {
   border-top: 1px solid rgba(17, 24, 39, 0.1);
@@ -1500,4 +1501,142 @@ button:not(:disabled),
 .buyback-submit-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* 买取承諾書 */
+.buyback-sheet {
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  background: #fff;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
+}
+
+@media (min-width: 640px) {
+  .buyback-sheet {
+    padding: 2rem 1.75rem;
+  }
+}
+
+.buyback-sheet-success {
+  text-align: center;
+}
+
+.buyback-sheet-brand {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+}
+
+.buyback-sheet-title {
+  margin-top: 0.35rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #111827;
+}
+
+.buyback-sheet-intro {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.buyback-sheet-meta {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.8125rem;
+  color: #374151;
+}
+
+.buyback-sheet-subtitle {
+  margin-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.buyback-sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.8125rem;
+}
+
+.buyback-sheet-table th,
+.buyback-sheet-table td {
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  vertical-align: middle;
+}
+
+.buyback-sheet-label {
+  width: 7.5rem;
+  background: #f3f4f6;
+  padding: 0.55rem 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+}
+
+.buyback-sheet-label.buyback-sheet-sub {
+  width: auto;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.buyback-sheet-field {
+  padding: 0.35rem 0.45rem;
+  background: #fff;
+}
+
+.buyback-sheet-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0.15rem;
+  font-size: 0.8125rem;
+  color: #111827;
+  outline: none;
+}
+
+.buyback-sheet-input:focus {
+  background: rgba(56, 189, 248, 0.06);
+}
+
+.buyback-inline-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #374151;
+}
+
+.buyback-legal-check {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.buyback-items-title {
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.buyback-example-row td {
+  background: #fafafa;
+}
+
+.buyback-items-table .buyback-sheet-input {
+  font-size: 0.75rem;
 }
