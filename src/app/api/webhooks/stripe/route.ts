@@ -34,13 +34,21 @@ export async function POST(request: NextRequest) {
         include: { items: true },
       });
       if (order && order.status !== "paid") {
+        const paidEmail = session.customer_details?.email?.trim().toLowerCase();
+        let customerId = order.customerId;
+        if (!customerId && paidEmail) {
+          const customer = await prisma.customer.findUnique({ where: { email: paidEmail } });
+          if (customer) customerId = customer.id;
+        }
+
         await prisma.$transaction([
           prisma.order.update({
             where: { id: orderId },
             data: {
               status: "paid",
-              customerEmail: session.customer_details?.email ?? undefined,
-              customerName: session.customer_details?.name ?? undefined,
+              customerId: customerId ?? undefined,
+              customerEmail: paidEmail ?? order.customerEmail ?? undefined,
+              customerName: session.customer_details?.name ?? order.customerName ?? undefined,
             },
           }),
           ...order.items.map((item) =>

@@ -12,7 +12,10 @@ export function proxy(request: NextRequest) {
 
   if (pathname === "/account" || pathname.startsWith("/account/")) {
     const isPublic =
-      pathname === "/account/login" || pathname === "/account/register";
+      pathname === "/account/login" ||
+      pathname === "/account/register" ||
+      pathname === "/account/forgot-password" ||
+      pathname === "/account/reset-password";
     const hasMember = request.cookies.has("member_session");
     if (!isPublic && !hasMember) {
       return NextResponse.redirect(new URL("/account/login", request.url));

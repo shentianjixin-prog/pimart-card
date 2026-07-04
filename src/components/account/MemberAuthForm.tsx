@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { loginAction, registerAction, type AuthState } from "@/app/account/actions";
+import {
+  forgotPasswordAction,
+  loginAction,
+  registerAction,
+  resetPasswordAction,
+  type AuthState,
+} from "@/app/account/actions";
 import { useT } from "@/lib/lang-context";
+import type { Lang } from "@/lib/translations";
 
 const INPUT =
   "w-full rounded-[14px] border border-[rgba(17,24,39,0.08)] bg-white px-4 py-2.5 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#111827]/10";
@@ -38,10 +45,11 @@ function AuthShell({
   );
 }
 
-function AuthError({ code }: { code?: string }) {
+function AuthFeedback({ state }: { state: AuthState }) {
   const T = useT();
-  if (!code) return null;
-  return <p className="text-sm text-red-600">{T(code)}</p>;
+  if (state?.error) return <p className="text-sm text-red-600">{T(state.error)}</p>;
+  if (state?.success) return <p className="text-sm text-emerald-600">{T(state.success)}</p>;
+  return null;
 }
 
 export function LoginForm() {
@@ -64,16 +72,14 @@ export function LoginForm() {
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_password")}</label>
           <input name="password" type="password" required autoComplete="current-password" className={INPUT} />
         </div>
-        <AuthError code={state?.error} />
+        <AuthFeedback state={state} />
         <button type="submit" disabled={pending} className="btn-primary min-h-11 w-full rounded-full">
           {pending ? "..." : T("auth_login_btn")}
         </button>
         <p className="text-center text-xs text-[#9ca3af]">
-          <Link href="/contact" className="hover:text-[#374151] hover:underline">
+          <Link href="/account/forgot-password" className="hover:text-[#374151] hover:underline">
             {T("auth_forgot_password")}
           </Link>
-          <span className="mx-1">·</span>
-          {T("auth_forgot_hint")}
         </p>
       </form>
     </AuthShell>
@@ -116,11 +122,53 @@ export function RegisterForm() {
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_password_confirm")}</label>
           <input name="passwordConfirm" type="password" required autoComplete="new-password" minLength={8} className={INPUT} />
         </div>
-        <AuthError code={state?.error} />
+        <AuthFeedback state={state} />
         <button type="submit" disabled={pending} className="btn-primary min-h-11 w-full rounded-full">
           {pending ? "..." : T("auth_register_btn")}
         </button>
       </form>
     </AuthShell>
+  );
+}
+
+export function ForgotPasswordForm({ lang }: { lang: Lang }) {
+  const T = useT();
+  const [state, action, pending] = useActionState<AuthState, FormData>(forgotPasswordAction, undefined);
+
+  return (
+    <form action={action} className="space-y-4">
+      <input type="hidden" name="lang" value={lang} />
+      <div>
+        <label className="mb-1 block text-sm text-[#374151]">{T("auth_email")}</label>
+        <input name="email" type="email" required autoComplete="email" className={INPUT} />
+      </div>
+      <AuthFeedback state={state} />
+      <button type="submit" disabled={pending} className="btn-primary min-h-11 w-full rounded-full">
+        {pending ? "..." : T("auth_reset_send")}
+      </button>
+    </form>
+  );
+}
+
+export function ResetPasswordForm({ token }: { token: string }) {
+  const T = useT();
+  const [state, action, pending] = useActionState<AuthState, FormData>(resetPasswordAction, undefined);
+
+  return (
+    <form action={action} className="space-y-4">
+      <input type="hidden" name="token" value={token} />
+      <div>
+        <label className="mb-1 block text-sm text-[#374151]">{T("auth_new_password")}</label>
+        <input name="newPassword" type="password" required minLength={8} autoComplete="new-password" className={INPUT} />
+      </div>
+      <div>
+        <label className="mb-1 block text-sm text-[#374151]">{T("auth_password_confirm")}</label>
+        <input name="newPasswordConfirm" type="password" required minLength={8} autoComplete="new-password" className={INPUT} />
+      </div>
+      <AuthFeedback state={state} />
+      <button type="submit" disabled={pending} className="btn-primary min-h-11 w-full rounded-full">
+        {pending ? "..." : T("auth_reset_confirm")}
+      </button>
+    </form>
   );
 }

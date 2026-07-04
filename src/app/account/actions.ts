@@ -1,13 +1,18 @@
 "use server";
 
 import bcrypt from "bcryptjs";
+import { randomBytes } from "crypto";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { linkOrdersToCustomer } from "@/lib/customer-orders";
+import { isEmailConfigured, sendPasswordResetEmail } from "@/lib/email";
 import {
   createMemberSession,
   destroyMemberSession,
   getMemberSession,
 } from "@/lib/session";
+import { resolveLang } from "@/lib/translations";
 
 export type AuthState = { error?: string; success?: string } | undefined;
 
@@ -55,6 +60,8 @@ export async function registerAction(
     },
   });
 
+  await linkOrdersToCustomer(customer.id, customer.email);
+
   await createMemberSession({
     customerId: customer.id,
     email: customer.email,
@@ -83,6 +90,8 @@ export async function loginAction(
   if (!ok) {
     return { error: "auth_err_invalid" };
   }
+
+  await linkOrdersToCustomer(customer.id, customer.email);
 
   await createMemberSession({
     customerId: customer.id,
@@ -172,4 +181,96 @@ export async function changePasswordAction(
   });
 
   return { success: "auth_password_saved" };
+}
+
+async function resolveRequestLang(formData?: FormData) {
+  if (formData) {
+    const raw = String(formData.get("lang") || "");
+    if (raw) return resolveLang(raw);
+  }
+  const cookieStore = await cookies();
+  return resolveLang(cookieStore.get("lang")?.value);
+}
+
+async function resolveSiteOrigin() {
+  const hdrs = await headers();
+  const host = hdrs.get("x-forwarded-host") || hdrs.get("host");
+  const proto = hdrs.get("x-forwarded-proto") || "https";
+  if (host) return `${proto}://${host}`;
+  return process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+}
+
+export async function forgotPasswordAction(
+  _prev: AuthState,
+  formData: FormData
+): Promise<AuthState> {
+  const email = normalizeEmail(String(formData.get("email") || ""));
+  const lang = await resolveRequestLang(formData);
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { error: "auth_err_email" };
+  }
+
+  if (!isEmailConfigured()) {
+    return { error: "auth_err_email_not_configured" };
+  }
+
+  const customer = await prisma.customer.findUnique({ where: { email } });
+  if (customer) {
+    const token = randomBytes(32).toString("hex");
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+    await prisma.passwordResetToken.deleteMany({ where: { customerId: customer.id } });
+    await prisma.passwordResetToken.create({
+      data: { customerId: customer.id, token, expiresAt },
+    });
+
+    const origin = await resolveSiteOrigin();
+    const resetUrl = `${origin}/account/reset-password?token=${token}`;
+    const sent = await sendPasswordResetEmail(email, resetUrl, lang);
+    if (!sent.ok) {
+      return { error: "auth_err_email_send_failed" };
+    }
+  }
+
+  return { success: "auth_reset_email_sent" };
+}
+
+export async function resetPasswordAction(
+  _prev: AuthState,
+  formData: FormData
+): Promise<AuthState> {
+  const token = String(formData.get("token") || "").trim();
+  const newPassword = String(formData.get("newPassword") || "");
+  const newPasswordConfirm = String(formData.get("newPasswordConfirm") || "");
+
+  if (!token || !newPassword) {
+    return { error: "auth_err_required" };
+  }
+  if (newPassword.length < 8) {
+    return { error: "auth_err_password_short" };
+  }
+  if (newPassword !== newPasswordConfirm) {
+    return { error: "auth_err_password_mismatch" };
+  }
+
+  const reset = await prisma.passwordResetToken.findUnique({
+    where: { token },
+    include: { customer: true },
+  });
+
+  if (!reset || reset.expiresAt < new Date()) {
+    return { error: "auth_err_reset_invalid" };
+  }
+
+  const passwordHash = await bcrypt.hash(newPassword, 10);
+  await prisma.$transaction([
+    prisma.customer.update({
+      where: { id: reset.customerId },
+      data: { passwordHash },
+    }),
+    prisma.passwordResetToken.deleteMany({ where: { customerId: reset.customerId } }),
+  ]);
+
+  redirect("/account/login");
 }

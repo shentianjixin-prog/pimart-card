@@ -145,4 +145,23 @@ if (!orderCols.has("customerId")) {
   console.log("[schema] Order.customerId 已添加");
 }
 
+const resetTable = db
+  .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='PasswordResetToken'")
+  .get();
+
+if (!resetTable) {
+  db.exec(`
+    CREATE TABLE "PasswordResetToken" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "customerId" TEXT NOT NULL,
+      "token" TEXT NOT NULL,
+      "expiresAt" DATETIME NOT NULL,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      CONSTRAINT "PasswordResetToken_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "Customer" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    );
+    CREATE UNIQUE INDEX "PasswordResetToken_token_key" ON "PasswordResetToken"("token");
+  `);
+  console.log("[schema] PasswordResetToken 表已创建");
+}
+
 db.close();
