@@ -116,4 +116,33 @@ if (!buybackTable) {
   }
 }
 
+const customerTable = db
+  .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='Customer'")
+  .get();
+
+if (!customerTable) {
+  db.exec(`
+    CREATE TABLE "Customer" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "email" TEXT NOT NULL,
+      "passwordHash" TEXT NOT NULL,
+      "name" TEXT NOT NULL,
+      "nameKana" TEXT,
+      "phone" TEXT,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL
+    );
+    CREATE UNIQUE INDEX "Customer_email_key" ON "Customer"("email");
+  `);
+  console.log("[schema] Customer 表已创建");
+}
+
+const orderCols = new Set(
+  db.prepare('PRAGMA table_info("Order")').all().map((row) => row.name)
+);
+if (!orderCols.has("customerId")) {
+  db.exec('ALTER TABLE "Order" ADD COLUMN "customerId" TEXT;');
+  console.log("[schema] Order.customerId 已添加");
+}
+
 db.close();

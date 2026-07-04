@@ -2,32 +2,46 @@ import "server-only";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
-const SECRET = process.env.ADMIN_SESSION_SECRET || "dev-only-insecure-secret";
-const COOKIE_NAME = "admin_session";
+const ADMIN_SECRET = process.env.ADMIN_SESSION_SECRET || "dev-only-insecure-secret";
+const MEMBER_SECRET = process.env.MEMBER_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET || "dev-only-member-secret";
+const ADMIN_COOKIE = "admin_session";
+const MEMBER_COOKIE = "member_session";
 
-type SessionPayload = {
+type AdminSessionPayload = {
   adminId: string;
   username: string;
 };
 
-export async function createAdminSession(payload: SessionPayload) {
-  const token = jwt.sign(payload, SECRET, { expiresIn: "7d" });
-  const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, token, {
+type MemberSessionPayload = {
+  customerId: string;
+  email: string;
+  name: string;
+};
+
+export type MemberSession = MemberSessionPayload;
+
+function cookieOptions(maxAge: number) {
+  return {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: "lax" as const,
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+    maxAge,
+  };
 }
 
-export async function getAdminSession(): Promise<SessionPayload | null> {
+export async function createAdminSession(payload: AdminSessionPayload) {
+  const token = jwt.sign(payload, ADMIN_SECRET, { expiresIn: "7d" });
   const cookieStore = await cookies();
-  const token = cookieStore.get(COOKIE_NAME)?.value;
+  cookieStore.set(ADMIN_COOKIE, token, cookieOptions(60 * 60 * 24 * 7));
+}
+
+export async function getAdminSession(): Promise<AdminSessionPayload | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(ADMIN_COOKIE)?.value;
   if (!token) return null;
   try {
-    return jwt.verify(token, SECRET) as SessionPayload;
+    return jwt.verify(token, ADMIN_SECRET) as AdminSessionPayload;
   } catch {
     return null;
   }
@@ -35,12 +49,27 @@ export async function getAdminSession(): Promise<SessionPayload | null> {
 
 export async function destroyAdminSession() {
   const cookieStore = await cookies();
-  // 显式覆盖写入同样的path/属性并立即过期，确保浏览器一定会清除该cookie
-  cookieStore.set(COOKIE_NAME, "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 0,
-  });
+  cookieStore.set(ADMIN_COOKIE, "", cookieOptions(0));
+}
+
+export async function createMemberSession(payload: MemberSessionPayload) {
+  const token = jwt.sign(payload, MEMBER_SECRET, { expiresIn: "30d" });
+  const cookieStore = await cookies();
+  cookieStore.set(MEMBER_COOKIE, token, cookieOptions(60 * 60 * 24 * 30));
+}
+
+export async function getMemberSession(): Promise<MemberSessionPayload | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(MEMBER_COOKIE)?.value;
+  if (!token) return null;
+  try {
+    return jwt.verify(token, MEMBER_SECRET) as MemberSessionPayload;
+  } catch {
+    return null;
+  }
+}
+
+export async function destroyMemberSession() {
+  const cookieStore = await cookies();
+  cookieStore.set(MEMBER_COOKIE, "", cookieOptions(0));
 }

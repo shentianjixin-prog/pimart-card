@@ -104,7 +104,7 @@ export function BuybackForm({ lang }: { lang: Lang }) {
           </p>
         )}
         <Link href="/" className="buyback-submit-btn mt-8 inline-flex min-h-11 items-center justify-center px-8">
-          {copy.home}
+          {copy.backHome}
         </Link>
       </div>
     );
@@ -125,7 +125,7 @@ export function BuybackForm({ lang }: { lang: Lang }) {
             value={`${draft.postalCode} ${draft.prefecture}${draft.city}${draft.addressLine}`}
           />
           <ConfirmBlock label={copy.mobile} value={draft.mobilePhone} />
-          <ConfirmBlock label={copy.home} value={draft.homePhone} />
+          <ConfirmBlock label={copy.homePhone} value={draft.homePhone} />
           <ConfirmBlock
             label={copy.bankSection}
             value={`${draft.bankName} ${draft.branchName} ${draft.accountType} ${draft.accountNumber} ${draft.accountHolderKana}`}
@@ -259,7 +259,7 @@ export function BuybackForm({ lang }: { lang: Lang }) {
                       <SheetInput name="mobilePhone" defaultValue={draft.mobilePhone} />
                     </div>
                     <div>
-                      <span className="mb-1 block text-xs text-[#6b7280]">{copy.home}</span>
+                      <span className="mb-1 block text-xs text-[#6b7280]">{copy.homePhone}</span>
                       <SheetInput name="homePhone" defaultValue={draft.homePhone} />
                     </div>
                   </div>

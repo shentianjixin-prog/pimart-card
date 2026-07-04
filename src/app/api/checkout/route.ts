@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
 import { isProductArchived } from "@/lib/product-status";
+import { getMemberSession } from "@/lib/session";
 
 type CheckoutItem = { productId: string; quantity: number };
 
@@ -59,9 +60,14 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  const member = await getMemberSession();
+
   const order = await prisma.order.create({
     data: {
       totalJpy,
+      customerId: member?.customerId,
+      customerEmail: member?.email,
+      customerName: member?.name,
       items: { create: orderItemsData },
     },
   });
@@ -72,6 +78,7 @@ export async function POST(request: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: lineItems,
+      customer_email: member?.email,
       success_url: `${origin}/checkout/success?order=${order.id}`,
       cancel_url: `${origin}/checkout/cancel?order=${order.id}`,
       metadata: { orderId: order.id },

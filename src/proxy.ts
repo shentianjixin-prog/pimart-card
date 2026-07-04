@@ -10,9 +10,21 @@ export function proxy(request: NextRequest) {
     }
   }
 
+  if (pathname === "/account" || pathname.startsWith("/account/")) {
+    const isPublic =
+      pathname === "/account/login" || pathname === "/account/register";
+    const hasMember = request.cookies.has("member_session");
+    if (!isPublic && !hasMember) {
+      return NextResponse.redirect(new URL("/account/login", request.url));
+    }
+    if (isPublic && hasMember) {
+      return NextResponse.redirect(new URL("/account", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/account", "/account/:path*"],
 };

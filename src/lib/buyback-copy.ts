@@ -25,7 +25,7 @@ export type BuybackCopy = {
   addressLine: string;
   phone: string;
   mobile: string;
-  home: string;
+  homePhone: string;
   email: string;
   occupation: string;
   occExecutive: string;
@@ -75,7 +75,7 @@ export type BuybackCopy = {
   successTitle: string;
   successDesc: string;
   yourOrderNo: string;
-  home: string;
+  backHome: string;
   minorCheck: string;
   errRequired: string;
   errEmail: string;
@@ -117,7 +117,7 @@ const COPY: Record<Lang, BuybackCopy> = {
     addressLine: "番地・建物名",
     phone: "電話番号 ※1",
     mobile: "携帯電話",
-    home: "ご自宅",
+    homePhone: "ご自宅",
     email: "メールアドレス ※2",
     occupation: "ご職業",
     occExecutive: "会社役員",
@@ -169,7 +169,7 @@ const COPY: Record<Lang, BuybackCopy> = {
     successTitle: "買取申込を受け付けました",
     successDesc: "内容を確認のうえ、1〜2営業日以内にメールでご連絡します。本人確認書類は返信メールの案内に従ってご送付ください。",
     yourOrderNo: "受付番号",
-    home: "ホームに戻る",
+    backHome: "ホームに戻る",
     minorCheck: "18歳未満です",
     errRequired: "必須項目を入力してください",
     errEmail: "メールアドレスの形式が正しくありません",
@@ -208,7 +208,7 @@ const COPY: Record<Lang, BuybackCopy> = {
     addressLine: "街道・门牌",
     phone: "电话 ※1",
     mobile: "手机",
-    home: "住宅",
+    homePhone: "住宅",
     email: "邮箱 ※2",
     occupation: "职业",
     occExecutive: "公司高管",
@@ -258,7 +258,7 @@ const COPY: Record<Lang, BuybackCopy> = {
     successTitle: "买取申请已受理",
     successDesc: "我们将在1–2个工作日内邮件联系。请按回复邮件指引提交本人确认证件。",
     yourOrderNo: "受理编号",
-    home: "返回首页",
+    backHome: "返回首页",
     minorCheck: "未满18岁",
     errRequired: "请填写必填项",
     errEmail: "邮箱格式不正确",
@@ -298,7 +298,7 @@ const COPY: Record<Lang, BuybackCopy> = {
     addressLine: "Street / building",
     phone: "Phone ※1",
     mobile: "Mobile",
-    home: "Home",
+    homePhone: "Home",
     email: "Email ※2",
     occupation: "Occupation",
     occExecutive: "Executive",
@@ -349,7 +349,7 @@ const COPY: Record<Lang, BuybackCopy> = {
     successTitle: "Buyback application received",
     successDesc: "We will contact you within 1–2 business days. Please send ID copies as instructed in our reply.",
     yourOrderNo: "Reference No.",
-    home: "Back to home",
+    backHome: "Back to home",
     minorCheck: "I am under 18",
     errRequired: "Please fill required fields",
     errEmail: "Invalid email",

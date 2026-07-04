@@ -44,6 +44,8 @@ model Product {
 model Order {
   id              String      @id @default(cuid())
   stripeSessionId String?     @unique
+  customerId      String?
+  customer        Customer?   @relation(fields: [customerId], references: [id], onDelete: SetNull)
   customerEmail   String?
   customerName    String?
   status          String      @default("pending") // pending/paid/cancelled
@@ -82,4 +84,17 @@ model BuybackRequest {
   payload   String
   status    String   @default("new")
   createdAt DateTime @default(now())
+}
+
+// 前台会员
+model Customer {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  nameKana     String?
+  phone        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  orders       Order[]
 }

@@ -7,6 +7,7 @@ import { useLang, useT } from "@/lib/lang-context";
 import { LANGS, LANG_LABELS } from "@/lib/translations";
 import { SearchBar } from "@/components/SearchBar";
 import { PimartLogo } from "@/components/PimartLogo";
+import type { MemberSession } from "@/lib/session";
 
 type MenuLink = { type: "link"; key: string; href: string };
 type MenuGroup = { type: "group"; key: string; children: MenuLink[] };
@@ -52,6 +53,7 @@ const MORE_MENU = [
 const MOBILE_MENU = [
   { key: "nav_home", href: "/" },
   { key: "nav_shop", href: "/?stock=instock" },
+  { key: "nav_account", href: "/account" },
   { key: "menu_buyback", href: "/buyback" },
   { key: "menu_wholesale", href: "/contact" },
   { key: "footer_contact", href: "/contact" },
@@ -227,7 +229,7 @@ function NavDropdown({
   );
 }
 
-export function Header() {
+export function Header({ member }: { member?: MemberSession | null }) {
   const { totalCount } = useCart();
   const T = useT();
   const [mounted, setMounted] = useState(false);
@@ -271,6 +273,29 @@ export function Header() {
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-1">
+            <div className="hidden items-center gap-1 sm:flex">
+              {member ? (
+                <Link
+                  href="/account"
+                  className="min-h-11 max-w-[120px] truncate rounded-full px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa] lg:max-w-[160px]"
+                  title={member.email}
+                >
+                  {member.name}
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/account/login"
+                    className="min-h-11 rounded-full px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]"
+                  >
+                    {T("nav_login")}
+                  </Link>
+                  <Link href="/account/register" className="btn-primary min-h-9 rounded-full px-3 text-xs sm:text-sm">
+                    {T("nav_register")}
+                  </Link>
+                </>
+              )}
+            </div>
             <div className="hidden lg:block">
               <LangSwitcher />
             </div>
@@ -324,6 +349,24 @@ export function Header() {
                   {T(item.key)}
                 </Link>
               ))}
+              {!member && (
+                <>
+                  <Link
+                    href="/account/login"
+                    onClick={closeMobile}
+                    className="flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]"
+                  >
+                    {T("nav_login")}
+                  </Link>
+                  <Link
+                    href="/account/register"
+                    onClick={closeMobile}
+                    className="flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]"
+                  >
+                    {T("nav_register")}
+                  </Link>
+                </>
+              )}
             </nav>
 
             <div className="mt-5 border-t border-[rgba(17,24,39,0.08)] pt-4">

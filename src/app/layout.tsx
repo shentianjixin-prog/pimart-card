@@ -7,6 +7,7 @@ import { LangProvider } from "@/lib/lang-context";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { HTML_LANG, resolveLang } from "@/lib/translations";
+import { getMemberSession } from "@/lib/session";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,6 +43,7 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const lang = resolveLang(cookieStore.get("lang")?.value);
+  const member = await getMemberSession();
 
   return (
     <html
@@ -58,7 +60,7 @@ export default async function RootLayout({
         <LangProvider initial={lang}>
           <CartProvider>
             <div className="site-frame">
-              <Header />
+              <Header member={member} />
               <main className="flex-1">{children}</main>
             </div>
             <Footer />
