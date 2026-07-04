@@ -1415,3 +1415,89 @@ button:not(:disabled),
     transform: translateX(-50%);
   }
 }
+
+/* 买取页 */
+.buyback-page {
+  color: #111827;
+}
+
+.buyback-panel {
+  border-top: 1px solid rgba(17, 24, 39, 0.1);
+  padding-top: 1.5rem;
+}
+
+.buyback-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.1);
+}
+
+.buyback-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.buyback-required {
+  margin-left: 0.25rem;
+  color: #dc2626;
+}
+
+.buyback-input {
+  width: 100%;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  border-radius: 4px;
+  background: #fff;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+.buyback-input:focus {
+  outline: none;
+  border-color: rgba(17, 24, 39, 0.28);
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.06);
+}
+
+.buyback-line-btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #06c755;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  transition: filter 0.2s ease;
+}
+
+.buyback-line-btn:hover {
+  filter: brightness(0.95);
+}
+
+.buyback-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #e85d4c 0%, #d6453a 100%);
+  padding: 0.65rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  transition: filter 0.2s ease;
+}
+
+.buyback-submit-btn:hover {
+  filter: brightness(1.05);
+}
+
+.buyback-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

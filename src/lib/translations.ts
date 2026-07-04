@@ -52,6 +52,7 @@ const dict: Record<string, Record<Lang, string>> = {
   menu_psa:         { zh: "PSA 评级卡", ja: "PSA鑑定品",        en: "PSA Cards" },
   menu_new_arrivals:{ zh: "新品上架",   ja: "新着商品",         en: "New Arrivals" },
   menu_wholesale:   { zh: "批发询价",   ja: "卸売・お問い合わせ", en: "Wholesale" },
+  menu_buyback:     { zh: "卡牌买取",   ja: "買取",               en: "Buyback" },
   menu_shipping:    { zh: "发货说明",   ja: "配送について",     en: "Shipping" },
   menu_guide:       { zh: "购物指南",   ja: "ご利用ガイド",     en: "Guide" },
 
@@ -192,6 +193,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // 页脚
   footer_contact:  { zh: "联系方式",   ja: "お問い合わせ",          en: "Contact" },
+  footer_buyback:  { zh: "卡牌买取",   ja: "買取",                  en: "Buyback" },
   footer_shipping: { zh: "发货说明",   ja: "配送について",          en: "Shipping" },
   footer_guide:    { zh: "购物指南",   ja: "ショッピングガイド",    en: "Shopping Guide" },
   footer_privacy:  { zh: "隐私政策",   ja: "プライバシーポリシー",  en: "Privacy Policy" },

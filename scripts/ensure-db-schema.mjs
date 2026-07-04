@@ -51,4 +51,23 @@ if (added === 0) {
   console.log(`[schema] 共补齐 ${added} 个字段`);
 }
 
+const buybackTable = db
+  .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='BuybackRequest'")
+  .get();
+
+if (!buybackTable) {
+  db.exec(`
+    CREATE TABLE "BuybackRequest" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "name" TEXT NOT NULL,
+      "nameKana" TEXT NOT NULL,
+      "email" TEXT NOT NULL,
+      "message" TEXT NOT NULL,
+      "status" TEXT NOT NULL DEFAULT 'new',
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
+  console.log("[schema] BuybackRequest 表已创建");
+}
+
 db.close();

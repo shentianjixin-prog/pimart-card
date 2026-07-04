@@ -45,6 +45,7 @@ export function Footer() {
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
               <Link href="/about" className="site-footer-link">{T("footer_about")}</Link>
               <Link href="/contact" className="site-footer-link">{T("footer_contact")}</Link>
+              <Link href="/buyback" className="site-footer-link">{T("footer_buyback")}</Link>
               <Link href="/contact" className="site-footer-link">{T("menu_wholesale")}</Link>
             </div>
           </div>

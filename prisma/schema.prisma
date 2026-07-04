@@ -71,3 +71,14 @@ model AdminUser {
   passwordHash String
   createdAt    DateTime @default(now())
 }
+
+// 买取咨询
+model BuybackRequest {
+  id        String   @id @default(cuid())
+  name      String
+  nameKana  String
+  email     String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}

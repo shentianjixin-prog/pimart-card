@@ -43,6 +43,7 @@ const SHOP_MENU: ShopMenuItem[] = [
 
 const MORE_MENU = [
   { key: "menu_new_arrivals", href: "/?sort=newest&stock=instock" },
+  { key: "menu_buyback", href: "/buyback" },
   { key: "menu_wholesale", href: "/contact" },
   { key: "menu_shipping", href: "/shipping" },
   { key: "menu_guide", href: "/guide" },
@@ -51,6 +52,7 @@ const MORE_MENU = [
 const MOBILE_MENU = [
   { key: "nav_home", href: "/" },
   { key: "nav_shop", href: "/?stock=instock" },
+  { key: "menu_buyback", href: "/buyback" },
   { key: "menu_wholesale", href: "/contact" },
   { key: "footer_contact", href: "/contact" },
 ] as const;
