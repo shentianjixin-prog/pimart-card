@@ -25,36 +25,32 @@ function B2BBoxFrame({
   src,
   alt,
   wrapperClassName,
-  frameClassName,
   aspect = "5/7",
 }: {
   src: string;
   alt: string;
   wrapperClassName: string;
-  frameClassName: string;
   aspect?: "5/7" | "square";
 }) {
   return (
     <div className={wrapperClassName}>
-      <div className={frameClassName}>
-        <div
-          className={`relative w-full overflow-hidden rounded-[14px] bg-white ${
-            aspect === "square" ? "aspect-square" : "aspect-[5/7]"
-          }`}
-        >
-          <ProductFrameImage src={src} alt={alt} />
-        </div>
+      <div
+        className={`relative w-full overflow-visible ${
+          aspect === "square" ? "aspect-square" : "aspect-[5/7]"
+        }`}
+      >
+        <HeroBrandImage src={src} alt={alt} />
       </div>
     </div>
   );
 }
 
 const STACK = [
-  { r: -14, x: -72, y: 20, z: 1 },
-  { r: -6, x: -28, y: -6, z: 2 },
+  { r: -14, x: -108, y: 20, z: 1 },
+  { r: -6, x: -52, y: -6, z: 2 },
   { r: 0, x: 0, y: 0, z: 4 },
-  { r: 7, x: 32, y: -10, z: 3 },
-  { r: 13, x: 68, y: 18, z: 2 },
+  { r: 7, x: 52, y: -10, z: 3 },
+  { r: 13, x: 104, y: 18, z: 2 },
 ];
 
 const HERO_BRAND_SLOTS: { src: string; alt: string }[] = [
@@ -66,7 +62,18 @@ const HERO_BRAND_SLOTS: { src: string; alt: string }[] = [
 ];
 
 function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
-  return <ProductFrameImage src={src} alt={alt} />;
+  const [failed, setFailed] = useState(false);
+  if (failed) return <CardPlaceholder />;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      className="absolute inset-0 h-full w-full object-contain"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
 }
 
 export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
@@ -88,10 +95,8 @@ export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
                     transform: `translate(calc(-50% + ${s.x}px), calc(-50% + ${s.y}px)) rotate(${s.r}deg)`,
                   }}
                 >
-                  <div className="hero-crystal-frame overflow-hidden rounded-[18px] p-[3px]">
-                    <div className="hero-crystal-frame-inner relative aspect-[5/7] w-full overflow-hidden rounded-[14px]">
-                      <HeroBrandImage src={slot.src} alt={slot.alt} />
-                    </div>
+                  <div className="relative aspect-[5/7] w-full overflow-visible">
+                    <HeroBrandImage src={slot.src} alt={slot.alt} />
                   </div>
                 </div>
               );
@@ -152,39 +157,29 @@ export function HeroPsaVisual() {
   );
 }
 
-const B2B_FRAME =
-  "rounded-[20px] border border-[rgba(15,23,42,0.08)] bg-white/90 p-2 shadow-[0_20px_50px_rgba(15,23,42,0.07)] backdrop-blur-sm";
-const B2B_FRAME_SM =
-  "rounded-[18px] border border-[rgba(15,23,42,0.08)] bg-white/90 p-2 shadow-[0_16px_40px_rgba(15,23,42,0.06)] backdrop-blur-sm";
-
-/** Fixed hero B2B frames — no random/placeholder slots */
 const B2B_HERO_FRAMES = [
   {
     src: "/images/hero-pack-gengar.jpg",
     alt: "宝可梦 宝石包 VOL.3",
     wrapperClassName: "hero-float-slow absolute left-[4%] top-[10%] w-[36%]",
-    frameClassName: B2B_FRAME,
     aspect: "5/7" as const,
   },
   {
     src: "/images/psa-zekrom.jpg",
     alt: "捷克罗姆 PSA 10",
     wrapperClassName: "hero-float-delay absolute right-[2%] top-[14%] w-[34%]",
-    frameClassName: B2B_FRAME,
     aspect: "5/7" as const,
   },
   {
     src: "/images/hero-pack-terastal.jpg",
     alt: "宝可梦 太晶盛聚",
     wrapperClassName: "hero-float-slow absolute bottom-[6%] left-[18%] w-[32%]",
-    frameClassName: B2B_FRAME_SM,
     aspect: "5/7" as const,
   },
   {
     src: "/products/cbb5c-box.png",
     alt: "宝可梦 原盒",
     wrapperClassName: "hero-float-delay absolute bottom-[10%] right-[12%] w-[38%]",
-    frameClassName: B2B_FRAME,
     aspect: "square" as const,
   },
 ] as const;
