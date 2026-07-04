@@ -425,6 +425,17 @@ const dict: Record<string, Record<Lang, string>> = {
   auth_err_password_mismatch: { zh: "两次密码不一致", ja: "パスワードが一致しません", en: "Passwords do not match" },
   auth_err_email_taken: { zh: "该邮箱已注册", ja: "このメールは既に登録されています", en: "Email already registered" },
   auth_err_invalid: { zh: "邮箱或密码错误", ja: "メールまたはパスワードが正しくありません", en: "Invalid email or password" },
+  auth_err_current_password: { zh: "当前密码不正确", ja: "現在のパスワードが正しくありません", en: "Current password is incorrect" },
+  auth_save_profile: { zh: "保存资料", ja: "会員情報を保存", en: "Save profile" },
+  auth_change_password: { zh: "修改密码", ja: "パスワードを変更", en: "Change password" },
+  auth_current_password: { zh: "当前密码", ja: "現在のパスワード", en: "Current password" },
+  auth_new_password: { zh: "新密码", ja: "新しいパスワード", en: "New password" },
+  auth_password_section: { zh: "修改密码", ja: "パスワード変更", en: "Password" },
+  auth_email_readonly: { zh: "邮箱暂不支持修改，如需变更请联系客服", ja: "メール変更はサポートへご連絡ください", en: "Contact support to change your email" },
+  auth_profile_saved: { zh: "资料已保存", ja: "会員情報を保存しました", en: "Profile saved" },
+  auth_password_saved: { zh: "密码已更新", ja: "パスワードを変更しました", en: "Password updated" },
+  auth_forgot_password: { zh: "忘记密码？", ja: "パスワードをお忘れですか？", en: "Forgot password?" },
+  auth_forgot_hint: { zh: "请联系客服协助重置", ja: "サポートまでお問い合わせください", en: "Contact support to reset" },
 };
 
 export function t(key: string, lang: Lang): string {

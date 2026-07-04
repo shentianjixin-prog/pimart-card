@@ -4,6 +4,7 @@ import { formatJpy } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { logoutMemberAction, requireMember } from "@/app/account/actions";
+import { PasswordChangeForm, ProfileEditForm } from "@/components/account/MemberProfileForms";
 import { resolveLang, t } from "@/lib/translations";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -56,28 +57,23 @@ export default async function AccountPage() {
       <div className="mt-8 grid gap-6">
         <section className="rounded-[20px] border border-[rgba(17,24,39,0.08)] bg-white p-6 shadow-[0_8px_30px_rgba(17,24,39,0.04)]">
           <h2 className="text-sm font-semibold text-[#111827]">{T("auth_profile")}</h2>
-          <dl className="mt-4 space-y-3 text-sm">
-            <div className="flex gap-3">
-              <dt className="w-24 shrink-0 text-[#9ca3af]">{T("auth_name")}</dt>
-              <dd className="text-[#111827]">{customer.name}</dd>
-            </div>
-            {customer.nameKana && (
-              <div className="flex gap-3">
-                <dt className="w-24 shrink-0 text-[#9ca3af]">{T("auth_name_kana")}</dt>
-                <dd className="text-[#111827]">{customer.nameKana}</dd>
-              </div>
-            )}
-            <div className="flex gap-3">
-              <dt className="w-24 shrink-0 text-[#9ca3af]">{T("auth_email")}</dt>
-              <dd className="text-[#111827]">{customer.email}</dd>
-            </div>
-            {customer.phone && (
-              <div className="flex gap-3">
-                <dt className="w-24 shrink-0 text-[#9ca3af]">{T("auth_phone")}</dt>
-                <dd className="text-[#111827]">{customer.phone}</dd>
-              </div>
-            )}
-          </dl>
+          <div className="mt-4">
+            <ProfileEditForm
+              defaults={{
+                name: customer.name,
+                nameKana: customer.nameKana || "",
+                email: customer.email,
+                phone: customer.phone || "",
+              }}
+            />
+          </div>
+        </section>
+
+        <section className="rounded-[20px] border border-[rgba(17,24,39,0.08)] bg-white p-6 shadow-[0_8px_30px_rgba(17,24,39,0.04)]">
+          <h2 className="text-sm font-semibold text-[#111827]">{T("auth_password_section")}</h2>
+          <div className="mt-4">
+            <PasswordChangeForm />
+          </div>
         </section>
 
         <section className="rounded-[20px] border border-[rgba(17,24,39,0.08)] bg-white p-6 shadow-[0_8px_30px_rgba(17,24,39,0.04)]">

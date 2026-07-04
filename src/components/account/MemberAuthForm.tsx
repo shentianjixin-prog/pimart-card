@@ -68,6 +68,13 @@ export function LoginForm() {
         <button type="submit" disabled={pending} className="btn-primary min-h-11 w-full rounded-full">
           {pending ? "..." : T("auth_login_btn")}
         </button>
+        <p className="text-center text-xs text-[#9ca3af]">
+          <Link href="/contact" className="hover:text-[#374151] hover:underline">
+            {T("auth_forgot_password")}
+          </Link>
+          <span className="mx-1">·</span>
+          {T("auth_forgot_hint")}
+        </p>
       </form>
     </AuthShell>
   );
