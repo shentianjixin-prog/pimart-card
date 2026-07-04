@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { CardPlaceholder } from "@/components/HeroPlaceholders";
 import type { HeroStackProduct } from "@/components/HomeHero";
@@ -46,20 +47,38 @@ function B2BBoxFrame({
 }
 
 const STACK = [
-  { r: -14, x: -108, y: 20, z: 1 },
-  { r: -6, x: -52, y: -6, z: 2 },
-  { r: 0, x: 0, y: 0, z: 4 },
-  { r: 7, x: 52, y: -10, z: 3 },
-  { r: 13, x: 104, y: 18, z: 2 },
+  { r: -12, x: -148, y: 22, z: 1 },
+  { r: -5, x: -72, y: -4, z: 2 },
+  { r: 0, x: 0, y: 0, z: 3 },
+  { r: 5, x: 72, y: -8, z: 2 },
+  { r: 12, x: 148, y: 20, z: 1 },
 ];
 
-const HERO_BRAND_SLOTS: { src: string; alt: string }[] = [
-  { src: "/products/151-box.png", alt: "宝可梦 151" },
-  { src: "/images/hero-pack-gengar.jpg", alt: "宝可梦 宝石包 VOL.3" },
-  { src: "/products/csv8c-box.png", alt: "宝可梦 星彩晶璃" },
-  { src: "/images/hero-pack-terastal.jpg", alt: "宝可梦 太晶盛聚" },
-  { src: "/images/hero-card-brock.png", alt: "小刚的发掘 SAR" },
-];
+const HERO_BRAND_SLOTS = [
+  { src: "/products/151-box.png", alt: "宝可梦 151", imageKey: "151-box" },
+  { src: "/products/cbb3c-box.png", alt: "宝可梦 宝石包 VOL.3", imageKey: "cbb3c" },
+  { src: "/products/csv8c-box.png", alt: "宝可梦 星彩晶璃", imageKey: "csv8c" },
+  { src: "/products/csv3c-box.png", alt: "宝可梦 太晶盛聚", imageKey: "csv3c" },
+  { src: "/images/hero-card-brock.png", alt: "小刚的发掘 SAR", imageKey: "brock" },
+] as const;
+
+function resolveBrandHref(products: HeroStackProduct[], imageKey: string, index: number) {
+  const matched = products.find((p) => p.images?.includes(imageKey));
+  if (matched?.slug) return `/products/${matched.slug}`;
+  const fallback = products[index];
+  if (fallback?.slug) return `/products/${fallback.slug}`;
+  return "/?sort=newest&stock=instock";
+}
+
+function brandCardTransform(
+  stack: (typeof STACK)[number],
+  hovered: boolean
+) {
+  const lift = hovered ? -22 : 0;
+  const scale = hovered ? 1.08 : 1;
+  const rotate = hovered ? stack.r * 0.2 : stack.r;
+  return `translate(calc(-50% + ${stack.x}px), calc(-50% + ${stack.y + lift}px)) rotate(${rotate}deg) scale(${scale})`;
+}
 
 function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
   const [failed, setFailed] = useState(false);
@@ -76,7 +95,9 @@ function HeroBrandImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
+export function HeroBrandVisual({ products }: { products: HeroStackProduct[] }) {
+  const [hovered, setHovered] = useState<number | null>(null);
+
   return (
     <div className="hero-brand-stage">
       <div className="hero-v2-visual hero-brand-visual">
@@ -84,21 +105,28 @@ export function HeroBrandVisual(_props: { products: HeroStackProduct[] }) {
           <div className="hero-brand-cards-inner">
             {HERO_BRAND_SLOTS.map((slot, i) => {
               const s = STACK[i];
+              const isHovered = hovered === i;
               return (
-                <div
+                <Link
                   key={`hero-brand-slot-${i}`}
-                  className="hero-stack-card absolute w-[36%] max-w-[130px] sm:max-w-[140px] lg:max-w-[150px]"
+                  href={resolveBrandHref(products, slot.imageKey, i)}
+                  className="hero-brand-card absolute block w-[30%] max-w-[118px] touch-manipulation sm:max-w-[128px] lg:max-w-[138px]"
                   style={{
-                    zIndex: s.z,
+                    zIndex: isHovered ? 20 : s.z,
                     left: "50%",
                     top: "50%",
-                    transform: `translate(calc(-50% + ${s.x}px), calc(-50% + ${s.y}px)) rotate(${s.r}deg)`,
+                    transform: brandCardTransform(s, isHovered),
                   }}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  onFocus={() => setHovered(i)}
+                  onBlur={() => setHovered(null)}
+                  aria-label={slot.alt}
                 >
                   <div className="relative aspect-[5/7] w-full overflow-visible">
                     <HeroBrandImage src={slot.src} alt={slot.alt} />
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -159,7 +187,7 @@ export function HeroPsaVisual() {
 
 const B2B_HERO_FRAMES = [
   {
-    src: "/images/hero-pack-gengar.jpg",
+    src: "/products/cbb3c-box.png",
     alt: "宝可梦 宝石包 VOL.3",
     wrapperClassName: "hero-float-slow absolute left-[4%] top-[10%] w-[36%]",
     aspect: "5/7" as const,
@@ -171,7 +199,7 @@ const B2B_HERO_FRAMES = [
     aspect: "5/7" as const,
   },
   {
-    src: "/images/hero-pack-terastal.jpg",
+    src: "/products/csv3c-box.png",
     alt: "宝可梦 太晶盛聚",
     wrapperClassName: "hero-float-slow absolute bottom-[6%] left-[18%] w-[32%]",
     aspect: "5/7" as const,
