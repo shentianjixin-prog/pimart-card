@@ -366,18 +366,18 @@ button:not(:disabled),
   /* Hero brand slide — card fan only (no poster background) */
   .hero-brand-column {
     @apply relative flex w-full items-center justify-center;
-    min-height: 260px;
+    min-height: 220px;
   }
 
   @media (min-width: 640px) {
     .hero-brand-column {
-      min-height: 300px;
+      min-height: 260px;
     }
   }
 
   @media (min-width: 1024px) {
     .hero-brand-column {
-      min-height: 380px;
+      min-height: 300px;
     }
   }
 
@@ -393,7 +393,7 @@ button:not(:disabled),
     position: relative;
     display: flex;
     width: 100%;
-    max-width: 640px;
+    max-width: 720px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -403,35 +403,33 @@ button:not(:disabled),
 
   @media (min-width: 1024px) {
     .hero-brand-visual {
-      max-width: 700px;
+      max-width: 760px;
     }
   }
 
-  .hero-brand-cards {
-    position: relative;
+  .hero-brand-row {
+    display: flex;
     width: 100%;
-    min-height: 260px;
+    max-width: 680px;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(0.4rem, 1.8vw, 1rem);
+    padding: 0.75rem 0.25rem 0.5rem;
+    margin-inline: auto;
+    min-height: 200px;
   }
 
   @media (min-width: 640px) {
-    .hero-brand-cards {
-      min-height: 300px;
+    .hero-brand-row {
+      gap: clamp(0.55rem, 2vw, 1.15rem);
+      min-height: 240px;
     }
   }
 
   @media (min-width: 1024px) {
-    .hero-brand-cards {
-      min-height: 360px;
+    .hero-brand-row {
+      min-height: 280px;
     }
-  }
-
-  .hero-brand-cards-inner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: min(98%, 620px);
-    height: 78%;
-    transform: translate(-50%, -50%);
   }
 
   .hero-brand-card {
