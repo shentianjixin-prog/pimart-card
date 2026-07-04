@@ -140,22 +140,6 @@ export function ProductCard({ product }: Props) {
               </div>
             )}
             <div className="flex gap-2">
-              <dt className="shrink-0 text-[#9ca3af]">{T("card_label_number")}</dt>
-              <dd className="truncate font-medium text-[#374151]">{product.cardNumber || "—"}</dd>
-            </div>
-            <div className="flex gap-2">
-              <dt className="shrink-0 text-[#9ca3af]">{T("card_label_rarity")}</dt>
-              <dd>
-                {product.rarity ? (
-                  <span className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold text-violet-700">
-                    {product.rarity}
-                  </span>
-                ) : (
-                  <span className="text-[#374151]">—</span>
-                )}
-              </dd>
-            </div>
-            <div className="flex gap-2">
               <dt className="shrink-0 text-[#9ca3af]">{T("card_label_stock")}</dt>
               <dd className={soldOut ? "text-[#9ca3af]" : product.stock <= 3 ? "font-medium text-[#92400e]" : "text-emerald-700"}>
                 {stockLabel}

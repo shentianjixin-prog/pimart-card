@@ -33,7 +33,7 @@ export default async function ProductPage({
   const T = (key: string) => t(key, lang);
 
   const soldOut = product.stock <= 0;
-  const metaParts = [product.cardNumber, product.rarity, product.language].filter(Boolean);
+  const metaParts = [product.language].filter(Boolean);
 
   const TIMELINE = [
     { label: T("detail_timeline_0"), sub: T("detail_timeline_0s") },
