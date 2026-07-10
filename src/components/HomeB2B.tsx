@@ -20,11 +20,11 @@ export function HomeB2B() {
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-[#6B7280] sm:text-base">
               {T("b2b_v2_desc")}
             </p>
-            <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
-              <Link href="/contact" className="btn-primary min-h-11 rounded-full px-6">
+            <div className="mt-6 flex flex-nowrap gap-2.5 sm:mt-8">
+              <Link href="/contact" className="btn-primary min-h-11 flex-1 rounded-full px-4 text-center sm:flex-none sm:px-6">
                 {T("hero_v2_cta_quote")}
               </Link>
-              <Link href="/contact" className="btn-secondary min-h-11 rounded-full px-6">
+              <Link href="/contact" className="btn-secondary min-h-11 flex-1 rounded-full px-4 text-center sm:flex-none sm:px-6">
                 {T("hero_v2_cta_wholesale")}
               </Link>
             </div>

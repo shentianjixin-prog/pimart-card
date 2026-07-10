@@ -6,9 +6,13 @@ import { useState } from "react";
 export function ProductImageGallery({
   images,
   name,
+  soldOut = false,
+  soldOutLabel = "售罄",
 }: {
   images: string;
   name: string;
+  soldOut?: boolean;
+  soldOutLabel?: string;
 }) {
   const list = images
     .split(",")
@@ -18,43 +22,76 @@ export function ProductImageGallery({
   const [selected, setSelected] = useState(0);
   const current = list[selected] || "/products/placeholder.svg";
 
-  return (
-    <div className="space-y-3">
-      <div className="surface relative aspect-[5/7] overflow-hidden">
-        <Image
-          src={current}
-          alt={name}
-          fill
-          unoptimized={current.endsWith(".svg")}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain"
-          priority
-        />
-      </div>
+  function goPrev() {
+    setSelected((i) => (i - 1 + Math.max(list.length, 1)) % Math.max(list.length, 1));
+  }
 
-      {list.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {list.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setSelected(i)}
-              className={`relative h-16 w-12 shrink-0 overflow-hidden rounded-[14px] border transition ${
-                i === selected
-                  ? "border-[#111827]"
-                  : "border-[rgba(17,24,39,0.08)] hover:border-[rgba(17,24,39,0.2)]"
-              }`}
-            >
-              <Image
-                src={img}
-                alt={`${name} ${i + 1}`}
-                fill
-                unoptimized={img.endsWith(".svg")}
-                className="object-contain"
-              />
-            </button>
-          ))}
+  function goNext() {
+    setSelected((i) => (i + 1) % Math.max(list.length, 1));
+  }
+
+  const thumbs = list.length > 1 ? (
+    <>
+      {list.map((img, i) => (
+        <button
+          key={i}
+          type="button"
+          onClick={() => setSelected(i)}
+          className={`product-gallery-thumb ${i === selected ? "is-active" : ""}`}
+          aria-label={`${name} ${i + 1}`}
+          aria-current={i === selected ? "true" : undefined}
+        >
+          <Image
+            src={img}
+            alt=""
+            fill
+            unoptimized={img.endsWith(".svg")}
+            className="object-contain p-1"
+            sizes="72px"
+          />
+        </button>
+      ))}
+    </>
+  ) : null;
+
+  return (
+    <div className="product-gallery">
+      {thumbs ? <div className="product-gallery-thumbs-desktop">{thumbs}</div> : null}
+
+      <div className="product-gallery-main">
+        <div className="product-gallery-stage">
+          <Image
+            src={current}
+            alt={name}
+            fill
+            unoptimized={current.endsWith(".svg")}
+            sizes="(max-width: 1023px) 100vw, 48vw"
+            className="object-contain p-4 sm:p-6"
+            priority
+          />
+
+          {soldOut && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/72 backdrop-blur-[2px]">
+              <span className="rounded-full border border-[rgba(17,24,39,0.08)] bg-white px-4 py-1.5 text-sm font-semibold text-[#6b7280]">
+                {soldOutLabel}
+              </span>
+            </div>
+          )}
+
+          {list.length > 1 && (
+            <div className="product-gallery-nav">
+              <button type="button" onClick={goPrev} className="product-gallery-nav-btn" aria-label="上一张">
+                ‹
+              </button>
+              <button type="button" onClick={goNext} className="product-gallery-nav-btn" aria-label="下一张">
+                ›
+              </button>
+            </div>
+          )}
         </div>
-      )}
+
+        {thumbs ? <div className="product-gallery-thumbs-mobile">{thumbs}</div> : null}
+      </div>
     </div>
   );
 }

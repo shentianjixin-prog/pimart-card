@@ -10,8 +10,8 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-5">
+          <div className="col-span-2 lg:col-span-1">
             <Link href="/" aria-label="PIMARTCARD">
               <PimartLogo height={34} tone="light" />
             </Link>

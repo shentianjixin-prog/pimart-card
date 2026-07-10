@@ -123,23 +123,23 @@ export function ProductCard({ product }: Props) {
           )}
         </div>
 
-        <div className="border-t border-[rgba(17,24,39,0.06)] p-4">
+        <div className="border-t border-[rgba(17,24,39,0.06)] p-3 sm:p-4">
           <p className="line-clamp-2 min-h-[2.5rem] text-sm font-medium leading-snug text-[#111827]">
             {product.name}
           </p>
 
-          <dl className="mt-3 space-y-1 text-[11px] text-[#6b7280]">
-            <div className="flex gap-2">
+          <dl className="product-card-meta mt-2.5 text-[11px] text-[#6b7280] sm:mt-3">
+            <div className="product-card-meta-row">
               <dt className="shrink-0 text-[#9ca3af]">{T("card_label_language")}</dt>
               <dd className="truncate text-[#374151]">{product.language || "—"}</dd>
             </div>
             {product.series && (
-              <div className="flex gap-2">
+              <div className="product-card-meta-row product-card-meta-series">
                 <dt className="shrink-0 text-[#9ca3af]">{T("card_label_series")}</dt>
                 <dd className="truncate text-[#374151]">{product.series}</dd>
               </div>
             )}
-            <div className="flex gap-2">
+            <div className="product-card-meta-row">
               <dt className="shrink-0 text-[#9ca3af]">{T("card_label_stock")}</dt>
               <dd className={soldOut ? "text-[#9ca3af]" : product.stock <= 3 ? "font-medium text-[#92400e]" : "text-emerald-700"}>
                 {stockLabel}
@@ -158,7 +158,7 @@ export function ProductCard({ product }: Props) {
         </div>
       </Link>
 
-      <div className="border-t border-[rgba(17,24,39,0.06)] px-4 pb-4 pt-3">
+      <div className="border-t border-[rgba(17,24,39,0.06)] px-3 pb-3 pt-2.5 sm:px-4 sm:pb-4 sm:pt-3">
         <button
           type="button"
           onClick={handleQuickAdd}

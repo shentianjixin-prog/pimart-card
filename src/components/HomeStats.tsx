@@ -29,12 +29,11 @@ export function HomeStats() {
   }, []);
 
   return (
-    <section ref={ref} className="home-stats mb-10 sm:mb-14 lg:mb-16">
-      <div className={`home-stats-grid metal-panel ${visible ? "is-visible" : ""}`}>
-        <div className="metal-panel-shine" aria-hidden />
+    <section ref={ref} className="home-stats">
+      <div className={`home-stats-grid ${visible ? "is-visible" : ""}`}>
         {STATS.map((s) => (
           <div key={s.labelKey} className="home-stat-item">
-            <p className="home-stat-value metal-stat-value">{s.value}</p>
+            <p className="home-stat-value">{s.value}</p>
             <p className="home-stat-label">{T(s.labelKey)}</p>
           </div>
         ))}

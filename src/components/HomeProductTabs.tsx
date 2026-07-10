@@ -29,12 +29,12 @@ export function HomeProductTabs({ productsByTab }: Props) {
 
   return (
     <section className="home-products-v2">
-      <div className="mb-7 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+      <div className="mb-6 flex items-end justify-between gap-3 sm:mb-8">
+        <div className="min-w-0">
           <h2 className="section-title">{T("section_popular")}</h2>
           <p className="section-subtitle">{T("section_popular_sub")}</p>
         </div>
-        <Link href="/?stock=instock" className="home-products-viewall">
+        <Link href="/?stock=instock" className="home-products-viewall shrink-0">
           {T("section_view_all")} →
         </Link>
       </div>

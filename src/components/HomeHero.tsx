@@ -78,14 +78,35 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
   const [paused, setPaused] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [slideWidth, setSlideWidth] = useState(0);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
+  const dragOffsetRef = useRef(0);
+  const isDraggingRef = useRef(false);
+  const activeRef = useRef(0);
 
   const goTo = useCallback((index: number) => {
-    setActive(((index % SLIDE_COUNT) + SLIDE_COUNT) % SLIDE_COUNT);
+    const next = ((index % SLIDE_COUNT) + SLIDE_COUNT) % SLIDE_COUNT;
+    activeRef.current = next;
+    setActive(next);
   }, []);
 
-  const goNext = useCallback(() => goTo(active + 1), [active, goTo]);
-  const goPrev = useCallback(() => goTo(active - 1), [active, goTo]);
+  const goNext = useCallback(() => goTo(activeRef.current + 1), [goTo]);
+  const goPrev = useCallback(() => goTo(activeRef.current - 1), [goTo]);
+
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const update = () => setSlideWidth(el.clientWidth);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     if (paused || isDragging) return;
@@ -95,22 +116,33 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
 
   function handleTouchStart(e: React.TouchEvent) {
     touchStartX.current = e.touches[0].clientX;
+    dragOffsetRef.current = 0;
+    isDraggingRef.current = true;
     setIsDragging(true);
     setDragOffset(0);
   }
 
   function handleTouchMove(e: React.TouchEvent) {
-    if (!isDragging) return;
-    setDragOffset(e.touches[0].clientX - touchStartX.current);
+    if (!isDraggingRef.current) return;
+    const offset = e.touches[0].clientX - touchStartX.current;
+    dragOffsetRef.current = offset;
+    setDragOffset(offset);
   }
 
   function handleTouchEnd() {
-    if (!isDragging) return;
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
     setIsDragging(false);
-    if (dragOffset < -50) goNext();
-    else if (dragOffset > 50) goPrev();
+    const offset = dragOffsetRef.current;
+    const threshold = Math.min(50, Math.max(28, slideWidth * 0.15));
+    if (offset < -threshold) goNext();
+    else if (offset > threshold) goPrev();
+    dragOffsetRef.current = 0;
     setDragOffset(0);
   }
+
+  const trackOffset =
+    slideWidth > 0 ? -active * slideWidth + (isDragging ? dragOffset : 0) : 0;
 
   return (
     <section
@@ -118,20 +150,24 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => {
         setPaused(false);
+        isDraggingRef.current = false;
+        dragOffsetRef.current = 0;
         setIsDragging(false);
         setDragOffset(0);
       }}
     >
       <div
+        ref={viewportRef}
         className="hero-v2-viewport relative overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
         <div
-          className="hero-banner-track flex h-full"
+          className="hero-banner-track flex"
           style={{
-            transform: `translateX(calc(-${active * 100}% + ${isDragging ? dragOffset : 0}px))`,
+            transform: `translate3d(${trackOffset}px, 0, 0)`,
             transition: isDragging
               ? "none"
               : `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
@@ -140,7 +176,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
           {SLIDES.map((slide, slideIndex) => (
             <div
               key={slide.id}
-              className={`hero-v2-slide relative min-w-full shrink-0 ${slideIndex === active ? "is-active" : ""}`}
+              className={`hero-v2-slide relative shrink-0 ${slideIndex === active ? "is-active" : ""}`}
             >
               {slide.visual === "psa" ? (
                 <HeroPsaSlideBackground />
@@ -198,13 +234,13 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                           <p className="hero-v2-brand-desc">{T(slide.descKey)}</p>
                         ) : null}
                       </div>
-                      <div className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-10 lg:justify-start">
+                      <div className="mt-7 flex flex-nowrap justify-center gap-2.5 sm:mt-10 sm:gap-3 lg:justify-start">
                         {slide.ctas.map((cta) =>
                           cta.primary ? (
                             <Link
                               key={cta.key}
                               href={cta.href}
-                              className="btn-primary min-h-11 rounded-full px-7 text-sm"
+                              className="btn-primary min-h-11 flex-1 rounded-full px-4 text-center text-sm sm:flex-none sm:px-7"
                             >
                               {T(cta.key)}
                             </Link>
@@ -212,7 +248,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                             <Link
                               key={cta.key}
                               href={cta.href}
-                              className="btn-secondary min-h-11 rounded-full px-7 text-sm"
+                              className="btn-secondary min-h-11 flex-1 rounded-full px-4 text-center text-sm sm:flex-none sm:px-7"
                             >
                               {T(cta.key)}
                             </Link>
@@ -249,13 +285,13 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                           {T(slide.descKey)}
                         </p>
                       ) : null}
-                      <div className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-10 lg:justify-start">
+                      <div className="mt-7 flex flex-nowrap justify-center gap-2.5 sm:mt-10 sm:gap-3 lg:justify-start">
                         {slide.ctas.map((cta) =>
                           cta.primary ? (
                             <Link
                               key={cta.key}
                               href={cta.href}
-                              className="btn-primary min-h-11 rounded-full px-7 text-sm"
+                              className="btn-primary min-h-11 flex-1 rounded-full px-4 text-center text-sm sm:flex-none sm:px-7"
                             >
                               {T(cta.key)}
                             </Link>
@@ -263,7 +299,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                             <Link
                               key={cta.key}
                               href={cta.href}
-                              className="btn-secondary min-h-11 rounded-full px-7 text-sm"
+                              className="btn-secondary min-h-11 flex-1 rounded-full px-4 text-center text-sm sm:flex-none sm:px-7"
                             >
                               {T(cta.key)}
                             </Link>

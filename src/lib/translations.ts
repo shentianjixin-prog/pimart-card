@@ -157,6 +157,13 @@ const dict: Record<string, Record<Lang, string>> = {
   boxtype_gem:         { zh: "宝石包", ja: "ジェムパック",     en: "Gem Pack" },
   boxtype_gift:        { zh: "礼盒",   ja: "ギフトBOX",       en: "Gift Box" },
 
+  // 详情页加购
+  btn_quantity:        { zh: "数量",         ja: "数量",           en: "Qty" },
+  btn_stock:           { zh: "库存",         ja: "在庫",           en: "Stock" },
+  btn_add_cart:        { zh: "加入购物车",   ja: "カートに追加",   en: "Add to Cart" },
+  btn_added_cart:      { zh: "已加入 ✓",     ja: "追加済 ✓",       en: "Added ✓" },
+  btn_buy_now:         { zh: "即刻购买",     ja: "今すぐ購入",     en: "Buy Now" },
+
   // 商品详情页
   detail_all_products: { zh: "全部商品",   ja: "全商品",        en: "All Products" },
   detail_series:       { zh: "系列：",     ja: "シリーズ：",    en: "Series: " },
@@ -177,6 +184,9 @@ const dict: Record<string, Record<Lang, string>> = {
   detail_timeline_3:   { zh: "收货",      ja: "受取",       en: "Receive" },
   detail_timeline_3s:  { zh: "5-7 天",   ja: "5-7日",      en: "5-7 days" },
   detail_preorder_date:{ zh: "预计发货日：", ja: "発送予定日：", en: "Expected ship date: " },
+  detail_choose_format:{ zh: "选择规格", ja: "仕様を選択", en: "Select format" },
+  detail_price_tax:    { zh: "含税", ja: "税込", en: "Tax included" },
+  detail_description:  { zh: "商品说明", ja: "商品説明", en: "Description" },
 
   // 购物车
   cart_title:           { zh: "购物车",          ja: "カート",              en: "Cart" },
