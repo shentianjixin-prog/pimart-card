@@ -9,9 +9,6 @@ import { HomeAnnounceBar } from "@/components/HomeAnnounceBar";
 import { HomeProductTabs } from "@/components/HomeProductTabs";
 import { HomeB2B } from "@/components/HomeB2B";
 import { TrustedFeatures } from "@/components/TrustedFeatures";
-import { HomeStats } from "@/components/HomeStats";
-import { HomeWorldTrust } from "@/components/HomeWorldTrust";
-import { SearchBar } from "@/components/SearchBar";
 import { t, resolveLang } from "@/lib/translations";
 import { fetchFilterFacets, fetchSubGameCounts } from "@/lib/product-facets";
 import {
@@ -113,9 +110,17 @@ export default async function Home({
     showMarketing ? Promise.resolve({}) : fetchSubGameCounts(),
     showMarketing
       ? prisma.product.findMany({
-          where: stockFilter,
+          where: {
+            OR: [
+              { images: { contains: "151-box" } },
+              { images: { contains: "cbb5c" } },
+              { images: { contains: "csv9c" } },
+              { images: { contains: "csv3c" } },
+              { images: { contains: "csv8c" } },
+            ],
+          },
           orderBy: { createdAt: "desc" },
-          take: 5,
+          take: 12,
           select: { name: true, images: true, slug: true },
         })
       : Promise.resolve([]),
@@ -165,7 +170,7 @@ export default async function Home({
       <>
         <HomeHero products={heroProducts} />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="home-main-stack mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <HomeAnnounceBar />
 
           <HomeProductTabs
@@ -179,28 +184,13 @@ export default async function Home({
 
           <HomeB2B />
           <TrustedFeatures />
-          <HomeStats />
         </div>
-
-        <HomeWorldTrust />
       </>
     );
   }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-      <div className="mb-6 sm:mb-8">
-        <h1 className="section-title">
-          {filterState.q
-            ? `${T("page_search_pre")}${filterState.q}"`
-            : filterState.category || T("page_all_products")}
-        </h1>
-        <p className="section-subtitle">{T("page_shipping_desc")}</p>
-        <div className="mt-5 max-w-xl">
-          <SearchBar defaultValue={filterState.q ?? ""} />
-        </div>
-      </div>
-
       {facets && (
         <ProductListingControls
           state={filterState}

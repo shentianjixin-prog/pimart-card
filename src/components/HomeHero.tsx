@@ -5,7 +5,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useT } from "@/lib/lang-context";
 import { PimartLogo } from "@/components/PimartLogo";
 import {
-  HeroB2BVisual,
   HeroBrandVisual,
   HeroPsaSlideBackground,
   HeroPsaVisual,
@@ -19,12 +18,12 @@ export type HeroStackProduct = {
 
 const SLIDE_COUNT = 3;
 const AUTOPLAY_MS = 10000;
-const TRANSITION_MS = 600;
+const TRANSITION_MS = 780;
 
 const SLIDE_GRADIENTS = [
-  "radial-gradient(circle at 12% 20%, #F0F9FF 0%, transparent 55%), radial-gradient(circle at 88% 25%, #F8F5FF 0%, transparent 50%), radial-gradient(circle at 50% 95%, #FFF7D6 0%, transparent 45%)",
+  "radial-gradient(ellipse 80% 60% at 18% 20%, rgba(240,249,255,0.95) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 88% 18%, rgba(255,247,214,0.7) 0%, transparent 50%), radial-gradient(ellipse 90% 55% at 55% 100%, rgba(226,232,240,0.55) 0%, transparent 55%)",
   "radial-gradient(circle at 20% 30%, #FFF0F5 0%, transparent 52%), radial-gradient(circle at 80% 20%, #EAF4FF 0%, transparent 48%)",
-  "radial-gradient(circle at 15% 70%, #FFF7D6 0%, transparent 50%), radial-gradient(circle at 85% 35%, #F3EEFF 0%, transparent 45%)",
+  "radial-gradient(ellipse 75% 60% at 50% 0%, rgba(234,244,255,0.95) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 50% 100%, rgba(255,247,214,0.55) 0%, transparent 50%)",
 ];
 
 type SlideConfig = {
@@ -34,7 +33,7 @@ type SlideConfig = {
   subtitleKey: string;
   descKey: string;
   ctas: { key: string; href: string; primary?: boolean }[];
-  visual: "brand" | "psa" | "b2b";
+  visual: "brand" | "psa" | "b2b" | "none";
 };
 
 const SLIDES: SlideConfig[] = [
@@ -46,7 +45,7 @@ const SLIDES: SlideConfig[] = [
     descKey: "hero_v2_s1_desc",
     ctas: [
       { key: "hero_v2_cta_new", href: "/?sort=newest&stock=instock", primary: true },
-      { key: "hero_v2_cta_psa", href: "/?type=psa" },
+      { key: "hero_v2_cta_psa", href: "/?stock=instock" },
     ],
     visual: "brand",
   },
@@ -56,7 +55,7 @@ const SLIDES: SlideConfig[] = [
     subtitleKey: "hero_v2_s2_sub",
     descKey: "hero_v2_s2_desc",
     ctas: [
-      { key: "hero_v2_cta_psa", href: "/?type=psa", primary: true },
+      { key: "hero_v2_cta_psa", href: "/?stock=instock", primary: true },
       { key: "hero_v2_cta_contact", href: "/contact" },
     ],
     visual: "psa",
@@ -67,8 +66,7 @@ const SLIDES: SlideConfig[] = [
     subtitleKey: "hero_v2_s3_sub",
     descKey: "hero_v2_s3_desc",
     ctas: [
-      { key: "hero_v2_cta_quote", href: "/contact", primary: true },
-      { key: "hero_v2_cta_wholesale", href: "/contact" },
+      { key: "hero_v2_cta_learn", href: "/contact", primary: true },
     ],
     visual: "b2b",
   },
@@ -125,7 +123,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
       }}
     >
       <div
-        className="hero-v2-viewport relative overflow-hidden bg-[#FAFAFA]"
+        className="hero-v2-viewport relative overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -134,94 +132,201 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
           className="hero-banner-track flex h-full"
           style={{
             transform: `translateX(calc(-${active * 100}% + ${isDragging ? dragOffset : 0}px))`,
-            transition: isDragging ? "none" : `transform ${TRANSITION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
+            transition: isDragging
+              ? "none"
+              : `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
           }}
         >
           {SLIDES.map((slide, slideIndex) => (
-            <div key={slide.id} className="hero-v2-slide relative min-w-full shrink-0">
+            <div
+              key={slide.id}
+              className={`hero-v2-slide relative min-w-full shrink-0 ${slideIndex === active ? "is-active" : ""}`}
+            >
               {slide.visual === "psa" ? (
                 <HeroPsaSlideBackground />
+              ) : slide.visual === "b2b" ? (
+                <div className="hero-v2-b2b-art" aria-hidden>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/hero-b2b-lugia.png?v=5"
+                    alt=""
+                    className="hero-v2-b2b-art-img hero-v2-b2b-art-img--blur"
+                  />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/hero-b2b-lugia.png?v=5"
+                    alt=""
+                    className="hero-v2-b2b-art-img hero-v2-b2b-art-img--sharp"
+                  />
+                  <div className="hero-v2-b2b-art-veil" />
+                </div>
               ) : (
                 <>
-                  <div className="pointer-events-none absolute inset-0 bg-[#FAFAFA]" />
+                  <div className="pointer-events-none absolute inset-0 bg-[#F7F8FA]" />
                   <div
                     className="pointer-events-none absolute inset-0"
                     style={{ background: SLIDE_GRADIENTS[slideIndex] }}
                   />
+                  <div className="hero-v2-grain" aria-hidden />
                 </>
               )}
 
-              <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8 xl:gap-12 xl:px-10">
-                <div className="text-center lg:text-left">
+              <div
+                className={`relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 lg:items-center lg:px-8 xl:px-10 ${
+                  slide.brand
+                    ? "lg:grid lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.32fr)] lg:gap-5 xl:gap-7"
+                    : slide.visual === "b2b"
+                      ? "hero-v2-b2b-frame"
+                      : "lg:grid lg:grid-cols-2 lg:gap-10 xl:gap-12"
+                }`}
+              >
+                <div
+                  className={`hero-v2-copy ${
+                    slide.brand
+                      ? "hero-v2-copy-brand"
+                      : slide.visual === "b2b"
+                        ? "hero-v2-b2b"
+                        : "text-center lg:text-left"
+                  }`}
+                >
                   {slide.brand ? (
-                    <div className="mb-5 flex justify-center lg:justify-start">
-                      <PimartLogo variant="wordmark" height={48} className="max-w-[280px]" />
+                    <>
+                      <div className="hero-v2-brand-stack">
+                        <PimartLogo variant="wordmark" height={52} className="hero-v2-brand-logo" />
+                        <p className="hero-v2-brand-sub">{T(slide.subtitleKey)}</p>
+                        {T(slide.descKey) ? (
+                          <p className="hero-v2-brand-desc">{T(slide.descKey)}</p>
+                        ) : null}
+                      </div>
+                      <div className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-10 lg:justify-start">
+                        {slide.ctas.map((cta) =>
+                          cta.primary ? (
+                            <Link
+                              key={cta.key}
+                              href={cta.href}
+                              className="btn-primary min-h-11 rounded-full px-7 text-sm"
+                            >
+                              {T(cta.key)}
+                            </Link>
+                          ) : (
+                            <Link
+                              key={cta.key}
+                              href={cta.href}
+                              className="btn-secondary min-h-11 rounded-full px-7 text-sm"
+                            >
+                              {T(cta.key)}
+                            </Link>
+                          )
+                        )}
+                      </div>
+                    </>
+                  ) : slide.visual === "b2b" ? (
+                    <div className="hero-v2-b2b-stack">
+                      <p className="hero-v2-b2b-kicker">PIMART B2B</p>
+                      <h1 className="hero-v2-b2b-title">{T(slide.titleKey)}</h1>
+                      <p className="hero-v2-b2b-lead">{T(slide.subtitleKey)}</p>
+                      {T(slide.descKey) ? (
+                        <p className="hero-v2-b2b-desc">{T(slide.descKey)}</p>
+                      ) : null}
+                      <div className="hero-v2-b2b-actions">
+                        {slide.ctas.map((cta) => (
+                          <Link key={cta.key} href={cta.href} className="hero-v2-b2b-cta">
+                            {T(cta.key)}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   ) : (
-                    <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
-                      {T(slide.titleKey)}
-                    </h1>
-                  )}
-                  {!slide.brand && (
-                    <p className="mt-2 text-lg font-medium text-[#374151] sm:text-xl">
-                      {T(slide.subtitleKey)}
-                    </p>
-                  )}
-                  {slide.brand && (
                     <>
-                      <p className="mt-3 text-xl font-medium text-[#374151] sm:text-2xl">
+                      <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.12]">
+                        {T(slide.titleKey)}
+                      </h1>
+                      <p className="mt-2 text-lg font-medium text-[#374151] sm:text-xl">
                         {T(slide.subtitleKey)}
                       </p>
+                      {T(slide.descKey) ? (
+                        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#6B7280] sm:mt-4 sm:text-base lg:mx-0">
+                          {T(slide.descKey)}
+                        </p>
+                      ) : null}
+                      <div className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-10 lg:justify-start">
+                        {slide.ctas.map((cta) =>
+                          cta.primary ? (
+                            <Link
+                              key={cta.key}
+                              href={cta.href}
+                              className="btn-primary min-h-11 rounded-full px-7 text-sm"
+                            >
+                              {T(cta.key)}
+                            </Link>
+                          ) : (
+                            <Link
+                              key={cta.key}
+                              href={cta.href}
+                              className="btn-secondary min-h-11 rounded-full px-7 text-sm"
+                            >
+                              {T(cta.key)}
+                            </Link>
+                          )
+                        )}
+                      </div>
                     </>
                   )}
-                  <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#6B7280] sm:text-base lg:mx-0">
-                    {T(slide.descKey)}
-                  </p>
-                  <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
-                    {slide.ctas.map((cta) =>
-                      cta.primary ? (
-                        <Link
-                          key={cta.key}
-                          href={cta.href}
-                          className="btn-primary min-h-11 rounded-full px-6 text-sm"
-                        >
-                          {T(cta.key)}
-                        </Link>
-                      ) : (
-                        <Link
-                          key={cta.key}
-                          href={cta.href}
-                          className="btn-secondary min-h-11 rounded-full px-6 text-sm"
-                        >
-                          {T(cta.key)}
-                        </Link>
-                      )
-                    )}
-                  </div>
                 </div>
 
-                <div
-                  className={
-                    slide.brand
-                      ? "hero-brand-column mt-8 lg:mt-0"
-                      : slide.visual === "psa"
-                        ? "hero-psa-column mt-8 lg:mt-0"
-                        : "mt-8 flex justify-center lg:mt-0"
-                  }
-                >
-                  {slide.visual === "brand" && <HeroBrandVisual products={products} />}
-                  {slide.visual === "psa" && <HeroPsaVisual />}
-                  {slide.visual === "b2b" && <HeroB2BVisual />}
-                </div>
+                {slide.visual !== "b2b" && slide.visual !== "none" && (
+                  <div
+                    className={
+                      slide.brand
+                        ? "hero-brand-column mt-6 lg:mt-0"
+                        : slide.visual === "psa"
+                          ? "hero-psa-column mt-6 lg:mt-0"
+                          : "mt-6 flex justify-center lg:mt-0"
+                    }
+                  >
+                    {slide.visual === "brand" && <HeroBrandVisual products={products} />}
+                    {slide.visual === "psa" && <HeroPsaVisual />}
+                  </div>
+                )}
               </div>
             </div>
           ))}
         </div>
 
+        {SLIDES[active]?.visual === "b2b" && (
+          <div className="hero-v2-b2b-social pointer-events-auto">
+            <span className="hero-v2-b2b-social-label">FOLLOW US</span>
+            <a
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-v2-b2b-social-link"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+              </svg>
+            </a>
+            <a
+              href="https://x.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-v2-b2b-social-link"
+              aria-label="X"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M18.244 2H21.5l-7.5 8.57L22.5 22h-6.59l-5.16-6.74L5.2 22H1.94l8.03-9.17L1.5 2h6.76l4.66 6.17L18.244 2zm-1.16 18h1.82L7.08 4H5.13l11.95 16z" />
+              </svg>
+            </a>
+          </div>
+        )}
+
         <button
           type="button"
           onClick={goPrev}
-          className="hero-banner-arrow absolute left-4 top-1/2 z-20 hidden -translate-y-1/2 lg:flex"
+          className="hero-banner-arrow absolute left-3 top-1/2 z-20 hidden -translate-y-1/2 lg:flex xl:left-5"
           aria-label="Previous"
         >
           ‹
@@ -229,13 +334,13 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
         <button
           type="button"
           onClick={goNext}
-          className="hero-banner-arrow absolute right-4 top-1/2 z-20 hidden -translate-y-1/2 lg:flex"
+          className="hero-banner-arrow absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 lg:flex xl:right-5"
           aria-label="Next"
         >
           ›
         </button>
 
-        <div className="hero-dots absolute bottom-5 left-0 right-0 z-20 flex items-center justify-center gap-2 lg:bottom-6">
+        <div className="hero-dots absolute bottom-4 left-0 right-0 z-20 flex items-center justify-center gap-2 lg:bottom-5">
           {SLIDES.map((slide, i) => (
             <button
               key={slide.id}

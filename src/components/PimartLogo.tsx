@@ -32,6 +32,23 @@ export function PimartLogo({
 }: Props) {
   const fill = tone === "light" ? WHITE : BLACK;
 
+  if (variant === "wordmark") {
+    const width = height * (172 / 36);
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 172 36"
+        width={width}
+        height={height}
+        className={className}
+        role="img"
+        aria-label="PIMARTCARD"
+      >
+        <Wordmark size={22} fill={fill} />
+      </svg>
+    );
+  }
+
   if (variant === "compact") {
     const width = height * 5.4;
     return (
@@ -61,7 +78,7 @@ export function PimartLogo({
       role="img"
       aria-label="PIMARTCARD"
     >
-      <Wordmark size={variant === "wordmark" ? 22 : 19} fill={fill} />
+      <Wordmark size={19} fill={fill} />
     </svg>
   );
 }

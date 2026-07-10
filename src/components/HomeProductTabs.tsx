@@ -28,21 +28,18 @@ export function HomeProductTabs({ productsByTab }: Props) {
   if (!productsByTab.all.length && !productsByTab.pokemon.length) return null;
 
   return (
-    <section className="home-products-v2 py-10 sm:py-14 lg:py-16">
-      <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+    <section className="home-products-v2">
+      <div className="mb-7 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="section-title">{T("section_popular")}</h2>
-          <p className="section-subtitle">{T("home_latest_arrivals")}</p>
+          <p className="section-subtitle">{T("section_popular_sub")}</p>
         </div>
-        <Link
-          href="/?stock=instock"
-          className="text-sm font-medium text-[#374151] transition hover:text-[#111827]"
-        >
+        <Link href="/?stock=instock" className="home-products-viewall">
           {T("section_view_all")} →
         </Link>
       </div>
 
-      <div className="home-tab-bar mb-8 flex gap-2 overflow-x-auto pb-1">
+      <div className="home-tab-bar mb-7 flex gap-2 overflow-x-auto pb-1 sm:mb-8">
         {TABS.map((tab) => (
           <button
             key={tab.key}
@@ -58,7 +55,7 @@ export function HomeProductTabs({ productsByTab }: Props) {
       {products.length === 0 ? (
         <p className="py-16 text-center text-sm text-[#9ca3af]">{T("page_no_products")}</p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+        <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
           {products.slice(0, 8).map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

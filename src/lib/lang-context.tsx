@@ -6,7 +6,7 @@ import { t, type Lang } from "./translations";
 
 type LangCtx = { lang: Lang; setLang: (l: Lang) => void };
 
-const LangContext = createContext<LangCtx>({ lang: "ja", setLang: () => {} });
+const LangContext = createContext<LangCtx>({ lang: "en", setLang: () => {} });
 
 export function LangProvider({
   initial,

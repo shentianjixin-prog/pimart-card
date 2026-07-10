@@ -1,15 +1,15 @@
 export type Lang = "zh" | "ja" | "en";
-export const DEFAULT_LANG: Lang = "ja";
-export const LANGS: Lang[] = ["ja", "zh", "en"];
+export const DEFAULT_LANG: Lang = "en";
+export const LANGS: Lang[] = ["en", "zh", "ja"];
 export const LANG_LABELS: Record<Lang, string> = {
-  ja: "日本語",
+  en: "English",
   zh: "中文",
-  en: "EN",
+  ja: "日本語",
 };
 
-/** 从 cookie 解析语言，默认日语（主站面向日本客户） */
+/** 从 cookie 解析语言，默认英语 */
 export function resolveLang(raw?: string | null): Lang {
-  if (raw === "zh" || raw === "en") return raw;
+  if (raw === "zh" || raw === "ja" || raw === "en") return raw;
   return DEFAULT_LANG;
 }
 
@@ -17,8 +17,9 @@ const dict: Record<string, Record<Lang, string>> = {
   // 导航
   nav_home:       { zh: "首页",       ja: "ホーム",       en: "Home" },
   nav_shop:       { zh: "商品",       ja: "商品",         en: "Products" },
-  nav_more:       { zh: "更多",       ja: "その他",       en: "More" },
-  nav_menu:       { zh: "菜单",       ja: "メニュー",     en: "Menu" },
+  nav_more:       { zh: "支持",       ja: "サポート",     en: "Support" },
+  nav_menu:       { zh: "分类",       ja: "カテゴリー",   en: "Shop" },
+  nav_menu_close: { zh: "关闭",       ja: "閉じる",       en: "Close" },
   nav_pokemon:    { zh: "宝可梦原盒", ja: "ポケモンBOX",  en: "Pokémon Boxes" },
   nav_naruto:     { zh: "火影忍者",   ja: "NARUTO",        en: "Naruto" },
   nav_cart:       { zh: "购物车",     ja: "カート",        en: "Cart" },
@@ -31,15 +32,21 @@ const dict: Record<string, Record<Lang, string>> = {
   info_weekly:    { zh: "每周上新", ja: "毎週新着", en: "New Weekly" },
 
   nav_lang_label: { zh: "语言", ja: "言語", en: "Language" },
+  nav_lang_zh: { zh: "中文", ja: "中国語", en: "中文" },
+  nav_lang_ja: { zh: "日语", ja: "日本語", en: "日本語" },
+  nav_lang_en: { zh: "英语", ja: "英語", en: "English" },
 
   menu_pokemon:     { zh: "宝可梦",     ja: "ポケモン",         en: "Pokémon" },
+  menu_pokemon_booster: { zh: "扩充包", ja: "拡張パック", en: "Booster Packs" },
+  menu_pokemon_gift:    { zh: "礼盒",   ja: "ギフトBOX", en: "Gift Boxes" },
+  menu_pokemon_merch:   { zh: "周边套装", ja: "周辺セット", en: "Accessories" },
   menu_one_piece:   { zh: "海贼王",     ja: "ワンピース",       en: "One Piece" },
   menu_other_tcg:   { zh: "其他 TCG",   ja: "その他TCG",        en: "Other TCG" },
   menu_merchandise: { zh: "周边商品",   ja: "周辺グッズ",       en: "Merchandise" },
   menu_dragon_ball: { zh: "龙珠",       ja: "ドラゴンボール",   en: "Dragon Ball" },
   menu_yugioh:      { zh: "游戏王",     ja: "遊戯王",           en: "Yu-Gi-Oh!" },
   menu_gundam:      { zh: "高达",       ja: "ガンダム",         en: "Gundam" },
-  menu_naruto:      { zh: "火影",       ja: "NARUTO",           en: "Naruto" },
+  menu_naruto:      { zh: "火影忍者",   ja: "NARUTO",           en: "Naruto" },
   menu_union_arena: { zh: "Union Arena", ja: "Union Arena",     en: "Union Arena" },
   menu_weiss:       { zh: "Weiss Schwarz", ja: "Weiss Schwarz", en: "Weiss Schwarz" },
   menu_sleeves:     { zh: "卡套",       ja: "スリーブ",         en: "Card Sleeves" },
@@ -52,7 +59,7 @@ const dict: Record<string, Record<Lang, string>> = {
   menu_psa:         { zh: "PSA 评级卡", ja: "PSA鑑定品",        en: "PSA Cards" },
   menu_new_arrivals:{ zh: "新品上架",   ja: "新着商品",         en: "New Arrivals" },
   menu_wholesale:   { zh: "批发询价",   ja: "卸売・お問い合わせ", en: "Wholesale" },
-  menu_buyback:     { zh: "卡牌买取",   ja: "買取",               en: "Buyback" },
+  menu_buyback:     { zh: "买取",       ja: "買取",               en: "Buyback" },
   menu_shipping:    { zh: "发货说明",   ja: "配送について",     en: "Shipping" },
   menu_guide:       { zh: "购物指南",   ja: "ご利用ガイド",     en: "Guide" },
 
@@ -78,6 +85,8 @@ const dict: Record<string, Record<Lang, string>> = {
   filter_category:     { zh: "商品分类",       ja: "カテゴリー",   en: "Category" },
   filter_apply:        { zh: "应用筛选",       ja: "絞り込む",     en: "Apply" },
   filter_filters:      { zh: "筛选",           ja: "絞り込み",     en: "Filters" },
+  filter_show:         { zh: "显示筛选",       ja: "フィルターを表示する", en: "Show filters" },
+  filter_hide:         { zh: "隐藏筛选",       ja: "フィルターを非表示", en: "Hide filters" },
   filter_clear_all:    { zh: "清除全部",       ja: "すべて解除",   en: "Clear all" },
   filter_show_results: { zh: "查看结果",       ja: "結果を表示",   en: "Show results" },
   filter_apply_price:  { zh: "应用价格",       ja: "価格を適用",   en: "Apply price" },
@@ -335,17 +344,22 @@ const dict: Record<string, Record<Lang, string>> = {
   // Homepage V2
   hero_v2_s1_title: { zh: "PIMART CARD", ja: "PIMART CARD", en: "PIMART CARD" },
   hero_v2_s1_sub: { zh: "全球卡牌交易平台", ja: "グローバルトレーディングカードマーケット", en: "Global Trading Card Marketplace" },
-  hero_v2_s1_desc: { zh: "日本直采 · 全球配送 · 正品保证", ja: "日本直仕入れ · 世界配送 · 正規品保証", en: "Direct from Japan · Worldwide Shipping · Authentic Guarantee" },
-  hero_v2_s2_title: { zh: "PSA 精选", ja: "PSAピックアップ", en: "PSA Picks" },
-  hero_v2_s2_sub: { zh: "高端评级卡收藏", ja: "プレミアム鑑定品コレクション", en: "Premium Graded Card Collection" },
-  hero_v2_s2_desc: { zh: "精选评级卡 · 全球现货库存", ja: "厳選鑑定品 · 世界在庫", en: "Curated graded cards · Global in-stock inventory" },
-  hero_v2_s3_title: { zh: "B2B 批发供应链", ja: "B2B卸売サプライチェーン", en: "B2B Wholesale Supply Chain" },
-  hero_v2_s3_sub: { zh: "日本原盒长期供货", ja: "日本未開封BOX長期供給", en: "Long-term Japanese Sealed Box Supply" },
-  hero_v2_s3_desc: { zh: "原盒供货 · PSA库存 · 批量采购", ja: "未開封BOX · PSA在庫 · 大口仕入れ", en: "Sealed boxes · PSA inventory · Bulk purchasing" },
+  hero_v2_s1_desc: { zh: "全球配送 · 正品保证", ja: "世界配送 · 正規品保証", en: "Worldwide Shipping · Authentic Guarantee" },
+  hero_v2_s2_title: { zh: "卡牌臻选", ja: "カード厳選", en: "Curated Cards" },
+  hero_v2_s2_sub: { zh: "各语版本 · 链接世界", ja: "多言語対応 · 世界をつなぐ", en: "All Languages · Connecting the World" },
+  hero_v2_s2_desc: { zh: "", ja: "", en: "" },
+  hero_v2_s3_title: { zh: "B2B 批发供应链", ja: "B2B WHOLESALE", en: "B2B WHOLESALE" },
+  hero_v2_s3_sub: { zh: "TCG原箱原盒批发 · 采购", ja: "TCG未開封BOXの卸売・仕入れに対応。", en: "TCG sealed box wholesale and sourcing." },
+  hero_v2_s3_desc: {
+    zh: "面向经销商与批量采购客户，提供原盒供货、物流合作支出与长期合作支持。",
+    ja: "ディーラー・大口仕入れ向けに、未開封BOX・物流連携・長期取引をサポートします。",
+    en: "For dealers and bulk buyers — sealed boxes, logistics partnership, and long-term supply support.",
+  },
   hero_v2_cta_new: { zh: "浏览新品", ja: "新着を見る", en: "Shop New Arrivals" },
-  hero_v2_cta_psa: { zh: "查看 PSA", ja: "PSAを見る", en: "View PSA" },
+  hero_v2_cta_psa: { zh: "查看卡牌", ja: "カードを見る", en: "Browse Cards" },
   hero_v2_cta_contact: { zh: "联系我们", ja: "お問い合わせ", en: "Contact Us" },
   hero_v2_cta_quote: { zh: "获取报价", ja: "見積もり", en: "Get a Quote" },
+  hero_v2_cta_learn: { zh: "了解详情", ja: "詳しく見る", en: "Learn More" },
   hero_v2_cta_wholesale: { zh: "批发咨询", ja: "卸売相談", en: "Wholesale Inquiry" },
 
   announce_title: { zh: "公告", ja: "お知らせ", en: "Announcements" },
@@ -360,14 +374,14 @@ const dict: Record<string, Record<Lang, string>> = {
   tab_pokemon: { zh: "宝可梦", ja: "ポケモン", en: "Pokémon" },
   tab_onepiece: { zh: "海贼王", ja: "ワンピース", en: "One Piece" },
   tab_psa: { zh: "PSA", ja: "PSA", en: "PSA" },
-  home_latest_arrivals: { zh: "Latest Arrivals", ja: "Latest Arrivals", en: "Latest Arrivals" },
+  home_latest_arrivals: { zh: "热门现货与新品", ja: "人気の新着・在庫", en: "Latest arrivals" },
 
   b2b_v2_tag: { zh: "PIMART B2B", ja: "PIMART B2B", en: "PIMART B2B" },
   b2b_v2_title: { zh: "全球卡牌批发供应链", ja: "グローバルTCG卸売サプライチェーン", en: "Global TCG Wholesale Supply Chain" },
   b2b_v2_line1: { zh: "当地直采，全球供应，正品保障", ja: "現地直仕入れ · 世界供給 · 正規品保証", en: "Local sourcing · Global supply · Authentic guarantee" },
   b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
 
-  trusted_title: { zh: "Trusted Worldwide", ja: "Trusted Worldwide", en: "Trusted Worldwide" },
+  trusted_title: { zh: "全球信赖", ja: "世界中で信頼される", en: "Trusted Worldwide" },
   trusted_subtitle: { zh: "连接日本库存与全球收藏家", ja: "日本在庫と世界のコレクターをつなぐ", en: "Connecting Japanese inventory with collectors worldwide" },
   trusted_f1_title: { zh: "全球配送", ja: "世界配送", en: "Worldwide Shipping" },
   trusted_f1_desc: { zh: "覆盖中国、美国、东南亚等多个国家地区", ja: "中国・米国・東南アジアなど多国対応", en: "China, US, Southeast Asia and more" },
@@ -379,15 +393,18 @@ const dict: Record<string, Record<Lang, string>> = {
   trusted_f4_desc: { zh: "Stripe 加密结算，安心付款", ja: "Stripe暗号化決済", en: "Stripe encrypted checkout" },
 
   stats_countries: { zh: "发货国家", ja: "配送国", en: "Countries Shipped" },
+  stats_partners: { zh: "合作国家", ja: "提携国", en: "Partner Countries" },
   stats_orders: { zh: "累计订单", ja: "累計注文", en: "Orders Fulfilled" },
   stats_collectors: { zh: "收藏用户", ja: "コレクター", en: "Collectors" },
   stats_rating: { zh: "好评率", ja: "高評価率", en: "Positive Rating" },
 
-  world_title: { zh: "Trusted by Collectors Worldwide", ja: "Trusted by Collectors Worldwide", en: "Trusted by Collectors Worldwide" },
+  world_title: { zh: "全球收藏家的选择", ja: "世界のコレクターに選ばれる", en: "Trusted by Collectors Worldwide" },
   world_subtitle: { zh: "从日本发往世界各地的收藏家与经销商", ja: "日本から世界のコレクター・業者へ", en: "From Japan to collectors and dealers worldwide" },
   region_jp: { zh: "日本", ja: "日本", en: "Japan" },
   region_cn: { zh: "中国", ja: "中国", en: "China" },
   region_us: { zh: "美国", ja: "米国", en: "United States" },
+  region_de: { zh: "德国", ja: "ドイツ", en: "Germany" },
+  region_id: { zh: "印尼", ja: "インドネシア", en: "Indonesia" },
   region_sg: { zh: "新加坡", ja: "シンガポール", en: "Singapore" },
   region_my: { zh: "马来西亚", ja: "マレーシア", en: "Malaysia" },
   region_th: { zh: "泰国", ja: "タイ", en: "Thailand" },

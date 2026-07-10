@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLang, useT } from "@/lib/lang-context";
 import { getSeriesPanelState, seriesLabelById } from "@/lib/product-series";
@@ -615,6 +615,9 @@ export function ProductListingControls({
   const { lang } = useLang();
   const router = useRouter();
   const [sheet, setSheet] = useState<"filter" | "sort" | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(true);
+  const [sortOpen, setSortOpen] = useState(false);
+  const sortRef = useRef<HTMLDivElement>(null);
   const [otherExpanded, setOtherExpanded] = useState(
     state.game === "other" || !!state.subGame
   );
@@ -628,6 +631,22 @@ export function ProductListingControls({
     if (state.game === "other" || state.subGame) setOtherExpanded(true);
   }, [state.game, state.subGame]);
 
+  useEffect(() => {
+    if (!sortOpen) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!sortRef.current?.contains(e.target as Node)) setSortOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSortOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [sortOpen]);
+
   const navigate = useCallback(
     (patch: Partial<FilterState>) => {
       router.push(buildListingHref(state, patch));
@@ -638,6 +657,16 @@ export function ProductListingControls({
   const handleSort = (sort: SortKey) => {
     navigate({ sort, page: 1 });
     setSheet(null);
+    setSortOpen(false);
+  };
+
+  const openFilters = () => {
+    // 桌面：切换侧栏；移动端：打开筛选抽屉
+    if (typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches) {
+      setFiltersOpen((v) => !v);
+      return;
+    }
+    setSheet("filter");
   };
 
   const clearAll = () => {
@@ -688,69 +717,100 @@ export function ProductListingControls({
 
   return (
     <>
-      <div className="filter-mobile-bar lg:hidden">
-        <button type="button" className="filter-mobile-btn" onClick={() => setSheet("filter")}>
-          {T("filter_filters")}
-          {hasFilters && <span className="filter-mobile-badge" />}
+      <div className="filter-control-bar">
+        <button
+          type="button"
+          className="filter-show-btn"
+          onClick={openFilters}
+          aria-expanded={filtersOpen}
+        >
+          <span>{T("filter_show")}</span>
+          {hasFilters && <span className="filter-show-btn-dot" aria-hidden />}
+          <svg className="filter-show-btn-icon" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M4 7h9M17 7h3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <circle cx="15.5" cy="7" r="2.2" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M4 12h3M11 12h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <circle cx="8.5" cy="12" r="2.2" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M4 17h7M15 17h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <circle cx="13.5" cy="17" r="2.2" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
         </button>
-        <button type="button" className="filter-mobile-btn" onClick={() => setSheet("sort")}>
-          {T("filter_sort")}
-        </button>
+
+        <div className="filter-sort-wrap" ref={sortRef}>
+          <button
+            type="button"
+            className="filter-sort-trigger"
+            onClick={() => setSortOpen((v) => !v)}
+            aria-expanded={sortOpen}
+            aria-haspopup="listbox"
+          >
+            <span>{T("filter_sort")}</span>
+            <svg
+              className={`filter-sort-chevron ${sortOpen ? "is-open" : ""}`}
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden
+            >
+              <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          {sortOpen && (
+            <div className="filter-sort-menu" role="listbox" aria-label={T("filter_sort")}>
+              {SORT_OPTIONS.map((key) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="option"
+                  aria-selected={state.sort === key}
+                  className={`filter-sort-menu-item ${state.sort === key ? "is-active" : ""}`}
+                  onClick={() => handleSort(key)}
+                >
+                  {T(`filter_sort_${key}`)}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <p className="filter-control-count">
+          <span className="font-semibold text-[#111827]">{total}</span>
+          {T("page_total_unit")}
+        </p>
       </div>
 
       <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
-        <aside className="filter-sidebar hidden lg:block">
-          <div className="filter-sidebar-head">
-            <h2 className="text-sm font-semibold text-[#111827]">{T("filter_filters")}</h2>
-            {hasFilters && (
-              <button type="button" className="filter-clear-link" onClick={clearAll}>
-                {T("filter_clear_all")}
-              </button>
-            )}
-          </div>
-          <FilterPanelContent
-            draft={state}
-            facets={facets}
-            subGameCounts={subGameCounts}
-            otherExpanded={otherExpanded}
-            onToggleOther={() => {
-              setOtherExpanded((v) => !v);
-            }}
-            onPatch={desktopPatch}
-            onPriceDraft={(min, max) =>
-              desktopPatch({
-                minPrice: min || undefined,
-                maxPrice: max || undefined,
-                page: 1,
-              })
-            }
-            lang={lang}
-          />
-        </aside>
+        {filtersOpen && (
+          <aside className="filter-sidebar hidden lg:block">
+            <div className="filter-sidebar-head">
+              <h2 className="text-sm font-semibold text-[#111827]">{T("filter_filters")}</h2>
+              {hasFilters && (
+                <button type="button" className="filter-clear-link" onClick={clearAll}>
+                  {T("filter_clear_all")}
+                </button>
+              )}
+            </div>
+            <FilterPanelContent
+              draft={state}
+              facets={facets}
+              subGameCounts={subGameCounts}
+              otherExpanded={otherExpanded}
+              onToggleOther={() => {
+                setOtherExpanded((v) => !v);
+              }}
+              onPatch={desktopPatch}
+              onPriceDraft={(min, max) =>
+                desktopPatch({
+                  minPrice: min || undefined,
+                  maxPrice: max || undefined,
+                  page: 1,
+                })
+              }
+              lang={lang}
+            />
+          </aside>
+        )}
 
         <div className="min-w-0 flex-1">
-          <div className="filter-toolbar">
-            <p className="filter-count">
-              <span className="font-semibold text-[#111827]">{total}</span>
-              {T("page_total_unit")}
-            </p>
-            <div className="hidden items-center gap-2 lg:flex">
-              <span className="text-sm text-[#6b7280]">{T("filter_sort")}</span>
-              <select
-                value={state.sort}
-                onChange={(e) => handleSort(e.target.value as SortKey)}
-                className="filter-sort-select"
-                aria-label={T("filter_sort")}
-              >
-                {SORT_OPTIONS.map((key) => (
-                  <option key={key} value={key}>
-                    {T(`filter_sort_${key}`)}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
           <FilterChips state={state} onNavigate={navigate} onClearAll={clearAll} lang={lang} />
 
           {children}

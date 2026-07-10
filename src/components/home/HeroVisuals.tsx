@@ -22,53 +22,87 @@ function ProductFrameImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-function B2BBoxFrame({
-  src,
-  alt,
-  wrapperClassName,
-  aspect = "5/7",
-}: {
-  src: string;
-  alt: string;
-  wrapperClassName: string;
-  aspect?: "5/7" | "square";
-}) {
-  return (
-    <div className={wrapperClassName}>
-      <div
-        className={`relative w-full overflow-visible ${
-          aspect === "square" ? "aspect-square" : "aspect-[5/7]"
-        }`}
-      >
-        <HeroBrandImage src={src} alt={alt} />
-      </div>
-    </div>
-  );
-}
-
-const BRAND_TILTS = [-4, -2, 0, 2, 4] as const;
-
 const HERO_BRAND_SLOTS = [
-  { src: "/products/151-box.png", alt: "宝可梦 151", imageKey: "151-box" },
-  { src: "/products/cbb5c-box.png", alt: "宝可梦 宝石包第五弹", imageKey: "cbb5c" },
-  { src: "/products/csv8c-box.png", alt: "宝可梦 星彩晶璃", imageKey: "csv8c" },
-  { src: "/products/csv3c-box.png", alt: "宝可梦 无畏太晶", imageKey: "csv3c" },
-  { src: "/images/hero-card-brock.png", alt: "小刚的发掘 SAR", imageKey: "brock" },
+  {
+    src: "/products/151-box.png",
+    alt: "宝可梦 151",
+    label: "151",
+    imageKey: "151-box",
+    nameHints: ["151"],
+    fallbackSlug: "ポケモンカ-ド151-box-简中",
+  },
+  {
+    src: "/products/cbb5c-box.png",
+    alt: "宝可梦 宝石包第五弹",
+    label: "宝石包第五弹",
+    imageKey: "cbb5c",
+    nameHints: ["宝石包第五", "宝石包第五弹", "CBB5"],
+    fallbackSlug: "宝石包第五弹-box-简中",
+  },
+  {
+    src: "/products/csv9c-box.png",
+    alt: "宝可梦 星彩晶璃",
+    label: "星彩晶璃",
+    imageKey: "csv9c",
+    nameHints: ["星彩晶璃", "CSV9"],
+    fallbackSlug: "星彩晶璃-box-简中",
+  },
+  {
+    src: "/products/csv3c-box.png",
+    alt: "宝可梦 无畏太晶",
+    label: "无畏太晶",
+    imageKey: "csv3c",
+    nameHints: ["无畏太晶", "CSV3"],
+    fallbackSlug: "无畏太晶-box-简中",
+  },
+  {
+    src: "/images/hero-card-brock.png",
+    alt: "小刚的发掘 SAR",
+    label: "小刚的发掘",
+    imageKey: "brock",
+    nameHints: ["小刚", "发掘", "Brock"],
+    fallbackSlug: null,
+    fallbackHref: "/?type=psa",
+  },
 ] as const;
 
-function resolveBrandHref(products: HeroStackProduct[], imageKey: string, index: number) {
-  const matched = products.find((p) => p.images?.includes(imageKey));
-  if (matched?.slug) return `/products/${matched.slug}`;
-  const fallback = products[index];
-  if (fallback?.slug) return `/products/${fallback.slug}`;
-  return "/?sort=newest&stock=instock";
+type BrandSlot = (typeof HERO_BRAND_SLOTS)[number];
+
+/** 桌面焦点货架：中心主推，两侧叠放 */
+const SHELF_LAYOUT = [
+  { role: "side", side: "far-left", rotate: -10 },
+  { role: "side", side: "near-left", rotate: -5 },
+  { role: "feature", side: "center", rotate: 0 },
+  { role: "side", side: "near-right", rotate: 5 },
+  { role: "side", side: "far-right", rotate: 10 },
+] as const;
+
+function resolveBrandProduct(
+  products: HeroStackProduct[],
+  slot: BrandSlot
+): HeroStackProduct | null {
+  const byImage = products.find((p) => p.images?.includes(slot.imageKey));
+  if (byImage) return byImage;
+
+  const byName = products.find((p) => {
+    const name = p.name ?? "";
+    return slot.nameHints.some((hint) => name.includes(hint));
+  });
+  if (byName) return byName;
+
+  return null;
 }
 
-function brandCardTransform(tilt: number, hovered: boolean) {
-  const lift = hovered ? -18 : 0;
-  const scale = hovered ? 1.06 : 1;
-  const rotate = hovered ? tilt * 0.15 : tilt;
-  return `translateY(${lift}px) rotate(${rotate}deg) scale(${scale})`;
+function resolveBrandHref(products: HeroStackProduct[], slot: BrandSlot) {
+  const matched = resolveBrandProduct(products, slot);
+  if (matched?.slug) return `/products/${matched.slug}`;
+  if ("fallbackSlug" in slot && slot.fallbackSlug) {
+    return `/products/${slot.fallbackSlug}`;
+  }
+  if ("fallbackHref" in slot && slot.fallbackHref) {
+    return slot.fallbackHref;
+  }
+  return "/?sort=newest&stock=instock";
 }
 
 function HeroBrandImage({
@@ -101,32 +135,61 @@ export function HeroBrandVisual({ products }: { products: HeroStackProduct[] }) 
 
   return (
     <div className="hero-brand-stage">
-      <div className="hero-v2-visual hero-brand-visual">
-        <div className="hero-brand-row">
+      <div className="hero-brand-visual" aria-label="精选商品">
+        {/* 桌面：焦点货架 */}
+        <div className="hero-brand-shelf" role="list">
           {HERO_BRAND_SLOTS.map((slot, i) => {
-            const tilt = BRAND_TILTS[i];
+            const layout = SHELF_LAYOUT[i];
+            const isFeature = layout.role === "feature";
             const isHovered = hovered === i;
+            const href = resolveBrandHref(products, slot);
+
             return (
               <Link
                 key={`hero-brand-slot-${i}`}
-                href={resolveBrandHref(products, slot.imageKey, i)}
-                className="hero-brand-card block w-[18%] min-w-[68px] max-w-[124px] flex-shrink-0 touch-manipulation sm:max-w-[132px] lg:max-w-[140px]"
+                href={href}
+                role="listitem"
+                className={`hero-brand-card hero-brand-card--${layout.side} ${
+                  isFeature ? "hero-brand-card--feature" : "hero-brand-card--side"
+                } ${isHovered ? "is-hovered" : ""}`}
                 style={{
-                  zIndex: isHovered ? 20 : 10 - Math.abs(i - 2),
-                  transform: brandCardTransform(tilt, isHovered),
+                  zIndex: isHovered ? 30 : isFeature ? 20 : 10 - Math.abs(i - 2),
+                  ["--brand-rotate" as string]: `${layout.rotate}deg`,
                 }}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
                 onFocus={() => setHovered(i)}
                 onBlur={() => setHovered(null)}
-                aria-label={slot.alt}
+                aria-label={`${slot.alt} — 查看商品`}
               >
-                <div className="relative aspect-[5/7] w-full overflow-visible">
-                  <HeroBrandImage src={slot.src} alt={slot.alt} priority={i <= 2} />
+                <div className="hero-brand-card-frame">
+                  <HeroBrandImage src={slot.src} alt={slot.alt} priority={i >= 1 && i <= 3} />
                 </div>
+                <span className="hero-brand-label">
+                  <span className="hero-brand-label-name">{slot.label}</span>
+                  <span className="hero-brand-label-cta">查看</span>
+                </span>
               </Link>
             );
           })}
+        </div>
+
+        {/* 移动：横滑货架 */}
+        <div className="hero-brand-rail" role="list">
+          {HERO_BRAND_SLOTS.map((slot, i) => (
+            <Link
+              key={`hero-brand-rail-${i}`}
+              href={resolveBrandHref(products, slot)}
+              role="listitem"
+              className="hero-brand-rail-card"
+              aria-label={`${slot.alt} — 查看商品`}
+            >
+              <div className="hero-brand-rail-frame">
+                <HeroBrandImage src={slot.src} alt={slot.alt} priority={i <= 1} />
+              </div>
+              <span className="hero-brand-rail-label">{slot.label}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
@@ -178,51 +241,6 @@ export function HeroPsaVisual() {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-const B2B_HERO_FRAMES = [
-  {
-    src: "/products/cbb3c-box.png",
-    alt: "宝可梦 宝石包 VOL.3",
-    wrapperClassName: "hero-float-slow absolute left-[4%] top-[10%] w-[36%]",
-    aspect: "5/7" as const,
-  },
-  {
-    src: "/images/psa-zekrom.jpg",
-    alt: "捷克罗姆 PSA 10",
-    wrapperClassName: "hero-float-delay absolute right-[2%] top-[14%] w-[34%]",
-    aspect: "5/7" as const,
-  },
-  {
-    src: "/products/csv3c-box.png",
-    alt: "宝可梦 太晶盛聚",
-    wrapperClassName: "hero-float-slow absolute bottom-[6%] left-[18%] w-[32%]",
-    aspect: "5/7" as const,
-  },
-  {
-    src: "/products/cbb5c-box.png",
-    alt: "宝可梦 原盒",
-    wrapperClassName: "hero-float-delay absolute bottom-[10%] right-[12%] w-[38%]",
-    aspect: "square" as const,
-  },
-] as const;
-
-export function HeroB2BVisual() {
-  return (
-    <div className="hero-v2-visual hero-float-group relative mx-auto h-[220px] w-full max-w-[400px] sm:h-[260px] lg:h-[300px]">
-      {B2B_HERO_FRAMES.map((frame) => (
-        <B2BBoxFrame key={frame.src} {...frame} />
-      ))}
-    </div>
-  );
-}
-
-export function B2BSectionVisual() {
-  return (
-    <div className="b2b-visual hero-float-group relative mx-auto h-[280px] w-full max-w-[420px] lg:mx-0 lg:h-[340px]">
-      <HeroB2BVisual />
     </div>
   );
 }

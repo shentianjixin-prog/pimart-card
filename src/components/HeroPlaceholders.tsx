@@ -53,5 +53,7 @@ export function isUsableProductImage(url?: string | null) {
   const trimmed = url.trim();
   if (!trimmed) return false;
   if (trimmed.endsWith("placeholder.svg")) return false;
-  return true;
+  if (trimmed.endsWith(".webp")) return true;
+  if (/\.(png|jpe?g|gif)$/i.test(trimmed)) return true;
+  return trimmed.startsWith("/products/") || trimmed.startsWith("/images/");
 }

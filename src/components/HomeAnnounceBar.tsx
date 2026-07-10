@@ -29,29 +29,19 @@ export function HomeAnnounceBar() {
   const { lang } = useLang();
 
   return (
-    <section className="home-announce mb-10 sm:mb-14">
-      <div className="home-announce-frame">
-        <div className="home-announce-inner">
-          <div className="home-announce-head">
-            <span className="home-announce-label">{T("announce_title")}</span>
-            <span className="home-announce-head-line" aria-hidden />
-          </div>
-          <ul className="home-announce-list">
-            {ANNOUNCEMENTS.map((item, index) => (
-              <li
-                key={item.id}
-                className="home-announce-item"
-                style={{ animationDelay: `${index * 80}ms` }}
-              >
-                <time className="home-announce-date" dateTime={item.date}>
-                  {formatAnnounceDate(item.date, lang)}
-                </time>
-                <span className="home-announce-divider" aria-hidden />
-                <span className="home-announce-text">{T(item.messageKey)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section className="home-announce">
+      <div className="home-announce-strip">
+        <span className="home-announce-label">{T("announce_title")}</span>
+        <ul className="home-announce-list">
+          {ANNOUNCEMENTS.map((item) => (
+            <li key={item.id} className="home-announce-item">
+              <time className="home-announce-date" dateTime={item.date}>
+                {formatAnnounceDate(item.date, lang)}
+              </time>
+              <span className="home-announce-text">{T(item.messageKey)}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
