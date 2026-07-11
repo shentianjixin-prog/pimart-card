@@ -1509,36 +1509,39 @@ button:not(:disabled),
     }
   }
 
-  /* Announce bar — slim strip, not a heavy card */
+  /* Announce bar — vertical notice list with CTA */
   .home-announce {
-    margin-top: -0.5rem;
-    margin-bottom: 2.25rem;
+    margin-top: -0.25rem;
+    margin-bottom: 2rem;
   }
 
   @media (min-width: 640px) {
     .home-announce {
-      margin-bottom: 2.75rem;
+      margin-bottom: 2.5rem;
     }
   }
 
-  .home-announce-strip {
+  .home-announce-panel {
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+    overflow: hidden;
+  }
+
+  .home-announce-head {
     display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0.75rem 1.15rem;
-    padding: 0.85rem 0 0.95rem;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    align-items: center;
+    padding: 0.85rem 1rem 0.65rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
   @media (min-width: 640px) {
-    .home-announce-strip {
-      gap: 1.5rem;
-      padding: 1.1rem 0 1.2rem;
+    .home-announce-head {
+      padding: 1rem 1.25rem 0.75rem;
     }
   }
 
   .home-announce-label {
-    flex-shrink: 0;
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.18em;
@@ -1548,43 +1551,38 @@ button:not(:disabled),
 
   .home-announce-list {
     display: flex;
-    min-width: 0;
-    flex: 1;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: baseline;
-    gap: 0.85rem 1.25rem;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .home-announce-list::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    .home-announce-list {
-      flex-wrap: wrap;
-      overflow-x: visible;
-      gap: 0.35rem 1.75rem;
-    }
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .home-announce-item {
     display: flex;
-    flex-shrink: 0;
-    min-width: 0;
-    max-width: 85%;
-    align-items: baseline;
-    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
-  @media (min-width: 768px) {
+  .home-announce-item:last-child {
+    border-bottom: none;
+  }
+
+  @media (min-width: 640px) {
     .home-announce-item {
-      max-width: none;
+      padding: 1rem 1.25rem;
+      gap: 1.25rem;
     }
+  }
+
+  .home-announce-main {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: baseline;
+    gap: 0.55rem 0.75rem;
   }
 
   .home-announce-date {
@@ -1598,20 +1596,52 @@ button:not(:disabled),
   @media (min-width: 640px) {
     .home-announce-date {
       font-size: 0.8125rem;
+      min-width: 2.75rem;
     }
   }
 
   .home-announce-text {
     min-width: 0;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 600;
     line-height: 1.4;
     color: #111827;
   }
 
+  .home-announce-cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    border: 1.5px solid rgba(17, 24, 39, 0.14);
+    background: #111827;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition:
+      background 160ms ease,
+      border-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .home-announce-cta:hover {
+    background: #1f2937;
+    border-color: #1f2937;
+  }
+
+  .home-announce-cta:active {
+    transform: scale(0.98);
+  }
+
   @media (min-width: 640px) {
-    .home-announce-text {
-      font-size: 0.875rem;
+    .home-announce-cta {
+      min-height: 2.4rem;
+      padding: 0.4rem 1.05rem;
+      font-size: 0.8125rem;
     }
   }
 
@@ -1622,12 +1652,20 @@ button:not(:disabled),
   }
 
   .home-products-v2 {
-    padding: 0.5rem 0 2.75rem;
+    padding: 0.5rem 0 2.25rem;
+  }
+
+  .home-products-latest {
+    padding-bottom: 1.5rem;
   }
 
   @media (min-width: 640px) {
     .home-products-v2 {
-      padding-bottom: 3.25rem;
+      padding-bottom: 2.75rem;
+    }
+
+    .home-products-latest {
+      padding-bottom: 1.75rem;
     }
   }
 
@@ -1654,7 +1692,7 @@ button:not(:disabled),
     border-color: var(--btn-border);
   }
 
-  /* Product tabs */
+  /* Product tabs (legacy; tabs removed from home) */
   .home-tab-pill {
     @apply rounded-full bg-white px-5 py-2.5 text-sm font-semibold tracking-wide text-[#374151];
     border: 1.5px solid var(--btn-border);

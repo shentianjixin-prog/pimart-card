@@ -6,7 +6,7 @@ import { ProductListingControls } from "@/components/ProductListingControls";
 import { Pagination } from "@/components/Pagination";
 import { HomeHero } from "@/components/HomeHero";
 import { HomeAnnounceBar } from "@/components/HomeAnnounceBar";
-import { HomeProductTabs } from "@/components/HomeProductTabs";
+import { HomeProductSections } from "@/components/HomeProductSections";
 import { HomeB2B } from "@/components/HomeB2B";
 import { TrustedFeatures } from "@/components/TrustedFeatures";
 import { t, resolveLang } from "@/lib/translations";
@@ -20,37 +20,10 @@ import {
   LISTING_PRODUCT,
   type RawSearchParams,
 } from "@/lib/product-filters";
-import type { Prisma } from "@/generated/prisma/client";
 import { findBoxVariantsForProducts } from "@/lib/product-box-variants";
 
 const POPULAR_TARGET = 8;
-
-const POKEMON_WHERE: Prisma.ProductWhereInput = {
-  OR: [
-    { category: { contains: "宝可梦" } },
-    { category: { contains: "ポケモン" } },
-    { name: { contains: "宝可梦" } },
-    { name: { contains: "Pokemon" } },
-    { name: { contains: "ポケモン" } },
-  ],
-};
-
-const ONEPIECE_WHERE: Prisma.ProductWhereInput = {
-  OR: [
-    { name: { contains: "One Piece" } },
-    { name: { contains: "海贼王" } },
-    { name: { contains: "ワンピース" } },
-  ],
-};
-
-const PSA_WHERE: Prisma.ProductWhereInput = {
-  OR: [
-    { name: { contains: "PSA" } },
-    { series: { contains: "PSA" } },
-    { category: { contains: "PSA" } },
-    { rarity: { contains: "PSA" } },
-  ],
-};
+const LATEST_TARGET = 4;
 
 function mergePopularProducts<T extends { id: string }>(
   featured: T[],
@@ -93,9 +66,7 @@ export default async function Home({
     heroProducts,
     featuredProducts,
     recentInStock,
-    pokemonProducts,
-    onepieceProducts,
-    psaTabProducts,
+    latestProducts,
   ] = await Promise.all([
     showMarketing
       ? Promise.resolve([])
@@ -135,28 +106,14 @@ export default async function Home({
       ? prisma.product.findMany({
           where: stockFilter,
           orderBy: { createdAt: "desc" },
-          take: 12,
+          take: 16,
         })
       : Promise.resolve([]),
     showMarketing
       ? prisma.product.findMany({
-          where: { AND: [stockFilter, POKEMON_WHERE] },
+          where: LISTING_PRODUCT,
           orderBy: { createdAt: "desc" },
-          take: 8,
-        })
-      : Promise.resolve([]),
-    showMarketing
-      ? prisma.product.findMany({
-          where: { AND: [stockFilter, ONEPIECE_WHERE] },
-          orderBy: { createdAt: "desc" },
-          take: 8,
-        })
-      : Promise.resolve([]),
-    showMarketing
-      ? prisma.product.findMany({
-          where: { AND: [stockFilter, PSA_WHERE] },
-          orderBy: { priceJpy: "desc" },
-          take: 8,
+          take: LATEST_TARGET,
         })
       : Promise.resolve([]),
   ]);
@@ -164,19 +121,11 @@ export default async function Home({
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   if (showMarketing) {
-    const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET);
-    const tabProducts = {
-      all: popular,
-      pokemon: pokemonProducts,
-      onepiece: onepieceProducts,
-      psa: psaTabProducts,
-    };
-    const allForVariants = [
-      ...popular,
-      ...pokemonProducts,
-      ...onepieceProducts,
-      ...psaTabProducts,
-    ];
+    const latestIds = new Set(latestProducts.map((p) => p.id));
+    const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET + latestProducts.length)
+      .filter((p) => !latestIds.has(p.id))
+      .slice(0, POPULAR_TARGET);
+    const allForVariants = [...latestProducts, ...popular];
     const variantMap = await findBoxVariantsForProducts(allForVariants);
 
     return (
@@ -186,8 +135,9 @@ export default async function Home({
         <div className="home-main-stack mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <HomeAnnounceBar />
 
-          <HomeProductTabs
-            productsByTab={tabProducts}
+          <HomeProductSections
+            latest={latestProducts}
+            popular={popular}
             variantsByProductId={Object.fromEntries(variantMap)}
           />
 

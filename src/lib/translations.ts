@@ -327,6 +327,8 @@ const dict: Record<string, Record<Lang, string>> = {
   // 首页商品区块
   section_popular:      { zh: "人气商品", ja: "人気商品", en: "Popular Products" },
   section_popular_sub:  { zh: "热门商品推荐", ja: "おすすめ人気商品", en: "Top picks for collectors" },
+  section_latest:       { zh: "最新商品", ja: "最新商品", en: "Latest Products" },
+  section_latest_sub:   { zh: "刚刚上架", ja: "つい最近の入荷", en: "Just arrived" },
   section_new_arrivals: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
   section_new_sub:      { zh: "最新原盒与评级卡", ja: "最新の未開封BOXと鑑定品", en: "Latest sealed boxes and graded picks" },
   section_best_sellers: { zh: "热销商品", ja: "人気商品", en: "Best Sellers" },
@@ -335,6 +337,7 @@ const dict: Record<string, Record<Lang, string>> = {
   section_psa_sub:      { zh: "评级卡与高端库存", ja: "鑑定品とプレミアム在庫", en: "Graded cards and premium inventory" },
   section_shop_all:     { zh: "查看全部", ja: "すべて見る", en: "Shop all" },
   section_view_all:     { zh: "查看全部", ja: "すべて見る", en: "View all" },
+  section_view_more:    { zh: "查看更多", ja: "もっと見る", en: "View more" },
   section_view_psa:     { zh: "查看 PSA", ja: "PSAを見る", en: "View PSA" },
 
   // Why PIMART
@@ -410,8 +413,10 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_cta_wholesale: { zh: "批发咨询", ja: "卸売相談", en: "Wholesale Inquiry" },
 
   announce_title: { zh: "公告", ja: "お知らせ", en: "Announcements" },
-  announce_gem_restock: { zh: "宝石包补货通知", ja: "宝石パック再入荷のお知らせ", en: "Gem Pack restock notice" },
-  announce_op_eb06: { zh: "海贼王 EB06 预售开启", ja: "ワンピース EB06 予約開始", en: "One Piece EB06 pre-order now open" },
+  announce_gem_restock: { zh: "宝石包第5弹补货", ja: "ジェムパック第5弾再入荷", en: "Gem Pack Vol.5 restocked" },
+  announce_op_eb06: { zh: "海贼王 EB06 预售开启", ja: "ワンピース EB06 予約開始", en: "One Piece EB06 pre-order open" },
+  announce_cta_preorder: { zh: "预售入口", ja: "予約へ", en: "Pre-order" },
+  announce_cta_buy: { zh: "去购买", ja: "購入する", en: "Shop now" },
   announce_sv: { zh: "SV 新品已到货", ja: "SV新着入荷", en: "SV new arrivals in stock" },
   announce_op: { zh: "海贼王新品预售中", ja: "ワンピース予約受付中", en: "One Piece pre-orders open" },
   announce_psa: { zh: "PSA 每周更新", ja: "PSA毎週更新", en: "PSA updated weekly" },
