@@ -64,7 +64,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-01-card-1.jpeg"],
+        images: ["/products/topcards/opc-01-card-1.png"],
+        title: "香克斯（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-2.png"],
+        title: "香克斯（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-3.png"],
+        title: "大和（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-4.png"],
+        title: "波雅·汉库克（SP）",
+        remark: "官网渲染图 · 特别异画",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-5.png"],
+        title: "蒙奇·D·路飞（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "シャンクス",
         remark: "SNKRDUNK参考价 ¥700,000",
       },
@@ -109,7 +133,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-02-card-1.jpeg"],
+        images: ["/products/topcards/opc-02-card-1.png"],
+        title: "波特卡斯·D·艾斯（漫画异画）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-2.png"],
+        title: "波特卡斯·D·艾斯（异画）",
+        remark: "官网渲染图 · SR 平行",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-3.png"],
+        title: "乌塔（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-4.png"],
+        title: "娜美（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-5.png"],
+        title: "萨卡斯基（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "ポートガス・D・エース",
         remark: "SNKRDUNK参考价 ¥340,000",
       },
@@ -155,7 +203,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-03-card-1.webp"],
+        images: ["/products/topcards/opc-03-card-1.png"],
+        title: "狙击王（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-2.png"],
+        title: "娜美（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-3.png"],
+        title: "马尔科（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-4.png"],
+        title: "夏洛特·布琳（SP）",
+        remark: "官网渲染图 · 特别异画",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-5.png"],
+        title: "波特卡斯·D·艾斯（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
+      },
+    ],
         title: "そげキング",
         remark: "SNKRDUNK参考价 ¥83,000",
       },
@@ -202,7 +274,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-04-card-1.jpeg"],
+        images: ["/products/topcards/opc-04-card-1.png"],
+        title: "萨博（漫画异画）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-2.png"],
+        title: "萨博（异画）",
+        remark: "官网渲染图 · SR 平行",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-3.png"],
+        title: "奈菲鲁塔利·薇薇（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-4.png"],
+        title: "唐吉诃德·多弗朗明哥（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-5.png"],
+        title: "山治（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "サボ",
         remark: "SNKRDUNK参考价 ¥250,000",
       },
@@ -250,7 +346,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-05-card-1.jpeg"],
+        images: ["/products/topcards/opc-05-card-1.png"],
+        title: "蒙奇·D·路飞（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-2.png"],
+        title: "尤斯塔斯·基德（漫画异画）",
+        remark: "官网渲染图 · 漫画异画",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-3.png"],
+        title: "特拉法尔加·罗（漫画异画）",
+        remark: "官网渲染图 · 漫画异画",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-4.png"],
+        title: "蒙奇·D·路飞（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-5.png"],
+        title: "索隆十郎（SP）",
+        remark: "官网渲染图 · 特别异画",
+      },
+    ],
         title: "モンキー・D・ルフィ",
         remark: "SNKRDUNK参考价 ¥1,680,000",
       },
@@ -297,7 +417,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-06-card-1.jpeg"],
+        images: ["/products/topcards/opc-06-card-1.png"],
+        title: "罗罗诺亚·索隆（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-2.png"],
+        title: "罗罗诺亚·索隆（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-3.png"],
+        title: "文斯莫克·贾奇（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-4.png"],
+        title: "香克斯（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-5.png"],
+        title: "乌塔（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "ロロノア・ゾロ",
         remark: "SNKRDUNK参考价 ¥549,000",
       },
@@ -343,7 +487,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-07-card-1.jpeg"],
+        images: ["/products/topcards/opc-07-card-1.png"],
+        title: "波雅·汉库克（漫画异画）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-2.png"],
+        title: "波雅·汉库克（异画）",
+        remark: "官网渲染图 · SR 平行",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-3.png"],
+        title: "巴兹尔·霍金斯（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-4.png"],
+        title: "波特卡斯·D·艾斯（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-5.png"],
+        title: "蒙奇·D·龙（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "ボア・ハンコック",
         remark: "SNKRDUNK参考价 ¥459,999",
       },
@@ -389,7 +557,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-08-card-1.jpeg"],
+        images: ["/products/topcards/opc-08-card-1.png"],
+        title: "西尔尔克·雷利（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-2.png"],
+        title: "西尔尔克·雷利（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-3.png"],
+        title: "夏洛特·布琳（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-4.png"],
+        title: "黑玛利亚（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-5.png"],
+        title: "娜美（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "シルバーズ・レイリー",
         remark: "SNKRDUNK参考价 ¥150,000",
       },
@@ -435,7 +627,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-09-card-1.jpeg"],
+        images: ["/products/topcards/opc-09-card-1.png"],
+        title: "戈尔·D·罗杰（黄金漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-2.png"],
+        title: "蒙奇·D·路飞（漫画异画 SEC）",
+        remark: "官网渲染图 · 漫画异画",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-3.png"],
+        title: "香克斯（漫画异画）",
+        remark: "官网渲染图 · 漫画异画",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-4.png"],
+        title: "马歇尔·D·蒂奇（漫画异画）",
+        remark: "官网渲染图 · 漫画异画",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-5.png"],
+        title: "巴基（漫画异画）",
+        remark: "官网渲染图 · 漫画异画",
+      },
+    ],
         title: "ゴール・D・ロジャー",
         remark: "SNKRDUNK参考价 ¥1,280,000",
       },
@@ -481,7 +697,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-10-card-1.webp"],
+        images: ["/products/topcards/opc-10-card-1.png"],
+        title: "特拉法尔加·罗（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-2.png"],
+        title: "特拉法尔加·罗（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-3.png"],
+        title: "神避（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-4.png"],
+        title: "库赞（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-5.png"],
+        title: "乌索普（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+    ],
         title: "トラファルガー・ロー",
         remark: "SNKRDUNK参考价 ¥60,000",
       },
@@ -528,7 +768,31 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-11-card-1.jpeg"],
+        images: ["/products/topcards/opc-11-card-1.png"],
+        title: "蒙奇·D·路飞（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-2.png"],
+        title: "蒙奇·D·路飞（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-3.png"],
+        title: "娜美（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-4.png"],
+        title: "库赞（异画）",
+        remark: "官网渲染图 · 人气异画",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-5.png"],
+        title: "橡胶橡胶果实·火手枪（异画）",
+        remark: "官网渲染图 · 事件异画",
+      },
+    ],
         title: "モンキー・D・ルフィ",
         remark: "SNKRDUNK参考价 ¥290,000",
       },
@@ -575,29 +839,29 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-14-card-1.jpeg"],
-        title: "ボア・ハンコック",
-        remark: "SNKRDUNK参考价 ¥127,999",
+        images: ["/products/topcards/opc-14-card-1.png"],
+        title: "鹰眼米霍克（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
       },
       {
-        images: ["/products/topcards/opc-14-card-2.webp"],
-        title: "ジュラキュール・ミホーク",
-        remark: "SNKRDUNK参考价 ¥88,000",
+        images: ["/products/topcards/opc-14-card-2.png"],
+        title: "鹰眼米霍克（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
       },
       {
-        images: ["/products/topcards/opc-14-card-3.jpeg"],
-        title: "わらわ こわい...♡",
-        remark: "SNKRDUNK参考价 ¥85,000",
+        images: ["/products/topcards/opc-14-card-3.png"],
+        title: "波雅·汉库克（异画）",
+        remark: "官网渲染图 · 人气异画",
       },
       {
-        images: ["/products/topcards/opc-14-card-4.jpeg"],
-        title: "ボア・ハンコック",
-        remark: "SNKRDUNK参考价 ¥68,000",
+        images: ["/products/topcards/opc-14-card-4.png"],
+        title: "波雅·汉库克（异画）",
+        remark: "官网渲染图 · 人气异画",
       },
       {
-        images: ["/products/topcards/opc-14-card-5.jpeg"],
-        title: "ナミ",
-        remark: "SNKRDUNK参考价 ¥40,000",
+        images: ["/products/topcards/opc-14-card-5.png"],
+        title: "娜美（异画）",
+        remark: "官网渲染图 · 人气异画",
       },
     ],
   },
@@ -621,29 +885,29 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
     ]),
     topCards: [
       {
-        images: ["/products/topcards/opc-15-1-1.png", "/products/topcards/opc-15-1-2.png"],
-        title: "蒙奇·D·路飞、艾尼路以SEC卡牌登场!",
-        remark: "“空岛篇”的那场战斗在此重现…!",
+        images: ["/products/topcards/opc-15-card-1.png"],
+        title: "艾尼路（漫画异画 SEC）",
+        remark: "官网渲染图 · 本弹旗舰 chase",
       },
       {
-        images: [
-          "/products/topcards/opc-15-2-1.png",
-          "/products/topcards/opc-15-2-2.png",
-          "/products/topcards/opc-15-2-3.png",
-          "/products/topcards/opc-15-2-4.png",
-        ],
-        title: "持有强力效果的卡牌大量登场!",
-        remark: "大量卡牌搭配领袖卡牌都有出色效果!",
+        images: ["/products/topcards/opc-15-card-2.png"],
+        title: "蒙奇·D·路飞（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
       },
       {
-        images: ["/products/topcards/opc-15-3-1.png", "/products/topcards/opc-15-3-2.png"],
-        title: "这次也收录了两种异画版事件卡牌!",
-        remark: "快来获取特别设计的卡牌吧!",
+        images: ["/products/topcards/opc-15-card-3.png"],
+        title: "艾尼路（异画 SEC）",
+        remark: "官网渲染图 · SEC 平行",
       },
       {
-        images: ["/products/topcards/opc-15-4-1.png"],
-        title: "这次的超级异画卡牌是艾尼路!",
-        remark: "将这张特别设计的卡牌收入手中吧!",
+        images: ["/products/topcards/opc-15-card-4.png"],
+        title: "蒙奇·D·路飞（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
+      },
+      {
+        images: ["/products/topcards/opc-15-card-5.png"],
+        title: "艾尼路（领袖异画）",
+        remark: "官网渲染图 · 领袖平行",
       },
     ],
   },

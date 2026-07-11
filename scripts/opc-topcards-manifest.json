@@ -2,391 +2,1639 @@
   "opc-01-romance-dawn-box": {
     "set_id": "OPC-01",
     "topcards": [
-      "/products/topcards/opc-01-card-1.jpeg",
-      "/products/topcards/opc-01-card-2.jpeg",
-      "/products/topcards/opc-01-card-3.webp",
-      "/products/topcards/opc-01-card-4.webp",
-      "/products/topcards/opc-01-card-5.jpeg"
+      "/products/topcards/opc-01-card-1.png",
+      "/products/topcards/opc-01-card-2.png",
+      "/products/topcards/opc-01-card-3.png",
+      "/products/topcards/opc-01-card-4.png",
+      "/products/topcards/opc-01-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP01-120_p2",
+        "titleZh": "香克斯（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-01-card-1.png"
+      },
+      {
+        "id": "OP01-120_p1",
+        "titleZh": "香克斯（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-01-card-2.png"
+      },
+      {
+        "id": "OP01-121_p1",
+        "titleZh": "大和（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-01-card-3.png"
+      },
+      {
+        "id": "OP01-078_p1",
+        "titleZh": "波雅·汉库克（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-01-card-4.png"
+      },
+      {
+        "id": "OP01-003_p1",
+        "titleZh": "蒙奇·D·路飞（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-01-card-5.png"
+      }
     ]
   },
   "opc-01-romance-dawn-case": {
     "set_id": "OPC-01",
     "topcards": [
-      "/products/topcards/opc-01-card-1.jpeg",
-      "/products/topcards/opc-01-card-2.jpeg",
-      "/products/topcards/opc-01-card-3.webp",
-      "/products/topcards/opc-01-card-4.webp",
-      "/products/topcards/opc-01-card-5.jpeg"
+      "/products/topcards/opc-01-card-1.png",
+      "/products/topcards/opc-01-card-2.png",
+      "/products/topcards/opc-01-card-3.png",
+      "/products/topcards/opc-01-card-4.png",
+      "/products/topcards/opc-01-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP01-120_p2",
+        "titleZh": "香克斯（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-01-card-1.png"
+      },
+      {
+        "id": "OP01-120_p1",
+        "titleZh": "香克斯（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-01-card-2.png"
+      },
+      {
+        "id": "OP01-121_p1",
+        "titleZh": "大和（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-01-card-3.png"
+      },
+      {
+        "id": "OP01-078_p1",
+        "titleZh": "波雅·汉库克（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-01-card-4.png"
+      },
+      {
+        "id": "OP01-003_p1",
+        "titleZh": "蒙奇·D·路飞（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-01-card-5.png"
+      }
     ]
   },
   "opc-01-romance-dawn-pack": {
     "set_id": "OPC-01",
     "topcards": [
-      "/products/topcards/opc-01-card-1.jpeg",
-      "/products/topcards/opc-01-card-2.jpeg",
-      "/products/topcards/opc-01-card-3.webp",
-      "/products/topcards/opc-01-card-4.webp",
-      "/products/topcards/opc-01-card-5.jpeg"
+      "/products/topcards/opc-01-card-1.png",
+      "/products/topcards/opc-01-card-2.png",
+      "/products/topcards/opc-01-card-3.png",
+      "/products/topcards/opc-01-card-4.png",
+      "/products/topcards/opc-01-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP01-120_p2",
+        "titleZh": "香克斯（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-01-card-1.png"
+      },
+      {
+        "id": "OP01-120_p1",
+        "titleZh": "香克斯（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-01-card-2.png"
+      },
+      {
+        "id": "OP01-121_p1",
+        "titleZh": "大和（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-01-card-3.png"
+      },
+      {
+        "id": "OP01-078_p1",
+        "titleZh": "波雅·汉库克（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-01-card-4.png"
+      },
+      {
+        "id": "OP01-003_p1",
+        "titleZh": "蒙奇·D·路飞（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-01-card-5.png"
+      }
     ]
   },
   "opc-02-paramount-war-box": {
     "set_id": "OPC-02",
     "topcards": [
-      "/products/topcards/opc-02-card-1.jpeg",
-      "/products/topcards/opc-02-card-2.jpeg",
-      "/products/topcards/opc-02-card-3.jpeg",
-      "/products/topcards/opc-02-card-4.jpeg",
-      "/products/topcards/opc-02-card-5.jpeg"
+      "/products/topcards/opc-02-card-1.png",
+      "/products/topcards/opc-02-card-2.png",
+      "/products/topcards/opc-02-card-3.png",
+      "/products/topcards/opc-02-card-4.png",
+      "/products/topcards/opc-02-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP02-013_p2",
+        "titleZh": "波特卡斯·D·艾斯（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-02-card-1.png"
+      },
+      {
+        "id": "OP02-013_p1",
+        "titleZh": "波特卡斯·D·艾斯（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-02-card-2.png"
+      },
+      {
+        "id": "OP02-120_p1",
+        "titleZh": "乌塔（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-02-card-3.png"
+      },
+      {
+        "id": "OP02-025_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-02-card-4.png"
+      },
+      {
+        "id": "OP02-099_p1",
+        "titleZh": "萨卡斯基（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-02-card-5.png"
+      }
     ]
   },
   "opc-02-paramount-war-case": {
     "set_id": "OPC-02",
     "topcards": [
-      "/products/topcards/opc-02-card-1.jpeg",
-      "/products/topcards/opc-02-card-2.jpeg",
-      "/products/topcards/opc-02-card-3.jpeg",
-      "/products/topcards/opc-02-card-4.jpeg",
-      "/products/topcards/opc-02-card-5.jpeg"
+      "/products/topcards/opc-02-card-1.png",
+      "/products/topcards/opc-02-card-2.png",
+      "/products/topcards/opc-02-card-3.png",
+      "/products/topcards/opc-02-card-4.png",
+      "/products/topcards/opc-02-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP02-013_p2",
+        "titleZh": "波特卡斯·D·艾斯（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-02-card-1.png"
+      },
+      {
+        "id": "OP02-013_p1",
+        "titleZh": "波特卡斯·D·艾斯（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-02-card-2.png"
+      },
+      {
+        "id": "OP02-120_p1",
+        "titleZh": "乌塔（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-02-card-3.png"
+      },
+      {
+        "id": "OP02-025_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-02-card-4.png"
+      },
+      {
+        "id": "OP02-099_p1",
+        "titleZh": "萨卡斯基（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-02-card-5.png"
+      }
     ]
   },
   "opc-02-paramount-war-pack": {
     "set_id": "OPC-02",
     "topcards": [
-      "/products/topcards/opc-02-card-1.jpeg",
-      "/products/topcards/opc-02-card-2.jpeg",
-      "/products/topcards/opc-02-card-3.jpeg",
-      "/products/topcards/opc-02-card-4.jpeg",
-      "/products/topcards/opc-02-card-5.jpeg"
+      "/products/topcards/opc-02-card-1.png",
+      "/products/topcards/opc-02-card-2.png",
+      "/products/topcards/opc-02-card-3.png",
+      "/products/topcards/opc-02-card-4.png",
+      "/products/topcards/opc-02-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP02-013_p2",
+        "titleZh": "波特卡斯·D·艾斯（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-02-card-1.png"
+      },
+      {
+        "id": "OP02-013_p1",
+        "titleZh": "波特卡斯·D·艾斯（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-02-card-2.png"
+      },
+      {
+        "id": "OP02-120_p1",
+        "titleZh": "乌塔（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-02-card-3.png"
+      },
+      {
+        "id": "OP02-025_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-02-card-4.png"
+      },
+      {
+        "id": "OP02-099_p1",
+        "titleZh": "萨卡斯基（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-02-card-5.png"
+      }
     ]
   },
   "opc-03-pillars-of-strength-box": {
     "set_id": "OPC-03",
     "topcards": [
-      "/products/topcards/opc-03-card-1.webp",
-      "/products/topcards/opc-03-card-2.jpeg",
-      "/products/topcards/opc-03-card-3.jpeg",
-      "/products/topcards/opc-03-card-4.jpeg",
-      "/products/topcards/opc-03-card-5.jpeg"
+      "/products/topcards/opc-03-card-1.png",
+      "/products/topcards/opc-03-card-2.png",
+      "/products/topcards/opc-03-card-3.png",
+      "/products/topcards/opc-03-card-4.png",
+      "/products/topcards/opc-03-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP03-122_p2",
+        "titleZh": "狙击王（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-03-card-1.png"
+      },
+      {
+        "id": "OP03-040_p1",
+        "titleZh": "娜美（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-03-card-2.png"
+      },
+      {
+        "id": "OP03-013_p1",
+        "titleZh": "马尔科（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-03-card-3.png"
+      },
+      {
+        "id": "OP03-112_p1",
+        "titleZh": "夏洛特·布琳（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-03-card-4.png"
+      },
+      {
+        "id": "OP03-001_p1",
+        "titleZh": "波特卡斯·D·艾斯（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-03-card-5.png"
+      }
     ]
   },
   "opc-03-pillars-of-strength-case": {
     "set_id": "OPC-03",
     "topcards": [
-      "/products/topcards/opc-03-card-1.webp",
-      "/products/topcards/opc-03-card-2.jpeg",
-      "/products/topcards/opc-03-card-3.jpeg",
-      "/products/topcards/opc-03-card-4.jpeg",
-      "/products/topcards/opc-03-card-5.jpeg"
+      "/products/topcards/opc-03-card-1.png",
+      "/products/topcards/opc-03-card-2.png",
+      "/products/topcards/opc-03-card-3.png",
+      "/products/topcards/opc-03-card-4.png",
+      "/products/topcards/opc-03-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP03-122_p2",
+        "titleZh": "狙击王（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-03-card-1.png"
+      },
+      {
+        "id": "OP03-040_p1",
+        "titleZh": "娜美（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-03-card-2.png"
+      },
+      {
+        "id": "OP03-013_p1",
+        "titleZh": "马尔科（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-03-card-3.png"
+      },
+      {
+        "id": "OP03-112_p1",
+        "titleZh": "夏洛特·布琳（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-03-card-4.png"
+      },
+      {
+        "id": "OP03-001_p1",
+        "titleZh": "波特卡斯·D·艾斯（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-03-card-5.png"
+      }
     ]
   },
   "opc-03-pillars-of-strength-pack": {
     "set_id": "OPC-03",
     "topcards": [
-      "/products/topcards/opc-03-card-1.webp",
-      "/products/topcards/opc-03-card-2.jpeg",
-      "/products/topcards/opc-03-card-3.jpeg",
-      "/products/topcards/opc-03-card-4.jpeg",
-      "/products/topcards/opc-03-card-5.jpeg"
+      "/products/topcards/opc-03-card-1.png",
+      "/products/topcards/opc-03-card-2.png",
+      "/products/topcards/opc-03-card-3.png",
+      "/products/topcards/opc-03-card-4.png",
+      "/products/topcards/opc-03-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP03-122_p2",
+        "titleZh": "狙击王（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-03-card-1.png"
+      },
+      {
+        "id": "OP03-040_p1",
+        "titleZh": "娜美（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-03-card-2.png"
+      },
+      {
+        "id": "OP03-013_p1",
+        "titleZh": "马尔科（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-03-card-3.png"
+      },
+      {
+        "id": "OP03-112_p1",
+        "titleZh": "夏洛特·布琳（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-03-card-4.png"
+      },
+      {
+        "id": "OP03-001_p1",
+        "titleZh": "波特卡斯·D·艾斯（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-03-card-5.png"
+      }
     ]
   },
   "opc-04-kingdoms-of-intrigue-box": {
     "set_id": "OPC-04",
     "topcards": [
-      "/products/topcards/opc-04-card-1.jpeg",
-      "/products/topcards/opc-04-card-2.jpeg",
-      "/products/topcards/opc-04-card-3.jpeg",
-      "/products/topcards/opc-04-card-4.jpeg",
-      "/products/topcards/opc-04-card-5.jpeg"
+      "/products/topcards/opc-04-card-1.png",
+      "/products/topcards/opc-04-card-2.png",
+      "/products/topcards/opc-04-card-3.png",
+      "/products/topcards/opc-04-card-4.png",
+      "/products/topcards/opc-04-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP04-083_p2",
+        "titleZh": "萨博（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-04-card-1.png"
+      },
+      {
+        "id": "OP04-083_p1",
+        "titleZh": "萨博（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-04-card-2.png"
+      },
+      {
+        "id": "OP04-001_p1",
+        "titleZh": "奈菲鲁塔利·薇薇（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-04-card-3.png"
+      },
+      {
+        "id": "OP04-031_p1",
+        "titleZh": "唐吉诃德·多弗朗明哥（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-04-card-4.png"
+      },
+      {
+        "id": "OP04-104_p1",
+        "titleZh": "山治（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-04-card-5.png"
+      }
     ]
   },
   "opc-04-kingdoms-of-intrigue-case": {
     "set_id": "OPC-04",
     "topcards": [
-      "/products/topcards/opc-04-card-1.jpeg",
-      "/products/topcards/opc-04-card-2.jpeg",
-      "/products/topcards/opc-04-card-3.jpeg",
-      "/products/topcards/opc-04-card-4.jpeg",
-      "/products/topcards/opc-04-card-5.jpeg"
+      "/products/topcards/opc-04-card-1.png",
+      "/products/topcards/opc-04-card-2.png",
+      "/products/topcards/opc-04-card-3.png",
+      "/products/topcards/opc-04-card-4.png",
+      "/products/topcards/opc-04-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP04-083_p2",
+        "titleZh": "萨博（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-04-card-1.png"
+      },
+      {
+        "id": "OP04-083_p1",
+        "titleZh": "萨博（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-04-card-2.png"
+      },
+      {
+        "id": "OP04-001_p1",
+        "titleZh": "奈菲鲁塔利·薇薇（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-04-card-3.png"
+      },
+      {
+        "id": "OP04-031_p1",
+        "titleZh": "唐吉诃德·多弗朗明哥（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-04-card-4.png"
+      },
+      {
+        "id": "OP04-104_p1",
+        "titleZh": "山治（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-04-card-5.png"
+      }
     ]
   },
   "opc-04-kingdoms-of-intrigue-pack": {
     "set_id": "OPC-04",
     "topcards": [
-      "/products/topcards/opc-04-card-1.jpeg",
-      "/products/topcards/opc-04-card-2.jpeg",
-      "/products/topcards/opc-04-card-3.jpeg",
-      "/products/topcards/opc-04-card-4.jpeg",
-      "/products/topcards/opc-04-card-5.jpeg"
+      "/products/topcards/opc-04-card-1.png",
+      "/products/topcards/opc-04-card-2.png",
+      "/products/topcards/opc-04-card-3.png",
+      "/products/topcards/opc-04-card-4.png",
+      "/products/topcards/opc-04-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP04-083_p2",
+        "titleZh": "萨博（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-04-card-1.png"
+      },
+      {
+        "id": "OP04-083_p1",
+        "titleZh": "萨博（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-04-card-2.png"
+      },
+      {
+        "id": "OP04-001_p1",
+        "titleZh": "奈菲鲁塔利·薇薇（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-04-card-3.png"
+      },
+      {
+        "id": "OP04-031_p1",
+        "titleZh": "唐吉诃德·多弗朗明哥（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-04-card-4.png"
+      },
+      {
+        "id": "OP04-104_p1",
+        "titleZh": "山治（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-04-card-5.png"
+      }
     ]
   },
   "opc-05-awakening-new-era-box": {
     "set_id": "OPC-05",
     "topcards": [
-      "/products/topcards/opc-05-card-1.jpeg",
-      "/products/topcards/opc-05-card-2.webp",
-      "/products/topcards/opc-05-card-3.webp",
-      "/products/topcards/opc-05-card-4.webp",
-      "/products/topcards/opc-05-card-5.webp"
+      "/products/topcards/opc-05-card-1.png",
+      "/products/topcards/opc-05-card-2.png",
+      "/products/topcards/opc-05-card-3.png",
+      "/products/topcards/opc-05-card-4.png",
+      "/products/topcards/opc-05-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP05-119_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-05-card-1.png"
+      },
+      {
+        "id": "OP05-074_p2",
+        "titleZh": "尤斯塔斯·基德（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-05-card-2.png"
+      },
+      {
+        "id": "OP05-069_p2",
+        "titleZh": "特拉法尔加·罗（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-05-card-3.png"
+      },
+      {
+        "id": "OP05-119_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-05-card-4.png"
+      },
+      {
+        "id": "OP05-067_p1",
+        "titleZh": "索隆十郎（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-05-card-5.png"
+      }
     ]
   },
   "opc-05-awakening-new-era-case": {
     "set_id": "OPC-05",
     "topcards": [
-      "/products/topcards/opc-05-card-1.jpeg",
-      "/products/topcards/opc-05-card-2.webp",
-      "/products/topcards/opc-05-card-3.webp",
-      "/products/topcards/opc-05-card-4.webp",
-      "/products/topcards/opc-05-card-5.webp"
+      "/products/topcards/opc-05-card-1.png",
+      "/products/topcards/opc-05-card-2.png",
+      "/products/topcards/opc-05-card-3.png",
+      "/products/topcards/opc-05-card-4.png",
+      "/products/topcards/opc-05-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP05-119_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-05-card-1.png"
+      },
+      {
+        "id": "OP05-074_p2",
+        "titleZh": "尤斯塔斯·基德（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-05-card-2.png"
+      },
+      {
+        "id": "OP05-069_p2",
+        "titleZh": "特拉法尔加·罗（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-05-card-3.png"
+      },
+      {
+        "id": "OP05-119_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-05-card-4.png"
+      },
+      {
+        "id": "OP05-067_p1",
+        "titleZh": "索隆十郎（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-05-card-5.png"
+      }
     ]
   },
   "opc-05-awakening-new-era-pack": {
     "set_id": "OPC-05",
     "topcards": [
-      "/products/topcards/opc-05-card-1.jpeg",
-      "/products/topcards/opc-05-card-2.webp",
-      "/products/topcards/opc-05-card-3.webp",
-      "/products/topcards/opc-05-card-4.webp",
-      "/products/topcards/opc-05-card-5.webp"
+      "/products/topcards/opc-05-card-1.png",
+      "/products/topcards/opc-05-card-2.png",
+      "/products/topcards/opc-05-card-3.png",
+      "/products/topcards/opc-05-card-4.png",
+      "/products/topcards/opc-05-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP05-119_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-05-card-1.png"
+      },
+      {
+        "id": "OP05-074_p2",
+        "titleZh": "尤斯塔斯·基德（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-05-card-2.png"
+      },
+      {
+        "id": "OP05-069_p2",
+        "titleZh": "特拉法尔加·罗（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-05-card-3.png"
+      },
+      {
+        "id": "OP05-119_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-05-card-4.png"
+      },
+      {
+        "id": "OP05-067_p1",
+        "titleZh": "索隆十郎（SP）",
+        "note": "特别异画",
+        "local": "/products/topcards/opc-05-card-5.png"
+      }
     ]
   },
   "opc-06-wings-of-the-captain-box": {
     "set_id": "OPC-06",
     "topcards": [
-      "/products/topcards/opc-06-card-1.jpeg",
-      "/products/topcards/opc-06-card-2.jpeg",
-      "/products/topcards/opc-06-card-3.jpeg",
-      "/products/topcards/opc-06-card-4.webp",
-      "/products/topcards/opc-06-card-5.webp"
+      "/products/topcards/opc-06-card-1.png",
+      "/products/topcards/opc-06-card-2.png",
+      "/products/topcards/opc-06-card-3.png",
+      "/products/topcards/opc-06-card-4.png",
+      "/products/topcards/opc-06-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP06-118_p2",
+        "titleZh": "罗罗诺亚·索隆（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-06-card-1.png"
+      },
+      {
+        "id": "OP06-118_p1",
+        "titleZh": "罗罗诺亚·索隆（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-06-card-2.png"
+      },
+      {
+        "id": "OP06-042_p1",
+        "titleZh": "文斯莫克·贾奇（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-3.png"
+      },
+      {
+        "id": "OP06-007_p1",
+        "titleZh": "香克斯（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-4.png"
+      },
+      {
+        "id": "OP06-035_p1",
+        "titleZh": "乌塔（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-5.png"
+      }
     ]
   },
   "opc-06-wings-of-the-captain-case": {
     "set_id": "OPC-06",
     "topcards": [
-      "/products/topcards/opc-06-card-1.jpeg",
-      "/products/topcards/opc-06-card-2.jpeg",
-      "/products/topcards/opc-06-card-3.jpeg",
-      "/products/topcards/opc-06-card-4.webp",
-      "/products/topcards/opc-06-card-5.webp"
+      "/products/topcards/opc-06-card-1.png",
+      "/products/topcards/opc-06-card-2.png",
+      "/products/topcards/opc-06-card-3.png",
+      "/products/topcards/opc-06-card-4.png",
+      "/products/topcards/opc-06-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP06-118_p2",
+        "titleZh": "罗罗诺亚·索隆（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-06-card-1.png"
+      },
+      {
+        "id": "OP06-118_p1",
+        "titleZh": "罗罗诺亚·索隆（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-06-card-2.png"
+      },
+      {
+        "id": "OP06-042_p1",
+        "titleZh": "文斯莫克·贾奇（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-3.png"
+      },
+      {
+        "id": "OP06-007_p1",
+        "titleZh": "香克斯（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-4.png"
+      },
+      {
+        "id": "OP06-035_p1",
+        "titleZh": "乌塔（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-5.png"
+      }
     ]
   },
   "opc-06-wings-of-the-captain-pack": {
     "set_id": "OPC-06",
     "topcards": [
-      "/products/topcards/opc-06-card-1.jpeg",
-      "/products/topcards/opc-06-card-2.jpeg",
-      "/products/topcards/opc-06-card-3.jpeg",
-      "/products/topcards/opc-06-card-4.webp",
-      "/products/topcards/opc-06-card-5.webp"
+      "/products/topcards/opc-06-card-1.png",
+      "/products/topcards/opc-06-card-2.png",
+      "/products/topcards/opc-06-card-3.png",
+      "/products/topcards/opc-06-card-4.png",
+      "/products/topcards/opc-06-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP06-118_p2",
+        "titleZh": "罗罗诺亚·索隆（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-06-card-1.png"
+      },
+      {
+        "id": "OP06-118_p1",
+        "titleZh": "罗罗诺亚·索隆（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-06-card-2.png"
+      },
+      {
+        "id": "OP06-042_p1",
+        "titleZh": "文斯莫克·贾奇（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-3.png"
+      },
+      {
+        "id": "OP06-007_p1",
+        "titleZh": "香克斯（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-4.png"
+      },
+      {
+        "id": "OP06-035_p1",
+        "titleZh": "乌塔（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-06-card-5.png"
+      }
     ]
   },
   "opc-07-500-years-future-box": {
     "set_id": "OPC-07",
     "topcards": [
-      "/products/topcards/opc-07-card-1.jpeg",
-      "/products/topcards/opc-07-card-2.webp",
-      "/products/topcards/opc-07-card-3.jpeg",
-      "/products/topcards/opc-07-card-4.jpeg",
-      "/products/topcards/opc-07-card-5.jpeg"
+      "/products/topcards/opc-07-card-1.png",
+      "/products/topcards/opc-07-card-2.png",
+      "/products/topcards/opc-07-card-3.png",
+      "/products/topcards/opc-07-card-4.png",
+      "/products/topcards/opc-07-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP07-051_p2",
+        "titleZh": "波雅·汉库克（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-07-card-1.png"
+      },
+      {
+        "id": "OP07-051_p1",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-07-card-2.png"
+      },
+      {
+        "id": "OP07-015_p1",
+        "titleZh": "巴兹尔·霍金斯（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-07-card-3.png"
+      },
+      {
+        "id": "OP07-001_p1",
+        "titleZh": "波特卡斯·D·艾斯（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-07-card-4.png"
+      },
+      {
+        "id": "OP07-044_p1",
+        "titleZh": "蒙奇·D·龙（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-07-card-5.png"
+      }
     ]
   },
   "opc-07-500-years-future-case": {
     "set_id": "OPC-07",
     "topcards": [
-      "/products/topcards/opc-07-card-1.jpeg",
-      "/products/topcards/opc-07-card-2.webp",
-      "/products/topcards/opc-07-card-3.jpeg",
-      "/products/topcards/opc-07-card-4.jpeg",
-      "/products/topcards/opc-07-card-5.jpeg"
+      "/products/topcards/opc-07-card-1.png",
+      "/products/topcards/opc-07-card-2.png",
+      "/products/topcards/opc-07-card-3.png",
+      "/products/topcards/opc-07-card-4.png",
+      "/products/topcards/opc-07-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP07-051_p2",
+        "titleZh": "波雅·汉库克（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-07-card-1.png"
+      },
+      {
+        "id": "OP07-051_p1",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-07-card-2.png"
+      },
+      {
+        "id": "OP07-015_p1",
+        "titleZh": "巴兹尔·霍金斯（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-07-card-3.png"
+      },
+      {
+        "id": "OP07-001_p1",
+        "titleZh": "波特卡斯·D·艾斯（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-07-card-4.png"
+      },
+      {
+        "id": "OP07-044_p1",
+        "titleZh": "蒙奇·D·龙（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-07-card-5.png"
+      }
     ]
   },
   "opc-07-500-years-future-pack": {
     "set_id": "OPC-07",
     "topcards": [
-      "/products/topcards/opc-07-card-1.jpeg",
-      "/products/topcards/opc-07-card-2.webp",
-      "/products/topcards/opc-07-card-3.jpeg",
-      "/products/topcards/opc-07-card-4.jpeg",
-      "/products/topcards/opc-07-card-5.jpeg"
+      "/products/topcards/opc-07-card-1.png",
+      "/products/topcards/opc-07-card-2.png",
+      "/products/topcards/opc-07-card-3.png",
+      "/products/topcards/opc-07-card-4.png",
+      "/products/topcards/opc-07-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP07-051_p2",
+        "titleZh": "波雅·汉库克（漫画异画）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-07-card-1.png"
+      },
+      {
+        "id": "OP07-051_p1",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "SR 平行",
+        "local": "/products/topcards/opc-07-card-2.png"
+      },
+      {
+        "id": "OP07-015_p1",
+        "titleZh": "巴兹尔·霍金斯（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-07-card-3.png"
+      },
+      {
+        "id": "OP07-001_p1",
+        "titleZh": "波特卡斯·D·艾斯（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-07-card-4.png"
+      },
+      {
+        "id": "OP07-044_p1",
+        "titleZh": "蒙奇·D·龙（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-07-card-5.png"
+      }
     ]
   },
   "opc-08-two-legends-box": {
     "set_id": "OPC-08",
     "topcards": [
-      "/products/topcards/opc-08-card-1.jpeg",
-      "/products/topcards/opc-08-card-2.jpeg",
-      "/products/topcards/opc-08-card-3.jpeg",
-      "/products/topcards/opc-08-card-4.jpeg",
-      "/products/topcards/opc-08-card-5.jpeg"
+      "/products/topcards/opc-08-card-1.png",
+      "/products/topcards/opc-08-card-2.png",
+      "/products/topcards/opc-08-card-3.png",
+      "/products/topcards/opc-08-card-4.png",
+      "/products/topcards/opc-08-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP08-118_p2",
+        "titleZh": "西尔尔克·雷利（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-08-card-1.png"
+      },
+      {
+        "id": "OP08-118_p1",
+        "titleZh": "西尔尔克·雷利（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-08-card-2.png"
+      },
+      {
+        "id": "OP08-076_p1",
+        "titleZh": "夏洛特·布琳（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-3.png"
+      },
+      {
+        "id": "OP08-052_p1",
+        "titleZh": "黑玛利亚（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-4.png"
+      },
+      {
+        "id": "OP08-106_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-5.png"
+      }
     ]
   },
   "opc-08-two-legends-case": {
     "set_id": "OPC-08",
     "topcards": [
-      "/products/topcards/opc-08-card-1.jpeg",
-      "/products/topcards/opc-08-card-2.jpeg",
-      "/products/topcards/opc-08-card-3.jpeg",
-      "/products/topcards/opc-08-card-4.jpeg",
-      "/products/topcards/opc-08-card-5.jpeg"
+      "/products/topcards/opc-08-card-1.png",
+      "/products/topcards/opc-08-card-2.png",
+      "/products/topcards/opc-08-card-3.png",
+      "/products/topcards/opc-08-card-4.png",
+      "/products/topcards/opc-08-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP08-118_p2",
+        "titleZh": "西尔尔克·雷利（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-08-card-1.png"
+      },
+      {
+        "id": "OP08-118_p1",
+        "titleZh": "西尔尔克·雷利（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-08-card-2.png"
+      },
+      {
+        "id": "OP08-076_p1",
+        "titleZh": "夏洛特·布琳（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-3.png"
+      },
+      {
+        "id": "OP08-052_p1",
+        "titleZh": "黑玛利亚（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-4.png"
+      },
+      {
+        "id": "OP08-106_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-5.png"
+      }
     ]
   },
   "opc-08-two-legends-pack": {
     "set_id": "OPC-08",
     "topcards": [
-      "/products/topcards/opc-08-card-1.jpeg",
-      "/products/topcards/opc-08-card-2.jpeg",
-      "/products/topcards/opc-08-card-3.jpeg",
-      "/products/topcards/opc-08-card-4.jpeg",
-      "/products/topcards/opc-08-card-5.jpeg"
+      "/products/topcards/opc-08-card-1.png",
+      "/products/topcards/opc-08-card-2.png",
+      "/products/topcards/opc-08-card-3.png",
+      "/products/topcards/opc-08-card-4.png",
+      "/products/topcards/opc-08-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP08-118_p2",
+        "titleZh": "西尔尔克·雷利（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-08-card-1.png"
+      },
+      {
+        "id": "OP08-118_p1",
+        "titleZh": "西尔尔克·雷利（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-08-card-2.png"
+      },
+      {
+        "id": "OP08-076_p1",
+        "titleZh": "夏洛特·布琳（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-3.png"
+      },
+      {
+        "id": "OP08-052_p1",
+        "titleZh": "黑玛利亚（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-4.png"
+      },
+      {
+        "id": "OP08-106_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-08-card-5.png"
+      }
     ]
   },
   "opc-09-emperors-new-world-box": {
     "set_id": "OPC-09",
     "topcards": [
-      "/products/topcards/opc-09-card-1.jpeg",
-      "/products/topcards/opc-09-card-2.jpeg",
-      "/products/topcards/opc-09-card-3.jpeg",
-      "/products/topcards/opc-09-card-4.webp",
-      "/products/topcards/opc-09-card-5.webp"
+      "/products/topcards/opc-09-card-1.png",
+      "/products/topcards/opc-09-card-2.png",
+      "/products/topcards/opc-09-card-3.png",
+      "/products/topcards/opc-09-card-4.png",
+      "/products/topcards/opc-09-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP09-118_p2",
+        "titleZh": "戈尔·D·罗杰（黄金漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-09-card-1.png"
+      },
+      {
+        "id": "OP09-119_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-2.png"
+      },
+      {
+        "id": "OP09-004_p2",
+        "titleZh": "香克斯（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-3.png"
+      },
+      {
+        "id": "OP09-093_p2",
+        "titleZh": "马歇尔·D·蒂奇（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-4.png"
+      },
+      {
+        "id": "OP09-051_p2",
+        "titleZh": "巴基（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-5.png"
+      }
     ]
   },
   "opc-09-emperors-new-world-case": {
     "set_id": "OPC-09",
     "topcards": [
-      "/products/topcards/opc-09-card-1.jpeg",
-      "/products/topcards/opc-09-card-2.jpeg",
-      "/products/topcards/opc-09-card-3.jpeg",
-      "/products/topcards/opc-09-card-4.webp",
-      "/products/topcards/opc-09-card-5.webp"
+      "/products/topcards/opc-09-card-1.png",
+      "/products/topcards/opc-09-card-2.png",
+      "/products/topcards/opc-09-card-3.png",
+      "/products/topcards/opc-09-card-4.png",
+      "/products/topcards/opc-09-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP09-118_p2",
+        "titleZh": "戈尔·D·罗杰（黄金漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-09-card-1.png"
+      },
+      {
+        "id": "OP09-119_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-2.png"
+      },
+      {
+        "id": "OP09-004_p2",
+        "titleZh": "香克斯（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-3.png"
+      },
+      {
+        "id": "OP09-093_p2",
+        "titleZh": "马歇尔·D·蒂奇（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-4.png"
+      },
+      {
+        "id": "OP09-051_p2",
+        "titleZh": "巴基（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-5.png"
+      }
     ]
   },
   "opc-09-emperors-new-world-pack": {
     "set_id": "OPC-09",
     "topcards": [
-      "/products/topcards/opc-09-card-1.jpeg",
-      "/products/topcards/opc-09-card-2.jpeg",
-      "/products/topcards/opc-09-card-3.jpeg",
-      "/products/topcards/opc-09-card-4.webp",
-      "/products/topcards/opc-09-card-5.webp"
+      "/products/topcards/opc-09-card-1.png",
+      "/products/topcards/opc-09-card-2.png",
+      "/products/topcards/opc-09-card-3.png",
+      "/products/topcards/opc-09-card-4.png",
+      "/products/topcards/opc-09-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP09-118_p2",
+        "titleZh": "戈尔·D·罗杰（黄金漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-09-card-1.png"
+      },
+      {
+        "id": "OP09-119_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-2.png"
+      },
+      {
+        "id": "OP09-004_p2",
+        "titleZh": "香克斯（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-3.png"
+      },
+      {
+        "id": "OP09-093_p2",
+        "titleZh": "马歇尔·D·蒂奇（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-4.png"
+      },
+      {
+        "id": "OP09-051_p2",
+        "titleZh": "巴基（漫画异画）",
+        "note": "漫画异画",
+        "local": "/products/topcards/opc-09-card-5.png"
+      }
     ]
   },
   "opc-10-royal-blood-box": {
     "set_id": "OPC-10",
     "topcards": [
-      "/products/topcards/opc-10-card-1.webp",
-      "/products/topcards/opc-10-card-2.jpeg",
-      "/products/topcards/opc-10-card-3.jpeg",
-      "/products/topcards/opc-10-card-4.jpeg",
-      "/products/topcards/opc-10-card-5.jpeg"
+      "/products/topcards/opc-10-card-1.png",
+      "/products/topcards/opc-10-card-2.png",
+      "/products/topcards/opc-10-card-3.png",
+      "/products/topcards/opc-10-card-4.png",
+      "/products/topcards/opc-10-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP10-119_p2",
+        "titleZh": "特拉法尔加·罗（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-10-card-1.png"
+      },
+      {
+        "id": "OP10-119_p1",
+        "titleZh": "特拉法尔加·罗（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-10-card-2.png"
+      },
+      {
+        "id": "OP10-118_p1",
+        "titleZh": "神避（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-10-card-3.png"
+      },
+      {
+        "id": "OP10-001_p1",
+        "titleZh": "库赞（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-10-card-4.png"
+      },
+      {
+        "id": "OP10-041",
+        "titleZh": "乌索普（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-10-card-5.png"
+      }
     ]
   },
   "opc-10-royal-blood-case": {
     "set_id": "OPC-10",
     "topcards": [
-      "/products/topcards/opc-10-card-1.webp",
-      "/products/topcards/opc-10-card-2.jpeg",
-      "/products/topcards/opc-10-card-3.jpeg",
-      "/products/topcards/opc-10-card-4.jpeg",
-      "/products/topcards/opc-10-card-5.jpeg"
+      "/products/topcards/opc-10-card-1.png",
+      "/products/topcards/opc-10-card-2.png",
+      "/products/topcards/opc-10-card-3.png",
+      "/products/topcards/opc-10-card-4.png",
+      "/products/topcards/opc-10-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP10-119_p2",
+        "titleZh": "特拉法尔加·罗（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-10-card-1.png"
+      },
+      {
+        "id": "OP10-119_p1",
+        "titleZh": "特拉法尔加·罗（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-10-card-2.png"
+      },
+      {
+        "id": "OP10-118_p1",
+        "titleZh": "神避（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-10-card-3.png"
+      },
+      {
+        "id": "OP10-001_p1",
+        "titleZh": "库赞（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-10-card-4.png"
+      },
+      {
+        "id": "OP10-041",
+        "titleZh": "乌索普（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-10-card-5.png"
+      }
     ]
   },
   "opc-10-royal-blood-pack": {
     "set_id": "OPC-10",
     "topcards": [
-      "/products/topcards/opc-10-card-1.webp",
-      "/products/topcards/opc-10-card-2.jpeg",
-      "/products/topcards/opc-10-card-3.jpeg",
-      "/products/topcards/opc-10-card-4.jpeg",
-      "/products/topcards/opc-10-card-5.jpeg"
+      "/products/topcards/opc-10-card-1.png",
+      "/products/topcards/opc-10-card-2.png",
+      "/products/topcards/opc-10-card-3.png",
+      "/products/topcards/opc-10-card-4.png",
+      "/products/topcards/opc-10-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP10-119_p2",
+        "titleZh": "特拉法尔加·罗（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-10-card-1.png"
+      },
+      {
+        "id": "OP10-119_p1",
+        "titleZh": "特拉法尔加·罗（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-10-card-2.png"
+      },
+      {
+        "id": "OP10-118_p1",
+        "titleZh": "神避（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-10-card-3.png"
+      },
+      {
+        "id": "OP10-001_p1",
+        "titleZh": "库赞（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-10-card-4.png"
+      },
+      {
+        "id": "OP10-041",
+        "titleZh": "乌索普（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-10-card-5.png"
+      }
     ]
   },
   "opc-11-divine-speed-box": {
     "set_id": "OPC-11",
     "topcards": [
-      "/products/topcards/opc-11-card-1.jpeg",
-      "/products/topcards/opc-11-card-2.jpeg",
-      "/products/topcards/opc-11-card-3.jpeg",
-      "/products/topcards/opc-11-card-4.jpeg",
-      "/products/topcards/opc-11-card-5.jpeg"
+      "/products/topcards/opc-11-card-1.png",
+      "/products/topcards/opc-11-card-2.png",
+      "/products/topcards/opc-11-card-3.png",
+      "/products/topcards/opc-11-card-4.png",
+      "/products/topcards/opc-11-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP11-118_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-11-card-1.png"
+      },
+      {
+        "id": "OP11-118_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-11-card-2.png"
+      },
+      {
+        "id": "OP11-040_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-11-card-3.png"
+      },
+      {
+        "id": "OP11-061",
+        "titleZh": "库赞（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-11-card-4.png"
+      },
+      {
+        "id": "OP11-056",
+        "titleZh": "橡胶橡胶果实·火手枪（异画）",
+        "note": "事件异画",
+        "local": "/products/topcards/opc-11-card-5.png"
+      }
     ]
   },
   "opc-11-divine-speed-case": {
     "set_id": "OPC-11",
     "topcards": [
-      "/products/topcards/opc-11-card-1.jpeg",
-      "/products/topcards/opc-11-card-2.jpeg",
-      "/products/topcards/opc-11-card-3.jpeg",
-      "/products/topcards/opc-11-card-4.jpeg",
-      "/products/topcards/opc-11-card-5.jpeg"
+      "/products/topcards/opc-11-card-1.png",
+      "/products/topcards/opc-11-card-2.png",
+      "/products/topcards/opc-11-card-3.png",
+      "/products/topcards/opc-11-card-4.png",
+      "/products/topcards/opc-11-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP11-118_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-11-card-1.png"
+      },
+      {
+        "id": "OP11-118_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-11-card-2.png"
+      },
+      {
+        "id": "OP11-040_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-11-card-3.png"
+      },
+      {
+        "id": "OP11-061",
+        "titleZh": "库赞（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-11-card-4.png"
+      },
+      {
+        "id": "OP11-056",
+        "titleZh": "橡胶橡胶果实·火手枪（异画）",
+        "note": "事件异画",
+        "local": "/products/topcards/opc-11-card-5.png"
+      }
     ]
   },
   "opc-11-divine-speed-pack": {
     "set_id": "OPC-11",
     "topcards": [
-      "/products/topcards/opc-11-card-1.jpeg",
-      "/products/topcards/opc-11-card-2.jpeg",
-      "/products/topcards/opc-11-card-3.jpeg",
-      "/products/topcards/opc-11-card-4.jpeg",
-      "/products/topcards/opc-11-card-5.jpeg"
+      "/products/topcards/opc-11-card-1.png",
+      "/products/topcards/opc-11-card-2.png",
+      "/products/topcards/opc-11-card-3.png",
+      "/products/topcards/opc-11-card-4.png",
+      "/products/topcards/opc-11-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP11-118_p2",
+        "titleZh": "蒙奇·D·路飞（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-11-card-1.png"
+      },
+      {
+        "id": "OP11-118_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-11-card-2.png"
+      },
+      {
+        "id": "OP11-040_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-11-card-3.png"
+      },
+      {
+        "id": "OP11-061",
+        "titleZh": "库赞（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-11-card-4.png"
+      },
+      {
+        "id": "OP11-056",
+        "titleZh": "橡胶橡胶果实·火手枪（异画）",
+        "note": "事件异画",
+        "local": "/products/topcards/opc-11-card-5.png"
+      }
     ]
   },
   "opc-14-cyan-sea-seven-box": {
     "set_id": "OPC-14",
     "topcards": [
-      "/products/topcards/opc-14-card-1.jpeg",
-      "/products/topcards/opc-14-card-2.webp",
-      "/products/topcards/opc-14-card-3.jpeg",
-      "/products/topcards/opc-14-card-4.jpeg",
-      "/products/topcards/opc-14-card-5.jpeg"
+      "/products/topcards/opc-14-card-1.png",
+      "/products/topcards/opc-14-card-2.png",
+      "/products/topcards/opc-14-card-3.png",
+      "/products/topcards/opc-14-card-4.png",
+      "/products/topcards/opc-14-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP14-119_p2",
+        "titleZh": "ジュラキュール·ミホーク（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-14-card-1.png"
+      },
+      {
+        "id": "OP14-119_p1",
+        "titleZh": "鹰眼米霍克（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-14-card-2.png"
+      },
+      {
+        "id": "OP14-083",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-3.png"
+      },
+      {
+        "id": "OP14-076",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-4.png"
+      },
+      {
+        "id": "OP14-040_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-5.png"
+      }
     ]
   },
   "opc-14-cyan-sea-seven-case": {
     "set_id": "OPC-14",
     "topcards": [
-      "/products/topcards/opc-14-card-1.jpeg",
-      "/products/topcards/opc-14-card-2.webp",
-      "/products/topcards/opc-14-card-3.jpeg",
-      "/products/topcards/opc-14-card-4.jpeg",
-      "/products/topcards/opc-14-card-5.jpeg"
+      "/products/topcards/opc-14-card-1.png",
+      "/products/topcards/opc-14-card-2.png",
+      "/products/topcards/opc-14-card-3.png",
+      "/products/topcards/opc-14-card-4.png",
+      "/products/topcards/opc-14-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP14-119_p2",
+        "titleZh": "ジュラキュール·ミホーク（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-14-card-1.png"
+      },
+      {
+        "id": "OP14-119_p1",
+        "titleZh": "鹰眼米霍克（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-14-card-2.png"
+      },
+      {
+        "id": "OP14-083",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-3.png"
+      },
+      {
+        "id": "OP14-076",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-4.png"
+      },
+      {
+        "id": "OP14-040_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-5.png"
+      }
     ]
   },
   "opc-14-cyan-sea-seven-pack": {
     "set_id": "OPC-14",
     "topcards": [
-      "/products/topcards/opc-14-card-1.jpeg",
-      "/products/topcards/opc-14-card-2.webp",
-      "/products/topcards/opc-14-card-3.jpeg",
-      "/products/topcards/opc-14-card-4.jpeg",
-      "/products/topcards/opc-14-card-5.jpeg"
+      "/products/topcards/opc-14-card-1.png",
+      "/products/topcards/opc-14-card-2.png",
+      "/products/topcards/opc-14-card-3.png",
+      "/products/topcards/opc-14-card-4.png",
+      "/products/topcards/opc-14-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP14-119_p2",
+        "titleZh": "ジュラキュール·ミホーク（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-14-card-1.png"
+      },
+      {
+        "id": "OP14-119_p1",
+        "titleZh": "鹰眼米霍克（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-14-card-2.png"
+      },
+      {
+        "id": "OP14-083",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-3.png"
+      },
+      {
+        "id": "OP14-076",
+        "titleZh": "波雅·汉库克（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-4.png"
+      },
+      {
+        "id": "OP14-040_p1",
+        "titleZh": "娜美（异画）",
+        "note": "人气异画",
+        "local": "/products/topcards/opc-14-card-5.png"
+      }
     ]
   },
   "opc-15-adventure-gods-island-box": {
     "set_id": "OPC-15",
     "topcards": [
-      "/products/topcards/opc-15-1-1.png",
-      "/products/topcards/opc-15-1-2.png",
-      "/products/topcards/opc-15-4-1.png",
-      "/products/topcards/opc-15-3-1.png",
-      "/products/topcards/opc-15-3-2.png"
+      "/products/topcards/opc-15-card-1.png",
+      "/products/topcards/opc-15-card-2.png",
+      "/products/topcards/opc-15-card-3.png",
+      "/products/topcards/opc-15-card-4.png",
+      "/products/topcards/opc-15-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP15-118_p2",
+        "titleZh": "艾尼路（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-15-card-1.png"
+      },
+      {
+        "id": "OP15-119_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-15-card-2.png"
+      },
+      {
+        "id": "OP15-118_p1",
+        "titleZh": "艾尼路（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-15-card-3.png"
+      },
+      {
+        "id": "OP15-001_p1",
+        "titleZh": "蒙奇·D·路飞（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-15-card-4.png"
+      },
+      {
+        "id": "OP15-002_p1",
+        "titleZh": "艾尼路（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-15-card-5.png"
+      }
     ]
   },
   "opc-15-adventure-gods-island-case": {
     "set_id": "OPC-15",
     "topcards": [
-      "/products/topcards/opc-15-1-1.png",
-      "/products/topcards/opc-15-1-2.png",
-      "/products/topcards/opc-15-4-1.png",
-      "/products/topcards/opc-15-3-1.png",
-      "/products/topcards/opc-15-3-2.png"
+      "/products/topcards/opc-15-card-1.png",
+      "/products/topcards/opc-15-card-2.png",
+      "/products/topcards/opc-15-card-3.png",
+      "/products/topcards/opc-15-card-4.png",
+      "/products/topcards/opc-15-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP15-118_p2",
+        "titleZh": "艾尼路（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-15-card-1.png"
+      },
+      {
+        "id": "OP15-119_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-15-card-2.png"
+      },
+      {
+        "id": "OP15-118_p1",
+        "titleZh": "艾尼路（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-15-card-3.png"
+      },
+      {
+        "id": "OP15-001_p1",
+        "titleZh": "蒙奇·D·路飞（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-15-card-4.png"
+      },
+      {
+        "id": "OP15-002_p1",
+        "titleZh": "艾尼路（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-15-card-5.png"
+      }
     ]
   },
   "opc-15-adventure-gods-island-pack": {
     "set_id": "OPC-15",
     "topcards": [
-      "/products/topcards/opc-15-1-1.png",
-      "/products/topcards/opc-15-1-2.png",
-      "/products/topcards/opc-15-4-1.png",
-      "/products/topcards/opc-15-3-1.png",
-      "/products/topcards/opc-15-3-2.png"
+      "/products/topcards/opc-15-card-1.png",
+      "/products/topcards/opc-15-card-2.png",
+      "/products/topcards/opc-15-card-3.png",
+      "/products/topcards/opc-15-card-4.png",
+      "/products/topcards/opc-15-card-5.png"
+    ],
+    "meta": [
+      {
+        "id": "OP15-118_p2",
+        "titleZh": "艾尼路（漫画异画 SEC）",
+        "note": "本弹旗舰 chase",
+        "local": "/products/topcards/opc-15-card-1.png"
+      },
+      {
+        "id": "OP15-119_p1",
+        "titleZh": "蒙奇·D·路飞（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-15-card-2.png"
+      },
+      {
+        "id": "OP15-118_p1",
+        "titleZh": "艾尼路（异画 SEC）",
+        "note": "SEC 平行",
+        "local": "/products/topcards/opc-15-card-3.png"
+      },
+      {
+        "id": "OP15-001_p1",
+        "titleZh": "蒙奇·D·路飞（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-15-card-4.png"
+      },
+      {
+        "id": "OP15-002_p1",
+        "titleZh": "艾尼路（领袖异画）",
+        "note": "领袖平行",
+        "local": "/products/topcards/opc-15-card-5.png"
+      }
     ]
   }
 }
