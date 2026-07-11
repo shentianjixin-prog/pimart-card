@@ -77,7 +77,7 @@ export default async function Home({
           take: PAGE_SIZE,
         }),
     showMarketing ? Promise.resolve(0) : prisma.product.count({ where }),
-    showMarketing ? Promise.resolve(null) : fetchFilterFacets(),
+    showMarketing ? Promise.resolve(null) : fetchFilterFacets(filterState.game),
     showMarketing ? Promise.resolve({}) : fetchSubGameCounts(),
     showMarketing
       ? prisma.product.findMany({

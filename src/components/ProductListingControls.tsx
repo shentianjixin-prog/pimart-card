@@ -12,13 +12,13 @@ import {
   type StockKey,
   type SubGameKey,
   MAIN_GAMES,
-  PRODUCT_TYPES,
   SORT_OPTIONS,
   STOCK_OPTIONS,
   SUB_GAMES,
   applyFilterPatch,
   buildListingHref,
   filterStateToParams,
+  productTypesForGame,
   subGameLabel,
   toggleInList,
 } from "@/lib/product-filters";
@@ -309,7 +309,7 @@ function FilterPanelContent({
 
       <FilterSection title={T("filter_product_type")}>
         <div className="flex flex-wrap gap-2">
-          {PRODUCT_TYPES.map((key) => {
+          {productTypesForGame(draft.game).map((key) => {
             const facet = facets.types.find((f) => f.key === key);
             return (
               <PillOption

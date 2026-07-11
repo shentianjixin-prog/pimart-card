@@ -13,8 +13,8 @@ export type SortKey =
   | "popular"
   | "restocked";
 
-/** 扩充包 / 礼盒 / 周边 / 套装 */
-export type ProductTypeKey = "expansion" | "gift" | "merch" | "set";
+/** 扩充包 / 礼盒 / 周边 / 套装 / 挂盒（挂盒主要用于海贼王） */
+export type ProductTypeKey = "expansion" | "gift" | "merch" | "set" | "hang";
 export type MainGameKey = "pokemon" | "onepiece" | "other";
 export type SubGameKey =
   | "dragon-ball"
@@ -78,9 +78,18 @@ export const LISTING_PRODUCT: Prisma.ProductWhereInput = {
   NOT: { boxType: { in: [...VARIANT_ONLY_BOX_TYPES] } },
 };
 
+/** 默认（宝可梦 / 全站）：扩充包 / 礼盒 / 周边 / 套装 */
 export const PRODUCT_TYPES: ProductTypeKey[] = ["expansion", "gift", "merch", "set"];
 
-/** 旧 URL type= 映射到新四类 */
+/** 海贼王：扩充包 / 礼盒 / 挂盒 */
+export const ONEPIECE_PRODUCT_TYPES: ProductTypeKey[] = ["expansion", "gift", "hang"];
+
+export function productTypesForGame(game?: MainGameKey): ProductTypeKey[] {
+  if (game === "onepiece") return ONEPIECE_PRODUCT_TYPES;
+  return PRODUCT_TYPES;
+}
+
+/** 旧 URL type= 映射 */
 const LEGACY_TYPE_MAP: Record<string, ProductTypeKey | undefined> = {
   sealed: "expansion",
   psa: undefined,
@@ -89,6 +98,7 @@ const LEGACY_TYPE_MAP: Record<string, ProductTypeKey | undefined> = {
   expansion: "expansion",
   gift: "gift",
   set: "set",
+  hang: "hang",
 };
 export const MAIN_GAMES: MainGameKey[] = ["pokemon", "onepiece", "other"];
 export const SUB_GAMES: SubGameKey[] = [
@@ -160,16 +170,18 @@ function legacyStock(raw: RawSearchParams): StockKey[] {
 }
 
 function parseProductTypes(raw?: string): ProductTypeKey[] {
+  const allKnown: ProductTypeKey[] = ["expansion", "gift", "merch", "set", "hang"];
   const out: ProductTypeKey[] = [];
   for (const v of splitMulti(raw)) {
-    const mapped = LEGACY_TYPE_MAP[v] ?? (PRODUCT_TYPES.includes(v as ProductTypeKey) ? (v as ProductTypeKey) : undefined);
+    const mapped =
+      LEGACY_TYPE_MAP[v] ?? (allKnown.includes(v as ProductTypeKey) ? (v as ProductTypeKey) : undefined);
     if (mapped && !out.includes(mapped)) out.push(mapped);
   }
   return out;
 }
 
 export function parseFilterState(raw: RawSearchParams): FilterState {
-  const type = parseProductTypes(firstParam(raw.type));
+  let type = parseProductTypes(firstParam(raw.type));
 
   let game = parseMainGame(firstParam(raw.game));
   let subGame = parseSubGame(firstParam(raw.subGame));
@@ -182,6 +194,9 @@ export function parseFilterState(raw: RawSearchParams): FilterState {
   }
 
   if (subGame && !game) game = "other";
+
+  const allowedTypes = new Set(productTypesForGame(game));
+  type = type.filter((k) => allowedTypes.has(k));
 
   const series = splitMulti(firstParam(raw.series)).map(normalizeSeriesId);
   const rarity = splitMulti(firstParam(raw.rarity));
@@ -255,7 +270,8 @@ const EXPANSION_BOX_TYPES = [
 
 const GIFT_BOX_TYPES = ["礼盒", "专属礼盒", "大礼盒"] as const;
 
-const SET_BOX_TYPES = ["对战套装", "构筑套装", "预组", "卡组"] as const;
+/** 挂盒：预组牌组 / 显式挂盒（海贼王 STC 等） */
+const HANG_BOX_TYPES = ["挂盒", "预组"] as const;
 
 export function typeWhere(key: ProductTypeKey): Prisma.ProductWhereInput {
   switch (key) {
@@ -264,7 +280,15 @@ export function typeWhere(key: ProductTypeKey): Prisma.ProductWhereInput {
     case "gift":
       return { boxType: { in: [...GIFT_BOX_TYPES] } };
     case "set":
-      return { boxType: { in: [...SET_BOX_TYPES] } };
+      // 预组归挂盒后，套装不再含预组，避免海贼王重复归类
+      return { boxType: { in: ["对战套装", "构筑套装", "卡组"] } };
+    case "hang":
+      return {
+        OR: [
+          { boxType: { in: [...HANG_BOX_TYPES] } },
+          { name: { contains: "挂盒" } },
+        ],
+      };
     case "merch":
       return MERCH_WHERE;
   }
@@ -494,6 +518,11 @@ export function applyFilterPatch(
     if (newGame !== state.game) {
       if (!("series" in patch)) next.series = [];
       if (!("subGame" in patch)) next.subGame = undefined;
+      // 切换游戏时丢掉不适用于该游戏的商品类型
+      if (!("type" in patch)) {
+        const allowed = new Set(productTypesForGame(newGame));
+        next.type = next.type.filter((k) => allowed.has(k));
+      }
     }
     if (newGame !== "other") next.subGame = undefined;
   }
@@ -503,6 +532,12 @@ export function applyFilterPatch(
   }
 
   if (next.game !== "other") next.subGame = undefined;
+
+  // 兜底：只保留当前游戏允许的类型
+  {
+    const allowed = new Set(productTypesForGame(next.game));
+    next.type = next.type.filter((k) => allowed.has(k));
+  }
 
   return next;
 }

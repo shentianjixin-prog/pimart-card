@@ -1,57 +1,44 @@
 import { prisma } from "@/lib/prisma";
 import {
   type FilterFacets,
+  type MainGameKey,
   MAIN_GAMES,
-  PRODUCT_TYPES,
   LISTING_PRODUCT,
+  productTypesForGame,
   typeWhere,
   subGameWhere,
+  gameWhere,
 } from "@/lib/product-filters";
 
 const ACTIVE = LISTING_PRODUCT;
 
-const POKEMON_WHERE = {
-  OR: [
-    { category: { contains: "宝可梦" } },
-    { category: { contains: "ポケモン" } },
-    { name: { contains: "宝可梦" } },
-    { name: { contains: "Pokemon" } },
-    { name: { contains: "ポケモン" } },
-  ],
-};
-
-const ONEPIECE_WHERE = {
-  OR: [
-    { name: { contains: "One Piece" } },
-    { name: { contains: "海贼王" } },
-    { name: { contains: "ワンピース" } },
-  ],
-};
-
-const OTHER_WHERE = { NOT: { OR: [POKEMON_WHERE, ONEPIECE_WHERE] } };
-
-async function countForGame(key: (typeof MAIN_GAMES)[number]) {
-  if (key === "pokemon") {
-    return prisma.product.count({ where: { AND: [LISTING_PRODUCT, POKEMON_WHERE] } });
-  }
-  if (key === "onepiece") {
-    return prisma.product.count({ where: { AND: [LISTING_PRODUCT, ONEPIECE_WHERE] } });
-  }
-  return prisma.product.count({ where: { AND: [LISTING_PRODUCT, OTHER_WHERE] } });
+async function countForGame(key: MainGameKey) {
+  return prisma.product.count({
+    where: { AND: [LISTING_PRODUCT, gameWhere(key)] },
+  });
 }
 
-export async function fetchFilterFacets(): Promise<FilterFacets> {
+export async function fetchFilterFacets(game?: MainGameKey): Promise<FilterFacets> {
+  const typeKeys = productTypesForGame(game);
+  const scopedGame = game ? gameWhere(game) : undefined;
+
   const [rarityGroups, typeCounts, gameCounts] = await Promise.all([
     prisma.product.groupBy({
       by: ["rarity"],
-      where: { ...ACTIVE, rarity: { not: null } },
+      where: {
+        ...ACTIVE,
+        rarity: { not: null },
+        ...(scopedGame ? { AND: [scopedGame] } : {}),
+      },
       _count: { _all: true },
     }),
     Promise.all(
-      PRODUCT_TYPES.map(async (key) => ({
+      typeKeys.map(async (key) => ({
         key,
         count: await prisma.product.count({
-          where: { AND: [LISTING_PRODUCT, typeWhere(key)] },
+          where: {
+            AND: [LISTING_PRODUCT, typeWhere(key), ...(scopedGame ? [scopedGame] : [])],
+          },
         }),
       }))
     ),

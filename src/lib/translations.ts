@@ -105,6 +105,7 @@ const dict: Record<string, Record<Lang, string>> = {
   filter_type_gift:      { zh: "礼盒",   ja: "ギフトBOX", en: "Gift Box" },
   filter_type_merch:     { zh: "周边",   ja: "周辺グッズ", en: "Merchandise" },
   filter_type_set:       { zh: "套装",   ja: "セット",     en: "Set" },
+  filter_type_hang:      { zh: "挂盒",   ja: "吊り下げBOX", en: "Hanging Pack" },
   filter_game_pokemon: { zh: "宝可梦",         ja: "ポケモン",     en: "Pokémon" },
   filter_game_onepiece:{ zh: "海贼王",         ja: "ワンピース",   en: "One Piece" },
   filter_game_naruto:  { zh: "火影忍者",       ja: "NARUTO",       en: "Naruto" },
