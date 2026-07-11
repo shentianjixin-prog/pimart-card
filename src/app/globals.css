@@ -449,6 +449,62 @@ button:not(:disabled),
     outline: none;
   }
 
+  /* 导航：买取 / 支持 */
+  .nav-pill {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 999px;
+    padding: 0.35rem 0.95rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: 1.5px solid transparent;
+    transition:
+      background 160ms ease,
+      color 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 140ms ease;
+  }
+
+  .nav-pill:active {
+    transform: scale(0.98);
+  }
+
+  .nav-pill-buyback {
+    color: #9a3412;
+    background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);
+    border-color: rgba(234, 88, 12, 0.28);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  }
+
+  .nav-pill-buyback:hover {
+    color: #7c2d12;
+    background: linear-gradient(180deg, #ffedd5 0%, #fed7aa 100%);
+    border-color: rgba(234, 88, 12, 0.45);
+  }
+
+  .nav-pill-support {
+    color: #0c4a6e;
+    background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-color: rgba(14, 165, 233, 0.28);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  }
+
+  .nav-pill-support:hover {
+    color: #075985;
+    background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+    border-color: rgba(14, 165, 233, 0.45);
+  }
+
+  .nav-pill-support[aria-expanded="true"] {
+    color: #075985;
+    background: #e0f2fe;
+    border-color: rgba(14, 165, 233, 0.5);
+  }
+
   .section-title {
     @apply text-2xl font-semibold tracking-tight text-[#111827] sm:text-3xl;
   }

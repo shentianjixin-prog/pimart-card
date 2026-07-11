@@ -179,10 +179,12 @@ function MoreNavDropdown({
   label,
   linkItems,
   onNavigate,
+  triggerClassName,
 }: {
   label: string;
   linkItems: { label: string; href: string }[];
   onNavigate?: () => void;
+  triggerClassName?: string;
 }) {
   const T = useT();
   const [open, setOpen] = useState(false);
@@ -208,7 +210,10 @@ function MoreNavDropdown({
           setOpen((v) => !v);
           setLangOpen(false);
         }}
-        className="flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-medium text-[#374151] transition hover:bg-[#f7f8fa]"
+        className={
+          triggerClassName ??
+          "flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-medium text-[#374151] transition hover:bg-[#f7f8fa]"
+        }
         aria-expanded={open}
       >
         {label}
@@ -325,13 +330,14 @@ export function Header({ member }: { member?: MemberSession | null }) {
               </Link>
             ))}
             <SimpleNavDropdown label={T("menu_other_tcg")} items={otherTcgItems} />
-            <Link
-              href="/buyback"
-              className="flex min-h-11 items-center rounded-full px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]"
-            >
+            <Link href="/buyback" className="nav-pill nav-pill-buyback">
               {T("menu_buyback")}
             </Link>
-            <MoreNavDropdown label={T("nav_more")} linkItems={moreItems} />
+            <MoreNavDropdown
+              label={T("nav_more")}
+              linkItems={moreItems}
+              triggerClassName="nav-pill nav-pill-support"
+            />
           </nav>
 
           <div className="ml-2 hidden w-[148px] shrink-0 lg:block xl:w-[180px]">
@@ -467,16 +473,16 @@ export function Header({ member }: { member?: MemberSession | null }) {
               </div>
 
               {[
-                { key: "menu_buyback", href: "/buyback" },
-                { key: "menu_wholesale", href: "/contact" },
-                { key: "footer_contact", href: "/contact" },
-                { key: "nav_account", href: "/account" },
+                { key: "menu_buyback", href: "/buyback", className: "nav-pill nav-pill-buyback w-full justify-center" },
+                { key: "menu_wholesale", href: "/contact", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
+                { key: "footer_contact", href: "/contact", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
+                { key: "nav_account", href: "/account", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
               ].map((item) => (
                 <Link
                   key={item.key}
                   href={item.href}
                   onClick={closeMobile}
-                  className="flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]"
+                  className={item.className}
                 >
                   {T(item.key)}
                 </Link>
