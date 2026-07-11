@@ -20,8 +20,6 @@ import {
   LISTING_PRODUCT,
   type RawSearchParams,
 } from "@/lib/product-filters";
-import { findBoxVariantsForProducts } from "@/lib/product-box-variants";
-
 const POPULAR_TARGET = 8;
 const LATEST_TARGET = 4;
 
@@ -125,9 +123,6 @@ export default async function Home({
     const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET + latestProducts.length)
       .filter((p) => !latestIds.has(p.id))
       .slice(0, POPULAR_TARGET);
-    const allForVariants = [...latestProducts, ...popular];
-    const variantMap = await findBoxVariantsForProducts(allForVariants);
-
     return (
       <>
         <HomeHero products={heroProducts} />
@@ -135,11 +130,7 @@ export default async function Home({
         <div className="home-main-stack mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <HomeAnnounceBar />
 
-          <HomeProductSections
-            latest={latestProducts}
-            popular={popular}
-            variantsByProductId={Object.fromEntries(variantMap)}
-          />
+          <HomeProductSections latest={latestProducts} popular={popular} />
 
           <HomeB2B />
           <TrustedFeatures />
@@ -147,8 +138,6 @@ export default async function Home({
       </>
     );
   }
-
-  const listingVariantMap = await findBoxVariantsForProducts(products);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
@@ -164,11 +153,7 @@ export default async function Home({
           ) : (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6">
               {products.map((p) => (
-                <ProductCard
-                  key={p.id}
-                  product={p}
-                  variants={listingVariantMap.get(p.id)}
-                />
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
           )}

@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { formatJpy } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useT } from "@/lib/lang-context";
 import { CardPlaceholder, isUsableProductImage } from "@/components/HeroPlaceholders";
-import { sortBoxVariants, type BoxVariantOption } from "@/lib/product-box-variant-types";
-import { ProductBuySheet } from "@/components/ProductBuySheet";
 
 const NEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -31,8 +30,6 @@ type ProductData = {
 
 type Props = {
   product: ProductData;
-  /** 传给「即刻购买」弹层；主页卡片本身不展示规格 */
-  variants?: BoxVariantOption[];
 };
 
 function isPsaProduct(product: ProductData) {
@@ -47,14 +44,13 @@ function isWholesaleProduct(product: ProductData) {
   return /wholesale|批发|卸売|b2b/i.test(haystack);
 }
 
-export function ProductCard({ product, variants = [] }: Props) {
+export function ProductCard({ product }: Props) {
+  const router = useRouter();
   const { addItem } = useCart();
   const T = useT();
   const [added, setAdded] = useState(false);
-  const [buyOpen, setBuyOpen] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
 
-  const ordered = sortBoxVariants(variants);
   const image = product.images.split(",")[0]?.trim();
   const showPlaceholder = !isUsableProductImage(image) || imgFailed;
   const soldOut = product.stock <= 0;
@@ -62,6 +58,7 @@ export function ProductCard({ product, variants = [] }: Props) {
   const isHot = product.featured === true;
   const isPsa = isPsaProduct(product);
   const isWholesale = isWholesaleProduct(product);
+  const productHref = `/products/${encodeURIComponent(product.slug)}`;
 
   const stockLabel = soldOut
     ? T("card_sold_out")
@@ -89,7 +86,7 @@ export function ProductCard({ product, variants = [] }: Props) {
     e.preventDefault();
     e.stopPropagation();
     if (soldOut) return;
-    setBuyOpen(true);
+    router.push(productHref);
   }
 
   const tagItems: { label: string; className: string }[] = [];
@@ -100,7 +97,7 @@ export function ProductCard({ product, variants = [] }: Props) {
 
   return (
     <div className="product-card group flex h-full flex-col">
-      <Link href={`/products/${encodeURIComponent(product.slug)}`} className="block flex-1">
+      <Link href={productHref} className="block flex-1">
         <div className="relative aspect-[5/7] w-full overflow-hidden bg-[#FAFAFA]">
           {showPlaceholder ? (
             <CardPlaceholder className="h-full rounded-none" />
@@ -212,22 +209,6 @@ export function ProductCard({ product, variants = [] }: Props) {
           </>
         )}
       </div>
-
-      <ProductBuySheet
-        open={buyOpen}
-        onClose={() => setBuyOpen(false)}
-        product={{
-          id: product.id,
-          slug: product.slug,
-          name: product.name,
-          series: product.series,
-          boxType: product.boxType,
-          priceJpy: product.priceJpy,
-          stock: product.stock,
-          images: product.images,
-        }}
-        variants={ordered}
-      />
     </div>
   );
 }

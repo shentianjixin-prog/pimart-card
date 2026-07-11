@@ -2,37 +2,25 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { ProductCard } from "@/components/ProductCard";
 import { t, resolveLang } from "@/lib/translations";
-import type { BoxVariantOption } from "@/lib/product-box-variant-types";
 
 type Product = React.ComponentProps<typeof ProductCard>["product"];
 
 type Props = {
   latest: Product[];
   popular: Product[];
-  variantsByProductId?: Record<string, BoxVariantOption[]>;
 };
 
-function ProductGrid({
-  products,
-  variantsByProductId,
-}: {
-  products: Product[];
-  variantsByProductId: Record<string, BoxVariantOption[]>;
-}) {
+function ProductGrid({ products }: { products: Product[] }) {
   return (
     <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
       {products.map((p) => (
-        <ProductCard key={p.id} product={p} variants={variantsByProductId[p.id]} />
+        <ProductCard key={p.id} product={p} />
       ))}
     </div>
   );
 }
 
-export async function HomeProductSections({
-  latest,
-  popular,
-  variantsByProductId = {},
-}: Props) {
+export async function HomeProductSections({ latest, popular }: Props) {
   const cookieStore = await cookies();
   const lang = resolveLang(cookieStore.get("lang")?.value);
   const T = (key: string) => t(key, lang);
@@ -49,7 +37,7 @@ export async function HomeProductSections({
               <p className="section-subtitle">{T("section_latest_sub")}</p>
             </div>
           </div>
-          <ProductGrid products={latest.slice(0, 4)} variantsByProductId={variantsByProductId} />
+          <ProductGrid products={latest.slice(0, 4)} />
         </section>
       ) : null}
 
@@ -64,7 +52,7 @@ export async function HomeProductSections({
               {T("section_view_more")}
             </Link>
           </div>
-          <ProductGrid products={popular.slice(0, 8)} variantsByProductId={variantsByProductId} />
+          <ProductGrid products={popular.slice(0, 8)} />
         </section>
       ) : null}
     </>
