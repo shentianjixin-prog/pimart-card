@@ -154,6 +154,10 @@ const dict: Record<string, Record<Lang, string>> = {
   // 商品类型标签 (DB 存中文，显示用这里翻译)
   boxtype_fat:         { zh: "肥盒",   ja: "ブースターBOX",    en: "Booster Box" },
   boxtype_slim:        { zh: "瘦盒",   ja: "強化拡張パック",   en: "Enhanced Pack" },
+  boxtype_fat_pack:    { zh: "肥散包", ja: "ジャンボパック",   en: "Jumbo Pack" },
+  boxtype_slim_pack:   { zh: "瘦散包", ja: "スリムパック",     en: "Slim Pack" },
+  boxtype_fat_case:    { zh: "肥原箱", ja: "ジャンボカートン", en: "Jumbo Case" },
+  boxtype_slim_case:   { zh: "瘦原箱", ja: "スリムカートン",   en: "Slim Case" },
   boxtype_gem:         { zh: "宝石包", ja: "ジェムパック",     en: "Gem Pack" },
   boxtype_gift:        { zh: "礼盒",   ja: "ギフトBOX",       en: "Gift Box" },
   boxtype_sealed:      { zh: "原盒",   ja: "BOX",              en: "Booster Box" },
@@ -521,6 +525,10 @@ export function t(key: string, lang: Lang): string {
 const BOX_TYPE_KEY: Record<string, string> = {
   肥盒: "boxtype_fat",
   瘦盒: "boxtype_slim",
+  肥散包: "boxtype_fat_pack",
+  瘦散包: "boxtype_slim_pack",
+  肥原箱: "boxtype_fat_case",
+  瘦原箱: "boxtype_slim_case",
   宝石包: "boxtype_gem",
   礼盒: "boxtype_gift",
   原盒: "boxtype_sealed",

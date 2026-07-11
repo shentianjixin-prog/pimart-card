@@ -91,7 +91,11 @@ export default async function ProductPage({
             </p>
           ) : null}
 
-          <ProductFormatSelector variants={variants} currentSlug={product.slug} />
+          <ProductFormatSelector
+            variants={variants}
+            currentSlug={product.slug}
+            series={product.series}
+          />
 
           <div className="product-detail-shipping">
             <p className="product-detail-shipping-title">{T("detail_shipping_h")}</p>

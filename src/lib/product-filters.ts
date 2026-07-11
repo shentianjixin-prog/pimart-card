@@ -218,12 +218,17 @@ const MERCH_WHERE: Prisma.ProductWhereInput = {
 const EXPANSION_BOX_TYPES = [
   "肥盒",
   "瘦盒",
+  "肥散包",
+  "瘦散包",
+  "肥原箱",
+  "瘦原箱",
   "宝石包",
   "原盒",
   "散包",
   "原箱",
   "特别版",
   "补充包(肥盒)",
+  "补充包(瘦盒)",
   "强化包(瘦盒)",
   "强化扩张包",
 ] as const;

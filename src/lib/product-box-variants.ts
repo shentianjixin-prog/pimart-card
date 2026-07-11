@@ -1,11 +1,21 @@
 import { prisma } from "@/lib/prisma";
 import {
   sortBoxVariants,
+  isOpcFormat,
+  isSvFormat,
+  isSvExtendedFormat,
+  isPokemonPairFormat,
+  OPC_FORMATS,
+  SV_FORMATS,
   type BoxVariantOption,
 } from "@/lib/product-box-variant-types";
 
 export type { BoxVariantOption } from "@/lib/product-box-variant-types";
-export { sortBoxVariants } from "@/lib/product-box-variant-types";
+export {
+  sortBoxVariants,
+  formatVariantTitle,
+  firstImage,
+} from "@/lib/product-box-variant-types";
 
 type SeriesBlock = {
   era: string;
@@ -13,10 +23,6 @@ type SeriesBlock = {
   num: string;
   isSlim: boolean;
 };
-
-const POKEMON_FORMATS = new Set(["肥盒", "瘦盒"]);
-const OPC_FORMATS = ["原盒", "散包", "原箱"] as const;
-const OPC_FORMAT_SET = new Set<string>(OPC_FORMATS);
 
 /** 从 series 解析剑&盾 / 太阳&月亮 的肥瘦区块号 */
 export function parseSeriesBlock(series: string | null | undefined): SeriesBlock | null {
@@ -50,6 +56,13 @@ export function parseOpcSeriesKey(series: string | null | undefined): string | n
   if (!series) return null;
   const m = series.match(/^(OPC-\d+)\b/i);
   return m ? m[1].toUpperCase() : null;
+}
+
+/** 解析朱・紫 CSV 键，如 CSV10c */
+export function parseCsvSeriesKey(series: string | null | undefined): string | null {
+  if (!series) return null;
+  const m = series.match(/\b(CSV\d+c)\b/i);
+  return m ? m[1].replace(/c$/i, "c").replace(/^csv/i, "CSV") : null;
 }
 
 function slimSeries(block: SeriesBlock) {
@@ -117,7 +130,8 @@ function toOption(p: {
   };
 }
 
-async function findPokemonVariants(product: ProductLike): Promise<BoxVariantOption[]> {
+/** 日月/剑盾：补充包肥盒 ↔ 强化包瘦盒 */
+async function findLegacyPokemonVariants(product: ProductLike): Promise<BoxVariantOption[]> {
   const block = parseSeriesBlock(product.series);
   if (!block) return [];
 
@@ -160,6 +174,47 @@ async function findPokemonVariants(product: ProductLike): Promise<BoxVariantOpti
   return sortBoxVariants([current, toOption(slim)]);
 }
 
+/** 朱・紫 CSV：同弹肥/瘦 × 整盒/散包/原箱 */
+async function findSvVariants(product: ProductLike): Promise<BoxVariantOption[]> {
+  const key = parseCsvSeriesKey(product.series);
+  if (!key) return [];
+
+  const language = product.language ?? undefined;
+  const siblings = await prisma.product.findMany({
+    where: {
+      status: "上架",
+      boxType: { in: [...SV_FORMATS] },
+      series: { contains: key },
+      ...(language ? { language } : {}),
+    },
+    select: VARIANT_SELECT,
+  });
+
+  const matched = siblings.filter(
+    (p) => isSvFormat(p.boxType) && parseCsvSeriesKey(p.series) === key
+  );
+
+  if (matched.length < 2) return [];
+  return sortBoxVariants(matched.map(toOption));
+}
+
+async function findPokemonVariants(product: ProductLike): Promise<BoxVariantOption[]> {
+  if (parseCsvSeriesKey(product.series) && isSvFormat(product.boxType)) {
+    return findSvVariants(product);
+  }
+  if (product.boxType === "肥盒" || product.boxType === "瘦盒") {
+    // 朱紫肥盒也可能走 CSV 路径
+    if (parseCsvSeriesKey(product.series)) {
+      return findSvVariants(product);
+    }
+    return findLegacyPokemonVariants(product);
+  }
+  if (isSvFormat(product.boxType)) {
+    return findSvVariants(product);
+  }
+  return [];
+}
+
 async function findOpcVariants(product: ProductLike): Promise<BoxVariantOption[]> {
   const key = parseOpcSeriesKey(product.series);
   if (!key) return [];
@@ -176,7 +231,7 @@ async function findOpcVariants(product: ProductLike): Promise<BoxVariantOption[]
   });
 
   const matched = siblings.filter((p) => {
-    if (!OPC_FORMAT_SET.has(p.boxType)) return false;
+    if (!isOpcFormat(p.boxType)) return false;
     return parseOpcSeriesKey(p.series) === key;
   });
 
@@ -186,15 +241,15 @@ async function findOpcVariants(product: ProductLike): Promise<BoxVariantOption[]
 
 /**
  * 查询可切换规格。
- * - 宝可梦：肥盒 / 瘦盒（按 series 区块配对）
- * - 海贼王 OPC：原盒 / 散包 / 原箱（同 OPC 编号）
- * 无配对时返回空数组，详情页不渲染规格区。
+ * - 朱・紫 CSV：瘦/肥 × 整盒/散包/原箱
+ * - 日月/剑盾：肥盒 / 瘦盒
+ * - 海贼王 OPC：原盒 / 散包 / 原箱
  */
 export async function findBoxVariants(product: ProductLike): Promise<BoxVariantOption[]> {
-  if (POKEMON_FORMATS.has(product.boxType)) {
+  if (isPokemonPairFormat(product.boxType) || isSvFormat(product.boxType)) {
     return findPokemonVariants(product);
   }
-  if (OPC_FORMAT_SET.has(product.boxType)) {
+  if (isOpcFormat(product.boxType)) {
     return findOpcVariants(product);
   }
   return [];
@@ -218,9 +273,14 @@ function opcGroupKey(series: string | null, language: string | null) {
   return `${key}::${language ?? ""}`;
 }
 
+function csvGroupKey(series: string | null, language: string | null) {
+  const key = parseCsvSeriesKey(series);
+  if (!key) return null;
+  return `${key}::${language ?? ""}`;
+}
+
 /**
  * 列表页批量查规格，避免 N+1。
- * 返回 productId → 可切换规格（含自身；少于 2 个则不入 map）。
  */
 export async function findBoxVariantsForProducts(
   products: ProductLike[]
@@ -228,8 +288,18 @@ export async function findBoxVariantsForProducts(
   const result = new Map<string, BoxVariantOption[]>();
   if (products.length === 0) return result;
 
-  const opcProducts = products.filter((p) => OPC_FORMAT_SET.has(p.boxType));
-  const pokemonProducts = products.filter((p) => POKEMON_FORMATS.has(p.boxType));
+  const opcProducts = products.filter((p) => isOpcFormat(p.boxType));
+  const svProducts = products.filter(
+    (p) =>
+      Boolean(parseCsvSeriesKey(p.series)) &&
+      (isSvExtendedFormat(p.boxType) || p.boxType === "肥盒" || p.boxType === "瘦盒")
+  );
+  const legacyPokemon = products.filter(
+    (p) =>
+      (p.boxType === "肥盒" || p.boxType === "瘦盒") &&
+      !parseCsvSeriesKey(p.series) &&
+      parseSeriesBlock(p.series)
+  );
 
   if (opcProducts.length > 0) {
     const prefixes = [
@@ -254,7 +324,7 @@ export async function findBoxVariantsForProducts(
 
     const byGroup = new Map<string, BoxVariantOption[]>();
     for (const row of siblings) {
-      if (!OPC_FORMAT_SET.has(row.boxType)) continue;
+      if (!isOpcFormat(row.boxType)) continue;
       const gk = opcGroupKey(row.series, row.language);
       if (!gk) continue;
       const list = byGroup.get(gk) ?? [];
@@ -270,10 +340,48 @@ export async function findBoxVariantsForProducts(
     }
   }
 
-  // 宝可梦肥瘦：数量少，逐个配对即可（首页通常 ≤8）
+  if (svProducts.length > 0) {
+    const keys = [
+      ...new Set(
+        svProducts
+          .map((p) => parseCsvSeriesKey(p.series))
+          .filter((k): k is string => Boolean(k))
+      ),
+    ];
+
+    const siblings: SiblingRow[] =
+      keys.length === 0
+        ? []
+        : await prisma.product.findMany({
+            where: {
+              status: "上架",
+              boxType: { in: [...SV_FORMATS] },
+              OR: keys.map((key) => ({ series: { contains: key } })),
+            },
+            select: VARIANT_SELECT,
+          });
+
+    const byGroup = new Map<string, BoxVariantOption[]>();
+    for (const row of siblings) {
+      if (!isSvFormat(row.boxType)) continue;
+      const gk = csvGroupKey(row.series, row.language);
+      if (!gk) continue;
+      const list = byGroup.get(gk) ?? [];
+      list.push(toOption(row));
+      byGroup.set(gk, list);
+    }
+
+    for (const product of svProducts) {
+      const gk = csvGroupKey(product.series, product.language);
+      if (!gk) continue;
+      const sorted = sortBoxVariants(byGroup.get(gk) ?? []);
+      if (sorted.length >= 2) result.set(product.id, sorted);
+    }
+  }
+
   await Promise.all(
-    pokemonProducts.map(async (product) => {
-      const variants = await findPokemonVariants(product);
+    legacyPokemon.map(async (product) => {
+      const variants = await findLegacyPokemonVariants(product);
       if (variants.length >= 2) result.set(product.id, variants);
     })
   );
