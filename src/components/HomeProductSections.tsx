@@ -30,7 +30,7 @@ function SectionHead({
   mark: string;
   eyebrow: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   action?: React.ReactNode;
 }) {
   return (
@@ -43,7 +43,7 @@ function SectionHead({
           <p className="home-section-eyebrow">{eyebrow}</p>
         </div>
         <h2 className="home-section-title">{title}</h2>
-        <p className="home-section-sub">{subtitle}</p>
+        {subtitle ? <p className="home-section-sub">{subtitle}</p> : null}
       </div>
       {action}
     </header>
@@ -65,7 +65,6 @@ export async function HomeProductSections({ latest, popular }: Props) {
             mark="01"
             eyebrow={T("section_latest_eyebrow")}
             title={T("section_latest")}
-            subtitle={T("section_latest_sub")}
           />
           <ProductGrid products={latest.slice(0, 4)} />
         </section>
