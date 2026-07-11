@@ -3001,6 +3001,97 @@ button:not(:disabled),
     line-height: 1.7;
     color: #6b7280;
   }
+
+  /* 海贼王官网风格规格区 */
+  .opc-specs {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .opc-specs-heading {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .opc-specs-product-name {
+    margin: 0 0 1.1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .opc-specs-list {
+    margin: 0;
+  }
+
+  .opc-specs-row {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 0.65rem 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    font-size: 0.875rem;
+  }
+
+  .opc-specs-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .opc-specs-row dt {
+    margin: 0;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .opc-specs-row dd {
+    margin: 0;
+    color: #111827;
+  }
+
+  .opc-specs-row-block {
+    align-items: start;
+  }
+
+  .opc-specs-contents {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 1.7;
+  }
+
+  .opc-specs-rarities {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .opc-specs-rarities li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 16rem;
+    line-height: 1.55;
+  }
+
+  .opc-specs-rarity-note {
+    margin: 0.65rem 0 0;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .opc-specs-footnotes {
+    margin: 1.15rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    color: #9ca3af;
+  }
 }
 
 @keyframes fade-up {
