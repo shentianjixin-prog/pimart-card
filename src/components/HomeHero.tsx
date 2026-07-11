@@ -238,7 +238,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                   {slide.brand ? (
                     <>
                       <div className="hero-v2-brand-stack">
-                        <PimartLogo variant="brand" height={52} className="hero-v2-brand-logo" />
+                        <PimartLogo variant="brand" height={72} className="hero-v2-brand-logo" />
                         <p className="hero-v2-brand-sub">{T(slide.subtitleKey)}</p>
                         {T(slide.descKey) ? (
                           <p className="hero-v2-brand-desc">{T(slide.descKey)}</p>

@@ -613,15 +613,15 @@ button:not(:disabled),
   .hero-v2-brand-logo {
     display: block;
     width: auto;
-    height: 2.45rem;
-    max-width: min(100%, 14.5rem);
+    height: 3.35rem;
+    max-width: min(100%, 18rem);
   }
 
   .hero-v2-brand-sub {
-    margin: 0;
+    margin: 0.15rem 0 0;
     max-width: 100%;
     padding-inline: 0.25rem;
-    font-size: 1.05rem;
+    font-size: 1.35rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     line-height: 1.35;
@@ -629,32 +629,32 @@ button:not(:disabled),
   }
 
   .hero-v2-brand-desc {
-    margin: 0.15rem 0 0;
+    margin: 0.25rem 0 0;
     max-width: 100%;
     padding-inline: 0.25rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.5;
     color: #6b7280;
   }
 
   @media (min-width: 640px) {
     .hero-v2-brand-logo {
-      height: 3rem;
-      max-width: min(100%, 17rem);
+      height: 4.1rem;
+      max-width: min(100%, 22rem);
     }
 
     .hero-v2-brand-sub {
-      font-size: 1.5rem;
+      font-size: 1.85rem;
     }
 
     .hero-v2-brand-desc {
-      font-size: 1rem;
+      font-size: 1.125rem;
     }
   }
 
   @media (min-width: 1024px) {
     .hero-v2-brand-logo {
-      height: 3.25rem;
+      height: 4.5rem;
       max-width: none;
     }
   }
@@ -669,7 +669,7 @@ button:not(:disabled),
     }
 
     .hero-v2-brand-sub {
-      font-size: 1.65rem;
+      font-size: 2rem;
     }
   }
 
