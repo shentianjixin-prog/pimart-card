@@ -20,6 +20,36 @@ function ProductGrid({ products }: { products: Product[] }) {
   );
 }
 
+function SectionHead({
+  mark,
+  eyebrow,
+  title,
+  subtitle,
+  action,
+}: {
+  mark: string;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <header className="home-section-head">
+      <div className="home-section-head-copy min-w-0">
+        <div className="home-section-meta">
+          <span className="home-section-mark" aria-hidden>
+            {mark}
+          </span>
+          <p className="home-section-eyebrow">{eyebrow}</p>
+        </div>
+        <h2 className="home-section-title">{title}</h2>
+        <p className="home-section-sub">{subtitle}</p>
+      </div>
+      {action}
+    </header>
+  );
+}
+
 export async function HomeProductSections({ latest, popular }: Props) {
   const cookieStore = await cookies();
   const lang = resolveLang(cookieStore.get("lang")?.value);
@@ -31,27 +61,29 @@ export async function HomeProductSections({ latest, popular }: Props) {
     <>
       {latest.length > 0 ? (
         <section className="home-products-v2 home-products-latest">
-          <div className="mb-5 flex items-end justify-between gap-3 sm:mb-6">
-            <div className="min-w-0">
-              <h2 className="section-title">{T("section_latest")}</h2>
-              <p className="section-subtitle">{T("section_latest_sub")}</p>
-            </div>
-          </div>
+          <SectionHead
+            mark="01"
+            eyebrow={T("section_latest_eyebrow")}
+            title={T("section_latest")}
+            subtitle={T("section_latest_sub")}
+          />
           <ProductGrid products={latest.slice(0, 4)} />
         </section>
       ) : null}
 
       {popular.length > 0 ? (
         <section className="home-products-v2">
-          <div className="mb-5 flex items-end justify-between gap-3 sm:mb-6">
-            <div className="min-w-0">
-              <h2 className="section-title">{T("section_popular")}</h2>
-              <p className="section-subtitle">{T("section_popular_sub")}</p>
-            </div>
-            <Link href="/?stock=instock" className="home-products-viewall shrink-0">
-              {T("section_view_more")}
-            </Link>
-          </div>
+          <SectionHead
+            mark="02"
+            eyebrow={T("section_popular_eyebrow")}
+            title={T("section_popular")}
+            subtitle={T("section_popular_sub")}
+            action={
+              <Link href="/?stock=instock" className="home-products-viewall shrink-0">
+                {T("section_view_more")}
+              </Link>
+            }
+          />
           <ProductGrid products={popular.slice(0, 8)} />
         </section>
       ) : null}

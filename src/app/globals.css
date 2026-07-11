@@ -681,6 +681,7 @@ button:not(:disabled),
     height: 100%;
     object-fit: cover;
     object-position: center 38%;
+    will-change: transform;
   }
 
   @media (min-width: 1024px) {
@@ -703,6 +704,7 @@ button:not(:disabled),
 
   .hero-v2-b2b-art-img--sharp {
     /* 中心清晰，向四周渐变到透明（露出底层模糊） */
+    transform: scale(1.04);
     -webkit-mask-image: radial-gradient(
       ellipse 72% 58% at 50% 40%,
       #000 0%,
@@ -738,12 +740,99 @@ button:not(:disabled),
     }
   }
 
+  /* 激活时：海面轻微漂浮 + 模糊层反向漂移（视差） */
+  .hero-v2-slide.is-active .hero-v2-b2b-art-img--sharp {
+    animation: hero-b2b-kenburns 18s ease-in-out infinite;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-art-img--blur {
+    animation: hero-b2b-drift 22s ease-in-out infinite;
+  }
+
+  @keyframes hero-b2b-kenburns {
+    0%,
+    100% {
+      transform: scale(1.04) translate3d(0, 0, 0);
+    }
+    40% {
+      transform: scale(1.1) translate3d(-1.4%, 0.9%, 0);
+    }
+    70% {
+      transform: scale(1.07) translate3d(1%, -0.6%, 0);
+    }
+  }
+
+  @keyframes hero-b2b-drift {
+    0%,
+    100% {
+      transform: scale(1.08) translate3d(0, 0, 0);
+    }
+    50% {
+      transform: scale(1.14) translate3d(1.6%, -1%, 0);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    @keyframes hero-b2b-drift {
+      0%,
+      100% {
+        transform: scale(1.06) translate3d(0, 0, 0);
+      }
+      50% {
+        transform: scale(1.12) translate3d(1.4%, -0.8%, 0);
+      }
+    }
+  }
+
   .hero-v2-b2b-art-veil {
     position: absolute;
     inset: 0;
     background:
       radial-gradient(ellipse 52% 48% at 50% 40%, rgba(255, 255, 255, 0.28) 0%, transparent 70%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 36%, rgba(6, 30, 55, 0.18) 100%);
+    overflow: hidden;
+  }
+
+  /* 海面光泽扫过 */
+  .hero-v2-b2b-art-veil::after {
+    content: "";
+    position: absolute;
+    inset: -30% -10%;
+    background: linear-gradient(
+      118deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.07) 47%,
+      rgba(255, 255, 255, 0.16) 50%,
+      rgba(255, 255, 255, 0.07) 53%,
+      transparent 62%
+    );
+    opacity: 0;
+    transform: translate3d(-18%, 0, 0);
+    pointer-events: none;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-art-veil::after {
+    animation: hero-b2b-shimmer 7.5s ease-in-out 0.6s infinite;
+  }
+
+  @keyframes hero-b2b-shimmer {
+    0%,
+    12% {
+      opacity: 0;
+      transform: translate3d(-22%, 0, 0);
+    }
+    28% {
+      opacity: 1;
+    }
+    48% {
+      opacity: 0.35;
+      transform: translate3d(22%, 0, 0);
+    }
+    60%,
+    100% {
+      opacity: 0;
+      transform: translate3d(28%, 0, 0);
+    }
   }
 
   .hero-v2-b2b-frame {
@@ -882,7 +971,18 @@ button:not(:disabled),
     transition:
       background 180ms ease,
       border-color 180ms ease,
-      transform 180ms ease;
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  @keyframes hero-b2b-cta-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 28px 2px rgba(255, 255, 255, 0.22);
+    }
   }
 
   @media (min-width: 640px) {
@@ -917,6 +1017,18 @@ button:not(:disabled),
     display: flex;
     align-items: center;
     gap: 0.35rem;
+    animation: hero-b2b-social-in 680ms cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+  }
+
+  @keyframes hero-b2b-social-in {
+    from {
+      opacity: 0;
+      transform: translate3d(-8px, 6px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   .hero-v2-b2b-social-label {
@@ -1004,6 +1116,44 @@ button:not(:disabled),
     animation: hero-copy-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
+  /* B2B：父级不整块淡入，改子元素错落 */
+  .hero-v2-slide.is-active .hero-v2-copy.hero-v2-b2b {
+    animation: none;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-kicker,
+  .hero-v2-slide.is-active .hero-v2-b2b-title,
+  .hero-v2-slide.is-active .hero-v2-b2b-lead,
+  .hero-v2-slide.is-active .hero-v2-b2b-desc,
+  .hero-v2-slide.is-active .hero-v2-b2b-actions {
+    animation: hero-b2b-rise 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-kicker {
+    animation-delay: 0.05s;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-title {
+    animation-delay: 0.14s;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-lead {
+    animation-delay: 0.24s;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-desc {
+    animation-delay: 0.32s;
+  }
+
+  .hero-v2-slide.is-active .hero-v2-b2b-actions {
+    animation-delay: 0.4s;
+  }
+
+  /* actions 容器已有 rise；CTA 自身再叠一层 glow，避免双重 rise 冲突 */
+  .hero-v2-slide.is-active .hero-v2-b2b-actions .hero-v2-b2b-cta {
+    animation: hero-b2b-cta-glow 3.8s ease-in-out 1.2s infinite;
+  }
+
   @keyframes hero-copy-in {
     from {
       opacity: 0;
@@ -1015,9 +1165,44 @@ button:not(:disabled),
     }
   }
 
+  @keyframes hero-b2b-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      filter: blur(0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-v2-slide.is-active .hero-v2-copy {
-      animation: none;
+    .hero-v2-slide.is-active .hero-v2-copy,
+    .hero-v2-slide.is-active .hero-v2-b2b-kicker,
+    .hero-v2-slide.is-active .hero-v2-b2b-title,
+    .hero-v2-slide.is-active .hero-v2-b2b-lead,
+    .hero-v2-slide.is-active .hero-v2-b2b-desc,
+    .hero-v2-slide.is-active .hero-v2-b2b-actions,
+    .hero-v2-slide.is-active .hero-v2-b2b-cta,
+    .hero-v2-slide.is-active .hero-v2-b2b-art-img--sharp,
+    .hero-v2-slide.is-active .hero-v2-b2b-art-img--blur,
+    .hero-v2-slide.is-active .hero-v2-b2b-art-veil::after,
+    .hero-v2-b2b-social {
+      animation: none !important;
+    }
+
+    .hero-v2-b2b-art-img--blur {
+      transform: scale(1.08);
+    }
+
+    .hero-v2-b2b-art-img--sharp {
+      transform: none;
+    }
+
+    .hero-v2-b2b-art-veil::after {
+      opacity: 0;
     }
   }
 
@@ -1710,6 +1895,110 @@ button:not(:disabled),
 
     .home-products-latest {
       padding-bottom: 1.75rem;
+    }
+  }
+
+  /* 首页区块大标题 */
+  .home-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.35rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #111827;
+    animation: home-section-head-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (min-width: 640px) {
+    .home-section-head {
+      margin-bottom: 1.65rem;
+      padding-bottom: 1.15rem;
+    }
+  }
+
+  @keyframes home-section-head-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .home-section-head-copy {
+    position: relative;
+    padding-left: 0.85rem;
+  }
+
+  .home-section-head-copy::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    bottom: 0.15rem;
+    width: 3px;
+    background: #111827;
+    border-radius: 1px;
+  }
+
+  .home-section-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .home-section-mark {
+    display: inline-flex;
+    min-width: 1.65rem;
+    height: 1.35rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.35rem;
+    border: 1.5px solid #111827;
+    border-radius: 4px;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    color: #111827;
+    background: #fff;
+  }
+
+  .home-section-eyebrow {
+    margin: 0;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
+  .home-section-title {
+    margin: 0;
+    font-size: clamp(1.7rem, 5.5vw, 2.45rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+    color: #111827;
+  }
+
+  .home-section-sub {
+    margin: 0.4rem 0 0;
+    max-width: 22rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    color: #6b7280;
+  }
+
+  @media (min-width: 640px) {
+    .home-section-sub {
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
     }
   }
 

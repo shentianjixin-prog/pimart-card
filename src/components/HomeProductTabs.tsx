@@ -29,15 +29,21 @@ export function HomeProductTabs({ productsByTab }: Props) {
 
   return (
     <section className="home-products-v2">
-      <div className="mb-6 flex items-end justify-between gap-3 sm:mb-8">
-        <div className="min-w-0">
-          <h2 className="section-title">{T("section_popular")}</h2>
-          <p className="section-subtitle">{T("section_popular_sub")}</p>
+      <header className="home-section-head">
+        <div className="home-section-head-copy min-w-0">
+          <div className="home-section-meta">
+            <span className="home-section-mark" aria-hidden>
+              02
+            </span>
+            <p className="home-section-eyebrow">{T("section_popular_eyebrow")}</p>
+          </div>
+          <h2 className="home-section-title">{T("section_popular")}</h2>
+          <p className="home-section-sub">{T("section_popular_sub")}</p>
         </div>
         <Link href="/?stock=instock" className="home-products-viewall shrink-0">
           {T("section_view_all")} →
         </Link>
-      </div>
+      </header>
 
       <div className="home-tab-bar mb-7 flex gap-2 overflow-x-auto pb-1 sm:mb-8">
         {TABS.map((tab) => (

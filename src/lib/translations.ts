@@ -329,8 +329,10 @@ const dict: Record<string, Record<Lang, string>> = {
   // 首页商品区块
   section_popular:      { zh: "人气商品", ja: "人気商品", en: "Popular Products" },
   section_popular_sub:  { zh: "热门商品推荐", ja: "おすすめ人気商品", en: "Top picks for collectors" },
+  section_popular_eyebrow: { zh: "热门精选", ja: "人気ピックアップ", en: "Trending" },
   section_latest:       { zh: "最新商品", ja: "最新商品", en: "Latest Products" },
   section_latest_sub:   { zh: "刚刚上架", ja: "つい最近の入荷", en: "Just arrived" },
+  section_latest_eyebrow: { zh: "新货上架", ja: "新着入荷", en: "Just in" },
   section_new_arrivals: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
   section_new_sub:      { zh: "最新原盒与评级卡", ja: "最新の未開封BOXと鑑定品", en: "Latest sealed boxes and graded picks" },
   section_best_sellers: { zh: "热销商品", ja: "人気商品", en: "Best Sellers" },
