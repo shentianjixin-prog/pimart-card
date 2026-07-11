@@ -47,7 +47,7 @@ const IMAGE_MAP = {
   "opc-04-kingdoms-of-intrigue-box": "/products/opc-04-box.jpg",
   "opc-05-awakening-new-era-box": "/products/opc-05-box.jpg",
   "opc-06-wings-of-the-captain-box": "/products/opc-06-box.jpg",
-  "opc-07-500-years-future-box": "/products/opc-07-box-v2.webp",
+  "opc-07-500-years-future-box": "/products/opc-07-box.jpg",
   "opc-08-two-legends-box": "/products/opc-08-box.webp",
   "opc-09-emperors-new-world-box": "/products/opc-09-box.jpg",
   "opc-10-royal-blood-box": "/products/opc-10-box-v2.jpg",
