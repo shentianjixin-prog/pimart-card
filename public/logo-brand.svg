@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" fill="none" role="img" aria-label="PIMART CARD">
+  <!-- ÁL LogoW -->
+  <text
+    x="0"
+    y="42"
+    font-family="Inter, ui-sans-serif, system-ui, sans-serif"
+    font-size="40"
+    font-weight="800"
+    fill="#111827"
+    letter-spacing="0.06em"
+  >PIMART</text>
+  <text
+    x="2"
+    y="66"
+    font-family="Inter, ui-sans-serif, system-ui, sans-serif"
+    font-size="13"
+    font-weight="600"
+    fill="#6B7280"
+    letter-spacing="0.28em"
+  >CARD</text>
+</svg>

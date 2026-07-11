@@ -184,17 +184,27 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                 <div className="hero-v2-b2b-art" aria-hidden>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/hero-b2b-lugia.png?v=5"
+                    src="/images/hero-b2b-lugia.png?v=6"
                     alt=""
                     className="hero-v2-b2b-art-img hero-v2-b2b-art-img--blur"
                   />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/hero-b2b-lugia.png?v=5"
+                    src="/images/hero-b2b-lugia.png?v=6"
                     alt=""
                     className="hero-v2-b2b-art-img hero-v2-b2b-art-img--sharp"
                   />
                   <div className="hero-v2-b2b-art-veil" />
+                  <div className="hero-v2-b2b-fx">
+                    <span className="hero-v2-b2b-fx-spark hero-v2-b2b-fx-spark--1" />
+                    <span className="hero-v2-b2b-fx-spark hero-v2-b2b-fx-spark--2" />
+                    <span className="hero-v2-b2b-fx-spark hero-v2-b2b-fx-spark--3" />
+                    <span className="hero-v2-b2b-fx-spark hero-v2-b2b-fx-spark--4" />
+                    <span className="hero-v2-b2b-fx-spark hero-v2-b2b-fx-spark--5" />
+                    <span className="hero-v2-b2b-fx-spark hero-v2-b2b-fx-spark--6" />
+                    <span className="hero-v2-b2b-fx-wave" />
+                    <span className="hero-v2-b2b-fx-wave hero-v2-b2b-fx-wave--late" />
+                  </div>
                 </div>
               ) : (
                 <>
@@ -228,7 +238,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                   {slide.brand ? (
                     <>
                       <div className="hero-v2-brand-stack">
-                        <PimartLogo variant="wordmark" height={52} className="hero-v2-brand-logo" />
+                        <PimartLogo variant="brand" height={52} className="hero-v2-brand-logo" />
                         <p className="hero-v2-brand-sub">{T(slide.subtitleKey)}</p>
                         {T(slide.descKey) ? (
                           <p className="hero-v2-brand-desc">{T(slide.descKey)}</p>

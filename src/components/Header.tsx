@@ -315,7 +315,7 @@ export function Header({ member }: { member?: MemberSession | null }) {
             onClick={closeMobile}
             aria-label="PIMARTCARD"
           >
-            <PimartLogo height={36} className="h-8 w-auto max-w-[128px] sm:h-9 sm:max-w-[200px]" />
+            <PimartLogo height={40} className="h-9 w-auto sm:h-10" />
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
