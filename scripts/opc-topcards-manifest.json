@@ -1,0 +1,392 @@
+{
+  "opc-01-romance-dawn-box": {
+    "set_id": "OPC-01",
+    "topcards": [
+      "/products/topcards/opc-01-card-1.jpeg",
+      "/products/topcards/opc-01-card-2.jpeg",
+      "/products/topcards/opc-01-card-3.webp",
+      "/products/topcards/opc-01-card-4.webp",
+      "/products/topcards/opc-01-card-5.jpeg"
+    ]
+  },
+  "opc-01-romance-dawn-case": {
+    "set_id": "OPC-01",
+    "topcards": [
+      "/products/topcards/opc-01-card-1.jpeg",
+      "/products/topcards/opc-01-card-2.jpeg",
+      "/products/topcards/opc-01-card-3.webp",
+      "/products/topcards/opc-01-card-4.webp",
+      "/products/topcards/opc-01-card-5.jpeg"
+    ]
+  },
+  "opc-01-romance-dawn-pack": {
+    "set_id": "OPC-01",
+    "topcards": [
+      "/products/topcards/opc-01-card-1.jpeg",
+      "/products/topcards/opc-01-card-2.jpeg",
+      "/products/topcards/opc-01-card-3.webp",
+      "/products/topcards/opc-01-card-4.webp",
+      "/products/topcards/opc-01-card-5.jpeg"
+    ]
+  },
+  "opc-02-paramount-war-box": {
+    "set_id": "OPC-02",
+    "topcards": [
+      "/products/topcards/opc-02-card-1.jpeg",
+      "/products/topcards/opc-02-card-2.jpeg",
+      "/products/topcards/opc-02-card-3.jpeg",
+      "/products/topcards/opc-02-card-4.jpeg",
+      "/products/topcards/opc-02-card-5.jpeg"
+    ]
+  },
+  "opc-02-paramount-war-case": {
+    "set_id": "OPC-02",
+    "topcards": [
+      "/products/topcards/opc-02-card-1.jpeg",
+      "/products/topcards/opc-02-card-2.jpeg",
+      "/products/topcards/opc-02-card-3.jpeg",
+      "/products/topcards/opc-02-card-4.jpeg",
+      "/products/topcards/opc-02-card-5.jpeg"
+    ]
+  },
+  "opc-02-paramount-war-pack": {
+    "set_id": "OPC-02",
+    "topcards": [
+      "/products/topcards/opc-02-card-1.jpeg",
+      "/products/topcards/opc-02-card-2.jpeg",
+      "/products/topcards/opc-02-card-3.jpeg",
+      "/products/topcards/opc-02-card-4.jpeg",
+      "/products/topcards/opc-02-card-5.jpeg"
+    ]
+  },
+  "opc-03-pillars-of-strength-box": {
+    "set_id": "OPC-03",
+    "topcards": [
+      "/products/topcards/opc-03-card-1.webp",
+      "/products/topcards/opc-03-card-2.jpeg",
+      "/products/topcards/opc-03-card-3.jpeg",
+      "/products/topcards/opc-03-card-4.jpeg",
+      "/products/topcards/opc-03-card-5.jpeg"
+    ]
+  },
+  "opc-03-pillars-of-strength-case": {
+    "set_id": "OPC-03",
+    "topcards": [
+      "/products/topcards/opc-03-card-1.webp",
+      "/products/topcards/opc-03-card-2.jpeg",
+      "/products/topcards/opc-03-card-3.jpeg",
+      "/products/topcards/opc-03-card-4.jpeg",
+      "/products/topcards/opc-03-card-5.jpeg"
+    ]
+  },
+  "opc-03-pillars-of-strength-pack": {
+    "set_id": "OPC-03",
+    "topcards": [
+      "/products/topcards/opc-03-card-1.webp",
+      "/products/topcards/opc-03-card-2.jpeg",
+      "/products/topcards/opc-03-card-3.jpeg",
+      "/products/topcards/opc-03-card-4.jpeg",
+      "/products/topcards/opc-03-card-5.jpeg"
+    ]
+  },
+  "opc-04-kingdoms-of-intrigue-box": {
+    "set_id": "OPC-04",
+    "topcards": [
+      "/products/topcards/opc-04-card-1.jpeg",
+      "/products/topcards/opc-04-card-2.jpeg",
+      "/products/topcards/opc-04-card-3.jpeg",
+      "/products/topcards/opc-04-card-4.jpeg",
+      "/products/topcards/opc-04-card-5.jpeg"
+    ]
+  },
+  "opc-04-kingdoms-of-intrigue-case": {
+    "set_id": "OPC-04",
+    "topcards": [
+      "/products/topcards/opc-04-card-1.jpeg",
+      "/products/topcards/opc-04-card-2.jpeg",
+      "/products/topcards/opc-04-card-3.jpeg",
+      "/products/topcards/opc-04-card-4.jpeg",
+      "/products/topcards/opc-04-card-5.jpeg"
+    ]
+  },
+  "opc-04-kingdoms-of-intrigue-pack": {
+    "set_id": "OPC-04",
+    "topcards": [
+      "/products/topcards/opc-04-card-1.jpeg",
+      "/products/topcards/opc-04-card-2.jpeg",
+      "/products/topcards/opc-04-card-3.jpeg",
+      "/products/topcards/opc-04-card-4.jpeg",
+      "/products/topcards/opc-04-card-5.jpeg"
+    ]
+  },
+  "opc-05-awakening-new-era-box": {
+    "set_id": "OPC-05",
+    "topcards": [
+      "/products/topcards/opc-05-card-1.jpeg",
+      "/products/topcards/opc-05-card-2.webp",
+      "/products/topcards/opc-05-card-3.webp",
+      "/products/topcards/opc-05-card-4.webp",
+      "/products/topcards/opc-05-card-5.webp"
+    ]
+  },
+  "opc-05-awakening-new-era-case": {
+    "set_id": "OPC-05",
+    "topcards": [
+      "/products/topcards/opc-05-card-1.jpeg",
+      "/products/topcards/opc-05-card-2.webp",
+      "/products/topcards/opc-05-card-3.webp",
+      "/products/topcards/opc-05-card-4.webp",
+      "/products/topcards/opc-05-card-5.webp"
+    ]
+  },
+  "opc-05-awakening-new-era-pack": {
+    "set_id": "OPC-05",
+    "topcards": [
+      "/products/topcards/opc-05-card-1.jpeg",
+      "/products/topcards/opc-05-card-2.webp",
+      "/products/topcards/opc-05-card-3.webp",
+      "/products/topcards/opc-05-card-4.webp",
+      "/products/topcards/opc-05-card-5.webp"
+    ]
+  },
+  "opc-06-wings-of-the-captain-box": {
+    "set_id": "OPC-06",
+    "topcards": [
+      "/products/topcards/opc-06-card-1.jpeg",
+      "/products/topcards/opc-06-card-2.jpeg",
+      "/products/topcards/opc-06-card-3.jpeg",
+      "/products/topcards/opc-06-card-4.webp",
+      "/products/topcards/opc-06-card-5.webp"
+    ]
+  },
+  "opc-06-wings-of-the-captain-case": {
+    "set_id": "OPC-06",
+    "topcards": [
+      "/products/topcards/opc-06-card-1.jpeg",
+      "/products/topcards/opc-06-card-2.jpeg",
+      "/products/topcards/opc-06-card-3.jpeg",
+      "/products/topcards/opc-06-card-4.webp",
+      "/products/topcards/opc-06-card-5.webp"
+    ]
+  },
+  "opc-06-wings-of-the-captain-pack": {
+    "set_id": "OPC-06",
+    "topcards": [
+      "/products/topcards/opc-06-card-1.jpeg",
+      "/products/topcards/opc-06-card-2.jpeg",
+      "/products/topcards/opc-06-card-3.jpeg",
+      "/products/topcards/opc-06-card-4.webp",
+      "/products/topcards/opc-06-card-5.webp"
+    ]
+  },
+  "opc-07-500-years-future-box": {
+    "set_id": "OPC-07",
+    "topcards": [
+      "/products/topcards/opc-07-card-1.jpeg",
+      "/products/topcards/opc-07-card-2.webp",
+      "/products/topcards/opc-07-card-3.jpeg",
+      "/products/topcards/opc-07-card-4.jpeg",
+      "/products/topcards/opc-07-card-5.jpeg"
+    ]
+  },
+  "opc-07-500-years-future-case": {
+    "set_id": "OPC-07",
+    "topcards": [
+      "/products/topcards/opc-07-card-1.jpeg",
+      "/products/topcards/opc-07-card-2.webp",
+      "/products/topcards/opc-07-card-3.jpeg",
+      "/products/topcards/opc-07-card-4.jpeg",
+      "/products/topcards/opc-07-card-5.jpeg"
+    ]
+  },
+  "opc-07-500-years-future-pack": {
+    "set_id": "OPC-07",
+    "topcards": [
+      "/products/topcards/opc-07-card-1.jpeg",
+      "/products/topcards/opc-07-card-2.webp",
+      "/products/topcards/opc-07-card-3.jpeg",
+      "/products/topcards/opc-07-card-4.jpeg",
+      "/products/topcards/opc-07-card-5.jpeg"
+    ]
+  },
+  "opc-08-two-legends-box": {
+    "set_id": "OPC-08",
+    "topcards": [
+      "/products/topcards/opc-08-card-1.jpeg",
+      "/products/topcards/opc-08-card-2.jpeg",
+      "/products/topcards/opc-08-card-3.jpeg",
+      "/products/topcards/opc-08-card-4.jpeg",
+      "/products/topcards/opc-08-card-5.jpeg"
+    ]
+  },
+  "opc-08-two-legends-case": {
+    "set_id": "OPC-08",
+    "topcards": [
+      "/products/topcards/opc-08-card-1.jpeg",
+      "/products/topcards/opc-08-card-2.jpeg",
+      "/products/topcards/opc-08-card-3.jpeg",
+      "/products/topcards/opc-08-card-4.jpeg",
+      "/products/topcards/opc-08-card-5.jpeg"
+    ]
+  },
+  "opc-08-two-legends-pack": {
+    "set_id": "OPC-08",
+    "topcards": [
+      "/products/topcards/opc-08-card-1.jpeg",
+      "/products/topcards/opc-08-card-2.jpeg",
+      "/products/topcards/opc-08-card-3.jpeg",
+      "/products/topcards/opc-08-card-4.jpeg",
+      "/products/topcards/opc-08-card-5.jpeg"
+    ]
+  },
+  "opc-09-emperors-new-world-box": {
+    "set_id": "OPC-09",
+    "topcards": [
+      "/products/topcards/opc-09-card-1.jpeg",
+      "/products/topcards/opc-09-card-2.jpeg",
+      "/products/topcards/opc-09-card-3.jpeg",
+      "/products/topcards/opc-09-card-4.webp",
+      "/products/topcards/opc-09-card-5.webp"
+    ]
+  },
+  "opc-09-emperors-new-world-case": {
+    "set_id": "OPC-09",
+    "topcards": [
+      "/products/topcards/opc-09-card-1.jpeg",
+      "/products/topcards/opc-09-card-2.jpeg",
+      "/products/topcards/opc-09-card-3.jpeg",
+      "/products/topcards/opc-09-card-4.webp",
+      "/products/topcards/opc-09-card-5.webp"
+    ]
+  },
+  "opc-09-emperors-new-world-pack": {
+    "set_id": "OPC-09",
+    "topcards": [
+      "/products/topcards/opc-09-card-1.jpeg",
+      "/products/topcards/opc-09-card-2.jpeg",
+      "/products/topcards/opc-09-card-3.jpeg",
+      "/products/topcards/opc-09-card-4.webp",
+      "/products/topcards/opc-09-card-5.webp"
+    ]
+  },
+  "opc-10-royal-blood-box": {
+    "set_id": "OPC-10",
+    "topcards": [
+      "/products/topcards/opc-10-card-1.webp",
+      "/products/topcards/opc-10-card-2.jpeg",
+      "/products/topcards/opc-10-card-3.jpeg",
+      "/products/topcards/opc-10-card-4.jpeg",
+      "/products/topcards/opc-10-card-5.jpeg"
+    ]
+  },
+  "opc-10-royal-blood-case": {
+    "set_id": "OPC-10",
+    "topcards": [
+      "/products/topcards/opc-10-card-1.webp",
+      "/products/topcards/opc-10-card-2.jpeg",
+      "/products/topcards/opc-10-card-3.jpeg",
+      "/products/topcards/opc-10-card-4.jpeg",
+      "/products/topcards/opc-10-card-5.jpeg"
+    ]
+  },
+  "opc-10-royal-blood-pack": {
+    "set_id": "OPC-10",
+    "topcards": [
+      "/products/topcards/opc-10-card-1.webp",
+      "/products/topcards/opc-10-card-2.jpeg",
+      "/products/topcards/opc-10-card-3.jpeg",
+      "/products/topcards/opc-10-card-4.jpeg",
+      "/products/topcards/opc-10-card-5.jpeg"
+    ]
+  },
+  "opc-11-divine-speed-box": {
+    "set_id": "OPC-11",
+    "topcards": [
+      "/products/topcards/opc-11-card-1.jpeg",
+      "/products/topcards/opc-11-card-2.jpeg",
+      "/products/topcards/opc-11-card-3.jpeg",
+      "/products/topcards/opc-11-card-4.jpeg",
+      "/products/topcards/opc-11-card-5.jpeg"
+    ]
+  },
+  "opc-11-divine-speed-case": {
+    "set_id": "OPC-11",
+    "topcards": [
+      "/products/topcards/opc-11-card-1.jpeg",
+      "/products/topcards/opc-11-card-2.jpeg",
+      "/products/topcards/opc-11-card-3.jpeg",
+      "/products/topcards/opc-11-card-4.jpeg",
+      "/products/topcards/opc-11-card-5.jpeg"
+    ]
+  },
+  "opc-11-divine-speed-pack": {
+    "set_id": "OPC-11",
+    "topcards": [
+      "/products/topcards/opc-11-card-1.jpeg",
+      "/products/topcards/opc-11-card-2.jpeg",
+      "/products/topcards/opc-11-card-3.jpeg",
+      "/products/topcards/opc-11-card-4.jpeg",
+      "/products/topcards/opc-11-card-5.jpeg"
+    ]
+  },
+  "opc-14-cyan-sea-seven-box": {
+    "set_id": "OPC-14",
+    "topcards": [
+      "/products/topcards/opc-14-card-1.jpeg",
+      "/products/topcards/opc-14-card-2.webp",
+      "/products/topcards/opc-14-card-3.jpeg",
+      "/products/topcards/opc-14-card-4.jpeg",
+      "/products/topcards/opc-14-card-5.jpeg"
+    ]
+  },
+  "opc-14-cyan-sea-seven-case": {
+    "set_id": "OPC-14",
+    "topcards": [
+      "/products/topcards/opc-14-card-1.jpeg",
+      "/products/topcards/opc-14-card-2.webp",
+      "/products/topcards/opc-14-card-3.jpeg",
+      "/products/topcards/opc-14-card-4.jpeg",
+      "/products/topcards/opc-14-card-5.jpeg"
+    ]
+  },
+  "opc-14-cyan-sea-seven-pack": {
+    "set_id": "OPC-14",
+    "topcards": [
+      "/products/topcards/opc-14-card-1.jpeg",
+      "/products/topcards/opc-14-card-2.webp",
+      "/products/topcards/opc-14-card-3.jpeg",
+      "/products/topcards/opc-14-card-4.jpeg",
+      "/products/topcards/opc-14-card-5.jpeg"
+    ]
+  },
+  "opc-15-adventure-gods-island-box": {
+    "set_id": "OPC-15",
+    "topcards": [
+      "/products/topcards/opc-15-1-1.png",
+      "/products/topcards/opc-15-1-2.png",
+      "/products/topcards/opc-15-4-1.png",
+      "/products/topcards/opc-15-3-1.png",
+      "/products/topcards/opc-15-3-2.png"
+    ]
+  },
+  "opc-15-adventure-gods-island-case": {
+    "set_id": "OPC-15",
+    "topcards": [
+      "/products/topcards/opc-15-1-1.png",
+      "/products/topcards/opc-15-1-2.png",
+      "/products/topcards/opc-15-4-1.png",
+      "/products/topcards/opc-15-3-1.png",
+      "/products/topcards/opc-15-3-2.png"
+    ]
+  },
+  "opc-15-adventure-gods-island-pack": {
+    "set_id": "OPC-15",
+    "topcards": [
+      "/products/topcards/opc-15-1-1.png",
+      "/products/topcards/opc-15-1-2.png",
+      "/products/topcards/opc-15-4-1.png",
+      "/products/topcards/opc-15-3-1.png",
+      "/products/topcards/opc-15-3-2.png"
+    ]
+  }
+}

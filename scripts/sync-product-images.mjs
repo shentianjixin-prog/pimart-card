@@ -17,7 +17,10 @@ if (!existsSync(dbPath)) {
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const TOPCARDS_MANIFEST = join(__dirname, "pokemon-topcards-manifest.json");
+const TOPCARDS_MANIFESTS = [
+  join(__dirname, "pokemon-topcards-manifest.json"),
+  join(__dirname, "opc-topcards-manifest.json"),
+];
 
 /** 盒图路径；若有 chase 卡清单则拼成「盒图 + top5」 */
 const IMAGE_MAP = {
@@ -103,22 +106,47 @@ const IMAGE_MAP = {
   "黑晶炽焰-box-简中": "/products/csv5c-box.png",
 };
 
-function withTopcards(imageMap) {
-  if (!existsSync(TOPCARDS_MANIFEST)) return imageMap;
-  let manifest;
+function loadTopcardsManifest(path) {
+  if (!existsSync(path)) return {};
   try {
-    manifest = JSON.parse(readFileSync(TOPCARDS_MANIFEST, "utf8"));
+    return JSON.parse(readFileSync(path, "utf8"));
   } catch (e) {
-    console.warn("[images] 读取 pokemon-topcards-manifest.json 失败:", e.message);
-    return imageMap;
+    console.warn(`[images] 读取 ${path} 失败:`, e.message);
+    return {};
   }
+}
+
+function withTopcards(imageMap) {
   const out = { ...imageMap };
-  for (const [slug, info] of Object.entries(manifest)) {
-    const tops = Array.isArray(info?.topcards) ? info.topcards.filter(Boolean) : [];
-    if (!tops.length) continue;
-    const base = (out[slug] || "").split(",")[0].trim();
-    if (!base) continue;
-    out[slug] = [base, ...tops].join(",");
+  for (const path of TOPCARDS_MANIFESTS) {
+    const manifest = loadTopcardsManifest(path);
+    for (const [slug, info] of Object.entries(manifest)) {
+      const tops = Array.isArray(info?.topcards) ? info.topcards.filter(Boolean) : [];
+      if (!tops.length) continue;
+      // IMAGE_MAP 可能只有 -box；清单里还有 -pack/-case，一并写入
+      const existing = (out[slug] || "").split(",")[0].trim();
+      const base = existing || tops[0];
+      // 若已有盒图用盒图；否则保持原样（pack/case 会在下面用 box 图补）
+      if (existing) {
+        out[slug] = [existing, ...tops].join(",");
+      } else {
+        out[slug] = tops.join(",");
+      }
+      void base;
+    }
+  }
+  // pack/case：若只有 chase 而无盒图，从同系列 -box 借盒图
+  for (const [slug, images] of Object.entries(out)) {
+    if (!slug.includes("-pack") && !slug.includes("-case")) continue;
+    const boxSlug = slug.replace(/-(pack|case)$/, "-box");
+    const boxImages = out[boxSlug];
+    if (!boxImages) continue;
+    const box = boxImages.split(",")[0].trim();
+    const tops = images
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => s && !s.includes("-box.") && s.includes("/topcards/"));
+    if (box && tops.length) out[slug] = [box, ...tops].join(",");
   }
   return out;
 }
@@ -415,7 +443,8 @@ for (const p of NEW_PRODUCTS) {
 
 db.close();
 console.log(`[images] 图片路径同步完成：更新 ${updated} 件，已是最新 ${skipped} 件，新品补齐/校正 ${inserted} 件`);
-if (existsSync(TOPCARDS_MANIFEST)) {
-  const n = Object.keys(JSON.parse(readFileSync(TOPCARDS_MANIFEST, "utf8"))).length;
-  console.log(`[images] 已合并宝可梦 chase 卡图清单 ${n} 个商品`);
+for (const path of TOPCARDS_MANIFESTS) {
+  if (!existsSync(path)) continue;
+  const n = Object.keys(JSON.parse(readFileSync(path, "utf8"))).length;
+  console.log(`[images] 已合并 chase 卡图清单 ${path.split(/[/\\]/).pop()}：${n} 个商品`);
 }
