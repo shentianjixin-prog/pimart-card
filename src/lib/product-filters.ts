@@ -69,6 +69,7 @@ export const VARIANT_ONLY_BOX_TYPES = [
   "瘦散包",
   "肥原箱",
   "瘦原箱",
+  "瘦盒", // 朱紫瘦盒规格附属，列表只展示肥盒主 SKU
 ] as const;
 
 /** 前台列表 / 首页用：上架且排除规格附属 SKU */
@@ -281,12 +282,32 @@ const POKEMON_WHERE: Prisma.ProductWhereInput = {
 };
 
 const ONEPIECE_WHERE: Prisma.ProductWhereInput = {
-  OR: [
-    { name: { contains: "One Piece" } },
-    { name: { contains: "海贼王" } },
-    { name: { contains: "ワンピース" } },
-    { series: { contains: "One Piece" } },
-    { series: { contains: "OP" } },
+  AND: [
+    {
+      OR: [
+        { category: { contains: "海贼王" } },
+        { category: { contains: "ワンピース" } },
+        { category: { contains: "One Piece" } },
+        { name: { startsWith: "OPC-" } },
+        { name: { startsWith: "EBC-" } },
+        { name: { startsWith: "STC-" } },
+        { name: { startsWith: "PRB" } },
+        { series: { startsWith: "OPC-" } },
+        { series: { startsWith: "EBC-" } },
+        { series: { startsWith: "STC-" } },
+        { series: { startsWith: "PRB" } },
+      ],
+    },
+    // 避免 NARUTOP 等被 series contains "OP" 误伤
+    {
+      NOT: {
+        OR: [
+          { name: { contains: "NARUTO" } },
+          { name: { contains: "火影" } },
+          { series: { contains: "NARUTO" } },
+        ],
+      },
+    },
   ],
 };
 

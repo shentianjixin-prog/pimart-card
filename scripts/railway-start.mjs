@@ -82,6 +82,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "ensure-catalog-fixes.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 目录修复失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "ensure-release-dates.mjs")}`, {
     stdio: "inherit",
     env: process.env,

@@ -146,7 +146,10 @@ export function ProductCard({ product, variants = [] }: Props) {
           <dl className="product-card-meta mt-2.5 text-[11px] text-[#6b7280] sm:mt-3">
             <div className="product-card-meta-row">
               <dt className="shrink-0 text-[#9ca3af]">{T("card_label_language")}</dt>
-              <dd className="truncate text-[#374151]">{product.language || "—"}</dd>
+              <dd className="truncate text-[#374151]">
+                {product.language?.trim() ||
+                  (product.name.includes("简中") ? "简中" : product.name.includes("日版") || product.name.includes("日文") ? "日文" : "—")}
+              </dd>
             </div>
             {product.series && (
               <div className="product-card-meta-row product-card-meta-series">

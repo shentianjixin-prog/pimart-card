@@ -98,17 +98,25 @@ function findSeriesOption(
 ): SeriesOption | undefined {
   const needle = id.toLowerCase();
   const panel = getSeriesPanelState(game, subGame);
-  if (panel.kind === "list") {
-    const hit = panel.options.find((o) => o.id === needle);
-    if (hit) return hit;
-  }
-  // 兜底：跨列表查找（URL 残留旧 id 时仍能显示标签）
   const all = [
+    ...(panel.kind === "list" ? panel.options : []),
     ...POKEMON_SERIES,
     ...ONEPIECE_SERIES,
     ...Object.values(SUBGAME_SERIES).flat(),
   ];
-  return all.find((o) => o.id === needle);
+  // 去重保序
+  const seen = new Set<string>();
+  const uniq: SeriesOption[] = [];
+  for (const o of all) {
+    if (seen.has(o.id)) continue;
+    seen.add(o.id);
+    uniq.push(o);
+  }
+  return (
+    uniq.find((o) => o.id === needle) ||
+    uniq.find((o) => o.label === id) ||
+    uniq.find((o) => o.label.toLowerCase() === needle)
+  );
 }
 
 export function seriesLabelById(
