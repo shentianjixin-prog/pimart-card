@@ -104,8 +104,6 @@ function GameFilterSection({
   draft,
   facets,
   subGameCounts,
-  otherExpanded,
-  onToggleOther,
   onSelectGame,
   onSelectSubGame,
   lang,
@@ -113,8 +111,6 @@ function GameFilterSection({
   draft: FilterState;
   facets: FilterFacets;
   subGameCounts: Record<string, number>;
-  otherExpanded: boolean;
-  onToggleOther: () => void;
   onSelectGame: (game: MainGameKey) => void;
   onSelectSubGame: (sub: SubGameKey) => void;
   lang: "zh" | "ja" | "en";
@@ -137,52 +133,18 @@ function GameFilterSection({
             />
           );
         })}
-      </div>
-
-      <div className="mt-3">
-        <button
-          type="button"
-          className="filter-other-toggle"
-          onClick={onToggleOther}
-          aria-expanded={otherExpanded}
-        >
-          <span>{T("filter_game_other")}</span>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            aria-hidden
-            className={`transition ${otherExpanded ? "rotate-180" : ""}`}
-          >
-            <path
-              d="M3.5 5.25L7 8.75L10.5 5.25"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
+        {SUB_GAMES.map((key) => {
+          const selected = draft.game === "other" && draft.subGame === key;
+          return (
+            <PillOption
+              key={key}
+              selected={selected}
+              label={subGameLabel(key, lang)}
+              count={subGameCounts[key]}
+              onClick={() => onSelectSubGame(key)}
             />
-          </svg>
-        </button>
-
-        {otherExpanded && (
-          <div className="filter-subgame-list">
-            <div className="flex flex-wrap gap-2">
-              {SUB_GAMES.map((key) => {
-                const selected = draft.game === "other" && draft.subGame === key;
-                return (
-                  <PillOption
-                    key={key}
-                    selected={selected}
-                    label={subGameLabel(key, lang)}
-                    count={subGameCounts[key]}
-                    size="sub"
-                    onClick={() => onSelectSubGame(key)}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        )}
+          );
+        })}
       </div>
     </FilterSection>
   );
@@ -226,8 +188,6 @@ function FilterPanelContent({
   draft,
   facets,
   subGameCounts,
-  otherExpanded,
-  onToggleOther,
   onPatch,
   onPriceDraft,
   lang,
@@ -235,8 +195,6 @@ function FilterPanelContent({
   draft: FilterState;
   facets: FilterFacets;
   subGameCounts: Record<string, number>;
-  otherExpanded: boolean;
-  onToggleOther: () => void;
   onPatch: (patch: Partial<FilterState>) => void;
   onPriceDraft: (min: string, max: string) => void;
   lang: "zh" | "ja" | "en";
@@ -260,7 +218,7 @@ function FilterPanelContent({
 
   const selectSubGame = (subGame: SubGameKey) => {
     if (draft.subGame === subGame) {
-      onPatch({ game: "other", subGame: undefined, series: [] });
+      onPatch({ game: undefined, subGame: undefined, series: [] });
     } else {
       onPatch({ game: "other", subGame, series: [] });
     }
@@ -272,8 +230,6 @@ function FilterPanelContent({
         draft={draft}
         facets={facets}
         subGameCounts={subGameCounts}
-        otherExpanded={otherExpanded}
-        onToggleOther={onToggleOther}
         onSelectGame={selectGame}
         onSelectSubGame={selectSubGame}
         lang={lang}
@@ -444,20 +400,11 @@ function FilterChips({
           {T("filter_game_onepiece")} ×
         </button>
       )}
-      {state.game === "other" && (
-        <button
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ game: undefined, subGame: undefined, series: [] })}
-        >
-          {T("filter_game_other")} ×
-        </button>
-      )}
       {state.subGame && (
         <button
           type="button"
           className="filter-chip"
-          onClick={() => onNavigate({ subGame: undefined, series: [] })}
+          onClick={() => onNavigate({ game: undefined, subGame: undefined, series: [] })}
         >
           {subGameLabel(state.subGame, lang)} ×
         </button>
@@ -536,18 +483,11 @@ export function ProductListingControls({
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [sortOpen, setSortOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
-  const [otherExpanded, setOtherExpanded] = useState(
-    state.game === "other" || !!state.subGame
-  );
   const [mobileDraft, setMobileDraft] = useState<FilterState>(state);
 
   useEffect(() => {
     if (sheet !== "filter") setMobileDraft(state);
   }, [state, sheet]);
-
-  useEffect(() => {
-    if (state.game === "other" || state.subGame) setOtherExpanded(true);
-  }, [state.game, state.subGame]);
 
   useEffect(() => {
     if (!sortOpen) return;
@@ -710,10 +650,6 @@ export function ProductListingControls({
               draft={state}
               facets={facets}
               subGameCounts={subGameCounts}
-              otherExpanded={otherExpanded}
-              onToggleOther={() => {
-                setOtherExpanded((v) => !v);
-              }}
               onPatch={desktopPatch}
               onPriceDraft={(min, max) =>
                 desktopPatch({
@@ -753,8 +689,6 @@ export function ProductListingControls({
           draft={mobileDraft}
           facets={facets}
           subGameCounts={subGameCounts}
-          otherExpanded={otherExpanded}
-          onToggleOther={() => setOtherExpanded((v) => !v)}
           onPatch={mobilePatch}
           onPriceDraft={(min, max) =>
             mobilePatch({
