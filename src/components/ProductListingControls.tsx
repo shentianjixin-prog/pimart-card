@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLang, useT } from "@/lib/lang-context";
-import { getSeriesPanelState, seriesLabelById } from "@/lib/product-series";
+import { getSeriesPanelState } from "@/lib/product-series";
 import {
   type FilterFacets,
   type FilterState,
@@ -370,121 +370,6 @@ function BottomSheet({
   );
 }
 
-function FilterChips({
-  state,
-  onNavigate,
-  onClearAll,
-  lang,
-}: {
-  state: FilterState;
-  onNavigate: (patch: Partial<FilterState>) => void;
-  onClearAll: () => void;
-  lang: "zh" | "ja" | "en";
-}) {
-  const T = useT();
-
-  const hasFilters =
-    state.type.length > 0 ||
-    !!state.game ||
-    !!state.subGame ||
-    state.series.length > 0 ||
-    state.rarity.length > 0 ||
-    state.stock.length > 0 ||
-    !!state.minPrice ||
-    !!state.maxPrice ||
-    !!state.category;
-
-  if (!hasFilters) return null;
-
-  return (
-    <div className="filter-chips">
-      {state.game === "pokemon" && (
-        <button
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ game: undefined, subGame: undefined, series: [] })}
-        >
-          {T("filter_game_pokemon")} ×
-        </button>
-      )}
-      {state.game === "onepiece" && (
-        <button
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ game: undefined, subGame: undefined, series: [] })}
-        >
-          {T("filter_game_onepiece")} ×
-        </button>
-      )}
-      {state.subGame && (
-        <button
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ game: undefined, subGame: undefined, series: [] })}
-        >
-          {subGameLabel(state.subGame, lang)} ×
-        </button>
-      )}
-      {state.stock.map((v) => (
-        <button
-          key={`st-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() =>
-            onNavigate({ stock: state.stock.filter((x) => x !== v), page: 1 })
-          }
-        >
-          {v === "instock"
-            ? T("filter_instock")
-            : v === "preorder"
-              ? T("filter_preorder")
-              : T("filter_stock_soldout")}{" "}
-          ×
-        </button>
-      ))}
-      {state.series.map((v) => (
-        <button
-          key={`s-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() =>
-            onNavigate({ series: state.series.filter((x) => x !== v), page: 1 })
-          }
-        >
-          {seriesLabelById(state.game, state.subGame, v)} ×
-        </button>
-      ))}
-      {state.type.map((v) => (
-        <button
-          key={`t-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ type: state.type.filter((x) => x !== v), page: 1 })}
-        >
-          {T(`filter_type_${v}`)} ×
-        </button>
-      ))}
-      {(state.minPrice || state.maxPrice) && (
-        <button
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ minPrice: undefined, maxPrice: undefined, page: 1 })}
-        >
-          {state.minPrice && state.maxPrice
-            ? `¥${state.minPrice}–¥${state.maxPrice}`
-            : state.minPrice
-              ? `≥¥${state.minPrice}`
-              : `≤¥${state.maxPrice}`}{" "}
-          ×
-        </button>
-      )}
-      <button type="button" className="filter-chip-clear" onClick={onClearAll}>
-        {T("filter_clear_all")}
-      </button>
-    </div>
-  );
-}
-
 export function ProductListingControls({
   state,
   facets,
@@ -680,8 +565,6 @@ export function ProductListingControls({
         )}
 
         <div className="min-w-0 flex-1">
-          <FilterChips state={state} onNavigate={navigate} onClearAll={clearAll} lang={lang} />
-
           {children}
         </div>
       </div>
