@@ -30,7 +30,7 @@ export function PimartLogo({
   const invert = tone === "light" ? "brightness-0 invert" : "";
 
   if (mode === "brand") {
-    const width = Math.round(height * (280 / 72));
+    const width = Math.round(height * (320 / 96));
     return (
       <span className={`inline-flex items-center ${className}`} role="img" aria-label="PIMART CARD">
         <Image
@@ -66,8 +66,8 @@ export function PimartLogo({
 
   // lockup：网站圆标 + 企业字标
   const markSize = height;
-  const brandH = Math.round(height * 0.72);
-  const brandW = Math.round(brandH * (280 / 72));
+  const brandH = Math.round(height * 0.85);
+  const brandW = Math.round(brandH * (320 / 96));
 
   return (
     <span
