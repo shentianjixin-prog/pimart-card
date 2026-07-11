@@ -20,7 +20,12 @@ if (!existsSync(dbPath)) {
 const IMAGE_RENAMES = [
   ["/products/opc-01-box.jpg", "/products/opc-01-box-v2.jpg"],
   ["/products/opc-02-box.jpg", "/products/opc-02-box-v2.jpg"],
-  ["/products/opc-07-box.webp", "/products/opc-07-box-v2.webp"],
+  ["/products/opc-07-box.webp", "/products/opc-07-box-v2.jpg"],
+  ["/products/opc-07-box-v2.webp", "/products/opc-07-box-v2.jpg"],
+  ["/products/opc-04-box.jpg", "/products/opc-04-box-v2.jpg"],
+  ["/products/opc-05-box.jpg", "/products/opc-05-box-v2.jpg"],
+  ["/products/opc-06-box.jpg", "/products/opc-06-box-v2.jpg"],
+  ["/products/opc-07-box.jpg", "/products/opc-07-box-v2.jpg"],
   ["/products/opc-10-box.jpg", "/products/opc-10-box-v2.jpg"],
   ["/products/opc-15-box.png", "/products/opc-15-box-v2.png"],
   ["/products/opc-15-box.webp", "/products/opc-15-box-v2.webp"],
