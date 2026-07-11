@@ -3092,6 +3092,63 @@ button:not(:disabled),
     line-height: 1.65;
     color: #9ca3af;
   }
+
+  /* 海贼王官网风格：本商品可开出的顶卡 */
+  .opc-topcards {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .opc-topcards-heading {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .opc-topcards-groups {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .opc-topcards-group {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .opc-topcards-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .opc-topcards-image-wrap {
+    position: relative;
+    width: 8.5rem;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #f3f4f6;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .opc-topcards-image {
+    object-fit: contain;
+  }
+
+  .opc-topcards-group-title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .opc-topcards-group-remark {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
 }
 
 @keyframes fade-up {

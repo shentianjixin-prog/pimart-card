@@ -218,6 +218,7 @@ const dict: Record<string, Record<Lang, string>> = {
   opc_note_types_fallback: { zh: "本系列卡牌", ja: "本シリーズのカード", en: "cards in this set" },
   opc_note_image:      { zh: "※图片仅供参考，以实际为准。", ja: "※画像はイメージです。", en: "※Images are for reference only." },
   opc_note_process:    { zh: "※商品加工方式可能会有变更。", ja: "※商品の仕様は予告なく変更される場合があります。", en: "※Product specifications are subject to change." },
+  opc_topcards_title:  { zh: "本商品可开出的顶卡", ja: "封入されるトップカード", en: "Top pulls from this box" },
 
 
   // 购物车

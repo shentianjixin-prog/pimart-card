@@ -4,6 +4,13 @@ export type OpcRarityRow = {
   count: number;
 };
 
+export type OpcTopCardGroup = {
+  /** 本地图片路径，/products/topcards/... */
+  images: string[];
+  title: string;
+  remark?: string;
+};
+
 export type OpcSetSpec = {
   /** 系列中文名（不含 OPC 编号，与店内 series 一致） */
   titleZh: string;
@@ -21,6 +28,8 @@ export type OpcSetSpec = {
   parallelTypes?: string;
   /** 官网商品页 */
   sourceUrl?: string;
+  /** 本商品可开出的顶卡展示（数据来源：onepiece-cardgame.cn 商品详情页） */
+  topCards?: OpcTopCardGroup[];
 };
 
 const PACK = { cardsPerPack: 6, packsPerBox: 24, boxesPerCase: 12 } as const;
@@ -286,6 +295,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 6],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-15-1-1.png", "/products/topcards/opc-15-1-2.png"],
+        title: "蒙奇·D·路飞、艾尼路以SEC卡牌登场!",
+        remark: "“空岛篇”的那场战斗在此重现…!",
+      },
+      {
+        images: [
+          "/products/topcards/opc-15-2-1.png",
+          "/products/topcards/opc-15-2-2.png",
+          "/products/topcards/opc-15-2-3.png",
+          "/products/topcards/opc-15-2-4.png",
+        ],
+        title: "持有强力效果的卡牌大量登场!",
+        remark: "大量卡牌搭配领袖卡牌都有出色效果!",
+      },
+      {
+        images: ["/products/topcards/opc-15-3-1.png", "/products/topcards/opc-15-3-2.png"],
+        title: "这次也收录了两种异画版事件卡牌!",
+        remark: "快来获取特别设计的卡牌吧!",
+      },
+      {
+        images: ["/products/topcards/opc-15-4-1.png"],
+        title: "这次的超级异画卡牌是艾尼路!",
+        remark: "将这张特别设计的卡牌收入手中吧!",
+      },
+    ],
   },
   "OPC-16": {
     titleZh: "决战之时",
@@ -306,6 +342,32 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_don", 1],
       ["opc_rarity_tr", 1],
     ]),
+    topCards: [
+      {
+        images: [
+          "/products/topcards/opc-16-1-1.png",
+          "/products/topcards/opc-16-1-2.png",
+          "/products/topcards/opc-16-1-3.png",
+          "/products/topcards/opc-16-1-4.png",
+        ],
+        title: "在那场战役中活跃的角色们悉数参战!",
+        remark: "大量卡牌搭配领袖卡牌都有出色效果!",
+      },
+      {
+        images: ["/products/topcards/opc-16-2-1.png", "/products/topcards/opc-16-2-2.png"],
+        title: "波特卡斯·D·艾斯、马歇尔·D·提奇以SEC卡牌登场!",
+        remark: "带着强力的效果一起奔向战场...!",
+      },
+      {
+        images: [
+          "/products/topcards/opc-16-3-1.png",
+          "/products/topcards/opc-16-3-2.png",
+          "/products/topcards/opc-16-3-3.png",
+        ],
+        title: "这次的超级异画卡牌是“三大将”!",
+        remark: "将这些特别设计的卡牌收入手中吧!",
+      },
+    ],
   },
 };
 

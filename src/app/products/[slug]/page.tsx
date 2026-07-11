@@ -10,6 +10,7 @@ import { t, resolveLang, translateBoxType, type Lang } from "@/lib/translations"
 import { isProductArchived } from "@/lib/product-status";
 import { findBoxVariants } from "@/lib/product-box-variants";
 import { OpcProductSpecs } from "@/components/OpcProductSpecs";
+import { OpcTopCards } from "@/components/OpcTopCards";
 
 function formatReleaseDate(date: Date, lang: Lang) {
   if (lang === "en") {
@@ -121,6 +122,8 @@ export default async function ProductPage({
             lang={lang}
             T={T}
           />
+
+          <OpcTopCards series={product.series} lang={lang} T={T} />
 
           {product.description ? (
             <div className="product-detail-desc">
