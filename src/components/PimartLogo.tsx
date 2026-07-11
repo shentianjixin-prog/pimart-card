@@ -9,10 +9,10 @@ type Props = {
 };
 
 /**
- * V4 方案：
- * - mark：左边圆形网站 logo
- * - brand：右边企业品牌字标
- * - lockup：两者并列（顶栏默认）
+ * 黑白线条高级标识：
+ * - mark：网站圆标（交叉卡 + 速度线 P）
+ * - brand：企业字标 PIMART CARD
+ * - lockup：圆标 + 字标
  */
 export function PimartLogo({
   height = 36,

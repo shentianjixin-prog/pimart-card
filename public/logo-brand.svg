@@ -6,7 +6,7 @@
     font-size="40"
     font-weight="800"
     fill="#111827"
-    letter-spacing="0.06em"
+    letter-spacing="0.08em"
   >PIMART</text>
   <text
     x="2"
@@ -15,6 +15,6 @@
     font-size="13"
     font-weight="600"
     fill="#6B7280"
-    letter-spacing="0.28em"
+    letter-spacing="0.32em"
   >CARD</text>
 </svg>
