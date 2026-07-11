@@ -1,9 +1,12 @@
 /**
  * 强制同步商品图片路径到运行时数据库（幂等）。
  * 解决 Railway Volume 旧库图片为 placeholder 的问题。
+ * 宝可梦原盒会附带「每盒最贵 5 张卡」图（见 pokemon-topcards-manifest.json）。
  */
 import Database from "better-sqlite3";
-import { existsSync } from "fs";
+import { existsSync, readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
 const url = process.env.DATABASE_URL || "file:./dev.db";
 const dbPath = url.startsWith("file:") ? url.slice(5) : url;
@@ -13,6 +16,10 @@ if (!existsSync(dbPath)) {
   process.exit(0);
 }
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const TOPCARDS_MANIFEST = join(__dirname, "pokemon-topcards-manifest.json");
+
+/** 盒图路径；若有 chase 卡清单则拼成「盒图 + top5」 */
 const IMAGE_MAP = {
   "30th-vol1-简中": "/products/30th-vol1.png",
   "30th-vol2-简中": "/products/30th-vol2.png",
@@ -95,6 +102,28 @@ const IMAGE_MAP = {
   "胜象星引-box-简中": "/products/cs65-box.jpg",
   "黑晶炽焰-box-简中": "/products/csv5c-box.png",
 };
+
+function withTopcards(imageMap) {
+  if (!existsSync(TOPCARDS_MANIFEST)) return imageMap;
+  let manifest;
+  try {
+    manifest = JSON.parse(readFileSync(TOPCARDS_MANIFEST, "utf8"));
+  } catch (e) {
+    console.warn("[images] 读取 pokemon-topcards-manifest.json 失败:", e.message);
+    return imageMap;
+  }
+  const out = { ...imageMap };
+  for (const [slug, info] of Object.entries(manifest)) {
+    const tops = Array.isArray(info?.topcards) ? info.topcards.filter(Boolean) : [];
+    if (!tops.length) continue;
+    const base = (out[slug] || "").split(",")[0].trim();
+    if (!base) continue;
+    out[slug] = [base, ...tops].join(",");
+  }
+  return out;
+}
+
+const IMAGE_MAP_FINAL = withTopcards(IMAGE_MAP);
 
 // 2026-07-16 朱紫第10弹「共逐荣光」相关的一批新商品，Railway Volume 旧库可能还没有这些行，
 // 光靠上面的 UPDATE 是补不出来的，所以这里连行一起 upsert（按 slug 幂等）。
@@ -347,7 +376,7 @@ const update = db.prepare('UPDATE "Product" SET images = ? WHERE slug = ? AND im
 let updated = 0;
 let skipped = 0;
 
-for (const [slug, images] of Object.entries(IMAGE_MAP)) {
+for (const [slug, images] of Object.entries(IMAGE_MAP_FINAL)) {
   const result = update.run(images, slug, images);
   if (result.changes > 0) {
     updated++;
@@ -373,9 +402,20 @@ const insertNew = db.prepare(`
 
 let inserted = 0;
 for (const p of NEW_PRODUCTS) {
-  const result = insertNew.run({ ...p, featured: p.featured ? 1 : 0, isPreorder: p.isPreorder ? 1 : 0 });
+  const tops = IMAGE_MAP_FINAL[p.slug];
+  const images = tops || p.images;
+  const result = insertNew.run({
+    ...p,
+    images,
+    featured: p.featured ? 1 : 0,
+    isPreorder: p.isPreorder ? 1 : 0,
+  });
   if (result.changes > 0) inserted++;
 }
 
 db.close();
 console.log(`[images] 图片路径同步完成：更新 ${updated} 件，已是最新 ${skipped} 件，新品补齐/校正 ${inserted} 件`);
+if (existsSync(TOPCARDS_MANIFEST)) {
+  const n = Object.keys(JSON.parse(readFileSync(TOPCARDS_MANIFEST, "utf8"))).length;
+  console.log(`[images] 已合并宝可梦 chase 卡图清单 ${n} 个商品`);
+}
