@@ -68,8 +68,9 @@ export function getSeriesPanelState(
   game?: MainGameKey,
   subGame?: SubGameKey
 ): SeriesPanelState {
+  // 未选游戏时不展示系列区块
   if (!game) {
-    return { kind: "hint", messageKey: "filter_series_select_game" };
+    return { kind: "hidden" };
   }
   if (game === "pokemon") {
     return { kind: "list", options: POKEMON_SERIES };
@@ -78,8 +79,9 @@ export function getSeriesPanelState(
     return { kind: "list", options: ONEPIECE_SERIES };
   }
   if (game === "other") {
+    // 需先点到具体 IP（火影 / 龙珠等）
     if (!subGame) {
-      return { kind: "hint", messageKey: "filter_series_select_subgame" };
+      return { kind: "hidden" };
     }
     const options = SUBGAME_SERIES[subGame] ?? [];
     if (options.length === 0) {

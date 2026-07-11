@@ -210,19 +210,24 @@ function FilterPanelContent({
 
   const selectGame = (game: MainGameKey) => {
     if (draft.game === game) {
-      onPatch({ game: undefined, subGame: undefined, series: [] });
+      onPatch({ game: undefined, subGame: undefined, series: [], type: [] });
     } else {
-      onPatch({ game, subGame: undefined, series: [] });
+      onPatch({ game, subGame: undefined, series: [], type: [] });
     }
   };
 
   const selectSubGame = (subGame: SubGameKey) => {
     if (draft.subGame === subGame) {
-      onPatch({ game: undefined, subGame: undefined, series: [] });
+      onPatch({ game: undefined, subGame: undefined, series: [], type: [] });
     } else {
-      onPatch({ game: "other", subGame, series: [] });
+      onPatch({ game: "other", subGame, series: [], type: [] });
     }
   };
+
+  const showSeriesAndType =
+    draft.game === "pokemon" ||
+    draft.game === "onepiece" ||
+    (draft.game === "other" && !!draft.subGame);
 
   return (
     <div className="filter-panel-inner">
@@ -256,31 +261,35 @@ function FilterPanelContent({
         </div>
       </FilterSection>
 
-      <SeriesFilterSection
-        draft={draft}
-        onToggleSeries={(id) =>
-          onPatch({ series: toggleInList(draft.series, id), page: 1 })
-        }
-      />
+      {showSeriesAndType && (
+        <SeriesFilterSection
+          draft={draft}
+          onToggleSeries={(id) =>
+            onPatch({ series: toggleInList(draft.series, id), page: 1 })
+          }
+        />
+      )}
 
-      <FilterSection title={T("filter_product_type")}>
-        <div className="flex flex-wrap gap-2">
-          {productTypesForGame(draft.game).map((key) => {
-            const facet = facets.types.find((f) => f.key === key);
-            return (
-              <PillOption
-                key={key}
-                selected={draft.type.includes(key)}
-                label={T(`filter_type_${key}`)}
-                count={facet?.count}
-                onClick={() =>
-                  onPatch({ type: toggleInList(draft.type, key), page: 1 })
-                }
-              />
-            );
-          })}
-        </div>
-      </FilterSection>
+      {showSeriesAndType && (
+        <FilterSection title={T("filter_product_type")}>
+          <div className="flex flex-wrap gap-2">
+            {productTypesForGame(draft.game).map((key) => {
+              const facet = facets.types.find((f) => f.key === key);
+              return (
+                <PillOption
+                  key={key}
+                  selected={draft.type.includes(key)}
+                  label={T(`filter_type_${key}`)}
+                  count={facet?.count}
+                  onClick={() =>
+                    onPatch({ type: toggleInList(draft.type, key), page: 1 })
+                  }
+                />
+              );
+            })}
+          </div>
+        </FilterSection>
+      )}
 
       <FilterSection title={T("filter_price")}>
         <div className="flex items-center gap-2">

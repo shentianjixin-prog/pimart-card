@@ -197,8 +197,12 @@ export function parseFilterState(raw: RawSearchParams): FilterState {
 
   const allowedTypes = new Set(productTypesForGame(game));
   type = type.filter((k) => allowedTypes.has(k));
+  if (!game || (game === "other" && !subGame)) {
+    type = [];
+  }
 
-  const series = splitMulti(firstParam(raw.series)).map(normalizeSeriesId);
+  const seriesRaw = splitMulti(firstParam(raw.series)).map(normalizeSeriesId);
+  const series = !game || (game === "other" && !subGame) ? [] : seriesRaw;
   const rarity = splitMulti(firstParam(raw.rarity));
 
   return {
@@ -533,8 +537,11 @@ export function applyFilterPatch(
 
   if (next.game !== "other") next.subGame = undefined;
 
-  // 兜底：只保留当前游戏允许的类型
-  {
+  // 未选游戏时清空系列与商品类型
+  if (!next.game || (next.game === "other" && !next.subGame)) {
+    next.series = [];
+    next.type = [];
+  } else {
     const allowed = new Set(productTypesForGame(next.game));
     next.type = next.type.filter((k) => allowed.has(k));
   }
