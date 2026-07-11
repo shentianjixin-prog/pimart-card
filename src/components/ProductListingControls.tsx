@@ -19,8 +19,8 @@ import {
   buildListingHref,
   filterStateToParams,
   productTypesForGame,
+  selectOnlyInList,
   subGameLabel,
-  toggleInList,
 } from "@/lib/product-filters";
 
 type Props = {
@@ -255,7 +255,7 @@ function FilterPanelContent({
                     : T("filter_stock_soldout")
               }
               onClick={() =>
-                onPatch({ stock: toggleInList(draft.stock, key as StockKey), page: 1 })
+                onPatch({ stock: selectOnlyInList(draft.stock, key as StockKey), page: 1 })
               }
             />
           ))}
@@ -274,7 +274,7 @@ function FilterPanelContent({
                   label={T(`filter_type_${key}`)}
                   count={facet?.count}
                   onClick={() => {
-                    const nextType = toggleInList(draft.type, key);
+                    const nextType = selectOnlyInList(draft.type, key);
                     onPatch({
                       type: nextType,
                       // 取消扩充包时同步清空系列
@@ -293,7 +293,7 @@ function FilterPanelContent({
         <SeriesFilterSection
           draft={draft}
           onToggleSeries={(id) =>
-            onPatch({ series: toggleInList(draft.series, id), page: 1 })
+            onPatch({ series: selectOnlyInList(draft.series, id), page: 1 })
           }
         />
       )}

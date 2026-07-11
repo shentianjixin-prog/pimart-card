@@ -200,13 +200,18 @@ export function parseFilterState(raw: RawSearchParams): FilterState {
   if (!game || (game === "other" && !subGame)) {
     type = [];
   }
+  // 各维度单选：URL 多值只保留第一项
+  if (type.length > 1) type = [type[0]!];
 
   const seriesRaw = splitMulti(firstParam(raw.series)).map(normalizeSeriesId);
   // 仅选中扩充包时保留系列筛选
-  const series =
+  let series =
     !game || (game === "other" && !subGame) || !type.includes("expansion")
       ? []
       : seriesRaw;
+  if (series.length > 1) series = [series[0]!];
+  let stock = legacyStock(raw);
+  if (stock.length > 1) stock = [stock[0]!];
   const rarity = splitMulti(firstParam(raw.rarity));
 
   return {
@@ -218,7 +223,7 @@ export function parseFilterState(raw: RawSearchParams): FilterState {
     rarity,
     minPrice: firstParam(raw.minPrice),
     maxPrice: firstParam(raw.maxPrice),
-    stock: legacyStock(raw),
+    stock,
     sort: parseSort(firstParam(raw.sort)),
     q: firstParam(raw.q),
     page: Math.max(1, Number(firstParam(raw.page)) || 1),
@@ -554,6 +559,11 @@ export function applyFilterPatch(
     }
   }
 
+  // 各维度仅保留一项（单点跳转，不做多选叠加）
+  if (next.type.length > 1) next.type = [next.type[0]!];
+  if (next.series.length > 1) next.series = [next.series[0]!];
+  if (next.stock.length > 1) next.stock = [next.stock[0]!];
+
   return next;
 }
 
@@ -587,6 +597,11 @@ export function buildListingHref(
 
 export function toggleInList<T extends string>(list: T[], value: T): T[] {
   return list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
+}
+
+/** 单选：点当前项取消，点其他项只保留该项 */
+export function selectOnlyInList<T extends string>(list: T[], value: T): T[] {
+  return list.length === 1 && list[0] === value ? [] : [value];
 }
 
 export function subGameLabel(key: SubGameKey, lang: Lang): string {
