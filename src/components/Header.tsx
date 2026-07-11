@@ -313,9 +313,9 @@ export function Header({ member }: { member?: MemberSession | null }) {
             href="/"
             className="flex min-h-11 shrink-0 items-center"
             onClick={closeMobile}
-            aria-label="PIMARTCARD"
+            aria-label="PIMART CARD"
           >
-            <PimartLogo height={40} className="h-9 w-auto sm:h-10" />
+            <PimartLogo variant="lockup" height={36} className="h-8 sm:h-9" />
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
