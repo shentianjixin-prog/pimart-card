@@ -1,55 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" role="img" aria-label="PIMART">
-  <!-- 黑白线条圆标：叠卡线框 + 实心黑 P -->
-  <circle cx="60" cy="60" r="54" stroke="#111827" stroke-width="5" fill="#FFFFFF"/>
-  <circle cx="60" cy="60" r="49.5" stroke="#111827" stroke-width="1" fill="none" opacity="0.28"/>
-
-  <!-- 后层卡 -->
-  <rect
-    x="38" y="28" width="40" height="54" rx="7"
-    fill="none" stroke="#111827" stroke-width="2"
-    transform="rotate(-22 58 55)"
-  />
-  <!-- 中层卡 -->
-  <rect
-    x="40" y="30" width="40" height="54" rx="7"
-    fill="none" stroke="#111827" stroke-width="2"
-    transform="rotate(18 60 57)"
-  />
-  <!-- 前层卡 -->
-  <rect
-    x="39" y="29" width="42" height="56" rx="7"
-    fill="#FFFFFF" stroke="#111827" stroke-width="2.25"
-    transform="rotate(-6 60 57)"
-  />
-
-  <!-- 实心黑 P + 速度线镂空 -->
-  <g transform="translate(47 41)">
-    <path
-      fill="#111827"
-      fill-rule="evenodd"
-      d="
-        M3 1.5
-        H16.2
-        C23.4 1.5 28.2 6.1 28.2 12.4
-        C28.2 18.8 23.2 23.2 15.8 23.2
-        H10.2
-        V36.5
-        H3
-        V1.5
-        Z
-
-        M10.2 7.4
-        V17.3
-        H15.4
-        C18.9 17.3 21.1 15.2 21.1 12.4
-        C21.1 9.6 18.9 7.4 15.4 7.4
-        H10.2
-        Z
-
-        M-0.2 9.6 H11.2 V11.5 H-0.2 Z
-        M-1.6 13.2 H11.2 V15.1 H-1.6 Z
-        M-0.2 16.8 H11.2 V18.7 H-0.2 Z
-      "
-    />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" fill="none" role="img" aria-label="PIMARTCARD">
+  <rect x="5" y="9" width="22" height="28" rx="3.5" fill="#E5E7EB" transform="rotate(-7 16 23)"/>
+  <rect x="9" y="5" width="22" height="28" rx="3.5" fill="#FFFFFF" stroke="#111827" stroke-width="1.25" transform="rotate(4 20 19)"/>
+  <path d="M14.5 14.5 C14.5 12.2 16.5 10.8 18.8 10.8 C20.8 10.8 22.3 12 22.3 13.6 C22.3 15.2 21.2 16.1 19.5 16.5 L22.5 21.5 H20 L17.8 16.8 H16.8 V21.5 H14.5 V14.5 Z M16.8 15.5 H18.8 C19.8 15.5 20.5 14.9 20.5 13.9 C20.5 12.9 19.8 12.3 18.8 12.3 H16.8 V15.5 Z" fill="#111827" transform="translate(0.5 1) rotate(4 20 19)"/>
+  <line x1="42" y1="9" x2="42" y2="31" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="27" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="800" fill="#111827" letter-spacing="0.08em">PIMARTCARD</text>
 </svg>
