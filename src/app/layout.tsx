@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
@@ -6,6 +6,7 @@ import { CartProvider } from "@/lib/cart-context";
 import { LangProvider } from "@/lib/lang-context";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MobileNavGestures } from "@/components/MobileNavGestures";
 import { HTML_LANG, resolveLang } from "@/lib/translations";
 import { getMemberSession } from "@/lib/session";
 
@@ -36,6 +37,15 @@ export const metadata: Metadata = {
   },
 };
 
+/** 手机端关闭误触双指/双击缩放 */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -59,6 +69,7 @@ export default async function RootLayout({
       >
         <LangProvider initial={lang}>
           <CartProvider>
+            <MobileNavGestures />
             <div className="site-frame">
               <Header member={member} />
               <main className="flex-1">{children}</main>

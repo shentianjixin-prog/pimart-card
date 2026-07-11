@@ -37,11 +37,19 @@
   --font-display: var(--font-inter);
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   background: #0a0a0a;
   color: #ffffff;
   font-family: var(--font-sans), "Noto Sans SC", "Noto Sans JP", system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
+  /* 减少误触缩放与横向滑出退出 */
+  touch-action: manipulation;
+  overscroll-behavior-x: none;
 }
 
 /* Site chrome — black outer shell + framed white content */
@@ -3000,7 +3008,7 @@ button:not(:disabled),
   }
 
   .hero-banner-viewport {
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-y;
   }
 
   @media (min-width: 1024px) {
