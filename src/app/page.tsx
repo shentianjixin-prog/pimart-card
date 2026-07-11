@@ -17,6 +17,7 @@ import {
   buildWhere,
   isListingView,
   parseFilterState,
+  LISTING_PRODUCT,
   type RawSearchParams,
 } from "@/lib/product-filters";
 import type { Prisma } from "@/generated/prisma/client";
@@ -51,8 +52,6 @@ const PSA_WHERE: Prisma.ProductWhereInput = {
   ],
 };
 
-const ACTIVE_PRODUCT: Prisma.ProductWhereInput = { status: "上架" };
-
 function mergePopularProducts<T extends { id: string }>(
   featured: T[],
   recent: T[],
@@ -84,7 +83,7 @@ export default async function Home({
   const orderBy = buildOrderBy(filterState.sort);
   const page = filterState.page;
 
-  const stockFilter = { ...ACTIVE_PRODUCT, stock: { gt: 0 } };
+  const stockFilter = { ...LISTING_PRODUCT, stock: { gt: 0 } };
 
   const [
     products,

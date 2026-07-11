@@ -58,6 +58,25 @@ export type FilterFacets = {
 
 export const ACTIVE_PRODUCT: Prisma.ProductWhereInput = { status: "上架" };
 
+/**
+ * 规格附属 SKU（散包/原箱等）不单独出现在首页与列表，
+ * 仅作为同款商品的详情/「即刻购买」选项。
+ */
+export const VARIANT_ONLY_BOX_TYPES = [
+  "散包",
+  "原箱",
+  "肥散包",
+  "瘦散包",
+  "肥原箱",
+  "瘦原箱",
+] as const;
+
+/** 前台列表 / 首页用：上架且排除规格附属 SKU */
+export const LISTING_PRODUCT: Prisma.ProductWhereInput = {
+  status: "上架",
+  NOT: { boxType: { in: [...VARIANT_ONLY_BOX_TYPES] } },
+};
+
 export const PRODUCT_TYPES: ProductTypeKey[] = ["expansion", "gift", "merch", "set"];
 
 /** 旧 URL type= 映射到新四类 */
@@ -363,7 +382,7 @@ function multiOr(
 }
 
 export function buildWhere(state: FilterState): Prisma.ProductWhereInput {
-  const and: Prisma.ProductWhereInput[] = [{ ...ACTIVE_PRODUCT }];
+  const and: Prisma.ProductWhereInput[] = [{ ...LISTING_PRODUCT }];
 
   if (state.category) and.push({ category: state.category });
   if (state.boxType) and.push({ boxType: state.boxType });

@@ -3,12 +3,12 @@ import {
   type FilterFacets,
   MAIN_GAMES,
   PRODUCT_TYPES,
-  ACTIVE_PRODUCT,
+  LISTING_PRODUCT,
   typeWhere,
   subGameWhere,
 } from "@/lib/product-filters";
 
-const ACTIVE = { status: "上架" as const };
+const ACTIVE = LISTING_PRODUCT;
 
 const POKEMON_WHERE = {
   OR: [
@@ -32,12 +32,12 @@ const OTHER_WHERE = { NOT: { OR: [POKEMON_WHERE, ONEPIECE_WHERE] } };
 
 async function countForGame(key: (typeof MAIN_GAMES)[number]) {
   if (key === "pokemon") {
-    return prisma.product.count({ where: { AND: [ACTIVE_PRODUCT, POKEMON_WHERE] } });
+    return prisma.product.count({ where: { AND: [LISTING_PRODUCT, POKEMON_WHERE] } });
   }
   if (key === "onepiece") {
-    return prisma.product.count({ where: { AND: [ACTIVE_PRODUCT, ONEPIECE_WHERE] } });
+    return prisma.product.count({ where: { AND: [LISTING_PRODUCT, ONEPIECE_WHERE] } });
   }
-  return prisma.product.count({ where: { AND: [ACTIVE_PRODUCT, OTHER_WHERE] } });
+  return prisma.product.count({ where: { AND: [LISTING_PRODUCT, OTHER_WHERE] } });
 }
 
 export async function fetchFilterFacets(): Promise<FilterFacets> {
@@ -51,7 +51,7 @@ export async function fetchFilterFacets(): Promise<FilterFacets> {
       PRODUCT_TYPES.map(async (key) => ({
         key,
         count: await prisma.product.count({
-          where: { AND: [ACTIVE_PRODUCT, typeWhere(key)] },
+          where: { AND: [LISTING_PRODUCT, typeWhere(key)] },
         }),
       }))
     ),
@@ -89,7 +89,7 @@ export async function fetchSubGameCounts(): Promise<Record<string, number>> {
     keys.map(async (key) => {
       try {
         const count = await prisma.product.count({
-          where: { AND: [ACTIVE_PRODUCT, subGameWhere(key)] },
+          where: { AND: [LISTING_PRODUCT, subGameWhere(key)] },
         });
         return [key, count] as const;
       } catch {
