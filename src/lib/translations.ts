@@ -65,7 +65,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // 筛选栏
   filter_sort:         { zh: "排序",           ja: "並び替え",     en: "Sort" },
-  filter_sort_newest:  { zh: "最新上架",       ja: "新着順",       en: "Newest" },
+  filter_sort_newest:  { zh: "最新发售",       ja: "発売日順",     en: "Newest Release" },
   filter_sort_asc:     { zh: "价格从低到高",   ja: "安い順",       en: "Price: Low to High" },
   filter_sort_desc:    { zh: "价格从高到低",   ja: "高い順",       en: "Price: High to Low" },
   filter_price:        { zh: "价格区间（日元）", ja: "価格帯（円）", en: "Price Range (¥)" },

@@ -441,14 +441,15 @@ export function buildOrderBy(
     case "price_desc":
       return { priceJpy: "desc" };
     case "newest":
-      return { createdAt: "desc" };
+      // 按发售日优先（OPC-16/15 等新品在前），无发售日再按创建时间
+      return [{ releaseDate: "desc" }, { createdAt: "desc" }];
     case "popular":
-      return [{ featured: "desc" }, { stock: "desc" }, { createdAt: "desc" }];
+      return [{ featured: "desc" }, { stock: "desc" }, { releaseDate: "desc" }, { createdAt: "desc" }];
     case "restocked":
       return [{ priceUpdatedAt: "desc" }, { createdAt: "desc" }];
     case "featured":
     default:
-      return [{ featured: "desc" }, { createdAt: "desc" }];
+      return [{ featured: "desc" }, { releaseDate: "desc" }, { createdAt: "desc" }];
   }
 }
 

@@ -112,7 +112,7 @@ export default async function Home({
     showMarketing
       ? prisma.product.findMany({
           where: LISTING_PRODUCT,
-          orderBy: { createdAt: "desc" },
+          orderBy: [{ releaseDate: "desc" }, { createdAt: "desc" }],
           take: LATEST_TARGET,
         })
       : Promise.resolve([]),

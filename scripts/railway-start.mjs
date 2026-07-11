@@ -82,6 +82,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "ensure-release-dates.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 发售日回填失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "sync-product-images.mjs")}`, {
     stdio: "inherit",
     env: process.env,
