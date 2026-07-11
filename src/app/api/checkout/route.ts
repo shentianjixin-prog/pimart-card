@@ -7,7 +7,7 @@ import { getMemberSession } from "@/lib/session";
 type CheckoutItem = { productId: string; quantity: number };
 
 export async function POST(request: NextRequest) {
-  let body: { items?: CheckoutItem[] };
+  let body: { items?: CheckoutItem[]; solo?: boolean };
   try {
     body = await request.json();
   } catch {
@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
   }
 
   const items = body.items;
+  const solo = body.solo === true;
   if (!items || items.length === 0) {
     return NextResponse.json({ error: "购物车为空" }, { status: 400 });
   }
@@ -79,9 +80,9 @@ export async function POST(request: NextRequest) {
       mode: "payment",
       line_items: lineItems,
       customer_email: member?.email,
-      success_url: `${origin}/checkout/success?order=${order.id}`,
+      success_url: `${origin}/checkout/success?order=${order.id}${solo ? "&solo=1" : ""}`,
       cancel_url: `${origin}/checkout/cancel?order=${order.id}`,
-      metadata: { orderId: order.id },
+      metadata: { orderId: order.id, solo: solo ? "1" : "0" },
     });
 
     await prisma.order.update({

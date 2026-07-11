@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useT } from "@/lib/lang-context";
+import { startSoloCheckout } from "@/lib/checkout-client";
 
 type Props = {
   product: {
@@ -18,10 +18,11 @@ type Props = {
 
 export function AddToCartButton({ product }: Props) {
   const { addItem } = useCart();
-  const router = useRouter();
   const T = useT();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const [buying, setBuying] = useState(false);
+  const [buyError, setBuyError] = useState<string | null>(null);
   const soldOut = product.stock <= 0;
 
   function handleAdd() {
@@ -38,6 +39,19 @@ export function AddToCartButton({ product }: Props) {
     );
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
+  }
+
+  async function handleBuyNow() {
+    if (soldOut || buying) return;
+    setBuying(true);
+    setBuyError(null);
+    const result = await startSoloCheckout([
+      { productId: product.id, quantity },
+    ]);
+    if (!result.ok) {
+      setBuyError(result.error);
+      setBuying(false);
+    }
   }
 
   if (soldOut) {
@@ -72,19 +86,19 @@ export function AddToCartButton({ product }: Props) {
         </span>
       </div>
       <div className="flex gap-3">
-        <button onClick={handleAdd} className="btn-secondary flex-1">
+        <button type="button" onClick={handleAdd} className="btn-secondary flex-1">
           {added ? T("btn_added_cart") : T("btn_add_cart")}
         </button>
         <button
-          onClick={() => {
-            handleAdd();
-            router.push("/cart");
-          }}
+          type="button"
+          onClick={handleBuyNow}
+          disabled={buying}
           className="btn-primary flex-1"
         >
-          {T("btn_buy_now")}
+          {buying ? T("btn_buy_loading") : T("btn_buy_now")}
         </button>
       </div>
+      {buyError ? <p className="text-sm text-red-500">{buyError}</p> : null}
     </div>
   );
 }

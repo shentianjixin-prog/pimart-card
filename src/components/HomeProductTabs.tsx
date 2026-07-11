@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { useT } from "@/lib/lang-context";
+import type { BoxVariantOption } from "@/lib/product-box-variant-types";
 
 type Product = React.ComponentProps<typeof ProductCard>["product"];
 
@@ -11,6 +12,7 @@ type TabKey = "all" | "pokemon" | "onepiece" | "psa";
 
 type Props = {
   productsByTab: Record<TabKey, Product[]>;
+  variantsByProductId?: Record<string, BoxVariantOption[]>;
 };
 
 const TABS: { key: TabKey; labelKey: string }[] = [
@@ -20,7 +22,7 @@ const TABS: { key: TabKey; labelKey: string }[] = [
   { key: "psa", labelKey: "tab_psa" },
 ];
 
-export function HomeProductTabs({ productsByTab }: Props) {
+export function HomeProductTabs({ productsByTab, variantsByProductId = {} }: Props) {
   const T = useT();
   const [active, setActive] = useState<TabKey>("all");
   const products = productsByTab[active];
@@ -57,7 +59,11 @@ export function HomeProductTabs({ productsByTab }: Props) {
       ) : (
         <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
           {products.slice(0, 8).map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <ProductCard
+              key={p.id}
+              product={p}
+              variants={variantsByProductId[p.id]}
+            />
           ))}
         </div>
       )}

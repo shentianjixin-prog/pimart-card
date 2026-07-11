@@ -20,6 +20,7 @@ import {
   type RawSearchParams,
 } from "@/lib/product-filters";
 import type { Prisma } from "@/generated/prisma/client";
+import { findBoxVariantsForProducts } from "@/lib/product-box-variants";
 
 const POPULAR_TARGET = 8;
 
@@ -165,6 +166,19 @@ export default async function Home({
 
   if (showMarketing) {
     const popular = mergePopularProducts(featuredProducts, recentInStock, POPULAR_TARGET);
+    const tabProducts = {
+      all: popular,
+      pokemon: pokemonProducts,
+      onepiece: onepieceProducts,
+      psa: psaTabProducts,
+    };
+    const allForVariants = [
+      ...popular,
+      ...pokemonProducts,
+      ...onepieceProducts,
+      ...psaTabProducts,
+    ];
+    const variantMap = await findBoxVariantsForProducts(allForVariants);
 
     return (
       <>
@@ -174,12 +188,8 @@ export default async function Home({
           <HomeAnnounceBar />
 
           <HomeProductTabs
-            productsByTab={{
-              all: popular,
-              pokemon: pokemonProducts,
-              onepiece: onepieceProducts,
-              psa: psaTabProducts,
-            }}
+            productsByTab={tabProducts}
+            variantsByProductId={Object.fromEntries(variantMap)}
           />
 
           <HomeB2B />
@@ -188,6 +198,8 @@ export default async function Home({
       </>
     );
   }
+
+  const listingVariantMap = await findBoxVariantsForProducts(products);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
@@ -203,7 +215,11 @@ export default async function Home({
           ) : (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6">
               {products.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  variants={listingVariantMap.get(p.id)}
+                />
               ))}
             </div>
           )}

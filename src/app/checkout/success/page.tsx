@@ -10,10 +10,12 @@ function CheckoutSuccessContent() {
   const { clear } = useCart();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order");
+  const solo = searchParams.get("solo") === "1";
   const T = useT();
 
   useEffect(() => {
-    clear();
+    // 即刻购买不经过购物车，成功后勿清空已有购物车
+    if (!solo) clear();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

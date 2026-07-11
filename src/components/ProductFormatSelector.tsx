@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
-import type { BoxVariantOption } from "@/lib/product-box-variants";
+import { sortBoxVariants, type BoxVariantOption } from "@/lib/product-box-variant-types";
 import { formatJpy } from "@/lib/format";
 
 export function ProductFormatSelector({
@@ -18,15 +18,16 @@ export function ProductFormatSelector({
 
   if (variants.length < 2) return null;
 
-  const ordered = [...variants].sort((a, b) => {
-    const rank = (t: string) => (t === "肥盒" ? 0 : 1);
-    return rank(a.boxType) - rank(b.boxType);
-  });
+  const ordered = sortBoxVariants(variants);
+  const cols = Math.min(ordered.length, 3);
 
   return (
     <div className="product-format">
       <p className="product-format-label">{T("detail_choose_format")}</p>
-      <div className="product-format-grid">
+      <div
+        className="product-format-grid"
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      >
         {ordered.map((v) => {
           const active = v.slug === currentSlug;
           const label = translateBoxType(v.boxType, lang);
@@ -53,7 +54,11 @@ export function ProductFormatSelector({
           }
 
           return (
-            <Link key={v.slug} href={`/products/${encodeURIComponent(v.slug)}`} className="product-format-option">
+            <Link
+              key={v.slug}
+              href={`/products/${encodeURIComponent(v.slug)}`}
+              className="product-format-option"
+            >
               {inner}
             </Link>
           );

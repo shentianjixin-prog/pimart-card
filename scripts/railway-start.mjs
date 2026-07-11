@@ -37,6 +37,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "ensure-opc-formats.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] OPC 规格补齐失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "sync-product-images.mjs")}`, {
     stdio: "inherit",
     env: process.env,

@@ -156,6 +156,9 @@ const dict: Record<string, Record<Lang, string>> = {
   boxtype_slim:        { zh: "瘦盒",   ja: "強化拡張パック",   en: "Enhanced Pack" },
   boxtype_gem:         { zh: "宝石包", ja: "ジェムパック",     en: "Gem Pack" },
   boxtype_gift:        { zh: "礼盒",   ja: "ギフトBOX",       en: "Gift Box" },
+  boxtype_sealed:      { zh: "原盒",   ja: "BOX",              en: "Booster Box" },
+  boxtype_pack:        { zh: "散包",   ja: "パック",           en: "Single Pack" },
+  boxtype_case:        { zh: "原箱",   ja: "カートン",         en: "Case" },
 
   // 详情页加购
   btn_quantity:        { zh: "数量",         ja: "数量",           en: "Qty" },
@@ -163,6 +166,7 @@ const dict: Record<string, Record<Lang, string>> = {
   btn_add_cart:        { zh: "加入购物车",   ja: "カートに追加",   en: "Add to Cart" },
   btn_added_cart:      { zh: "已加入 ✓",     ja: "追加済 ✓",       en: "Added ✓" },
   btn_buy_now:         { zh: "即刻购买",     ja: "今すぐ購入",     en: "Buy Now" },
+  btn_buy_loading:     { zh: "跳转支付中…", ja: "決済へ移動中…", en: "Redirecting…" },
 
   // 商品详情页
   detail_all_products: { zh: "全部商品",   ja: "全商品",        en: "All Products" },
@@ -490,6 +494,9 @@ const BOX_TYPE_KEY: Record<string, string> = {
   瘦盒: "boxtype_slim",
   宝石包: "boxtype_gem",
   礼盒: "boxtype_gift",
+  原盒: "boxtype_sealed",
+  散包: "boxtype_pack",
+  原箱: "boxtype_case",
 };
 
 export function translateBoxType(boxType: string, lang: Lang): string {

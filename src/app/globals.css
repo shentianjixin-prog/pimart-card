@@ -192,6 +192,17 @@ button:not(:disabled),
     box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
   }
 
+  .product-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .product-card-actions .product-card-btn {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
   .product-card-meta {
     display: flex;
     flex-wrap: wrap;
@@ -2800,6 +2811,12 @@ button:not(:disabled),
     gap: 0.65rem;
   }
 
+  @media (max-width: 419px) {
+    .product-format-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
   .product-format-option {
     display: flex;
     flex-direction: column;
@@ -2844,6 +2861,88 @@ button:not(:disabled),
   .product-format-stock.is-out {
     color: #9ca3af;
   }
+
+  /* 列表卡紧凑规格 */
+  .product-card-formats {
+    padding-bottom: 0.35rem;
+  }
+
+  .product-card-formats-label {
+    margin: 0 0 0.4rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #9ca3af;
+  }
+
+  .product-card-format-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .product-card-format-row:has(> :nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-card-format-chip {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.05rem;
+    border: 1px solid rgba(17, 24, 39, 0.12);
+    border-radius: 10px;
+    background: #fff;
+    padding: 0.4rem 0.45rem;
+    text-align: left;
+    transition: border-color 160ms ease, background 160ms ease;
+  }
+
+  .product-card-format-chip:hover {
+    border-color: rgba(17, 24, 39, 0.35);
+  }
+
+  .product-card-format-chip.is-active {
+    border-color: #111827;
+    border-width: 1.5px;
+    background: #fafafa;
+    padding: calc(0.4rem - 0.25px) calc(0.45rem - 0.25px);
+  }
+
+  .product-card-format-chip.is-out {
+    opacity: 0.55;
+  }
+
+  .product-card-format-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111827;
+  }
+
+  .product-card-format-price {
+    font-size: 0.62rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #6b7280;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 639px) {
+    .product-card-format-chip {
+      padding: 0.35rem 0.3rem;
+    }
+
+    .product-card-format-name {
+      font-size: 0.65rem;
+    }
+
+    .product-card-format-price {
+      font-size: 0.58rem;
+    }
+  }
+
 
   .product-detail-shipping {
     margin-top: 1.35rem;
