@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
 import {
@@ -17,10 +16,13 @@ export function ProductFormatSelector({
   variants,
   currentSlug,
   series,
+  onSelect,
 }: {
   variants: BoxVariantOption[];
   currentSlug: string;
   series?: string | null;
+  /** 有回调时原地切换，不再整页跳转 */
+  onSelect?: (slug: string) => void;
 }) {
   const T = useT();
   const { lang } = useLang();
@@ -38,6 +40,46 @@ export function ProductFormatSelector({
     ordered.some((v) => isSvExtendedFormat(v.boxType)) ||
     ordered.length >= 3;
 
+  function OptionShell({
+    active,
+    slug,
+    className,
+    children,
+  }: {
+    active: boolean;
+    slug: string;
+    className: string;
+    children: React.ReactNode;
+  }) {
+    if (active) {
+      return (
+        <div role="option" aria-selected="true" className={`${className} is-active`}>
+          {children}
+        </div>
+      );
+    }
+
+    if (onSelect) {
+      return (
+        <button
+          type="button"
+          role="option"
+          aria-selected="false"
+          className={className}
+          onClick={() => onSelect(slug)}
+        >
+          {children}
+        </button>
+      );
+    }
+
+    return (
+      <a href={`/products/${encodeURIComponent(slug)}`} role="option" aria-selected="false" className={className}>
+        {children}
+      </a>
+    );
+  }
+
   if (useList) {
     return (
       <div className="product-format">
@@ -50,8 +92,8 @@ export function ProductFormatSelector({
                 ? formatVariantTitle(v.boxType, v.name, series)
                 : translateBoxType(v.boxType, lang);
             const thumb = firstImage(v.images);
-            const inner = (
-              <>
+            return (
+              <OptionShell key={v.slug} active={active} slug={v.slug} className="product-format-row">
                 <span className="product-format-thumb">
                   <Image src={thumb} alt="" width={48} height={48} className="product-format-thumb-img" />
                 </span>
@@ -66,32 +108,7 @@ export function ProductFormatSelector({
                   )}
                 </span>
                 <span className="product-format-price">{formatJpy(v.priceJpy)}</span>
-              </>
-            );
-
-            if (active) {
-              return (
-                <div
-                  key={v.slug}
-                  role="option"
-                  aria-selected="true"
-                  className="product-format-row is-active"
-                >
-                  {inner}
-                </div>
-              );
-            }
-
-            return (
-              <Link
-                key={v.slug}
-                href={`/products/${encodeURIComponent(v.slug)}`}
-                role="option"
-                aria-selected="false"
-                className="product-format-row"
-              >
-                {inner}
-              </Link>
+              </OptionShell>
             );
           })}
         </div>
@@ -111,8 +128,13 @@ export function ProductFormatSelector({
         {ordered.map((v) => {
           const active = v.slug === currentSlug;
           const label = translateBoxType(v.boxType, lang);
-          const inner = (
-            <>
+          return (
+            <OptionShell
+              key={v.slug}
+              active={active}
+              slug={v.slug}
+              className="product-format-option"
+            >
               <span className="product-format-name">{label}</span>
               <span className="product-format-price">{formatJpy(v.priceJpy)}</span>
               {v.stock <= 0 ? (
@@ -122,25 +144,7 @@ export function ProductFormatSelector({
                   {T("btn_stock")} {v.stock}
                 </span>
               )}
-            </>
-          );
-
-          if (active) {
-            return (
-              <div key={v.slug} className="product-format-option is-active" aria-current="true">
-                {inner}
-              </div>
-            );
-          }
-
-          return (
-            <Link
-              key={v.slug}
-              href={`/products/${encodeURIComponent(v.slug)}`}
-              className="product-format-option"
-            >
-              {inner}
-            </Link>
+            </OptionShell>
           );
         })}
       </div>

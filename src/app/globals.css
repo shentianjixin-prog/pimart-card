@@ -3689,13 +3689,17 @@ button:not(:disabled),
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+    width: 100%;
     min-height: 4.5rem;
     padding: 0.85rem 0.9rem;
     border: 1.5px solid rgba(15, 23, 42, 0.14);
     border-radius: 4px;
     background: #fff;
+    text-align: left;
     text-decoration: none;
     color: inherit;
+    font: inherit;
+    cursor: pointer;
     transition: border-color 160ms ease, background 160ms ease;
   }
 
@@ -3720,13 +3724,17 @@ button:not(:disabled),
     grid-template-columns: 48px minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.75rem;
+    width: 100%;
     min-height: 3.75rem;
     padding: 0.55rem 0.75rem;
     border: 1.5px solid rgba(15, 23, 42, 0.12);
     border-radius: 10px;
     background: #fff;
+    text-align: left;
     text-decoration: none;
     color: inherit;
+    font: inherit;
+    cursor: pointer;
     transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
   }
 
