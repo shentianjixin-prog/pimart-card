@@ -1835,77 +1835,171 @@ button:not(:disabled),
     position: relative;
   }
 
-  /* Trusted features — flat columns, no chrome cards */
+  /* Trusted features — closing trust band */
   .trusted-features {
-    margin-bottom: 2.75rem;
+    position: relative;
+    margin: 0.5rem 0 3rem;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(15, 23, 42, 0.04), transparent 55%),
+      linear-gradient(180deg, #f8fafc 0%, #ffffff 42%, #fbfcfd 100%);
   }
 
   @media (min-width: 640px) {
     .trusted-features {
-      margin-bottom: 3.5rem;
+      margin-bottom: 3.75rem;
+      border-radius: 28px;
     }
   }
 
+  .trusted-features-inner {
+    position: relative;
+    padding: 1.75rem 1rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-features-inner {
+      padding: 2.35rem 1.5rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .trusted-features-inner {
+      padding: 2.75rem 2rem 0;
+    }
+  }
+
+  .trusted-features-hero {
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-features-hero {
+      margin-bottom: 2.25rem;
+    }
+  }
+
+  .trusted-eyebrow {
+    margin: 0 0 0.55rem;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
   .trusted-section-title {
-    @apply text-2xl font-semibold tracking-tight text-[#111827] sm:text-3xl;
-    letter-spacing: -0.02em;
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #111827;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-section-title {
+      font-size: 2.15rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .trusted-section-title {
+      font-size: 2.5rem;
+    }
   }
 
   .trusted-section-subtitle {
-    @apply mt-2 text-sm text-[#6b7280] sm:text-base;
+    margin: 0.65rem auto 0;
+    max-width: 28rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: #6b7280;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-section-subtitle {
+      margin-top: 0.8rem;
+      font-size: 1rem;
+    }
   }
 
   .trusted-inline-stats {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 0.85rem 1.25rem;
-    margin-top: 1.15rem;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 1.35rem;
   }
 
   @media (min-width: 640px) {
     .trusted-inline-stats {
-      gap: 1.5rem 2.75rem;
-      margin-top: 1.6rem;
+      margin-top: 1.85rem;
     }
   }
 
   .trusted-inline-stat {
+    position: relative;
+    flex: 1 1 0;
+    max-width: 9.5rem;
     text-align: center;
-    min-width: 0;
+    padding: 0 0.65rem;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-inline-stat {
+      max-width: 11rem;
+      padding: 0 1.25rem;
+    }
+  }
+
+  .trusted-stat-divider {
+    position: absolute;
+    left: 0;
+    top: 12%;
+    bottom: 18%;
+    width: 1px;
+    background: rgba(15, 23, 42, 0.1);
   }
 
   .trusted-inline-stat-value {
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
     color: #111827;
-    line-height: 1.1;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
   }
 
   @media (min-width: 640px) {
     .trusted-inline-stat-value {
-      font-size: 1.35rem;
+      font-size: 1.85rem;
     }
   }
 
   @media (min-width: 1024px) {
     .trusted-inline-stat-value {
-      font-size: 1.6rem;
+      font-size: 2.15rem;
     }
   }
 
   .trusted-inline-stat-label {
-    margin-top: 0.25rem;
+    margin: 0.35rem 0 0;
     font-size: 0.6875rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     color: #6b7280;
   }
 
   @media (min-width: 640px) {
     .trusted-inline-stat-label {
-      margin-top: 0.3rem;
-      font-size: 0.75rem;
+      margin-top: 0.45rem;
+      font-size: 0.8125rem;
     }
   }
 
@@ -1914,7 +2008,7 @@ button:not(:disabled),
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0;
     border-top: 1px solid rgba(15, 23, 42, 0.08);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.72);
   }
 
   @media (min-width: 1024px) {
@@ -1924,7 +2018,12 @@ button:not(:disabled),
   }
 
   .trusted-feature-item {
-    padding: 1.1rem 0.75rem 1.2rem;
+    padding: 1.15rem 0.9rem 1.35rem;
+    transition: background 180ms ease;
+  }
+
+  .trusted-feature-item:hover {
+    background: rgba(15, 23, 42, 0.02);
   }
 
   .trusted-feature-item:nth-child(odd) {
@@ -1937,7 +2036,7 @@ button:not(:disabled),
 
   @media (min-width: 1024px) {
     .trusted-feature-item {
-      padding: 1.5rem 1.25rem;
+      padding: 1.65rem 1.35rem 1.85rem;
     }
 
     .trusted-feature-item:nth-child(odd),
@@ -1952,11 +2051,57 @@ button:not(:disabled),
   }
 
   .trusted-feature-title {
-    @apply text-sm font-semibold tracking-tight text-[#111827] sm:text-lg;
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #111827;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-feature-title {
+      font-size: 1.0625rem;
+    }
   }
 
   .trusted-feature-desc {
-    @apply mt-1.5 text-xs leading-relaxed text-[#6b7280] sm:mt-2 sm:text-sm;
+    margin: 0.45rem 0 0;
+    font-size: 0.75rem;
+    line-height: 1.55;
+    color: #6b7280;
+  }
+
+  @media (min-width: 640px) {
+    .trusted-feature-desc {
+      margin-top: 0.55rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .trusted-features-hero {
+      animation: trusted-rise 520ms ease-out both;
+    }
+
+    .trusted-feature-item {
+      animation: trusted-rise 560ms ease-out both;
+    }
+
+    .trusted-feature-item:nth-child(1) { animation-delay: 60ms; }
+    .trusted-feature-item:nth-child(2) { animation-delay: 110ms; }
+    .trusted-feature-item:nth-child(3) { animation-delay: 160ms; }
+    .trusted-feature-item:nth-child(4) { animation-delay: 210ms; }
+  }
+
+  @keyframes trusted-rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Stats — light strip */

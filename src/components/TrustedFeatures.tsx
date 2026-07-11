@@ -19,26 +19,34 @@ export function TrustedFeatures() {
   const T = useT();
 
   return (
-    <section className="trusted-features">
-      <div className="mb-6 text-center sm:mb-8">
-        <h2 className="trusted-section-title">{T("trusted_title")}</h2>
-        <p className="trusted-section-subtitle mx-auto max-w-xl">{T("trusted_subtitle")}</p>
-        <div className="trusted-inline-stats">
-          {INLINE_STATS.map((s) => (
-            <div key={s.labelKey} className="trusted-inline-stat">
-              <p className="trusted-inline-stat-value">{s.value}</p>
-              <p className="trusted-inline-stat-label">{T(s.labelKey)}</p>
-            </div>
+    <section className="trusted-features" aria-labelledby="trusted-heading">
+      <div className="trusted-features-inner">
+        <header className="trusted-features-hero">
+          <p className="trusted-eyebrow">PIMART CARD</p>
+          <h2 id="trusted-heading" className="trusted-section-title">
+            {T("trusted_title")}
+          </h2>
+          <p className="trusted-section-subtitle">{T("trusted_subtitle")}</p>
+
+          <div className="trusted-inline-stats" role="list">
+            {INLINE_STATS.map((s, i) => (
+              <div key={s.labelKey} className="trusted-inline-stat" role="listitem">
+                {i > 0 ? <span className="trusted-stat-divider" aria-hidden="true" /> : null}
+                <p className="trusted-inline-stat-value">{s.value}</p>
+                <p className="trusted-inline-stat-label">{T(s.labelKey)}</p>
+              </div>
+            ))}
+          </div>
+        </header>
+
+        <div className="trusted-features-track">
+          {FEATURES.map((f) => (
+            <article key={f.titleKey} className="trusted-feature-item">
+              <h3 className="trusted-feature-title">{T(f.titleKey)}</h3>
+              <p className="trusted-feature-desc">{T(f.descKey)}</p>
+            </article>
           ))}
         </div>
-      </div>
-      <div className="trusted-features-track">
-        {FEATURES.map((f) => (
-          <div key={f.titleKey} className="trusted-feature-item">
-            <h3 className="trusted-feature-title">{T(f.titleKey)}</h3>
-            <p className="trusted-feature-desc">{T(f.descKey)}</p>
-          </div>
-        ))}
       </div>
     </section>
   );
