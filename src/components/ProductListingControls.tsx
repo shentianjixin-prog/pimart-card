@@ -100,30 +100,6 @@ function PillOption({
   );
 }
 
-function CheckOption({
-  checked,
-  label,
-  count,
-  onChange,
-}: {
-  checked: boolean;
-  label: string;
-  count?: number;
-  onChange: () => void;
-}) {
-  return (
-    <label className={`filter-option ${checked ? "filter-option-selected" : ""}`}>
-      <input type="checkbox" checked={checked} onChange={onChange} className="filter-checkbox" />
-      <span className="filter-option-label">
-        {label}
-        {typeof count === "number" && (
-          <span className="filter-option-count">({count})</span>
-        )}
-      </span>
-    </label>
-  );
-}
-
 function GameFilterSection({
   draft,
   facets,
@@ -292,6 +268,45 @@ function FilterPanelContent({
 
   return (
     <div className="filter-panel-inner">
+      <GameFilterSection
+        draft={draft}
+        facets={facets}
+        subGameCounts={subGameCounts}
+        otherExpanded={otherExpanded}
+        onToggleOther={onToggleOther}
+        onSelectGame={selectGame}
+        onSelectSubGame={selectSubGame}
+        lang={lang}
+      />
+
+      <FilterSection title={T("filter_stock")}>
+        <div className="flex flex-wrap gap-2">
+          {STOCK_OPTIONS.map((key) => (
+            <PillOption
+              key={key}
+              selected={draft.stock.includes(key)}
+              label={
+                key === "instock"
+                  ? T("filter_instock")
+                  : key === "preorder"
+                    ? T("filter_preorder")
+                    : T("filter_stock_soldout")
+              }
+              onClick={() =>
+                onPatch({ stock: toggleInList(draft.stock, key as StockKey), page: 1 })
+              }
+            />
+          ))}
+        </div>
+      </FilterSection>
+
+      <SeriesFilterSection
+        draft={draft}
+        onToggleSeries={(id) =>
+          onPatch({ series: toggleInList(draft.series, id), page: 1 })
+        }
+      />
+
       <FilterSection title={T("filter_product_type")}>
         <div className="flex flex-wrap gap-2">
           {PRODUCT_TYPES.map((key) => {
@@ -310,57 +325,6 @@ function FilterPanelContent({
           })}
         </div>
       </FilterSection>
-
-      <GameFilterSection
-        draft={draft}
-        facets={facets}
-        subGameCounts={subGameCounts}
-        otherExpanded={otherExpanded}
-        onToggleOther={onToggleOther}
-        onSelectGame={selectGame}
-        onSelectSubGame={selectSubGame}
-        lang={lang}
-      />
-
-      <SeriesFilterSection
-        draft={draft}
-        onToggleSeries={(id) =>
-          onPatch({ series: toggleInList(draft.series, id), page: 1 })
-        }
-      />
-
-      {facets.languages.length > 0 && (
-        <FilterSection title={T("filter_language")}>
-          {facets.languages.map(({ value, count }) => (
-            <CheckOption
-              key={value}
-              checked={draft.language.includes(value)}
-              label={value}
-              count={count}
-              onChange={() =>
-                onPatch({ language: toggleInList(draft.language, value), page: 1 })
-              }
-            />
-          ))}
-        </FilterSection>
-      )}
-
-      {facets.rarities.length > 0 && (
-        <FilterSection title={T("filter_rarity")}>
-          <div className="flex flex-wrap gap-2">
-            {facets.rarities.slice(0, 12).map(({ value, count }) => (
-              <PillOption
-                key={value}
-                selected={draft.rarity.includes(value)}
-                label={`${value}${count ? ` (${count})` : ""}`}
-                onClick={() =>
-                  onPatch({ rarity: toggleInList(draft.rarity, value), page: 1 })
-                }
-              />
-            ))}
-          </div>
-        </FilterSection>
-      )}
 
       <FilterSection title={T("filter_price")}>
         <div className="flex items-center gap-2">
@@ -387,27 +351,6 @@ function FilterPanelContent({
             }}
             className="input-field w-1/2"
           />
-        </div>
-      </FilterSection>
-
-      <FilterSection title={T("filter_stock")}>
-        <div className="flex flex-wrap gap-2">
-          {STOCK_OPTIONS.map((key) => (
-            <PillOption
-              key={key}
-              selected={draft.stock.includes(key)}
-              label={
-                key === "instock"
-                  ? T("filter_instock")
-                  : key === "preorder"
-                    ? T("filter_preorder")
-                    : T("filter_stock_soldout")
-              }
-              onClick={() =>
-                onPatch({ stock: toggleInList(draft.stock, key as StockKey), page: 1 })
-              }
-            />
-          ))}
         </div>
       </FilterSection>
     </div>
@@ -472,7 +415,6 @@ function FilterChips({
     state.type.length > 0 ||
     !!state.game ||
     !!state.subGame ||
-    state.language.length > 0 ||
     state.series.length > 0 ||
     state.rarity.length > 0 ||
     state.stock.length > 0 ||
@@ -484,16 +426,6 @@ function FilterChips({
 
   return (
     <div className="filter-chips">
-      {state.type.map((v) => (
-        <button
-          key={`t-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() => onNavigate({ type: state.type.filter((x) => x !== v), page: 1 })}
-        >
-          {T(`filter_type_${v}`)} ×
-        </button>
-      ))}
       {state.game === "pokemon" && (
         <button
           type="button"
@@ -530,42 +462,6 @@ function FilterChips({
           {subGameLabel(state.subGame, lang)} ×
         </button>
       )}
-      {state.language.map((v) => (
-        <button
-          key={`l-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() =>
-            onNavigate({ language: state.language.filter((x) => x !== v), page: 1 })
-          }
-        >
-          {v} ×
-        </button>
-      ))}
-      {state.series.map((v) => (
-        <button
-          key={`s-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() =>
-            onNavigate({ series: state.series.filter((x) => x !== v), page: 1 })
-          }
-        >
-          {seriesLabelById(state.game, state.subGame, v)} ×
-        </button>
-      ))}
-      {state.rarity.map((v) => (
-        <button
-          key={`r-${v}`}
-          type="button"
-          className="filter-chip"
-          onClick={() =>
-            onNavigate({ rarity: state.rarity.filter((x) => x !== v), page: 1 })
-          }
-        >
-          {v} ×
-        </button>
-      ))}
       {state.stock.map((v) => (
         <button
           key={`st-${v}`}
@@ -581,6 +477,28 @@ function FilterChips({
               ? T("filter_preorder")
               : T("filter_stock_soldout")}{" "}
           ×
+        </button>
+      ))}
+      {state.series.map((v) => (
+        <button
+          key={`s-${v}`}
+          type="button"
+          className="filter-chip"
+          onClick={() =>
+            onNavigate({ series: state.series.filter((x) => x !== v), page: 1 })
+          }
+        >
+          {seriesLabelById(state.game, state.subGame, v)} ×
+        </button>
+      ))}
+      {state.type.map((v) => (
+        <button
+          key={`t-${v}`}
+          type="button"
+          className="filter-chip"
+          onClick={() => onNavigate({ type: state.type.filter((x) => x !== v), page: 1 })}
+        >
+          {T(`filter_type_${v}`)} ×
         </button>
       ))}
       {(state.minPrice || state.maxPrice) && (
@@ -708,7 +626,6 @@ export function ProductListingControls({
     state.type.length > 0 ||
     !!state.game ||
     !!state.subGame ||
-    state.language.length > 0 ||
     state.series.length > 0 ||
     state.rarity.length > 0 ||
     state.stock.length > 0 ||

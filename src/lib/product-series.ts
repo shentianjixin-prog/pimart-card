@@ -1,57 +1,62 @@
 import type { MainGameKey, SubGameKey } from "@/lib/product-filters";
 
-export type SeriesOption = { id: string; label: string };
+export type SeriesOption = {
+  id: string;
+  label: string;
+  /** 匹配 series / name 的关键词（默认用 id + label） */
+  match?: string[];
+};
 
-/** URL / query 用小写 id，展示用 label */
+/** 大版本分类（对齐网站数据.xlsx 分组） */
 export const POKEMON_SERIES: SeriesOption[] = [
-  { id: "151", label: "151" },
-  { id: "sv", label: "SV" },
-  { id: "sv8a", label: "SV8a" },
-  { id: "sv9", label: "SV9" },
-  { id: "sv10", label: "SV10" },
-  { id: "m1", label: "M1" },
-  { id: "m2", label: "M2" },
-  { id: "m3", label: "M3" },
-  { id: "m4", label: "M4" },
-  { id: "m5", label: "M5" },
-  { id: "gem-pack", label: "Gem Pack" },
+  { id: "sun-moon", label: "太阳&月亮", match: ["太阳&月亮"] },
+  { id: "sword-shield", label: "剑&盾", match: ["剑&盾"] },
+  { id: "scarlet-violet", label: "朱・紫", match: ["朱・紫", "朱紫"] },
+  { id: "151", label: "151", match: ["151"] },
+  { id: "gem-pack", label: "宝石包", match: ["宝石包"] },
 ];
 
 export const ONEPIECE_SERIES: SeriesOption[] = [
-  "OP01", "OP02", "OP03", "OP04", "OP05", "OP06", "OP07",
-  "OP08", "OP09", "OP10", "OP11", "OP12", "OP13", "EB", "PRB",
-].map((label) => ({ id: label.toLowerCase(), label }));
+  { id: "opc", label: "主弹补充包", match: ["OPC-"] },
+  { id: "ebc", label: "特别补充包", match: ["EBC-"] },
+  { id: "prbc", label: "豪华补充包", match: ["PRBC-", "PRB"] },
+  { id: "stc", label: "基本卡组", match: ["STC-", "预组"] },
+];
 
 export const SUBGAME_SERIES: Record<SubGameKey, SeriesOption[]> = {
   "dragon-ball": [
-    "FB01", "FB02", "FB03", "FB04", "FB05", "FB06",
-  ].map((label) => ({ id: label.toLowerCase(), label })),
+    "FB01",
+    "FB02",
+    "FB03",
+    "FB04",
+    "FB05",
+    "FB06",
+  ].map((label) => ({ id: label.toLowerCase(), label, match: [label] })),
   naruto: [
-    { id: "naruto", label: "NARUTO" },
-    { id: "bp", label: "BP" },
-    { id: "nrt", label: "NRT" },
-    { id: "shippuden", label: "疾风传" },
+    { id: "kayou", label: "卡游 / 官方", match: ["NARUTOP", "疾風", "疾风"] },
+    { id: "expansion", label: "系列扩展", match: ["游历"] },
+    { id: "gift-merch", label: "礼盒 / 周边", match: ["礼盒", "周边", "入门套装"] },
   ],
   yugioh: [
-    { id: "ocg", label: "OCG" },
-    { id: "rush-duel", label: "Rush Duel" },
-    { id: "structure-deck", label: "Structure Deck" },
+    { id: "ocg", label: "OCG", match: ["OCG"] },
+    { id: "rush-duel", label: "Rush Duel", match: ["Rush Duel"] },
+    { id: "structure-deck", label: "Structure Deck", match: ["Structure Deck"] },
   ],
   gundam: [
-    { id: "gd01", label: "GD01" },
-    { id: "st01", label: "ST01" },
-    { id: "st02", label: "ST02" },
-    { id: "st03", label: "ST03" },
+    { id: "gd01", label: "GD01", match: ["GD01"] },
+    { id: "st01", label: "ST01", match: ["ST01"] },
+    { id: "st02", label: "ST02", match: ["ST02"] },
+    { id: "st03", label: "ST03", match: ["ST03"] },
   ],
   "union-arena": [
-    { id: "ua", label: "UA" },
-    { id: "ue", label: "UE" },
-    { id: "promo", label: "Promo" },
+    { id: "ua", label: "UA", match: ["UA"] },
+    { id: "ue", label: "UE", match: ["UE"] },
+    { id: "promo", label: "Promo", match: ["Promo"] },
   ],
   weiss: [
-    { id: "ws", label: "WS" },
-    { id: "bp", label: "BP" },
-    { id: "trial", label: "Trial Deck" },
+    { id: "ws", label: "WS", match: ["WS"] },
+    { id: "bp", label: "BP", match: ["BP"] },
+    { id: "trial", label: "Trial Deck", match: ["Trial Deck"] },
   ],
 };
 
@@ -86,17 +91,43 @@ export function getSeriesPanelState(
   return { kind: "hidden" };
 }
 
+function findSeriesOption(
+  game: MainGameKey | undefined,
+  subGame: SubGameKey | undefined,
+  id: string
+): SeriesOption | undefined {
+  const needle = id.toLowerCase();
+  const panel = getSeriesPanelState(game, subGame);
+  if (panel.kind === "list") {
+    const hit = panel.options.find((o) => o.id === needle);
+    if (hit) return hit;
+  }
+  // 兜底：跨列表查找（URL 残留旧 id 时仍能显示标签）
+  const all = [
+    ...POKEMON_SERIES,
+    ...ONEPIECE_SERIES,
+    ...Object.values(SUBGAME_SERIES).flat(),
+  ];
+  return all.find((o) => o.id === needle);
+}
+
 export function seriesLabelById(
   game: MainGameKey | undefined,
   subGame: SubGameKey | undefined,
   id: string
 ): string {
-  const panel = getSeriesPanelState(game, subGame);
-  if (panel.kind === "list") {
-    const hit = panel.options.find((o) => o.id === id.toLowerCase());
-    if (hit) return hit.label;
-  }
-  return id.toUpperCase();
+  return findSeriesOption(game, subGame, id)?.label ?? id;
+}
+
+export function seriesMatchTokens(
+  game: MainGameKey | undefined,
+  subGame: SubGameKey | undefined,
+  id: string
+): string[] {
+  const option = findSeriesOption(game, subGame, id);
+  if (option?.match?.length) return option.match;
+  if (option) return [option.id, option.label];
+  return [id];
 }
 
 export function normalizeSeriesId(raw: string): string {

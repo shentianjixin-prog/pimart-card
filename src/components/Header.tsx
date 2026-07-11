@@ -17,9 +17,9 @@ const PRIMARY_NAV = [
 
 /** 宝可梦悬停子项 */
 const POKEMON_SUBNAV = [
-  { key: "menu_pokemon_booster", href: "/?game=pokemon&boxType=肥盒" },
-  { key: "menu_pokemon_gift", href: "/?game=pokemon&boxType=礼盒" },
-  { key: "menu_pokemon_merch", href: "/?game=pokemon&boxType=对战套装" },
+  { key: "menu_pokemon_booster", href: "/?game=pokemon&type=expansion" },
+  { key: "menu_pokemon_gift", href: "/?game=pokemon&type=gift" },
+  { key: "menu_pokemon_merch", href: "/?game=pokemon&type=set" },
 ] as const;
 
 /** 「其他 TCG」下拉 */

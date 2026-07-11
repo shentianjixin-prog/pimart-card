@@ -1,7 +1,7 @@
 import type { Prisma } from "@/generated/prisma/client";
 import type { Lang } from "@/lib/translations";
 import { t } from "@/lib/translations";
-import { normalizeSeriesId, seriesLabelById } from "@/lib/product-series";
+import { normalizeSeriesId, seriesMatchTokens } from "@/lib/product-series";
 
 export const PAGE_SIZE = 12;
 
@@ -13,7 +13,8 @@ export type SortKey =
   | "popular"
   | "restocked";
 
-export type ProductTypeKey = "sealed" | "psa" | "single" | "merch";
+/** 扩充包 / 礼盒 / 周边 / 套装 */
+export type ProductTypeKey = "expansion" | "gift" | "merch" | "set";
 export type MainGameKey = "pokemon" | "onepiece" | "other";
 export type SubGameKey =
   | "dragon-ball"
@@ -33,6 +34,7 @@ export type FilterState = {
   type: ProductTypeKey[];
   game?: MainGameKey;
   subGame?: SubGameKey;
+  /** @deprecated 语言筛选已移除，保留字段仅兼容旧 URL */
   language: string[];
   series: string[];
   rarity: string[];
@@ -49,7 +51,6 @@ export type FilterState = {
 export type Facet = { value: string; count: number };
 
 export type FilterFacets = {
-  languages: Facet[];
   rarities: Facet[];
   games: { key: MainGameKey; count: number }[];
   types: { key: ProductTypeKey; count: number }[];
@@ -57,7 +58,18 @@ export type FilterFacets = {
 
 export const ACTIVE_PRODUCT: Prisma.ProductWhereInput = { status: "上架" };
 
-export const PRODUCT_TYPES: ProductTypeKey[] = ["sealed", "psa", "single", "merch"];
+export const PRODUCT_TYPES: ProductTypeKey[] = ["expansion", "gift", "merch", "set"];
+
+/** 旧 URL type= 映射到新四类 */
+const LEGACY_TYPE_MAP: Record<string, ProductTypeKey | undefined> = {
+  sealed: "expansion",
+  psa: undefined,
+  single: undefined,
+  merch: "merch",
+  expansion: "expansion",
+  gift: "gift",
+  set: "set",
+};
 export const MAIN_GAMES: MainGameKey[] = ["pokemon", "onepiece", "other"];
 export const SUB_GAMES: SubGameKey[] = [
   "dragon-ball",
@@ -127,10 +139,17 @@ function legacyStock(raw: RawSearchParams): StockKey[] {
   return legacy;
 }
 
+function parseProductTypes(raw?: string): ProductTypeKey[] {
+  const out: ProductTypeKey[] = [];
+  for (const v of splitMulti(raw)) {
+    const mapped = LEGACY_TYPE_MAP[v] ?? (PRODUCT_TYPES.includes(v as ProductTypeKey) ? (v as ProductTypeKey) : undefined);
+    if (mapped && !out.includes(mapped)) out.push(mapped);
+  }
+  return out;
+}
+
 export function parseFilterState(raw: RawSearchParams): FilterState {
-  const type = splitMulti(firstParam(raw.type)).filter((v): v is ProductTypeKey =>
-    PRODUCT_TYPES.includes(v as ProductTypeKey)
-  );
+  const type = parseProductTypes(firstParam(raw.type));
 
   let game = parseMainGame(firstParam(raw.game));
   let subGame = parseSubGame(firstParam(raw.subGame));
@@ -145,14 +164,13 @@ export function parseFilterState(raw: RawSearchParams): FilterState {
   if (subGame && !game) game = "other";
 
   const series = splitMulti(firstParam(raw.series)).map(normalizeSeriesId);
-  const language = splitMulti(firstParam(raw.language));
   const rarity = splitMulti(firstParam(raw.rarity));
 
   return {
     type,
     game,
     subGame: game === "other" ? subGame : undefined,
-    language,
+    language: [],
     series,
     rarity,
     minPrice: firstParam(raw.minPrice),
@@ -171,7 +189,6 @@ export function isListingView(state: FilterState): boolean {
     state.type.length > 0 ||
     !!state.game ||
     !!state.subGame ||
-    state.language.length > 0 ||
     state.series.length > 0 ||
     state.rarity.length > 0 ||
     state.stock.length > 0 ||
@@ -185,17 +202,9 @@ export function isListingView(state: FilterState): boolean {
   );
 }
 
-const PSA_WHERE: Prisma.ProductWhereInput = {
-  OR: [
-    { name: { contains: "PSA" } },
-    { series: { contains: "PSA" } },
-    { category: { contains: "PSA" } },
-    { rarity: { contains: "PSA" } },
-  ],
-};
-
 const MERCH_WHERE: Prisma.ProductWhereInput = {
   OR: [
+    { boxType: { in: ["其他"] } },
     { category: { contains: "周边" } },
     { name: { contains: "卡套" } },
     { name: { contains: "卡册" } },
@@ -205,21 +214,32 @@ const MERCH_WHERE: Prisma.ProductWhereInput = {
   ],
 };
 
+/** 扩充包：补充包/强化包/宝石包/OPC 原盒散包原箱等 */
+const EXPANSION_BOX_TYPES = [
+  "肥盒",
+  "瘦盒",
+  "宝石包",
+  "原盒",
+  "散包",
+  "原箱",
+  "特别版",
+  "补充包(肥盒)",
+  "强化包(瘦盒)",
+  "强化扩张包",
+] as const;
+
+const GIFT_BOX_TYPES = ["礼盒", "专属礼盒", "大礼盒"] as const;
+
+const SET_BOX_TYPES = ["对战套装", "构筑套装", "预组", "卡组"] as const;
+
 export function typeWhere(key: ProductTypeKey): Prisma.ProductWhereInput {
   switch (key) {
-    case "sealed":
-      return { AND: [{ boxType: { not: "" } }, { NOT: PSA_WHERE }] };
-    case "psa":
-      return PSA_WHERE;
-    case "single":
-      return {
-        AND: [
-          { boxType: "" },
-          { NOT: PSA_WHERE },
-          { NOT: MERCH_WHERE },
-          { OR: [{ cardNumber: { not: null } }, { rarity: { not: null } }] },
-        ],
-      };
+    case "expansion":
+      return { boxType: { in: [...EXPANSION_BOX_TYPES] } };
+    case "gift":
+      return { boxType: { in: [...GIFT_BOX_TYPES] } };
+    case "set":
+      return { boxType: { in: [...SET_BOX_TYPES] } };
     case "merch":
       return MERCH_WHERE;
   }
@@ -314,10 +334,13 @@ function stockWhere(key: StockKey): Prisma.ProductWhereInput {
   }
 }
 
-function seriesWhere(id: string): Prisma.ProductWhereInput {
-  const label = seriesLabelById(undefined, undefined, id);
-  const tokens = [id, label, label.replace(/\s+/g, " ")].filter(Boolean);
-  const unique = [...new Set(tokens)];
+function seriesWhere(
+  id: string,
+  game?: MainGameKey,
+  subGame?: SubGameKey
+): Prisma.ProductWhereInput {
+  const tokens = seriesMatchTokens(game, subGame, id);
+  const unique = [...new Set(tokens.filter(Boolean))];
   return {
     OR: unique.flatMap((token) => [
       { series: { contains: token } },
@@ -328,7 +351,7 @@ function seriesWhere(id: string): Prisma.ProductWhereInput {
 
 function multiOr(
   items: string[],
-  field: "language" | "rarity"
+  field: "rarity"
 ): Prisma.ProductWhereInput | undefined {
   if (!items.length) return undefined;
   return { OR: items.map((v) => ({ [field]: { contains: v } })) };
@@ -349,11 +372,10 @@ export function buildWhere(state: FilterState): Prisma.ProductWhereInput {
     else and.push(OTHER_TCG_WHERE);
   }
 
-  const langW = multiOr(state.language, "language");
-  if (langW) and.push(langW);
-
   if (state.series.length) {
-    and.push({ OR: state.series.map(seriesWhere) });
+    and.push({
+      OR: state.series.map((id) => seriesWhere(id, state.game, state.subGame)),
+    });
   }
 
   const rarityW = multiOr(state.rarity, "rarity");
@@ -444,7 +466,6 @@ export function filterStateToParams(state: FilterState): Record<string, string> 
   if (state.type.length) p.type = state.type.join(",");
   if (state.game) p.game = state.game;
   if (state.game === "other" && state.subGame) p.subGame = state.subGame;
-  if (state.language.length) p.language = state.language.join(",");
   if (state.series.length) p.series = state.series.join(",");
   if (state.rarity.length) p.rarity = state.rarity.join(",");
   if (state.minPrice) p.minPrice = state.minPrice;

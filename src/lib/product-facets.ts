@@ -41,12 +41,7 @@ async function countForGame(key: (typeof MAIN_GAMES)[number]) {
 }
 
 export async function fetchFilterFacets(): Promise<FilterFacets> {
-  const [langGroups, rarityGroups, typeCounts, gameCounts] = await Promise.all([
-    prisma.product.groupBy({
-      by: ["language"],
-      where: { ...ACTIVE, language: { not: null } },
-      _count: { _all: true },
-    }),
+  const [rarityGroups, typeCounts, gameCounts] = await Promise.all([
     prisma.product.groupBy({
       by: ["rarity"],
       where: { ...ACTIVE, rarity: { not: null } },
@@ -69,10 +64,6 @@ export async function fetchFilterFacets(): Promise<FilterFacets> {
   ]);
 
   return {
-    languages: langGroups
-      .filter((g) => g.language)
-      .map((g) => ({ value: g.language!, count: g._count._all }))
-      .sort((a, b) => b.count - a.count),
     rarities: rarityGroups
       .filter((g) => g.rarity)
       .map((g) => ({ value: g.rarity!, count: g._count._all }))

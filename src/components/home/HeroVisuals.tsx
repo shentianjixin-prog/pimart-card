@@ -62,7 +62,7 @@ const HERO_BRAND_SLOTS = [
     imageKey: "brock",
     nameHints: ["小刚", "发掘", "Brock"],
     fallbackSlug: null,
-    fallbackHref: "/?type=psa",
+    fallbackHref: "/?game=pokemon",
   },
 ] as const;
 
