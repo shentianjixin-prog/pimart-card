@@ -30,11 +30,13 @@ export function ProductFormatSelector({
   const ordered = sortBoxVariants(variants);
   const isCsv = Boolean(series && /\bCSV\d+c\b/i.test(series));
   const isGem = series === "宝石包";
+  const isOpc = Boolean(series && /^OPC-\d+/i.test(series));
   const useList =
     isCsv ||
     isGem ||
+    isOpc ||
     ordered.some((v) => isSvExtendedFormat(v.boxType)) ||
-    ordered.length >= 4;
+    ordered.length >= 3;
 
   if (useList) {
     return (

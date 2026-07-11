@@ -21,7 +21,7 @@ const db = new Database(dbPath);
 
 const boxes = db
   .prepare(
-    `SELECT id, slug, name, series, language, category, description, priceJpy, images,
+    `SELECT id, slug, name, series, language, category, description, priceJpy, stock, images,
             shippingDays, isPreorder, releaseDate, status, featured
      FROM Product
      WHERE boxType = '原盒'
@@ -51,25 +51,25 @@ const tx = db.transaction(() => {
     const seriesTitle = String(box.series || "").replace(/^OPC-\d+\s*/, "").trim();
     const code = String(box.series || "").match(/^(OPC-\d+)/i)?.[1]?.toUpperCase() || "OPC";
 
+    const boxStock = Number(box.stock) || 0;
+    const boxPrice = Number(box.priceJpy) || 0;
+
     const variants = [
       {
         boxType: "散包",
         slug: `${baseSlug}-pack`,
         name: `${code} ${seriesTitle} 散包（${box.language || "简中"}）`.replace(/\s+/g, " ").trim(),
-        priceJpy: Math.max(100, Math.round(Number(box.priceJpy) / PACKS_PER_BOX)),
+        priceJpy: Math.max(100, Math.round(boxPrice / PACKS_PER_BOX)),
         description: `${box.description || ""}\n单包散装，约 ${PACKS_PER_BOX} 包/盒。`.trim(),
-        stock:
-          Number(box.stock) > 0
-            ? Math.max(PACKS_PER_BOX, Number(box.stock) * 4)
-            : 0,
+        stock: boxStock > 0 ? Math.max(PACKS_PER_BOX, boxStock * 4) : 0,
       },
       {
         boxType: "原箱",
         slug: `${baseSlug}-case`,
         name: `${code} ${seriesTitle} 原箱（${box.language || "简中"}）`.replace(/\s+/g, " ").trim(),
-        priceJpy: Number(box.priceJpy) * BOXES_PER_CASE,
+        priceJpy: boxPrice * BOXES_PER_CASE,
         description: `${box.description || ""}\n原箱整件，约 ${BOXES_PER_CASE} 盒/箱。`.trim(),
-        stock: Math.floor(Number(box.stock) / BOXES_PER_CASE),
+        stock: Math.floor(boxStock / BOXES_PER_CASE),
       },
     ];
 

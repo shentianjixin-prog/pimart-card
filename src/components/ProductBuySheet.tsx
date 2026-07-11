@@ -95,11 +95,13 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
   const soldOut = active.stock <= 0;
   const maxQty = Math.max(1, active.stock);
   const qty = Math.min(quantity, maxQty);
+  const isOpc = Boolean(product.series && /^OPC-\d+/i.test(product.series));
   const useListTitles =
     Boolean(product.series && /\bCSV\d+c\b/i.test(product.series)) ||
     ordered.some((v) => isSvExtendedFormat(v.boxType)) ||
     ordered.length >= 4 ||
     product.series === "宝石包";
+  // OPC 用简短盒型名（原盒/散包/原箱）
 
   function handleAdd() {
     if (soldOut) return;
@@ -158,9 +160,10 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
               <div className="product-format-list" role="listbox" aria-label={T("detail_choose_format")}>
                 {ordered.map((v) => {
                   const activeFmt = v.id === active.id;
-                  const title = useListTitles
-                    ? formatVariantTitle(v.boxType, v.name, product.series)
-                    : translateBoxType(v.boxType, lang);
+                  const title =
+                    useListTitles && !isOpc
+                      ? formatVariantTitle(v.boxType, v.name, product.series)
+                      : translateBoxType(v.boxType, lang);
                   const out = v.stock <= 0;
                   return (
                     <button
