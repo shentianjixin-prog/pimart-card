@@ -117,7 +117,7 @@ export default async function ProductPage({
           ) : null}
 
           <div className="product-detail-cta">
-            <AddToCartButton product={product} />
+            <AddToCartButton product={product} variants={variants} />
           </div>
 
           <OpcProductSpecs

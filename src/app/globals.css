@@ -2568,6 +2568,114 @@ button:not(:disabled),
     @apply flex gap-3;
   }
 
+  /* 即刻购买 — 规格选择弹层 */
+  .buy-sheet-root {
+    @apply fixed inset-0 z-[110];
+  }
+
+  .buy-sheet-backdrop {
+    @apply absolute inset-0 border-0 bg-[#111827]/40 backdrop-blur-[2px];
+  }
+
+  .buy-sheet-panel {
+    @apply absolute inset-x-0 bottom-0 flex max-h-[88vh] flex-col rounded-t-[24px] border bg-white shadow-lg sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-lg sm:-translate-x-1/2;
+    border-color: var(--border);
+    animation: sheet-up 280ms ease-out;
+  }
+
+  .buy-sheet-header {
+    @apply relative shrink-0 border-b px-4 pb-3 pt-4 sm:px-5;
+    border-color: var(--border);
+  }
+
+  .buy-sheet-hero {
+    @apply flex gap-3 pr-10;
+  }
+
+  .buy-sheet-thumb {
+    @apply block h-[72px] w-[72px] shrink-0 overflow-hidden rounded-xl bg-[#f3f4f6];
+  }
+
+  .buy-sheet-thumb-img {
+    @apply h-full w-full object-cover;
+  }
+
+  .buy-sheet-hero-main {
+    @apply min-w-0 flex-1;
+  }
+
+  .buy-sheet-price {
+    @apply text-xl font-semibold tracking-tight text-[#ea580c];
+  }
+
+  .buy-sheet-stock {
+    @apply mt-0.5 text-xs text-[#6b7280];
+  }
+
+  .buy-sheet-name {
+    @apply mt-1 line-clamp-2 text-sm font-medium text-[#111827];
+  }
+
+  .buy-sheet-close {
+    @apply absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-2xl font-light text-[#6b7280] hover:bg-[#f7f8fa];
+  }
+
+  .buy-sheet-body {
+    @apply overflow-y-auto px-4 py-4 sm:px-5;
+    flex: 1;
+  }
+
+  .buy-sheet-label {
+    @apply mb-2 text-sm font-semibold text-[#111827];
+  }
+
+  .buy-sheet-formats {
+    @apply mb-5;
+  }
+
+  .buy-sheet-formats .product-format-row {
+    @apply w-full cursor-pointer border-0 text-left;
+    background: transparent;
+  }
+
+  .buy-sheet-formats .product-format-row.is-out:not(.is-active) {
+    opacity: 0.45;
+  }
+
+  .buy-sheet-qty {
+    @apply flex items-center justify-between gap-3;
+  }
+
+  .buy-sheet-stepper {
+    @apply flex items-center gap-2;
+  }
+
+  .buy-sheet-step {
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(17,24,39,0.12)] text-lg text-[#111827] disabled:opacity-40;
+  }
+
+  .buy-sheet-qty-value {
+    @apply min-w-[2rem] text-center text-sm font-semibold text-[#111827];
+  }
+
+  .buy-sheet-footer {
+    @apply shrink-0 border-t px-4 py-4 sm:px-5;
+    border-color: rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  .buy-sheet-error {
+    @apply mb-2 text-sm text-red-500;
+  }
+
+  .buy-sheet-actions {
+    @apply flex gap-3;
+  }
+
+  .buy-sheet-actions > button {
+    @apply min-h-12 flex-1;
+  }
+
   .filter-sort-option {
     @apply flex min-h-11 w-full items-center rounded-2xl px-4 text-left text-sm font-medium text-[#374151] transition hover:bg-[#f7f8fa];
   }

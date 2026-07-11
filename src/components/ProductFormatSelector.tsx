@@ -29,7 +29,12 @@ export function ProductFormatSelector({
 
   const ordered = sortBoxVariants(variants);
   const isCsv = Boolean(series && /\bCSV\d+c\b/i.test(series));
-  const useList = isCsv || ordered.some((v) => isSvExtendedFormat(v.boxType)) || ordered.length >= 4;
+  const isGem = series === "宝石包";
+  const useList =
+    isCsv ||
+    isGem ||
+    ordered.some((v) => isSvExtendedFormat(v.boxType)) ||
+    ordered.length >= 4;
 
   if (useList) {
     return (
@@ -38,9 +43,10 @@ export function ProductFormatSelector({
         <div className="product-format-list" role="listbox" aria-label={T("detail_choose_format")}>
           {ordered.map((v) => {
             const active = v.slug === currentSlug;
-            const title = isCsv
-              ? formatVariantTitle(v.boxType, v.name, series)
-              : translateBoxType(v.boxType, lang);
+            const title =
+              isCsv || isGem || isSvExtendedFormat(v.boxType)
+                ? formatVariantTitle(v.boxType, v.name, series)
+                : translateBoxType(v.boxType, lang);
             const thumb = firstImage(v.images);
             const inner = (
               <>

@@ -55,6 +55,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "ensure-pokemon-formats.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 宝石包/日月剑盾散包原箱补齐失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "reset-all-stock-100.mjs")}`, {
     stdio: "inherit",
     env: process.env,

@@ -3,26 +3,29 @@
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { useT } from "@/lib/lang-context";
-import { startSoloCheckout } from "@/lib/checkout-client";
+import { ProductBuySheet } from "@/components/ProductBuySheet";
+import type { BoxVariantOption } from "@/lib/product-box-variant-types";
 
 type Props = {
   product: {
     id: string;
     name: string;
     slug: string;
+    series?: string | null;
+    boxType?: string;
     priceJpy: number;
     stock: number;
     images: string;
   };
+  variants?: BoxVariantOption[];
 };
 
-export function AddToCartButton({ product }: Props) {
+export function AddToCartButton({ product, variants = [] }: Props) {
   const { addItem } = useCart();
   const T = useT();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-  const [buying, setBuying] = useState(false);
-  const [buyError, setBuyError] = useState<string | null>(null);
+  const [buyOpen, setBuyOpen] = useState(false);
   const soldOut = product.stock <= 0;
 
   function handleAdd() {
@@ -39,19 +42,6 @@ export function AddToCartButton({ product }: Props) {
     );
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
-  }
-
-  async function handleBuyNow() {
-    if (soldOut || buying) return;
-    setBuying(true);
-    setBuyError(null);
-    const result = await startSoloCheckout([
-      { productId: product.id, quantity },
-    ]);
-    if (!result.ok) {
-      setBuyError(result.error);
-      setBuying(false);
-    }
   }
 
   if (soldOut) {
@@ -89,16 +79,26 @@ export function AddToCartButton({ product }: Props) {
         <button type="button" onClick={handleAdd} className="btn-secondary flex-1">
           {added ? T("btn_added_cart") : T("btn_add_cart")}
         </button>
-        <button
-          type="button"
-          onClick={handleBuyNow}
-          disabled={buying}
-          className="btn-primary flex-1"
-        >
-          {buying ? T("btn_buy_loading") : T("btn_buy_now")}
+        <button type="button" onClick={() => setBuyOpen(true)} className="btn-primary flex-1">
+          {T("btn_buy_now")}
         </button>
       </div>
-      {buyError ? <p className="text-sm text-red-500">{buyError}</p> : null}
+
+      <ProductBuySheet
+        open={buyOpen}
+        onClose={() => setBuyOpen(false)}
+        product={{
+          id: product.id,
+          slug: product.slug,
+          name: product.name,
+          series: product.series ?? null,
+          boxType: product.boxType || "",
+          priceJpy: product.priceJpy,
+          stock: product.stock,
+          images: product.images,
+        }}
+        variants={variants}
+      />
     </div>
   );
 }

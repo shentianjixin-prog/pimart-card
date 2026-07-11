@@ -8,8 +8,8 @@ import { useCart } from "@/lib/cart-context";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
 import { CardPlaceholder, isUsableProductImage } from "@/components/HeroPlaceholders";
-import { startSoloCheckout } from "@/lib/checkout-client";
 import { sortBoxVariants, type BoxVariantOption } from "@/lib/product-box-variant-types";
+import { ProductBuySheet } from "@/components/ProductBuySheet";
 
 const NEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -53,8 +53,7 @@ export function ProductCard({ product, variants = [] }: Props) {
   const T = useT();
   const { lang } = useLang();
   const [added, setAdded] = useState(false);
-  const [buying, setBuying] = useState(false);
-  const [buyError, setBuyError] = useState<string | null>(null);
+  const [buyOpen, setBuyOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(product.id);
   const [imgFailed, setImgFailed] = useState(false);
 
@@ -102,7 +101,6 @@ export function ProductCard({ product, variants = [] }: Props) {
   function selectFormat(variant: BoxVariantOption) {
     setSelectedId(variant.id);
     setImgFailed(false);
-    setBuyError(null);
   }
 
   function addToCart() {
@@ -125,17 +123,11 @@ export function ProductCard({ product, variants = [] }: Props) {
     setTimeout(() => setAdded(false), 1500);
   }
 
-  async function handleBuyNow(e: React.MouseEvent) {
+  function handleBuyNow(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    if (soldOut || buying) return;
-    setBuying(true);
-    setBuyError(null);
-    const result = await startSoloCheckout([{ productId: active.id, quantity: 1 }]);
-    if (!result.ok) {
-      setBuyError(result.error);
-      setBuying(false);
-    }
+    if (soldOut) return;
+    setBuyOpen(true);
   }
 
   const tagItems: { label: string; className: string }[] = [];
@@ -266,17 +258,29 @@ export function ProductCard({ product, variants = [] }: Props) {
             <button
               type="button"
               onClick={handleBuyNow}
-              disabled={buying}
               className="btn-buy product-card-btn min-h-11 flex-1 rounded-full px-2 text-xs sm:text-sm"
             >
-              {buying ? T("btn_buy_loading") : T("btn_buy_now")}
+              {T("btn_buy_now")}
             </button>
           </>
         )}
       </div>
-      {buyError ? (
-        <p className="px-3 pb-2 text-[11px] text-red-500 sm:px-4">{buyError}</p>
-      ) : null}
+
+      <ProductBuySheet
+        open={buyOpen}
+        onClose={() => setBuyOpen(false)}
+        product={{
+          id: active.id,
+          slug: active.slug,
+          name: active.name,
+          series: product.series,
+          boxType: active.boxType,
+          priceJpy: active.priceJpy,
+          stock: active.stock,
+          images: active.images,
+        }}
+        variants={ordered}
+      />
     </div>
   );
 }

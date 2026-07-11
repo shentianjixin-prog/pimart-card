@@ -2,10 +2,13 @@ import { prisma } from "@/lib/prisma";
 import {
   sortBoxVariants,
   isOpcFormat,
+  isGemFormat,
   isSvFormat,
   isSvExtendedFormat,
   isPokemonPairFormat,
+  parseGemKey,
   OPC_FORMATS,
+  GEM_FORMATS,
   SV_FORMATS,
   type BoxVariantOption,
 } from "@/lib/product-box-variant-types";
@@ -15,6 +18,7 @@ export {
   sortBoxVariants,
   formatVariantTitle,
   firstImage,
+  parseGemKey,
 } from "@/lib/product-box-variant-types";
 
 type SeriesBlock = {
@@ -130,48 +134,52 @@ function toOption(p: {
   };
 }
 
-/** 日月/剑盾：补充包肥盒 ↔ 强化包瘦盒 */
+/** 日月/剑盾：肥瘦整盒 + 各自散包/原箱 */
 async function findLegacyPokemonVariants(product: ProductLike): Promise<BoxVariantOption[]> {
   const block = parseSeriesBlock(product.series);
   if (!block) return [];
 
   const language = product.language ?? undefined;
-  const current = toOption(product);
+  const options: BoxVariantOption[] = [];
+  const seen = new Set<string>();
 
-  if (block.isSlim) {
-    const prefix = fatSeriesPattern(block);
-    const candidates = await prisma.product.findMany({
-      where: {
-        status: "上架",
-        boxType: "肥盒",
-        ...(language ? { language } : {}),
-        series: { startsWith: prefix },
-        NOT: { id: product.id },
-      },
-      orderBy: { series: "asc" },
-      select: VARIANT_SELECT,
-    });
-
-    const fats = candidates.filter((p) => isFatSeriesForBlock(p.series, block));
-    if (fats.length === 0) return [];
-
-    const preferred = fats.find((p) => /b$/i.test(p.series ?? "")) ?? fats[0];
-    return sortBoxVariants([toOption(preferred), current]);
+  function push(p: Parameters<typeof toOption>[0]) {
+    if (seen.has(p.id)) return;
+    seen.add(p.id);
+    options.push(toOption(p));
   }
 
-  const slim = await prisma.product.findFirst({
+  push(product);
+
+  const prefix = fatSeriesPattern(block);
+  const fatCandidates = await prisma.product.findMany({
     where: {
       status: "上架",
-      boxType: "瘦盒",
-      series: slimSeries(block),
+      boxType: { in: ["肥盒", "肥散包", "肥原箱"] },
       ...(language ? { language } : {}),
-      NOT: { id: product.id },
+      series: { startsWith: prefix },
     },
+    orderBy: { series: "asc" },
     select: VARIANT_SELECT,
   });
 
-  if (!slim) return [];
-  return sortBoxVariants([current, toOption(slim)]);
+  for (const p of fatCandidates) {
+    if (isFatSeriesForBlock(p.series, block)) push(p);
+  }
+
+  const slimRows = await prisma.product.findMany({
+    where: {
+      status: "上架",
+      boxType: { in: ["瘦盒", "瘦散包", "瘦原箱"] },
+      series: slimSeries(block),
+      ...(language ? { language } : {}),
+    },
+    select: VARIANT_SELECT,
+  });
+  for (const p of slimRows) push(p);
+
+  if (options.length < 2) return [];
+  return sortBoxVariants(options);
 }
 
 /** 朱・紫 CSV：同弹肥/瘦 × 整盒/散包/原箱 */
@@ -198,18 +206,39 @@ async function findSvVariants(product: ProductLike): Promise<BoxVariantOption[]>
   return sortBoxVariants(matched.map(toOption));
 }
 
+/** 宝石包：同弹 整盒/散包/原箱 */
+async function findGemVariants(product: ProductLike): Promise<BoxVariantOption[]> {
+  const key = parseGemKey(product.name, product.slug);
+  if (!key) return [];
+
+  const language = product.language ?? undefined;
+  const siblings = await prisma.product.findMany({
+    where: {
+      status: "上架",
+      boxType: { in: [...GEM_FORMATS] },
+      series: "宝石包",
+      ...(language ? { language } : {}),
+      OR: [{ name: { contains: key } }, { slug: { contains: key } }],
+    },
+    select: VARIANT_SELECT,
+  });
+
+  const matched = siblings.filter(
+    (p) => isGemFormat(p.boxType) && parseGemKey(p.name, p.slug) === key
+  );
+
+  if (matched.length < 2) return [];
+  return sortBoxVariants(matched.map(toOption));
+}
+
 async function findPokemonVariants(product: ProductLike): Promise<BoxVariantOption[]> {
-  if (parseCsvSeriesKey(product.series) && isSvFormat(product.boxType)) {
+  if (parseCsvSeriesKey(product.series) && (isSvFormat(product.boxType) || isPokemonPairFormat(product.boxType))) {
     return findSvVariants(product);
   }
-  if (product.boxType === "肥盒" || product.boxType === "瘦盒") {
-    // 朱紫肥盒也可能走 CSV 路径
-    if (parseCsvSeriesKey(product.series)) {
-      return findSvVariants(product);
-    }
+  if (parseSeriesBlock(product.series) && isPokemonPairFormat(product.boxType)) {
     return findLegacyPokemonVariants(product);
   }
-  if (isSvFormat(product.boxType)) {
+  if (isSvFormat(product.boxType) && parseCsvSeriesKey(product.series)) {
     return findSvVariants(product);
   }
   return [];
@@ -242,10 +271,14 @@ async function findOpcVariants(product: ProductLike): Promise<BoxVariantOption[]
 /**
  * 查询可切换规格。
  * - 朱・紫 CSV：瘦/肥 × 整盒/散包/原箱
- * - 日月/剑盾：肥盒 / 瘦盒
+ * - 日月/剑盾：肥瘦整盒 + 散包/原箱
+ * - 宝石包：整盒 / 散包 / 原箱
  * - 海贼王 OPC：原盒 / 散包 / 原箱
  */
 export async function findBoxVariants(product: ProductLike): Promise<BoxVariantOption[]> {
+  if (product.boxType === "宝石包" || (product.series === "宝石包" && isGemFormat(product.boxType))) {
+    return findGemVariants(product);
+  }
   if (isPokemonPairFormat(product.boxType) || isSvFormat(product.boxType)) {
     return findPokemonVariants(product);
   }
@@ -279,6 +312,12 @@ function csvGroupKey(series: string | null, language: string | null) {
   return `${key}::${language ?? ""}`;
 }
 
+function gemGroupKey(name: string, slug: string, language: string | null) {
+  const key = parseGemKey(name, slug);
+  if (!key) return null;
+  return `${key}::${language ?? ""}`;
+}
+
 /**
  * 列表页批量查规格，避免 N+1。
  */
@@ -288,7 +327,10 @@ export async function findBoxVariantsForProducts(
   const result = new Map<string, BoxVariantOption[]>();
   if (products.length === 0) return result;
 
-  const opcProducts = products.filter((p) => isOpcFormat(p.boxType));
+  const opcProducts = products.filter((p) => isOpcFormat(p.boxType) && parseOpcSeriesKey(p.series));
+  const gemProducts = products.filter(
+    (p) => p.boxType === "宝石包" || (p.series === "宝石包" && isGemFormat(p.boxType))
+  );
   const svProducts = products.filter(
     (p) =>
       Boolean(parseCsvSeriesKey(p.series)) &&
@@ -296,7 +338,7 @@ export async function findBoxVariantsForProducts(
   );
   const legacyPokemon = products.filter(
     (p) =>
-      (p.boxType === "肥盒" || p.boxType === "瘦盒") &&
+      isPokemonPairFormat(p.boxType) &&
       !parseCsvSeriesKey(p.series) &&
       parseSeriesBlock(p.series)
   );
@@ -334,6 +376,34 @@ export async function findBoxVariantsForProducts(
 
     for (const product of opcProducts) {
       const gk = opcGroupKey(product.series, product.language);
+      if (!gk) continue;
+      const sorted = sortBoxVariants(byGroup.get(gk) ?? []);
+      if (sorted.length >= 2) result.set(product.id, sorted);
+    }
+  }
+
+  if (gemProducts.length > 0) {
+    const siblings: SiblingRow[] = await prisma.product.findMany({
+      where: {
+        status: "上架",
+        boxType: { in: [...GEM_FORMATS] },
+        series: "宝石包",
+      },
+      select: VARIANT_SELECT,
+    });
+
+    const byGroup = new Map<string, BoxVariantOption[]>();
+    for (const row of siblings) {
+      if (!isGemFormat(row.boxType)) continue;
+      const gk = gemGroupKey(row.name, row.slug, row.language);
+      if (!gk) continue;
+      const list = byGroup.get(gk) ?? [];
+      list.push(toOption(row));
+      byGroup.set(gk, list);
+    }
+
+    for (const product of gemProducts) {
+      const gk = gemGroupKey(product.name, product.slug, product.language);
       if (!gk) continue;
       const sorted = sortBoxVariants(byGroup.get(gk) ?? []);
       if (sorted.length >= 2) result.set(product.id, sorted);
