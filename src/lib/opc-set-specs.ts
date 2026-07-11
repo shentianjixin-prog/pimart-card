@@ -62,6 +62,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sr", 10],
       ["opc_rarity_sec", 2],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-01-card-1.jpeg"],
+        title: "シャンクス",
+        remark: "SNKRDUNK参考价 ¥700,000",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-2.jpeg"],
+        title: "トラファルガー・ロー",
+        remark: "SNKRDUNK参考价 ¥54,000",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-3.webp"],
+        title: "モンキー・D・ルフィ",
+        remark: "SNKRDUNK参考价 ¥35,000",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-4.webp"],
+        title: "ロロノア・ゾロ",
+        remark: "SNKRDUNK参考价 ¥20,000",
+      },
+      {
+        images: ["/products/topcards/opc-01-card-5.jpeg"],
+        title: "うるティ",
+        remark: "SNKRDUNK参考价 ¥18,000",
+      },
+    ],
   },
   "OPC-02": {
     titleZh: "顶尖决战",
@@ -80,6 +107,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sr", 10],
       ["opc_rarity_sec", 2],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-02-card-1.jpeg"],
+        title: "ポートガス・D・エース",
+        remark: "SNKRDUNK参考价 ¥340,000",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-2.jpeg"],
+        title: "ウタ",
+        remark: "SNKRDUNK参考价 ¥60,000",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-3.jpeg"],
+        title: "ナミ",
+        remark: "SNKRDUNK参考价 ¥60,000",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-4.jpeg"],
+        title: "サカズキ",
+        remark: "SNKRDUNK参考价 ¥15,000",
+      },
+      {
+        images: ["/products/topcards/opc-02-card-5.jpeg"],
+        title: "マゼラン",
+        remark: "SNKRDUNK参考价 ¥15,000",
+      },
+    ],
   },
   "OPC-03": {
     titleZh: "强大的敌人",
@@ -99,6 +153,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sec", 2],
       ["opc_rarity_sp", 4],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-03-card-1.webp"],
+        title: "そげキング",
+        remark: "SNKRDUNK参考价 ¥83,000",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-2.jpeg"],
+        title: "ナミ",
+        remark: "SNKRDUNK参考价 ¥25,000",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-3.jpeg"],
+        title: "マルコ",
+        remark: "SNKRDUNK参考价 ¥8,000",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-4.jpeg"],
+        title: "シャーロット・プリン",
+        remark: "SNKRDUNK参考价 ¥5,600",
+      },
+      {
+        images: ["/products/topcards/opc-03-card-5.jpeg"],
+        title: "アーロン",
+        remark: "SNKRDUNK参考价 ¥5,000",
+      },
+    ],
   },
   "OPC-04": {
     titleZh: "诡计的王国",
@@ -119,6 +200,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 5],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-04-card-1.jpeg"],
+        title: "サボ",
+        remark: "SNKRDUNK参考价 ¥250,000",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-2.jpeg"],
+        title: "ネフェルタリ・ビビ",
+        remark: "SNKRDUNK参考价 ¥77,777",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-3.jpeg"],
+        title: "ドンキホーテ・ドフラミンゴ",
+        remark: "SNKRDUNK参考价 ¥49,000",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-4.jpeg"],
+        title: "サンジ",
+        remark: "SNKRDUNK参考价 ¥9,900",
+      },
+      {
+        images: ["/products/topcards/opc-04-card-5.jpeg"],
+        title: "ヤマト",
+        remark: "SNKRDUNK参考价 ¥6,000",
+      },
+    ],
   },
   "OPC-05": {
     titleZh: "新时代的主角",
@@ -140,6 +248,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_don", 1],
       ["opc_rarity_anni1", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-05-card-1.jpeg"],
+        title: "モンキー・D・ルフィ",
+        remark: "SNKRDUNK参考价 ¥1,680,000",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-2.webp"],
+        title: "ユースタス・キッド",
+        remark: "SNKRDUNK参考价 ¥75,000",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-3.webp"],
+        title: "トラファルガー・ロー",
+        remark: "SNKRDUNK参考价 ¥70,000",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-4.webp"],
+        title: "エネル",
+        remark: "SNKRDUNK参考价 ¥8,000",
+      },
+      {
+        images: ["/products/topcards/opc-05-card-5.webp"],
+        title: "モンキー・D・ルフィ",
+        remark: "SNKRDUNK参考价 ¥5,000",
+      },
+    ],
   },
   "OPC-06": {
     titleZh: "双壁的霸者",
@@ -160,6 +295,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 6],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-06-card-1.jpeg"],
+        title: "ロロノア・ゾロ",
+        remark: "SNKRDUNK参考价 ¥549,000",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-2.jpeg"],
+        title: "ヴィンスモーク・ジャッジ",
+        remark: "SNKRDUNK参考价 ¥10,000",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-3.jpeg"],
+        title: "シャンクス",
+        remark: "SNKRDUNK参考价 ¥10,000",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-4.webp"],
+        title: "ウタ",
+        remark: "SNKRDUNK参考价 ¥7,000",
+      },
+      {
+        images: ["/products/topcards/opc-06-card-5.webp"],
+        title: "ヤマト",
+        remark: "SNKRDUNK参考价 ¥4,444",
+      },
+    ],
   },
   "OPC-07": {
     titleZh: "500年后的未来",
@@ -179,6 +341,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 6],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-07-card-1.jpeg"],
+        title: "ボア・ハンコック",
+        remark: "SNKRDUNK参考价 ¥459,999",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-2.webp"],
+        title: "ボア・ハンコック",
+        remark: "SNKRDUNK参考价 ¥9,500",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-3.jpeg"],
+        title: "バジル・ホーキンス",
+        remark: "SNKRDUNK参考价 ¥9,000",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-4.jpeg"],
+        title: "ポートガス・D・エース",
+        remark: "SNKRDUNK参考价 ¥8,500",
+      },
+      {
+        images: ["/products/topcards/opc-07-card-5.jpeg"],
+        title: "モンキー・D・ドラゴン",
+        remark: "SNKRDUNK参考价 ¥7,000",
+      },
+    ],
   },
   "OPC-08": {
     titleZh: "双子传说",
@@ -198,6 +387,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 6],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-08-card-1.jpeg"],
+        title: "シルバーズ・レイリー",
+        remark: "SNKRDUNK参考价 ¥150,000",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-2.jpeg"],
+        title: "シャーロット・プリン",
+        remark: "SNKRDUNK参考价 ¥70,000",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-3.jpeg"],
+        title: "ブラックマリア",
+        remark: "SNKRDUNK参考价 ¥20,000",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-4.jpeg"],
+        title: "S-スネーク",
+        remark: "SNKRDUNK参考价 ¥8,888",
+      },
+      {
+        images: ["/products/topcards/opc-08-card-5.jpeg"],
+        title: "ナミ",
+        remark: "SNKRDUNK参考价 ¥5,500",
+      },
+    ],
   },
   "OPC-09": {
     titleZh: "新帝降临",
@@ -217,6 +433,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 10],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-09-card-1.jpeg"],
+        title: "ゴール・D・ロジャー",
+        remark: "SNKRDUNK参考价 ¥1,280,000",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-2.jpeg"],
+        title: "モンキー・D・ルフィ",
+        remark: "SNKRDUNK参考价 ¥525,000",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-3.jpeg"],
+        title: "シャンクス",
+        remark: "SNKRDUNK参考价 ¥298,000",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-4.webp"],
+        title: "マーシャル・D・ティーチ",
+        remark: "SNKRDUNK参考价 ¥155,555",
+      },
+      {
+        images: ["/products/topcards/opc-09-card-5.webp"],
+        title: "バギー",
+        remark: "SNKRDUNK参考价 ¥88,000",
+      },
+    ],
   },
   "OPC-10": {
     titleZh: "王之血脉",
@@ -236,6 +479,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_sp", 6],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-10-card-1.webp"],
+        title: "トラファルガー・ロー",
+        remark: "SNKRDUNK参考价 ¥60,000",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-2.jpeg"],
+        title: "神避",
+        remark: "SNKRDUNK参考价 ¥35,000",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-3.jpeg"],
+        title: "クザン",
+        remark: "SNKRDUNK参考价 ¥5,450",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-4.jpeg"],
+        title: "ウソップ",
+        remark: "SNKRDUNK参考价 ¥4,500",
+      },
+      {
+        images: ["/products/topcards/opc-10-card-5.jpeg"],
+        title: "レベッカ",
+        remark: "SNKRDUNK参考价 ¥4,000",
+      },
+    ],
   },
   "OPC-11": {
     titleZh: "神速之拳",
@@ -256,6 +526,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_anni3", 2],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-11-card-1.jpeg"],
+        title: "モンキー・D・ルフィ",
+        remark: "SNKRDUNK参考价 ¥290,000",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-2.jpeg"],
+        title: "ギア2",
+        remark: "SNKRDUNK参考价 ¥111,000",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-3.jpeg"],
+        title: "ナミ",
+        remark: "SNKRDUNK参考价 ¥34,800",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-4.jpeg"],
+        title: "クザン",
+        remark: "SNKRDUNK参考价 ¥20,000",
+      },
+      {
+        images: ["/products/topcards/opc-11-card-5.jpeg"],
+        title: "ゴムゴムの火拳銃",
+        remark: "SNKRDUNK参考价 ¥12,000",
+      },
+    ],
   },
   "OPC-14": {
     titleZh: "苍海七杰",
@@ -276,6 +573,33 @@ export const OPC_SET_SPECS: Record<string, OpcSetSpec> = {
       ["opc_rarity_anni3", 2],
       ["opc_rarity_don", 1],
     ]),
+    topCards: [
+      {
+        images: ["/products/topcards/opc-14-card-1.jpeg"],
+        title: "ボア・ハンコック",
+        remark: "SNKRDUNK参考价 ¥127,999",
+      },
+      {
+        images: ["/products/topcards/opc-14-card-2.webp"],
+        title: "ジュラキュール・ミホーク",
+        remark: "SNKRDUNK参考价 ¥88,000",
+      },
+      {
+        images: ["/products/topcards/opc-14-card-3.jpeg"],
+        title: "わらわ こわい...♡",
+        remark: "SNKRDUNK参考价 ¥85,000",
+      },
+      {
+        images: ["/products/topcards/opc-14-card-4.jpeg"],
+        title: "ボア・ハンコック",
+        remark: "SNKRDUNK参考价 ¥68,000",
+      },
+      {
+        images: ["/products/topcards/opc-14-card-5.jpeg"],
+        title: "ナミ",
+        remark: "SNKRDUNK参考价 ¥40,000",
+      },
+    ],
   },
   "OPC-15": {
     titleZh: "神之岛的冒险",
