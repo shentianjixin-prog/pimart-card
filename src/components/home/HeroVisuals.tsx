@@ -29,7 +29,7 @@ const HERO_BRAND_SLOTS = [
     label: "151",
     imageKey: "151-box",
     nameHints: ["151"],
-    fallbackSlug: "ポケモンカ-ド151-box-简中",
+    fallbackSlug: "pokemon-card-151-box-简中",
   },
   {
     src: "/products/cbb5c-box.png",

@@ -127,7 +127,8 @@ const dict: Record<string, Record<Lang, string>> = {
   page_see_all_stock:  { zh: "查看全部现货 →", ja: "全在庫を見る →", en: "See All In Stock →" },
   page_all_products:   { zh: "全部商品",    ja: "全商品",        en: "All Products" },
   page_total_unit:     { zh: "件商品",      ja: "件の商品",      en: " products" },
-  page_total_pre:      { zh: "共 ",         ja: "全 ",           en: "" },
+  page_total_pre:      { zh: "共 ",         ja: "全 ",           en: "Total " },
+  page_total_suf:      { zh: " 件商品",     ja: " 件",           en: " products" },
   page_shipping_desc:  { zh: "简中原盒 / 预售现货 / 5-7 天发货", ja: "日・中 TCG 未開封BOX / PSA / 予約・現物 / 5〜7日発送", en: "JP & CN sealed boxes · PSA · Pre-order & in stock · Ships in 5-7 days" },
   page_back_home:      { zh: "← 返回首页", ja: "← ホームに戻る", en: "← Back to home" },
   page_no_products:    { zh: "没有找到符合条件的商品", ja: "条件に合う商品が見つかりません", en: "No products found" },
@@ -200,7 +201,7 @@ const dict: Record<string, Record<Lang, string>> = {
   opc_release_date:    { zh: "发售日", ja: "発売日", en: "Release Date" },
   opc_contents:        { zh: "商品内容", ja: "商品内容", en: "Contents" },
   opc_rarity:          { zh: "稀有度", ja: "レアリティ", en: "Rarity" },
-  opc_rarity_unit:     { zh: "种", ja: "種", en: "" },
+  opc_rarity_unit:     { zh: "种", ja: "種", en: " types" },
   opc_content_pack:    { zh: "1包：卡牌{n}张{types}", ja: "1パック：カード{n}枚{types}", en: "1 pack: {n} cards{types}" },
   opc_types_suffix:    { zh: "（共{types}）", ja: "（全{types}）", en: " ({types} total)" },
   opc_content_box:     { zh: "1盒：{n}包", ja: "1BOX：{n}パック", en: "1 box: {n} packs" },
@@ -389,7 +390,7 @@ const dict: Record<string, Record<Lang, string>> = {
   newsletter_btn:         { zh: "订阅", ja: "登録する", en: "Subscribe" },
   newsletter_done:          { zh: "订阅成功，感谢加入 PIMART CARD。", ja: "登録ありがとうございます。", en: "Subscribed — thank you for joining PIMART CARD." },
 
-  filter_count_unit: { zh: "件", ja: "件", en: "" },
+  filter_count_unit: { zh: "件", ja: "件", en: " items" },
 
   // Homepage V2
   hero_v2_s1_title: { zh: "PIMART CARD", ja: "PIMART CARD", en: "PIMART CARD" },
@@ -397,7 +398,11 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_s1_desc: { zh: "全球配送 · 正品保证", ja: "世界配送 · 正規品保証", en: "Worldwide Shipping · Authentic Guarantee" },
   hero_v2_s2_title: { zh: "卡牌臻选", ja: "カード厳選", en: "Curated Cards" },
   hero_v2_s2_sub: { zh: "各语版本 · 链接世界", ja: "多言語対応 · 世界をつなぐ", en: "All Languages · Connecting the World" },
-  hero_v2_s2_desc: { zh: "", ja: "", en: "" },
+  hero_v2_s2_desc: {
+    zh: "日版、简中与多语种原盒，精选现货与预售。",
+    ja: "日版・簡中・多言語の未開封BOXを厳選。",
+    en: "Curated JP, Simplified Chinese, and multilingual sealed boxes.",
+  },
   hero_v2_s3_title: { zh: "B2B 批发供应链", ja: "B2B WHOLESALE", en: "B2B WHOLESALE" },
   hero_v2_s3_sub: { zh: "TCG原箱原盒批发 · 采购", ja: "TCG未開封BOXの卸売・仕入れに対応。", en: "TCG sealed box wholesale and sourcing." },
   hero_v2_s3_desc: {

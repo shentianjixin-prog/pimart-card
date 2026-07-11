@@ -73,6 +73,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "ensure-product-listing.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 上架/slug 修正失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "sync-product-images.mjs")}`, {
     stdio: "inherit",
     env: process.env,
