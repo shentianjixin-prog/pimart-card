@@ -17,10 +17,9 @@ export const POKEMON_SERIES: SeriesOption[] = [
 ];
 
 export const ONEPIECE_SERIES: SeriesOption[] = [
-  { id: "opc", label: "主弹补充包", match: ["OPC-"] },
-  { id: "ebc", label: "特别补充包", match: ["EBC-"] },
-  { id: "prbc", label: "豪华补充包", match: ["PRBC-", "PRB"] },
-  { id: "stc", label: "基本卡组", match: ["STC-", "预组"] },
+  { id: "opc", label: "OP补充包", match: ["OPC-"] },
+  { id: "ebc", label: "EB补充包", match: ["EBC-"] },
+  { id: "prbc", label: "prb典藏包", match: ["PRBC-", "PRB"] },
 ];
 
 export const SUBGAME_SERIES: Record<SubGameKey, SeriesOption[]> = {
