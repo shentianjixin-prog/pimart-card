@@ -46,6 +46,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "reset-all-stock-100.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 库存重置失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "sync-product-images.mjs")}`, {
     stdio: "inherit",
     env: process.env,
