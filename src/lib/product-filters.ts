@@ -202,7 +202,11 @@ export function parseFilterState(raw: RawSearchParams): FilterState {
   }
 
   const seriesRaw = splitMulti(firstParam(raw.series)).map(normalizeSeriesId);
-  const series = !game || (game === "other" && !subGame) ? [] : seriesRaw;
+  // 仅选中扩充包时保留系列筛选
+  const series =
+    !game || (game === "other" && !subGame) || !type.includes("expansion")
+      ? []
+      : seriesRaw;
   const rarity = splitMulti(firstParam(raw.rarity));
 
   return {
@@ -544,6 +548,10 @@ export function applyFilterPatch(
   } else {
     const allowed = new Set(productTypesForGame(next.game));
     next.type = next.type.filter((k) => allowed.has(k));
+    // 未选扩充包时不保留系列
+    if (!next.type.includes("expansion")) {
+      next.series = [];
+    }
   }
 
   return next;

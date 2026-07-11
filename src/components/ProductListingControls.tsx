@@ -224,10 +224,11 @@ function FilterPanelContent({
     }
   };
 
-  const showSeriesAndType =
+  const showProductType =
     draft.game === "pokemon" ||
     draft.game === "onepiece" ||
     (draft.game === "other" && !!draft.subGame);
+  const showSeries = showProductType && draft.type.includes("expansion");
 
   return (
     <div className="filter-panel-inner">
@@ -261,16 +262,7 @@ function FilterPanelContent({
         </div>
       </FilterSection>
 
-      {showSeriesAndType && (
-        <SeriesFilterSection
-          draft={draft}
-          onToggleSeries={(id) =>
-            onPatch({ series: toggleInList(draft.series, id), page: 1 })
-          }
-        />
-      )}
-
-      {showSeriesAndType && (
+      {showProductType && (
         <FilterSection title={T("filter_product_type")}>
           <div className="flex flex-wrap gap-2">
             {productTypesForGame(draft.game).map((key) => {
@@ -281,14 +273,29 @@ function FilterPanelContent({
                   selected={draft.type.includes(key)}
                   label={T(`filter_type_${key}`)}
                   count={facet?.count}
-                  onClick={() =>
-                    onPatch({ type: toggleInList(draft.type, key), page: 1 })
-                  }
+                  onClick={() => {
+                    const nextType = toggleInList(draft.type, key);
+                    onPatch({
+                      type: nextType,
+                      // 取消扩充包时同步清空系列
+                      series: nextType.includes("expansion") ? draft.series : [],
+                      page: 1,
+                    });
+                  }}
                 />
               );
             })}
           </div>
         </FilterSection>
+      )}
+
+      {showSeries && (
+        <SeriesFilterSection
+          draft={draft}
+          onToggleSeries={(id) =>
+            onPatch({ series: toggleInList(draft.series, id), page: 1 })
+          }
+        />
       )}
 
       <FilterSection title={T("filter_price")}>
