@@ -218,12 +218,12 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
               )}
 
               <div
-                className={`relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 lg:items-center lg:px-8 xl:px-10 ${
+                className={`relative z-10 mx-auto flex h-full max-w-7xl flex-col px-5 lg:px-8 xl:px-10 ${
                   slide.brand
-                    ? "lg:grid lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.32fr)] lg:gap-5 xl:gap-7"
+                    ? "hero-v2-brand-frame justify-start lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] lg:items-start lg:gap-4 xl:gap-6"
                     : slide.visual === "b2b"
-                      ? "hero-v2-b2b-frame"
-                      : "lg:grid lg:grid-cols-2 lg:gap-10 xl:gap-12"
+                      ? "hero-v2-b2b-frame justify-center lg:items-center"
+                      : "justify-center lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 xl:gap-12"
                 }`}
               >
                 <div
@@ -238,19 +238,19 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                   {slide.brand ? (
                     <>
                       <div className="hero-v2-brand-stack">
-                        <PimartLogo variant="brand" height={72} className="hero-v2-brand-logo" />
+                        <PimartLogo variant="brand" height={88} className="hero-v2-brand-logo" />
                         <p className="hero-v2-brand-sub">{T(slide.subtitleKey)}</p>
                         {T(slide.descKey) ? (
                           <p className="hero-v2-brand-desc">{T(slide.descKey)}</p>
                         ) : null}
                       </div>
-                      <div className="mt-7 flex flex-nowrap justify-center gap-2.5 sm:mt-10 sm:gap-3 lg:justify-start">
+                      <div className="hero-v2-brand-actions">
                         {slide.ctas.map((cta) =>
                           cta.primary ? (
                             <Link
                               key={cta.key}
                               href={cta.href}
-                              className="btn-primary min-h-11 flex-1 rounded-full px-4 text-center text-sm sm:flex-none sm:px-7"
+                              className="btn-primary min-h-11 flex-1 rounded-full px-5 text-center text-sm sm:flex-none sm:px-8"
                             >
                               {T(cta.key)}
                             </Link>
@@ -258,7 +258,7 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
                             <Link
                               key={cta.key}
                               href={cta.href}
-                              className="btn-secondary min-h-11 flex-1 rounded-full px-4 text-center text-sm sm:flex-none sm:px-7"
+                              className="btn-secondary min-h-11 flex-1 rounded-full px-5 text-center text-sm sm:flex-none sm:px-8"
                             >
                               {T(cta.key)}
                             </Link>
