@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   description:
     "日版・中国語版 TCG 未開封BOX、PSA鑑定品、卸売対応。正規品保証、日本から発送。",
   icons: {
-    icon: "/logo-icon.svg",
-    apple: "/logo-icon.svg",
+    icon: [{ url: "/logo-icon.png", type: "image/png" }, { url: "/favicon-32.png", sizes: "32x32", type: "image/png" }],
+    apple: "/apple-touch-icon.png",
   },
 };
 
