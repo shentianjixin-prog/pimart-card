@@ -56,7 +56,7 @@ const dict: Record<string, Record<Lang, string>> = {
   menu_official:    { zh: "官方周边",   ja: "公式グッズ",     en: "Official Goods" },
   menu_limited_box: { zh: "限定礼盒",   ja: "限定ギフトBOX",  en: "Limited Gift Boxes" },
   menu_sealed:      { zh: "现货原盒",   ja: "未開封BOX",        en: "Sealed Boxes" },
-  menu_psa:         { zh: "PSA 评级卡", ja: "PSA鑑定品",        en: "PSA Cards" },
+  menu_psa:         { zh: "现货原盒",   ja: "未開封BOX",        en: "Sealed Boxes" },
   menu_new_arrivals:{ zh: "新品上架",   ja: "新着商品",         en: "New Arrivals" },
   menu_wholesale:   { zh: "批发合作",   ja: "卸売・提携", en: "Wholesale" },
   menu_buyback:     { zh: "买取",       ja: "買取",               en: "Buyback" },
@@ -130,7 +130,7 @@ const dict: Record<string, Record<Lang, string>> = {
   page_total_unit:     { zh: "件商品",      ja: "件の商品",      en: " products" },
   page_total_pre:      { zh: "共 ",         ja: "全 ",           en: "Total " },
   page_total_suf:      { zh: " 件商品",     ja: " 件",           en: " products" },
-  page_shipping_desc:  { zh: "简中原盒 / 预售现货 / 5-7 天发货", ja: "日・中 TCG 未開封BOX / PSA / 予約・現物 / 5〜7日発送", en: "JP & CN sealed boxes · PSA · Pre-order & in stock · Ships in 5-7 days" },
+  page_shipping_desc:  { zh: "简中原盒 / 预售现货 / 5-7 天发货", ja: "日・中 TCG 未開封BOX / 予約・現物 / 5〜7日発送", en: "JP & CN sealed boxes · Pre-order & in stock · Ships in 5-7 days" },
   page_back_home:      { zh: "← 返回首页", ja: "← ホームに戻る", en: "← Back to home" },
   page_no_products:    { zh: "没有找到符合条件的商品", ja: "条件に合う商品が見つかりません", en: "No products found" },
   page_hot_badge:      { zh: "热销",        ja: "人気",          en: "Hot" },
@@ -286,11 +286,11 @@ const dict: Record<string, Record<Lang, string>> = {
   // 顶部公告栏
   banner_worldwide: { zh: "日本发货 · 全球配送", ja: "日本から世界へ発送", en: "Ships Worldwide from Japan" },
   banner_wholesale: { zh: "支持批发询价", ja: "卸売対応", en: "Wholesale Available" },
-  banner_psa:       { zh: "每周 PSA 新品上架", ja: "毎週PSA新着入荷", en: "New PSA Arrivals Every Week" },
+  banner_psa:       { zh: "多语种原盒持续更新", ja: "多言語未開封BOXを随時更新", en: "Multilingual sealed boxes updated regularly" },
 
   // 分类展示
   showcase_title:    { zh: "探索分类", ja: "カテゴリー", en: "Shop by Category" },
-  showcase_subtitle: { zh: "从人气 IP 到评级卡与批发", ja: "人気IPから鑑定品・卸売まで", en: "From fan-favorite IPs to graded cards and wholesale" },
+  showcase_subtitle: { zh: "从人气 IP 到现货原盒与批发", ja: "人気IPから未開封BOX・卸売まで", en: "From fan-favorite IPs to sealed boxes and wholesale" },
   showcase_explore:  { zh: "浏览 →", ja: "見る →", en: "Explore →" },
 
   // Hero（首页主视觉）
@@ -301,17 +301,17 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_trust_auth:  { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
   hero_cta_new:     { zh: "浏览新品", ja: "新着商品を見る", en: "Shop New Arrivals" },
   hero_cta_wholesale:{ zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
-  hero_cta_psa:     { zh: "查看 PSA 精选", ja: "PSA商品を見る", en: "View PSA Picks" },
+  hero_cta_psa:     { zh: "浏览原盒", ja: "未開封BOXを見る", en: "Browse Sealed Boxes" },
 
   hero_slide2_title: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
   hero_slide2_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
   hero_slide2_sub:   { zh: "最新未开封 BOX 持续更新", ja: "最新未開封BOXを随時更新", en: "Fresh sealed boxes added regularly" },
   hero_slide2_cta:   { zh: "浏览新品", ja: "新着商品を見る", en: "Shop New Arrivals" },
 
-  hero_slide3_title: { zh: "PSA 精选", ja: "PSAピックアップ", en: "PSA Picks" },
+  hero_slide3_title: { zh: "原盒臻选", ja: "未開封BOX厳選", en: "Sealed Selection" },
   hero_slide3_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
-  hero_slide3_sub:   { zh: "鉴定卡与高端库存", ja: "鑑定品とプレミアム在庫", en: "Graded cards & premium inventory" },
-  hero_slide3_cta:   { zh: "查看 PSA", ja: "PSA商品を見る", en: "View PSA Picks" },
+  hero_slide3_sub:   { zh: "多语种现货与预售", ja: "多言語の現物・予約", en: "Multilingual stock & pre-order" },
+  hero_slide3_cta:   { zh: "立即选购", ja: "購入する", en: "Shop Now" },
 
   hero_slide4_title: { zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
   hero_slide4_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
@@ -322,7 +322,7 @@ const dict: Record<string, Record<Lang, string>> = {
   cat_pokemon:      { zh: "宝可梦", ja: "ポケモン", en: "Pokémon" },
   cat_one_piece:    { zh: "海贼王", ja: "ワンピース", en: "One Piece" },
   cat_dragon_ball:  { zh: "龙珠", ja: "ドラゴンボール", en: "Dragon Ball" },
-  cat_psa:          { zh: "PSA", ja: "PSA", en: "PSA" },
+  cat_psa:          { zh: "预售", ja: "予約", en: "Pre-order" },
   cat_sealed:       { zh: "现货原盒", ja: "未開封BOX", en: "Sealed Boxes" },
   cat_wholesale:    { zh: "批发", ja: "卸売", en: "Wholesale" },
 
@@ -334,19 +334,19 @@ const dict: Record<string, Record<Lang, string>> = {
   section_latest_sub:   { zh: "刚刚上架", ja: "つい最近の入荷", en: "Just arrived" },
   section_latest_eyebrow: { zh: "新货上架", ja: "新着入荷", en: "Just in" },
   section_new_arrivals: { zh: "新品上架", ja: "新着商品", en: "New Arrivals" },
-  section_new_sub:      { zh: "最新原盒与评级卡", ja: "最新の未開封BOXと鑑定品", en: "Latest sealed boxes and graded picks" },
+  section_new_sub:      { zh: "最新原盒与现货精选", ja: "最新の未開封BOXと現物", en: "Latest sealed boxes and in-stock picks" },
   section_best_sellers: { zh: "热销商品", ja: "人気商品", en: "Best Sellers" },
   section_best_sub:     { zh: "需求旺盛的人气商品", ja: "人気の高い定番アイテム", en: "Popular items with strong demand" },
-  section_psa_picks:    { zh: "PSA 精选", ja: "PSAピックアップ", en: "PSA Picks" },
-  section_psa_sub:      { zh: "评级卡与高端库存", ja: "鑑定品とプレミアム在庫", en: "Graded cards and premium inventory" },
+  section_psa_picks:    { zh: "现货精选", ja: "現物ピックアップ", en: "In-Stock Picks" },
+  section_psa_sub:      { zh: "可立即发货的原盒库存", ja: "すぐ発送できる未開封在庫", en: "Sealed inventory ready to ship" },
   section_shop_all:     { zh: "查看全部", ja: "すべて見る", en: "Shop all" },
   section_view_all:     { zh: "查看全部", ja: "すべて見る", en: "View all" },
   section_view_more:    { zh: "查看更多", ja: "もっと見る", en: "View more" },
-  section_view_psa:     { zh: "查看 PSA", ja: "PSAを見る", en: "View PSA" },
+  section_view_psa:     { zh: "浏览现货", ja: "現物を見る", en: "View In Stock" },
 
   // Why PIMART
   why_title:    { zh: "为什么选择 PIMART CARD", ja: "PIMART CARDが選ばれる理由", en: "Why PIMART CARD" },
-  why_subtitle: { zh: "原盒、评级卡与批发客户的可靠供货", ja: "未開封BOX・鑑定品・卸売向けの信頼できる仕入れ", en: "Trusted supply for sealed boxes, graded cards, and wholesale buyers" },
+  why_subtitle: { zh: "原盒零售与 B2B 客户的可靠供货", ja: "未開封BOX小売とB2B向けの信頼できる仕入れ", en: "Trusted supply for sealed-box retail and B2B buyers" },
   why_auth_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
   why_auth_desc:  { zh: "所有商品均来自可溯源的正规渠道", ja: "すべて正規ルートから仕入れ、トレーサビリティを確保", en: "All products sourced through verified channels with traceable supply." },
   why_japan_title:{ zh: "日本发货", ja: "日本から発送", en: "Ships from Japan" },
@@ -359,7 +359,7 @@ const dict: Record<string, Record<Lang, string>> = {
   // 批发横幅
   wholesale_tag:   { zh: "B2B / 批发", ja: "B2B / 卸売", en: "B2B / Wholesale" },
   wholesale_title: { zh: "批发与批量供货", ja: "卸売・大口仕入れ", en: "Wholesale & Bulk Supply" },
-  wholesale_desc:  { zh: "需要原盒、PSA 库存或定期供货？欢迎联系询价与专属支持。", ja: "未開封BOX・PSA在庫・定期仕入れをご希望の方は、価格・在庫・専任サポートをご相談ください。", en: "Looking for sealed boxes, PSA inventory, or recurring supply? Contact us for pricing, availability, and dedicated support for resellers and shops." },
+  wholesale_desc:  { zh: "需要原盒批量、定期补货或长期合作？欢迎联系询价与专属支持。", ja: "未開封BOXの大口・定期補充・長期取引をご希望の方は、価格・在庫・専任サポートをご相談ください。", en: "Need bulk sealed boxes, recurring replenishment, or a long-term partnership? Contact us for pricing, availability, and dedicated support." },
   wholesale_cta:   { zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
 
   // 页脚扩展
@@ -380,11 +380,11 @@ const dict: Record<string, Record<Lang, string>> = {
   footer_faq:      { zh: "常见问题", ja: "よくある質問", en: "FAQ" },
   footer_tokusho:  { zh: "特定商取引法", ja: "特定商取引法", en: "Legal Notice" },
 
-  // 结构参考集换社三段式：我们是谁 → 做什么 → 未来；页底另列主体与邮箱
+  // 品牌叙事：全球零售 + B2B，不强调评级卡线
   about_p1: {
-    zh: "PIMART CARD 创立于 2022 年，是一家面向全球收藏者与经销商的 TCG 交易平台。团队成员多为长期活跃在卡牌圈的收藏者与交易者，深知正品原盒、评级卡与稳定货源往往受困于信息分散、渠道难辨与跨境履约复杂。我们致力于把「可溯源正品 + 日本发货 + 全球可达」做成一条清晰路径，降低跨境购卡与补货门槛，让个人与业者都能更安心地完成交易。",
-    ja: "PIMART CARDは2022年に始まり、世界のコレクターと業者をつなぐTCGトレーディングプラットフォームです。メンバーの多くはカード界で長く活動してきたコレクター／トレーダーで、正規の未開封BOXや鑑定品、安定した仕入れが「情報の分散・真贋の見極め・越境配送」に阻まれやすいことを知っています。私たちは「正規ルートで辿れる仕入れ」「日本発送」「世界へ届ける」を一本の導線にし、購入と仕入れのハードルを下げ、安心して取引できる場をつくります。",
-    en: "Founded in 2022, PIMART CARD is a TCG trading platform for collectors and dealers worldwide. Our team is largely made up of long-time collectors and traders who know how hard authentic sealed boxes, graded cards, and steady supply can be amid scattered information, authenticity risks, and cross-border fulfillment. We exist to make one clear path—traceable authenticity, shipping from Japan, and worldwide delivery—so collectors and businesses can trade with more confidence.",
+    zh: "PIMART CARD 创立于 2022 年，以日本为履约枢纽，面向全球买家经营集换式卡牌原箱原盒。我们相信：跨境购卡不该靠运气——正品货源、清晰说明与可预期的发货，才是长期交易的基础。",
+    ja: "PIMART CARDは2022年に始まり、日本を発送拠点として、世界のお客様へTCG未開封BOXをお届けしています。越境の買い物は運任せであるべきではありません。正規ルートの仕入れ、明確な案内、予測可能な発送——それが長く続く取引の土台です。",
+    en: "Founded in 2022 and shipping from Japan, PIMART CARD serves buyers worldwide with sealed TCG boxes. Cross-border collecting should not rely on luck—traceable sourcing, clear product guidance, and predictable fulfillment are the foundation of lasting trade.",
   },
   about_founded_label: { zh: "创办年份", ja: "設立年", en: "Founded" },
   about_company_label: { zh: "公司", ja: "販売業者", en: "Company" },
@@ -393,19 +393,19 @@ const dict: Record<string, Record<Lang, string>> = {
   about_phone_label: { zh: "电话", ja: "電話番号", en: "Phone" },
 
   about_p2: {
-    zh: "集换式卡牌游戏（TCG）鼓励玩家之间自由交易，也常带有竞技与收藏双重乐趣。PIMART CARD 以日本为发货基地，面向个人收藏者提供现货与预售原盒、PSA 精选；面向店铺与经销商提供批发与定期供货。我们用圈内人的标准验货与打包，并把配送、售后与品相说明写清楚，让下单到收货少一些猜测、多一份确定。",
-    ja: "トレーディングカードゲーム（TCG）は、プレイヤー同士の自由な取引を前提とし、競技と収集の両面を楽しむ文化です。PIMART CARDは日本を発送拠点に、個人コレクター向けには現物・予約の未開封BOXとPSAセレクトを、店舗・業者向けには卸売と定期仕入れを提供します。現場目線で検品・梱包し、配送・アフター・コンディションを明示することで、注文から受取までの不安を減らします。",
-    en: "Trading Card Games (TCG) encourage free trade among players and often blend competition with collecting. From our Japan shipping base, PIMART CARD offers in-stock and pre-order sealed boxes plus PSA picks for collectors, and wholesale or recurring supply for shops and resellers. We inspect and pack to collector standards, and we spell out shipping, after-sales, and condition guidance—so checkout to delivery feels certain, not guessed.",
+    zh: "对个人买家，我们提供多语种未开封原盒的现货与预售，从日本发往世界各地。对经销商与店铺，我们正着力建设 B2B 能力：批量询价、稳定补货与长期供货协作。零售与批发共用同一标准——可溯源渠道、专业打包、售后边界写清楚。",
+    ja: "個人のお客様には、多言語の未開封BOXを現物・予約でご用意し、日本から世界各国へお届けします。ディーラー・店舗向けには、大口見積もり、安定した補充、長期取引を支えるB2B体制を拡充しています。小売も卸も同じ基準——正規ルート、丁寧な梱包、アフターの境界を明示します。",
+    en: "For collectors, we offer multilingual sealed boxes in stock and on pre-order, shipped worldwide from Japan. For shops and distributors, we are building B2B capacity—bulk quotes, steady replenishment, and long-term supply partnerships. Retail and wholesale share one standard: traceable channels, professional packing, and clearly stated after-sales boundaries.",
   },
   about_p3: {
-    zh: "未来我们将继续连接更多语区与合作伙伴，挖掘圈层用户在购入、批发与买取上的真实需求，与全球卡友和业者一起把「放心交易」做得更完整。PIMART CARD——全球交易平台。",
-    ja: "これからも多言語のお客様とパートナーをつなぎ、購入・卸売・買取における現場のニーズに応え、コレクターも業者も安心して取引できる場を広げます。PIMART CARD——グローバルトレーディングプラットフォーム。",
-    en: "Going forward we will keep connecting language regions and partners, meeting real needs in buying, wholesale, and buyback—so collectors and businesses can trade with confidence. PIMART CARD—a global trading platform.",
+    zh: "真正的全球卖货，靠的是供应链与履约能力，而不是口号。我们将持续扩展语区覆盖与业者网络，让 PIMART CARD 成为连接日本库存与全球市场的可靠入口。",
+    ja: "本物のグローバル販売は、スローガンではなくサプライチェーンと履行力で決まります。言語圏とパートナー網を広げ、PIMART CARDを「日本在庫と世界市場をつなぐ信頼できる入口」にしていきます。",
+    en: "Real global commerce is built on supply chain and fulfillment—not slogans. We will keep expanding language coverage and partner networks so PIMART CARD remains a reliable gateway between Japanese inventory and the world market.",
   },
   about_p4: {
-    zh: "订单、物流与售后请联系客服邮箱；批发与商务合作请使用 B2B 邮箱。欢迎随时联系我们。",
-    ja: "ご注文・配送・アフターはカスタマーサポートへ。卸売・提携のご相談はB2Bメールへ。お気軽にご連絡ください。",
-    en: "For orders, shipping, and after-sales, use customer support. For wholesale and partnership, use the B2B inbox. We welcome your message.",
+    zh: "订单、物流与售后请联系客服；批发与商务合作请使用 B2B 邮箱。欢迎与我们开启对话。",
+    ja: "ご注文・配送・アフターはカスタマーサポートへ。卸売・提携はB2Bメールへ。まずはお気軽にご連絡ください。",
+    en: "For orders, shipping, and after-sales, contact support. For wholesale and partnerships, use the B2B inbox. We welcome the conversation.",
   },
   about_support_label: { zh: "客服邮箱", ja: "カスタマーサポート", en: "Customer support" },
   about_b2b_label: { zh: "B2B / 批发合作", ja: "B2B / 卸売提携", en: "B2B / Wholesale" },
@@ -418,9 +418,9 @@ const dict: Record<string, Record<Lang, string>> = {
   faq_a3: { zh: "请发送邮件至 info@pimartcard.com，或通过页脚「批发合作」入口联系。", ja: "info@pimartcard.com までご連絡ください。フッターの「卸売・提携」からもご相談いただけます。", en: "Email info@pimartcard.com, or use Wholesale in the footer." },
   faq_returns_title: { zh: "售后与退换", ja: "返品・交換について", en: "Returns & after-sales" },
   faq_returns_a1: {
-    zh: "【购前同意】未开封原盒、预售、PSA、随机/开封类属特殊品类，不适用笼统「七天无理由」。下单付款即视为同意商品页与《用户协议》。个人喜好、买多了、价格波动、开封结果不理想等顾客都合，原则上不支持退换（对齐会员购特殊品 + SNKRDUNK 顾客都合不可）。",
-    ja: "【購入前同意】未開封BOX・予約・PSA・ランダム/開封系は特殊商品で、一律のクーリングオフは適用されません。ご注文・お支払いをもって商品ページと利用規約に同意したものとみなします。好み・買過ぎ・相場・開封結果などお客様都合は原則不可です。",
-    en: "By paying, you accept product-page rules and the Terms. Sealed/pre-order/PSA/random items are not covered by blanket no-reason returns. Preference and pull disappointment are generally ineligible.",
+    zh: "【购前同意】未开封原盒、预售、随机/开封类属特殊品类，不适用笼统「七天无理由」。下单付款即视为同意商品页与《用户协议》。个人喜好、买多了、价格波动、开封结果不理想等顾客都合，原则上不支持退换。",
+    ja: "【購入前同意】未開封BOX・予約・ランダム/開封系は特殊商品で、一律のクーリングオフは適用されません。ご注文・お支払いをもって商品ページと利用規約に同意したものとみなします。好み・買過ぎ・相場・開封結果などお客様都合は原則不可です。",
+    en: "By paying, you accept product-page rules and the Terms. Sealed, pre-order, and random/open-pack items are not covered by blanket no-reason returns. Preference and pull disappointment are generally ineligible.",
   },
   faq_returns_a2: {
     zh: "【可受理】运输破损致商品实质受损、错发、漏发。请于签收后 7 日内联系客服，并提供订单号与完整开箱视频（从封闭包裹连续拍到取出）。证凭不足或逾期，可能不予受理。经核实属本站责任的，优先补发/换货；无库存可退该商品实付。不接受到付退货。",
@@ -437,7 +437,7 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // 邮件订阅
   newsletter_title:       { zh: "订阅更新", ja: "最新情報を受け取る", en: "Stay updated" },
-  newsletter_sub:           { zh: "新品、PSA 上架与批发资讯", ja: "新着・PSA入荷・卸売情報", en: "New arrivals, PSA drops, and wholesale updates." },
+  newsletter_sub:           { zh: "新品上架与批发资讯", ja: "新着・卸売情報", en: "New arrivals and wholesale updates." },
   newsletter_placeholder: { zh: "your@email.com", ja: "your@email.com", en: "your@email.com" },
   newsletter_btn:         { zh: "订阅", ja: "登録する", en: "Subscribe" },
   newsletter_done:          { zh: "订阅成功，感谢加入 PIMART CARD。", ja: "登録ありがとうございます。", en: "Subscribed — thank you for joining PIMART CARD." },
@@ -448,7 +448,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_s1_title: { zh: "PIMART CARD", ja: "PIMART CARD", en: "PIMART CARD" },
   hero_v2_s1_sub: { zh: "全球卡牌交易平台", ja: "グローバルトレーディングカードマーケット", en: "Global Trading Card Marketplace" },
   hero_v2_s1_desc: { zh: "全球配送 · 正品保证", ja: "世界配送 · 正規品保証", en: "Worldwide Shipping · Authentic Guarantee" },
-  hero_v2_s2_title: { zh: "卡牌臻选", ja: "カード厳選", en: "Curated Cards" },
+  hero_v2_s2_title: { zh: "原盒臻选", ja: "未開封BOX厳選", en: "Sealed Selection" },
   hero_v2_s2_sub: { zh: "各语版本 · 链接世界", ja: "多言語対応 · 世界をつなぐ", en: "All Languages · Connecting the World" },
   hero_v2_s2_desc: {
     zh: "日版、简中与多语种原盒，精选现货与预售。",
@@ -458,12 +458,12 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_s3_title: { zh: "B2B 批发供应链", ja: "B2B WHOLESALE", en: "B2B WHOLESALE" },
   hero_v2_s3_sub: { zh: "TCG原箱原盒批发 · 采购", ja: "TCG未開封BOXの卸売・仕入れに対応。", en: "TCG sealed box wholesale and sourcing." },
   hero_v2_s3_desc: {
-    zh: "面向经销商与批量采购客户，提供原盒供货、物流合作支出与长期合作支持。",
+    zh: "面向经销商与批量采购客户，提供原盒供货、物流协作与长期合作支持。",
     ja: "ディーラー・大口仕入れ向けに、未開封BOX・物流連携・長期取引をサポートします。",
     en: "For dealers and bulk buyers — sealed boxes, logistics partnership, and long-term supply support.",
   },
   hero_v2_cta_new: { zh: "浏览新品", ja: "新着を見る", en: "Shop New Arrivals" },
-  hero_v2_cta_psa: { zh: "查看卡牌", ja: "カードを見る", en: "Browse Cards" },
+  hero_v2_cta_psa: { zh: "浏览原盒", ja: "BOXを見る", en: "Browse Boxes" },
   hero_v2_cta_contact: { zh: "联系我们", ja: "お問い合わせ", en: "Contact Us" },
   hero_v2_cta_quote: { zh: "获取报价", ja: "見積もり", en: "Get a Quote" },
   hero_v2_cta_learn: { zh: "了解详情", ja: "詳しく見る", en: "Learn More" },
@@ -476,13 +476,13 @@ const dict: Record<string, Record<Lang, string>> = {
   announce_cta_buy: { zh: "去购买", ja: "購入する", en: "Shop now" },
   announce_sv: { zh: "SV 新品已到货", ja: "SV新着入荷", en: "SV new arrivals in stock" },
   announce_op: { zh: "海贼王新品预售中", ja: "ワンピース予約受付中", en: "One Piece pre-orders open" },
-  announce_psa: { zh: "PSA 每周更新", ja: "PSA毎週更新", en: "PSA updated weekly" },
+  announce_psa: { zh: "现货原盒持续更新", ja: "未開封BOX随時更新", en: "Sealed boxes updated regularly" },
   announce_b2b: { zh: "支持批发询价", ja: "卸売お問い合わせ受付", en: "Wholesale inquiries welcome" },
 
   tab_all: { zh: "全部", ja: "すべて", en: "All" },
   tab_pokemon: { zh: "宝可梦", ja: "ポケモン", en: "Pokémon" },
   tab_onepiece: { zh: "海贼王", ja: "ワンピース", en: "One Piece" },
-  tab_psa: { zh: "PSA", ja: "PSA", en: "PSA" },
+  tab_psa: { zh: "现货", ja: "現物", en: "In Stock" },
   home_latest_arrivals: { zh: "热门现货与新品", ja: "人気の新着・在庫", en: "Latest arrivals" },
 
   b2b_v2_tag: { zh: "PIMART B2B", ja: "PIMART B2B", en: "PIMART B2B" },
@@ -590,7 +590,7 @@ const dict: Record<string, Record<Lang, string>> = {
   contact_support_label: { zh: "客服邮箱", ja: "サポートメール", en: "Support email" },
   contact_b2b_label: { zh: "B2B 合作邮箱", ja: "B2Bメール", en: "B2B email" },
   contact_b2b_title: { zh: "批发 / B2B 合作", ja: "卸売 / B2B提携", en: "Wholesale / B2B" },
-  contact_b2b_desc: { zh: "原盒批量、PSA 库存、定期供货等商务合作，请发至合作邮箱。", ja: "未開封BOXの大口、PSA在庫、定期仕入れなどのご相談は提携用メールへ。", en: "For bulk sealed boxes, PSA inventory, or recurring supply, email our B2B inbox." },
+  contact_b2b_desc: { zh: "原盒批量、定期供货等商务合作，请发至合作邮箱。", ja: "未開封BOXの大口、定期仕入れなどのご相談は提携用メールへ。", en: "For bulk sealed boxes or recurring supply, email our B2B inbox." },
   contact_back: { zh: "← 返回首页", ja: "← ホームに戻る", en: "← Back to home" },
 };
 

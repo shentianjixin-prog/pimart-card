@@ -20,13 +20,13 @@ export function HomeB2B() {
             <p className="home-b2b-desc">{T("b2b_v2_desc")}</p>
             <div className="mt-6 flex flex-nowrap gap-2.5 sm:mt-8">
               <Link
-                href="/contact"
+                href="/wholesale"
                 className="btn-primary min-h-11 flex-1 rounded-full px-4 text-center sm:flex-none sm:px-6"
               >
                 {T("hero_v2_cta_quote")}
               </Link>
               <Link
-                href="/contact"
+                href="/wholesale"
                 className="btn-secondary min-h-11 flex-1 rounded-full px-4 text-center sm:flex-none sm:px-6"
               >
                 {T("hero_v2_cta_wholesale")}

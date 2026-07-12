@@ -2,7 +2,7 @@
 
 import { useT } from "@/lib/lang-context";
 
-const ITEMS = ["banner_worldwide", "banner_wholesale", "banner_psa"] as const;
+const ITEMS = ["banner_worldwide", "banner_wholesale", "announce_b2b"] as const;
 
 export function AnnouncementBar() {
   const T = useT();

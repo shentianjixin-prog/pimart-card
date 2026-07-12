@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { B2B_EMAIL, SUPPORT_EMAIL } from "@/lib/site";
+import {
+  B2B_EMAIL,
+  COMPANY_ADDRESS,
+  COMPANY_FOUNDED_YEAR,
+  COMPANY_PHONE,
+  COMPANY_REPRESENTATIVE,
+  COMPANY_SELLER,
+  SUPPORT_EMAIL,
+} from "@/lib/site";
 import { t, resolveLang } from "@/lib/translations";
 
 export default async function AboutPage() {
@@ -9,30 +17,75 @@ export default async function AboutPage() {
   const T = (key: string) => t(key, lang);
 
   return (
-    <div className="section-tone-default mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:py-20">
-      <h1 className="section-title">{T("footer_about")}</h1>
-      <div className="surface mt-8 space-y-4 p-8 text-sm leading-relaxed text-[#374151]">
-        <p>{T("about_p1")}</p>
-        <p>{T("about_p2")}</p>
-        <p>{T("about_p3")}</p>
-        <p>{T("about_p4")}</p>
-        <ul className="list-none space-y-2 border-t border-[#e5e7eb] pt-4 text-[#6b7280]">
-          <li>
-            {T("about_support_label")}{" "}
-            <a href={`mailto:${SUPPORT_EMAIL}`} className="font-medium text-[#111827] hover:underline">
-              {SUPPORT_EMAIL}
-            </a>
-          </li>
-          <li>
-            {T("about_b2b_label")}{" "}
-            <a href={`mailto:${B2B_EMAIL}`} className="font-medium text-[#111827] hover:underline">
-              {B2B_EMAIL}
-            </a>
-          </li>
-        </ul>
-        <Link href="/" className="inline-block font-medium text-[#111827] hover:underline">
-          {T("page_back_home")}
-        </Link>
+    <div className="legal-shell">
+      <header className="legal-hero">
+        <p className="legal-eyebrow">About · 品牌</p>
+        <h1 className="legal-title">{T("footer_about")}</h1>
+        <p className="legal-subtitle">PIMART CARD · Global Sealed &amp; B2B</p>
+        <div className="legal-meta-row">
+          <span className="legal-chip">
+            {T("about_founded_label")} {COMPANY_FOUNDED_YEAR}
+          </span>
+          <span className="legal-chip">{COMPANY_SELLER}</span>
+        </div>
+      </header>
+
+      <div className="legal-main mt-6">
+        <article className="legal-article">
+          <div className="legal-article-body space-y-5 text-[0.975rem] leading-[1.9]">
+            <p>{T("about_p1")}</p>
+            <p>{T("about_p2")}</p>
+            <p>{T("about_p3")}</p>
+            <p>{T("about_p4")}</p>
+          </div>
+        </article>
+
+        <div className="legal-info-card mt-1">
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_founded_label")}</span>
+            <span className="legal-info-value">{COMPANY_FOUNDED_YEAR}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_company_label")}</span>
+            <span className="legal-info-value">{COMPANY_SELLER}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_rep_label")}</span>
+            <span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_address_label")}</span>
+            <span className="legal-info-value">{COMPANY_ADDRESS}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_phone_label")}</span>
+            <span className="legal-info-value">{COMPANY_PHONE}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_support_label")}</span>
+            <span className="legal-info-value">
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+            </span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_b2b_label")}</span>
+            <span className="legal-info-value">
+              <a href={`mailto:${B2B_EMAIL}`}>{B2B_EMAIL}</a>
+            </span>
+          </div>
+        </div>
+
+        <div className="legal-crosslinks-row mt-2">
+          <Link href="/wholesale" className="legal-crosslink">
+            {T("footer_wholesale")}
+          </Link>
+          <Link href="/contact" className="legal-crosslink">
+            {T("footer_contact")}
+          </Link>
+          <Link href="/" className="legal-crosslink">
+            {T("page_back_home")}
+          </Link>
+        </div>
       </div>
     </div>
   );

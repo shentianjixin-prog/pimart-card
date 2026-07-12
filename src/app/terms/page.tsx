@@ -48,7 +48,7 @@ const KEY_NOTICES = [
   },
   {
     title: "特殊品不适用笼统七天无理由",
-    body: "未开封原盒、预售、PSA、随机/开封类等特殊商品，个人原因退换原则不接受。",
+    body: "未开封原盒、预售、随机/开封类等特殊商品，个人原因退换原则不接受。",
   },
   {
     title: "签收后 7 日内举证",
@@ -77,7 +77,7 @@ export default function TermsPage() {
             网站及下单购买商品所订立的具有约束力的协议。代表责任者：{COMPANY_REPRESENTATIVE}。
           </li>
           <li>
-            不同商品适用不同售后政策（现货 / 预售 / 未开封原盒 / PSA 等），将在商品详情页及本协议、
+            不同商品适用不同售后政策（现货 / 预售 / 未开封原盒等），将在商品详情页及本协议、
             <Link href="/tokusho">特定商取引法表記</Link>、
             <Link href="/faq#returns">售后说明</Link>
             中公示。不一致时，以商品页特别说明优先；商品页未说明的，以本协议为准。
@@ -181,7 +181,7 @@ export default function TermsPage() {
         <ul className="list-disc space-y-1">
           <li>未开封原盒、补充包、礼盒、双盒装等 sealed 商品</li>
           <li>预售商品（含定金/全款预售）</li>
-          <li>PSA / 其他评级卡等一经售出难以按新品二次销售的商品</li>
+          <li>一经售出难以按新品二次销售的特殊商品（商品页另行标注）</li>
           <li>明示随机、福袋、组合包或「开封结果随机」的商品</li>
           <li>商品页另行标注「不支持无理由退换」的商品</li>
         </ul>

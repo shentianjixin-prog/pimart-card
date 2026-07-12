@@ -7,9 +7,9 @@ const CATEGORIES = [
   { key: "cat_pokemon", href: "/?category=宝可梦原盒", tint: "#EAF4FF" },
   { key: "cat_one_piece", href: "/?q=One%20Piece", tint: "#F3EEFF" },
   { key: "cat_dragon_ball", href: "/?q=Dragon%20Ball", tint: "#FFF7D6" },
-  { key: "cat_psa", href: "/?q=PSA", tint: "#FFF0F5" },
   { key: "cat_sealed", href: "/?inStock=1", tint: "#EAF4FF" },
-  { key: "cat_wholesale", href: "/contact", tint: "#F3EEFF" },
+  { key: "cat_psa", href: "/?stock=preorder", tint: "#FFF7ED" },
+  { key: "cat_wholesale", href: "/wholesale", tint: "#F3EEFF" },
 ] as const;
 
 export function CategoryPills() {

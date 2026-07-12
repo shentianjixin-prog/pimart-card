@@ -58,7 +58,7 @@ const SLIDES: SlideConfig[] = [
       { key: "hero_v2_cta_psa", href: "/?stock=instock", primary: true },
       { key: "hero_v2_cta_contact", href: "/contact" },
     ],
-    visual: "psa",
+    visual: "brand",
   },
   {
     id: 2,

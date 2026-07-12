@@ -27,9 +27,10 @@ const DATA: Record<
       {
         title: "现货与预售",
         items: [
-          "现货商品：下单后 5-7 个工作日内安排发货",
-          "预售商品：将在预计发货日或到货后优先安排发货，详情页会标注预售信息",
-          "预售商品同样支持正常下单支付，发货时间以商品页说明为准",
+          "现货商品：下单后按商品页与结账说明尽快安排发货",
+          "预售商品页的「预计发货/到货」仅为参考，可能因出荷、质检、清关等延迟；实际以发货为准",
+          "自首次展示的预计发货日起满 90 日仍未发货（且未发货）的，可就该商品按实付金额申请退款",
+          "下单付款即视为已阅读并同意商品页说明与用户协议",
         ],
       },
       {
@@ -49,8 +50,10 @@ const DATA: Record<
       {
         title: "售后与退换货",
         items: [
-          "如收到商品与描述不符或运输途中损坏，请在收货后 7 天内联系我们处理",
-          "原盒及 sealed 商品一经拆封，原则上不支持因个人原因退换",
+          "未开封原盒、预售、随机/开封类：不适用笼统「七天无理由」；个人原因原则上不退换",
+          "可受理：运输破损、错发、漏发——请于签收后 7 日内联系，并提供完整开箱视频与照片",
+          "轻微外箱压痕等不影响 sealed 的，一般不视为质量问题；开封结果随机，不保证特定卡",
+          "详细规则见「用户协议」与 FAQ「售后与退换」",
         ],
       },
     ],
@@ -78,9 +81,10 @@ const DATA: Record<
       {
         title: "現物と予約商品",
         items: [
-          "現物商品：ご注文後5〜7営業日以内に発送します",
-          "予約商品：発送予定日または入荷後、優先的に発送します。詳細は商品ページをご確認ください",
-          "予約商品も通常どおりご注文・お支払いが可能です",
+          "現物商品：商品ページ・決済画面の案内に従い、できるだけ早く発送します",
+          "予約ページの発送/入荷予定は目安です。出荷・検品・通関等で遅れる場合があり、実際の発送をもって確定します",
+          "初回表示の発送予定日から90日経過しても未発送の場合、当該商品の実支払額で返金申請できます",
+          "ご注文・お支払いをもって、商品ページと利用規約に同意したものとみなします",
         ],
       },
       {
@@ -100,8 +104,10 @@ const DATA: Record<
       {
         title: "返品・交換について",
         items: [
-          "商品説明と異なる場合や輸送中の損傷があった場合は、受取後7日以内にご連絡ください",
-          "未開封BOXおよびsealedの商品は、お客様都合の返品・交換は原則お受けできません",
+          "未開封BOX・予約・ランダム/開封系は特殊商品で、一律のクーリングオフは適用されません。お客様都合の返品は原則不可です",
+          "対応可：輸送破損・誤発送・欠品。受取後7日以内にご連絡のうえ、開封動画と写真をご提出ください",
+          "sealedに影響しない軽い外箱痕などは原則品質問題としません。開封結果はランダムで特定カードを保証しません",
+          "詳細は「利用規約」と FAQ「返品・交換」をご確認ください",
         ],
       },
     ],
@@ -129,9 +135,10 @@ const DATA: Record<
       {
         title: "In-Stock vs Pre-order",
         items: [
-          "In-stock items: Ships within 5–7 business days after your order",
-          "Pre-order items: Shipped first upon arrival or on the scheduled ship date — details on the product page",
-          "Pre-orders can be placed and paid for in the same way as in-stock items",
+          "In-stock: We dispatch as soon as practical per the product page and checkout notes",
+          "Pre-order “estimated ship/arrival” dates are references only and may slip due to production, QC, or customs; actual ship date controls",
+          "If still unshipped 90 days after the first displayed estimate, you may request a refund of that item’s amount paid",
+          "Placing and paying an order means you accept the product page and Terms",
         ],
       },
       {
@@ -151,8 +158,10 @@ const DATA: Record<
       {
         title: "Returns & Exchanges",
         items: [
-          "If you receive an item that doesn't match the description or was damaged in transit, contact us within 7 days of receipt",
-          "Sealed and unopened products cannot be returned for personal reasons once the seal is broken",
+          "Sealed boxes, pre-orders, and random/open-pack items are special categories—no blanket no-reason returns; preference returns are generally declined",
+          "Eligible: transit damage, wrong/missing item—contact within 7 days of delivery with a full unboxing video and photos",
+          "Minor box dents that don’t break the seal are usually not defects; pulls are random and specific cards are not guaranteed",
+          "See Terms of Use and FAQ Returns for full rules",
         ],
       },
     ],
