@@ -12,6 +12,7 @@ import {
   destroyMemberSession,
   getMemberSession,
 } from "@/lib/session";
+import { checkRateLimit, isHoneypotFilled, rateLimitKey } from "@/lib/security";
 import { resolveLang } from "@/lib/translations";
 
 export type AuthState = { error?: string; success?: string } | undefined;
@@ -43,6 +44,13 @@ export async function registerAction(
   const password = String(formData.get("password") || "");
   const passwordConfirm = String(formData.get("passwordConfirm") || "");
   const acceptedTerms = formData.get("terms") === "on";
+  const hdrs = await headers();
+  const ipLimit = checkRateLimit({ key: rateLimitKey(hdrs, "register"), limit: 20, windowMs: 60 * 60 * 1000 });
+  const emailLimit = checkRateLimit({ key: rateLimitKey(hdrs, "register-email", email), limit: 5, windowMs: 60 * 60 * 1000 });
+
+  if (isHoneypotFilled(formData) || !ipLimit.allowed || !emailLimit.allowed) {
+    return { error: "auth_err_rate_limited" };
+  }
 
   if (!name || !email || !password) {
     return { error: "auth_err_required" };
@@ -93,6 +101,13 @@ export async function loginAction(
 ): Promise<AuthState> {
   const email = normalizeEmail(String(formData.get("email") || ""));
   const password = String(formData.get("password") || "");
+  const hdrs = await headers();
+  const ipLimit = checkRateLimit({ key: rateLimitKey(hdrs, "login"), limit: 30, windowMs: 15 * 60 * 1000 });
+  const emailLimit = checkRateLimit({ key: rateLimitKey(hdrs, "login-email", email), limit: 8, windowMs: 15 * 60 * 1000 });
+
+  if (isHoneypotFilled(formData) || !ipLimit.allowed || !emailLimit.allowed) {
+    return { error: "auth_err_rate_limited" };
+  }
 
   if (!email || !password) {
     return { error: "auth_err_required" };
@@ -167,6 +182,12 @@ export async function changePasswordAction(
   formData: FormData
 ): Promise<AuthState> {
   const session = await requireMember();
+  const hdrs = await headers();
+  const passwordLimit = checkRateLimit({ key: rateLimitKey(hdrs, "change-password", session.customerId), limit: 8, windowMs: 15 * 60 * 1000 });
+  if (!passwordLimit.allowed) {
+    return { error: "auth_err_rate_limited" };
+  }
+
   const currentPassword = String(formData.get("currentPassword") || "");
   const newPassword = String(formData.get("newPassword") || "");
   const newPasswordConfirm = String(formData.get("newPasswordConfirm") || "");
@@ -223,6 +244,13 @@ export async function forgotPasswordAction(
 ): Promise<AuthState> {
   const email = normalizeEmail(String(formData.get("email") || ""));
   const lang = await resolveRequestLang(formData);
+  const hdrs = await headers();
+  const ipLimit = checkRateLimit({ key: rateLimitKey(hdrs, "forgot-password"), limit: 10, windowMs: 60 * 60 * 1000 });
+  const emailLimit = checkRateLimit({ key: rateLimitKey(hdrs, "forgot-password-email", email), limit: 3, windowMs: 60 * 60 * 1000 });
+
+  if (isHoneypotFilled(formData) || !ipLimit.allowed || !emailLimit.allowed) {
+    return { error: "auth_err_rate_limited" };
+  }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { error: "auth_err_email" };

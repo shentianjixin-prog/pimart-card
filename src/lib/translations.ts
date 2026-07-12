@@ -543,6 +543,7 @@ const dict: Record<string, Record<Lang, string>> = {
   auth_err_name_rule: { zh: "昵称需为 2-20 位，可用中文、日文、字母、数字、下划线或连字符", ja: "ニックネームは2〜20文字で、漢字・かな・英数字・_・- が使えます", en: "Nickname must be 2-20 valid characters" },
   auth_err_password_rule: { zh: "密码需为 8-32 位，并同时包含字母和数字，不能有空格", ja: "パスワードは8〜32文字で、英字と数字を両方含め、空白は使えません", en: "Password must be 8-32 characters with letters and numbers, no spaces" },
   auth_err_terms_required: { zh: "请先同意服务条款和隐私政策", ja: "利用規約とプライバシーポリシーに同意してください", en: "Please agree to the Terms and Privacy Policy" },
+  auth_err_rate_limited: { zh: "请求过于频繁，请稍后再试", ja: "リクエストが多すぎます。しばらくしてから再試行してください", en: "Too many requests. Please try again later" },
   auth_err_password_mismatch: { zh: "两次密码不一致", ja: "パスワードが一致しません", en: "Passwords do not match" },
   auth_err_email_taken: { zh: "该邮箱已注册", ja: "このメールは既に登録されています", en: "Email already registered" },
   auth_err_invalid: { zh: "邮箱或密码错误", ja: "メールまたはパスワードが正しくありません", en: "Invalid email or password" },

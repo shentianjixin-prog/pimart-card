@@ -2,11 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
 import { isProductArchived } from "@/lib/product-status";
+import { checkRateLimit, rateLimitKey } from "@/lib/security";
 import { getMemberSession } from "@/lib/session";
 
 type CheckoutItem = { productId: string; quantity: number };
 
 export async function POST(request: NextRequest) {
+  const checkoutLimit = checkRateLimit({
+    key: rateLimitKey(request.headers, "checkout-create"),
+    limit: 20,
+    windowMs: 10 * 60 * 1000,
+  });
+  if (!checkoutLimit.allowed) {
+    return NextResponse.json({ error: "请求过于频繁，请稍后再试" }, { status: 429 });
+  }
   let body: { items?: CheckoutItem[]; solo?: boolean };
   try {
     body = await request.json();

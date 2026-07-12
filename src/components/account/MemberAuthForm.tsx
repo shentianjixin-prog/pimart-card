@@ -64,6 +64,7 @@ export function LoginForm() {
       altKey="auth_go_register"
     >
       <form action={action} className="space-y-4">
+        <input name="company" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <div>
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_email")}</label>
           <input name="email" type="email" required autoComplete="email" className={INPUT} />
@@ -98,6 +99,7 @@ export function RegisterForm() {
       altKey="auth_go_login"
     >
       <form action={action} className="space-y-4">
+        <input name="company" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <div>
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_name")}</label>
           <input name="name" type="text" required autoComplete="nickname" minLength={2} maxLength={20} className={INPUT} />
@@ -140,6 +142,7 @@ export function ForgotPasswordForm({ lang }: { lang: Lang }) {
 
   return (
     <form action={action} className="space-y-4">
+        <input name="company" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <input type="hidden" name="lang" value={lang} />
       <div>
         <label className="mb-1 block text-sm text-[#374151]">{T("auth_email")}</label>
@@ -159,6 +162,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
 
   return (
     <form action={action} className="space-y-4">
+        <input name="company" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <input type="hidden" name="token" value={token} />
       <div>
         <label className="mb-1 block text-sm text-[#374151]">{T("auth_new_password")}</label>
