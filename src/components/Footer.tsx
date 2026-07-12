@@ -46,24 +46,25 @@ export function Footer() {
               <Link href="/about" className="site-footer-link">{T("footer_about")}</Link>
               <Link href="/contact" className="site-footer-link">{T("footer_contact")}</Link>
               <Link href="/buyback" className="site-footer-link">{T("footer_buyback")}</Link>
-              <Link href="/contact" className="site-footer-link">{T("menu_wholesale")}</Link>
+              <Link href="/contact#b2b" className="site-footer-link">{T("footer_wholesale")}</Link>
             </div>
           </div>
 
           <div>
             <p className="site-footer-heading">{T("footer_support")}</p>
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
-              <Link href="/shipping" className="site-footer-link">{T("footer_shipping_policy")}</Link>
-              <Link href="/guide" className="site-footer-link">{T("footer_condition")}</Link>
-              <Link href="/faq" className="site-footer-link">{T("footer_faq")}</Link>
               <Link href="/guide" className="site-footer-link">{T("footer_guide")}</Link>
+              <Link href="/shipping" className="site-footer-link">{T("footer_shipping_policy")}</Link>
+              <Link href="/faq#returns" className="site-footer-link">{T("footer_returns")}</Link>
+              <Link href="/faq" className="site-footer-link">{T("footer_faq")}</Link>
+              <Link href="/guide" className="site-footer-link">{T("footer_condition")}</Link>
             </div>
           </div>
 
           <div>
             <p className="site-footer-heading">{T("footer_shop")}</p>
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
-              <Link href="/?category=宝可梦原盒" className="site-footer-link">{T("menu_pokemon")}</Link>
+              <Link href="/?category=宝可梦原盒" className="site-footer-link">{T("footer_link_pokemon")}</Link>
               <Link href="/?q=PSA" className="site-footer-link">{T("footer_link_psa")}</Link>
               <Link href="/?inStock=1" className="site-footer-link">{T("menu_sealed")}</Link>
             </div>

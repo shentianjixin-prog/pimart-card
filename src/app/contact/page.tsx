@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { LINE_CONTACT_URL, SUPPORT_EMAIL } from "@/lib/site";
+import { B2B_EMAIL, LINE_CONTACT_URL, SUPPORT_EMAIL } from "@/lib/site";
 import { resolveLang, t } from "@/lib/translations";
 
 export default async function ContactPage() {
@@ -31,9 +31,26 @@ export default async function ContactPage() {
           </a>
         </div>
 
+        <div id="b2b" className="rounded-2xl border border-[#e5e7eb] bg-[#fafafa] p-4">
+          <p className="font-medium text-[#111827]">{T("contact_b2b_title")}</p>
+          <p className="mt-1 text-[#6b7280]">{T("contact_b2b_desc")}</p>
+          <a
+            href={`mailto:${B2B_EMAIL}`}
+            className="mt-3 inline-flex min-h-11 items-center font-medium text-[#111827] hover:underline"
+          >
+            {B2B_EMAIL}
+          </a>
+        </div>
+
         <ul className="list-disc space-y-2 pl-5 text-[#6b7280]">
           <li>{T("contact_hours")}</li>
           <li>{T("contact_reply")}</li>
+          <li>
+            {T("contact_support_label")}：{SUPPORT_EMAIL}
+          </li>
+          <li>
+            {T("contact_b2b_label")}：{B2B_EMAIL}
+          </li>
         </ul>
 
         <p className="text-xs text-[#9ca3af]">{T("contact_line_hint")}</p>

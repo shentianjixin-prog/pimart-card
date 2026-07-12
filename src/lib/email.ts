@@ -3,7 +3,7 @@ import { SUPPORT_EMAIL } from "@/lib/site";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY?.trim();
 const EMAIL_FROM =
-  process.env.EMAIL_FROM?.trim() || `PIMART CARD <noreply@${SUPPORT_EMAIL.split("@")[1] || "pimart-card.com"}>`;
+  process.env.EMAIL_FROM?.trim() || `PIMART CARD <noreply@${SUPPORT_EMAIL.split("@")[1] || "pimartcard.com"}>`;
 
 export function isEmailConfigured() {
   return Boolean(RESEND_API_KEY);

@@ -58,7 +58,7 @@ const dict: Record<string, Record<Lang, string>> = {
   menu_sealed:      { zh: "现货原盒",   ja: "未開封BOX",        en: "Sealed Boxes" },
   menu_psa:         { zh: "PSA 评级卡", ja: "PSA鑑定品",        en: "PSA Cards" },
   menu_new_arrivals:{ zh: "新品上架",   ja: "新着商品",         en: "New Arrivals" },
-  menu_wholesale:   { zh: "批发询价",   ja: "卸売・お問い合わせ", en: "Wholesale" },
+  menu_wholesale:   { zh: "批发合作",   ja: "卸売・提携", en: "Wholesale" },
   menu_buyback:     { zh: "买取",       ja: "買取",               en: "Buyback" },
   menu_shipping:    { zh: "发货说明",   ja: "配送について",     en: "Shipping" },
   menu_guide:       { zh: "购物指南",   ja: "ご利用ガイド",     en: "Guide" },
@@ -250,14 +250,14 @@ const dict: Record<string, Record<Lang, string>> = {
   checkout_cancel_cta:    { zh: "返回购物车",     ja: "カートに戻る",        en: "Back to Cart" },
 
   // 页脚
-  footer_contact:  { zh: "联系方式",   ja: "お問い合わせ",          en: "Contact" },
+  footer_contact:  { zh: "联系我们",   ja: "お問い合わせ",          en: "Contact Us" },
   footer_buyback:  { zh: "卡牌买取",   ja: "買取",                  en: "Buyback" },
   footer_shipping: { zh: "发货说明",   ja: "配送について",          en: "Shipping" },
   footer_guide:    { zh: "购物指南",   ja: "ショッピングガイド",    en: "Shopping Guide" },
   footer_privacy:  { zh: "隐私政策",   ja: "プライバシーポリシー",  en: "Privacy Policy" },
-  footer_terms:    { zh: "服务条款",   ja: "利用規約",              en: "Terms of Service" },
+  footer_terms:    { zh: "用户协议",   ja: "利用規約",              en: "Terms of Use" },
   footer_admin:    { zh: "管理后台",   ja: "管理画面",              en: "Admin" },
-  footer_payment:  { zh: "支持 Visa / Mastercard / JCB 在线支付（测试模式）", ja: "Visa / Mastercard / JCB 対応（テストモード）", en: "Visa / Mastercard / JCB accepted (test mode)" },
+  footer_payment:  { zh: "支持 Visa / Mastercard / JCB 在线支付", ja: "Visa / Mastercard / JCB 対応", en: "Visa / Mastercard / JCB accepted" },
 
   // 公告
   ann_title:  { zh: "最新公告", ja: "お知らせ", en: "Announcements" },
@@ -363,27 +363,62 @@ const dict: Record<string, Record<Lang, string>> = {
   wholesale_cta:   { zh: "批发询价", ja: "卸売のお問い合わせ", en: "Wholesale Inquiry" },
 
   // 页脚扩展
-  footer_tagline:  { zh: "全球卡牌交易平台——原盒、PSA 评级卡与批发供货", ja: "未開封BOX・PSA鑑定品・卸売対応のグローバルTCGマーケット", en: "Global Trading Card Marketplace for sealed boxes, PSA cards, and wholesale supply." },
+  footer_tagline:  { zh: "全球交易平台", ja: "グローバルトレーディングプラットフォーム", en: "Global Trading Platform" },
   footer_shop:     { zh: "选购", ja: "ショップ", en: "Shop" },
-  footer_support:  { zh: "支持", ja: "サポート", en: "Support" },
+  footer_support:  { zh: "帮助中心", ja: "ヘルプセンター", en: "Help Center" },
   footer_legal:    { zh: "法律信息", ja: "法的情報", en: "Legal" },
   footer_link_psa: { zh: "PSA 精选", ja: "PSA商品", en: "PSA Picks" },
+  footer_link_pokemon: { zh: "宝可梦原盒", ja: "ポケモン未開封BOX", en: "Pokémon Boxes" },
   footer_about:    { zh: "关于我们", ja: "会社概要", en: "About Us" },
-  footer_company:  { zh: "公司", ja: "Company", en: "Company" },
-  footer_shipping_policy: { zh: "配送政策", ja: "配送ポリシー", en: "Shipping Policy" },
-  footer_condition: { zh: "品相指南", ja: "コンディションガイド", en: "Condition Guide" },
-  footer_faq:      { zh: "常见问题", ja: "FAQ", en: "FAQ" },
+  footer_company:  { zh: "关于 PIMART", ja: "PIMARTについて", en: "About PIMART" },
+  footer_wholesale: { zh: "批发合作", ja: "卸売・提携", en: "Wholesale" },
+  footer_shipping_policy: { zh: "配送与运费", ja: "配送・送料", en: "Shipping & Fees" },
+  footer_condition: { zh: "品相说明", ja: "コンディション案内", en: "Condition Guide" },
+  footer_returns:  { zh: "售后与退换", ja: "返品・交換", en: "Returns" },
+  footer_faq:      { zh: "常见问题", ja: "よくある質問", en: "FAQ" },
   footer_tokusho:  { zh: "特定商取引法", ja: "特定商取引法", en: "Legal Notice" },
 
-  about_p1: { zh: "PIMART CARD 是面向全球收藏者与经销商的 TCG 交易平台，提供日版与中国语版未开封原盒、PSA 评级卡及批发供货。", ja: "PIMART CARDは、コレクターと業者向けのグローバルTCGマーケットです。日版・中国語版の未開封BOX、PSA鑑定品、卸売に対応しています。", en: "PIMART CARD is a global TCG marketplace for collectors and resellers, offering Japanese and Chinese sealed boxes, PSA graded cards, and wholesale supply." },
-  about_p2: { zh: "我们从日本发货，坚持正品渠道、安全支付与可靠包装。", ja: "日本から発送。正規ルート仕入れ、安全な決済、丁寧な梱包を徹底しています。", en: "We ship from Japan with authentic sourcing, secure checkout, and careful packaging." },
+  about_p1: {
+    zh: "PIMART CARD 由一群长期浸泡在 TCG 圈的收藏者与交易者组建。我们深知：想买到靠谱的未开封原盒、评级卡与稳定货源，往往要面对信息分散、渠道难辨、跨境履约复杂等问题。",
+    ja: "PIMART CARDは、TCGを長く愛してきたコレクターとトレーダーが立ち上げました。未開封BOXや鑑定品、安定した仕入れを求めるとき、情報が散らばり、真贋の見極めや越境配送が難しい——そんな現場の課題から出発しています。",
+    en: "PIMART CARD was built by collectors and traders who live in the TCG scene. We know how hard it can be to find trustworthy sealed boxes, graded cards, and steady supply amid scattered information, authenticity risks, and cross-border fulfillment.",
+  },
+  about_p2: {
+    zh: "因此我们把「正品可溯源 + 日本发货 + 全球可达」做成一条清晰路径：面向个人收藏者提供现货与预售原盒、PSA 精选；面向店铺与经销商提供批发与定期供货支持。",
+    ja: "だからこそ「正規ルートで辿れる仕入れ」「日本発送」「世界へ届ける」を一本の導線にしました。個人コレクター向けには現物・予約の未開封BOXとPSAセレクトを、店舗・業者向けには卸売と定期仕入れを提供します。",
+    en: "So we built one clear path: authentic, traceable sourcing, shipping from Japan, and worldwide delivery—sealed boxes and PSA picks for collectors, plus wholesale and recurring supply for shops and resellers.",
+  },
+  about_p3: {
+    zh: "团队坚持用圈内人的标准验货与打包，也参考成熟交易平台的体验：把配送、售后、品相说明写清楚，让下单到收货少一些猜测、多一份确定。",
+    ja: "現場目線で検品と梱包を徹底し、成熟したマーケットの体験も参考にしています。配送・アフター・コンディションを明示し、注文から受取までの不安を減らします。",
+    en: "We inspect and pack to collector standards, and we take cues from mature marketplaces: clear shipping, after-sales, and condition guidance—so checkout to delivery feels certain, not guessed.",
+  },
+  about_p4: {
+    zh: "未来我们将继续连接更多语区与合作伙伴，让全球卡友与业者都能更轻松地完成一笔放心交易。PIMART CARD——全球交易平台。",
+    ja: "これからも多言語のお客様とパートナーをつなぎ、コレクターも業者も安心して取引できる場を広げます。PIMART CARD——グローバルトレーディングプラットフォーム。",
+    en: "We will keep connecting language regions and partners so collectors and businesses can trade with confidence. PIMART CARD—a global trading platform.",
+  },
+  about_support_label: { zh: "客服邮箱", ja: "カスタマーサポート", en: "Customer support" },
+  about_b2b_label: { zh: "B2B / 批发合作", ja: "B2B / 卸売提携", en: "B2B / Wholesale" },
 
   faq_q1: { zh: "是否支持国际配送？", ja: "海外配送は可能ですか？", en: "Do you ship internationally?" },
   faq_a1: { zh: "支持。我们从日本发货，具体时效与费用以结账页为准。", ja: "はい。日本から世界各国へ発送しています。詳細はチェックアウト時にご確認ください。", en: "Yes. We ship worldwide from Japan. Rates and delivery times are shown at checkout." },
   faq_q2: { zh: "商品是否为正品？", ja: "正規品ですか？", en: "Are products authentic?" },
   faq_a2: { zh: "所有商品均来自可溯源的正规渠道。", ja: "すべて正規ルートから仕入れた商品です。", en: "All items are sourced through verified authentic channels." },
   faq_q3: { zh: "如何咨询批发？", ja: "卸売の問い合わせは？", en: "How do I inquire about wholesale?" },
-  faq_a3: { zh: "请通过 Contact 页面或 Footer 中的 Wholesale 链接联系我们。", ja: "ContactページまたはフッターのWholesaleリンクよりお問い合わせください。", en: "Contact us via the Contact page or the Wholesale link in the footer." },
+  faq_a3: { zh: "请发送邮件至 info@pimartcard.com，或通过「联系我们」页的批发合作入口咨询。", ja: "info@pimartcard.com までご連絡ください。お問い合わせページの卸売欄からもご相談いただけます。", en: "Email info@pimartcard.com, or use the wholesale section on the Contact page." },
+  faq_returns_title: { zh: "售后与退换", ja: "返品・交換について", en: "Returns & after-sales" },
+  faq_returns_a1: {
+    zh: "请在签收时核对外包装；如发现运输破损或错发，建议保留开箱视频并尽快联系客服。未开封原盒、预售及特殊品类的退换规则以商品页与用户协议为准，不适用笼统的「七天无理由」。",
+    ja: "受取時に外装をご確認ください。輸送破損や誤発送の場合は開封動画を残し、速やかにご連絡ください。未開封BOX・予約・特殊商品の返品条件は商品ページと利用規約に従い、一律のクーリングオフとは異なります。",
+    en: "Please check the outer packaging on delivery. For shipping damage or wrong items, keep an unboxing video and contact support promptly. Sealed boxes, pre-orders, and special items follow product-page and Terms rules—not a blanket “no-reason return” policy.",
+  },
+  faq_returns_a2: {
+    zh: "因个人喜好、未拆封主观原因等通常不支持退换；具体受理范围以客服核实结果为准。",
+    ja: "好みの変更や主観的な理由による返品は原則お受けできません。可否はサポート確認のうえご案内します。",
+    en: "Returns for preference or subjective reasons are generally not accepted; eligibility is confirmed by support.",
+  },
+  faq_returns_contact: { zh: "售后请联系", ja: "アフターはこちら", en: "For after-sales, contact" },
   faq_contact_pre: { zh: "还有其他问题？", ja: "他にご質問は？", en: "More questions?" },
 
   // 邮件订阅
@@ -525,9 +560,13 @@ const dict: Record<string, Record<Lang, string>> = {
   contact_line_btn: { zh: "通过 LINE 联系客服", ja: "LINEでお問い合わせ", en: "Contact via LINE" },
   contact_email_label: { zh: "邮箱", ja: "メール", en: "Email" },
   contact_line_hint: { zh: "也可通过 LINE 快速咨询", ja: "LINEでもお気軽にお問い合わせください", en: "You can also reach us on LINE" },
-  contact_desc: { zh: "商品咨询、订单支持、批发询价或密码重置，欢迎通过以下方式联系我们。", ja: "商品・注文・卸売・パスワード再設定など、お気軽にお問い合わせください。", en: "For product, order, wholesale, or password reset support, reach us via:" },
+  contact_desc: { zh: "商品咨询、订单物流、售后与会员账号问题，请联系客服；批发与 B2B 请使用合作邮箱。", ja: "商品・注文・配送・アフター・会員アカウントはカスタマーサポートへ。卸売・B2Bは提携用メールをご利用ください。", en: "For products, orders, shipping, after-sales, and account help, use customer support. For wholesale / B2B, use the partnership inbox." },
   contact_hours: { zh: "工作时间：周一至周五 10:00–18:00（JST）", ja: "受付時間：月〜金 10:00〜18:00（JST）", en: "Hours: Mon–Fri 10:00–18:00 (JST)" },
   contact_reply: { zh: "通常在 1–2 个工作日内回复", ja: "通常1〜2営業日以内にご返信します", en: "We typically respond within 1–2 business days" },
+  contact_support_label: { zh: "客服邮箱", ja: "サポートメール", en: "Support email" },
+  contact_b2b_label: { zh: "B2B 合作邮箱", ja: "B2Bメール", en: "B2B email" },
+  contact_b2b_title: { zh: "批发 / B2B 合作", ja: "卸売 / B2B提携", en: "Wholesale / B2B" },
+  contact_b2b_desc: { zh: "原盒批量、PSA 库存、定期供货等商务合作，请发至合作邮箱。", ja: "未開封BOXの大口、PSA在庫、定期仕入れなどのご相談は提携用メールへ。", en: "For bulk sealed boxes, PSA inventory, or recurring supply, email our B2B inbox." },
   contact_back: { zh: "← 返回首页", ja: "← ホームに戻る", en: "← Back to home" },
 };
 

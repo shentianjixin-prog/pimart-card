@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
+import { SUPPORT_EMAIL } from "@/lib/site";
 import { t, resolveLang } from "@/lib/translations";
 
 const FAQ_KEYS = ["faq_q1", "faq_a1", "faq_q2", "faq_a2", "faq_q3", "faq_a3"] as const;
@@ -19,6 +20,18 @@ export default async function FaqPage() {
             <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">{T(FAQ_KEYS[i * 2 + 1])}</p>
           </div>
         ))}
+
+        <div id="returns" className="surface scroll-mt-24 p-6">
+          <h2 className="text-base font-semibold text-[#111827]">{T("faq_returns_title")}</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">{T("faq_returns_a1")}</p>
+          <p className="mt-3 text-sm leading-relaxed text-[#6b7280]">{T("faq_returns_a2")}</p>
+          <p className="mt-3 text-sm leading-relaxed text-[#6b7280]">
+            {T("faq_returns_contact")}{" "}
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="font-medium text-[#111827] hover:underline">
+              {SUPPORT_EMAIL}
+            </a>
+          </p>
+        </div>
       </div>
       <p className="mt-8 text-sm text-[#6b7280]">
         {T("faq_contact_pre")}
