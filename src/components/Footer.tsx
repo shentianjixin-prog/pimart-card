@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-4">
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" aria-label="PIMARTCARD">
               <PimartLogo height={34} tone="light" />
@@ -46,7 +46,7 @@ export function Footer() {
               <Link href="/about" className="site-footer-link">{T("footer_about")}</Link>
               <Link href="/contact" className="site-footer-link">{T("footer_contact")}</Link>
               <Link href="/buyback" className="site-footer-link">{T("footer_buyback")}</Link>
-              <Link href="/contact#b2b" className="site-footer-link">{T("footer_wholesale")}</Link>
+              <Link href="/wholesale" className="site-footer-link">{T("footer_wholesale")}</Link>
             </div>
           </div>
 
@@ -57,24 +57,14 @@ export function Footer() {
               <Link href="/shipping" className="site-footer-link">{T("footer_shipping_policy")}</Link>
               <Link href="/faq#returns" className="site-footer-link">{T("footer_returns")}</Link>
               <Link href="/faq" className="site-footer-link">{T("footer_faq")}</Link>
-              <Link href="/guide" className="site-footer-link">{T("footer_condition")}</Link>
-            </div>
-          </div>
-
-          <div>
-            <p className="site-footer-heading">{T("footer_shop")}</p>
-            <div className="mt-4 flex flex-col gap-2.5 text-sm">
-              <Link href="/?category=宝可梦原盒" className="site-footer-link">{T("footer_link_pokemon")}</Link>
-              <Link href="/?q=PSA" className="site-footer-link">{T("footer_link_psa")}</Link>
-              <Link href="/?inStock=1" className="site-footer-link">{T("menu_sealed")}</Link>
             </div>
           </div>
 
           <div>
             <p className="site-footer-heading">{T("footer_legal")}</p>
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
-              <Link href="/privacy" className="site-footer-link">{T("footer_privacy")}</Link>
               <Link href="/terms" className="site-footer-link">{T("footer_terms")}</Link>
+              <Link href="/privacy" className="site-footer-link">{T("footer_privacy")}</Link>
               <Link href="/tokusho" className="site-footer-link">{T("footer_tokusho")}</Link>
             </div>
           </div>
