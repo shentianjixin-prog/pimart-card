@@ -20,28 +20,47 @@ function normalizeEmail(raw: string) {
   return raw.trim().toLowerCase();
 }
 
+function isValidNickname(name: string) {
+  return /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}A-Za-z0-9_-]{2,20}$/u.test(name);
+}
+
+function isValidPassword(password: string) {
+  return (
+    password.length >= 8 &&
+    password.length <= 32 &&
+    !/\s/.test(password) &&
+    /[A-Za-z]/.test(password) &&
+    /\d/.test(password)
+  );
+}
+
 export async function registerAction(
   _prev: AuthState,
   formData: FormData
 ): Promise<AuthState> {
   const name = String(formData.get("name") || "").trim();
-  const nameKana = String(formData.get("nameKana") || "").trim();
   const email = normalizeEmail(String(formData.get("email") || ""));
-  const phone = String(formData.get("phone") || "").trim();
   const password = String(formData.get("password") || "");
   const passwordConfirm = String(formData.get("passwordConfirm") || "");
+  const acceptedTerms = formData.get("terms") === "on";
 
   if (!name || !email || !password) {
     return { error: "auth_err_required" };
   }
+  if (!isValidNickname(name)) {
+    return { error: "auth_err_name_rule" };
+  }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { error: "auth_err_email" };
   }
-  if (password.length < 8) {
-    return { error: "auth_err_password_short" };
+  if (!isValidPassword(password)) {
+    return { error: "auth_err_password_rule" };
   }
   if (password !== passwordConfirm) {
     return { error: "auth_err_password_mismatch" };
+  }
+  if (!acceptedTerms) {
+    return { error: "auth_err_terms_required" };
   }
 
   const exists = await prisma.customer.findUnique({ where: { email } });
@@ -54,8 +73,6 @@ export async function registerAction(
     data: {
       email,
       name,
-      nameKana: nameKana || null,
-      phone: phone || null,
       passwordHash,
     },
   });

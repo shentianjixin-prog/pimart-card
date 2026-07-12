@@ -100,28 +100,31 @@ export function RegisterForm() {
       <form action={action} className="space-y-4">
         <div>
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_name")}</label>
-          <input name="name" type="text" required autoComplete="name" className={INPUT} />
-        </div>
-        <div>
-          <label className="mb-1 block text-sm text-[#374151]">{T("auth_name_kana")}</label>
-          <input name="nameKana" type="text" autoComplete="off" className={INPUT} />
+          <input name="name" type="text" required autoComplete="nickname" minLength={2} maxLength={20} className={INPUT} />
+          <p className="mt-1 text-xs text-[#9ca3af]">{T("auth_name_hint")}</p>
         </div>
         <div>
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_email")}</label>
           <input name="email" type="email" required autoComplete="email" className={INPUT} />
         </div>
         <div>
-          <label className="mb-1 block text-sm text-[#374151]">{T("auth_phone")}</label>
-          <input name="phone" type="tel" autoComplete="tel" className={INPUT} />
-        </div>
-        <div>
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_password")}</label>
-          <input name="password" type="password" required autoComplete="new-password" minLength={8} className={INPUT} />
+          <input name="password" type="password" required autoComplete="new-password" minLength={8} maxLength={32} className={INPUT} />
+          <p className="mt-1 text-xs text-[#9ca3af]">{T("auth_password_hint")}</p>
         </div>
         <div>
           <label className="mb-1 block text-sm text-[#374151]">{T("auth_password_confirm")}</label>
-          <input name="passwordConfirm" type="password" required autoComplete="new-password" minLength={8} className={INPUT} />
+          <input name="passwordConfirm" type="password" required autoComplete="new-password" minLength={8} maxLength={32} className={INPUT} />
         </div>
+        <label className="flex items-start gap-2 text-xs leading-5 text-[#6b7280]">
+          <input name="terms" type="checkbox" required className="mt-1 size-4 rounded border-[rgba(17,24,39,0.18)]" />
+          <span>
+            {T("auth_terms_prefix")}
+            <Link href="/terms" className="font-medium text-[#111827] hover:underline">{T("auth_terms")}</Link>
+            {T("auth_terms_join")}
+            <Link href="/privacy" className="font-medium text-[#111827] hover:underline">{T("auth_privacy")}</Link>
+          </span>
+        </label>
         <AuthFeedback state={state} />
         <button type="submit" disabled={pending} className="btn-primary min-h-11 w-full rounded-full">
           {pending ? "..." : T("auth_register_btn")}
