@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { formatJpy } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
@@ -45,6 +46,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
   const [buying, setBuying] = useState(false);
   const [added, setAdded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [acceptedRules, setAcceptedRules] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -53,6 +55,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
     setBuying(false);
     setAdded(false);
     setError(null);
+    setAcceptedRules(false);
   }, [open, product.id]);
 
   useEffect(() => {
@@ -122,6 +125,10 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
 
   async function handleBuy() {
     if (soldOut || buying) return;
+    if (!acceptedRules) {
+      setError("请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。");
+      return;
+    }
     setBuying(true);
     setError(null);
     const result = await startSoloCheckout([{ productId: active.id, quantity: qty }]);
@@ -231,12 +238,27 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
         </div>
 
         <div className="buy-sheet-footer">
+          <label className="mb-3 flex items-start gap-2 rounded-[12px] border border-[rgba(17,24,39,0.08)] bg-[#fafafa] p-3 text-xs leading-relaxed text-[#6b7280]">
+            <input
+              type="checkbox"
+              checked={acceptedRules}
+              onChange={(e) => setAcceptedRules(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 rounded border-[rgba(17,24,39,0.18)]"
+            />
+            <span>
+              我已阅读并同意
+              <Link href="/terms" className="mx-1 font-medium text-[#111827] hover:underline">用户协议</Link>
+              <Link href="/privacy" className="mx-1 font-medium text-[#111827] hover:underline">隐私政策</Link>
+              <Link href="/faq#returns" className="mx-1 font-medium text-[#111827] hover:underline">售后规则</Link>
+              ，并理解特殊商品售后限制。
+            </span>
+          </label>
           {error ? <p className="buy-sheet-error">{error}</p> : null}
           <div className="buy-sheet-actions">
             <button type="button" className="btn-secondary" disabled={soldOut} onClick={handleAdd}>
               {added ? T("btn_added_cart") : T("btn_add_cart")}
             </button>
-            <button type="button" className="btn-buy" disabled={soldOut || buying} onClick={handleBuy}>
+            <button type="button" className="btn-buy" disabled={soldOut || buying || !acceptedRules} onClick={handleBuy}>
               {buying ? T("btn_buy_loading") : T("btn_buy_now")}
             </button>
           </div>

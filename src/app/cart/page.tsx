@@ -13,9 +13,14 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [acceptedRules, setAcceptedRules] = useState(false);
   useEffect(() => setMounted(true), []);
 
   async function handleCheckout() {
+    if (!acceptedRules) {
+      setError("请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。");
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -23,6 +28,7 @@ export default function CartPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          acceptedRules: true,
           items: items.map((i) => ({
             productId: i.productId,
             quantity: i.quantity,
@@ -113,9 +119,26 @@ export default function CartPage() {
 
       <p className="mt-4 text-xs text-[#6b7280]">{T("cart_shipping_note")}</p>
 
+      <label className="mt-5 flex items-start gap-3 rounded-[16px] border border-[rgba(17,24,39,0.08)] bg-white p-4 text-xs leading-relaxed text-[#6b7280]">
+        <input
+          type="checkbox"
+          checked={acceptedRules}
+          onChange={(e) => setAcceptedRules(e.target.checked)}
+          className="mt-0.5 size-4 shrink-0 rounded border-[rgba(17,24,39,0.18)]"
+        />
+        <span>
+          我已阅读并同意
+          <Link href="/terms" className="mx-1 font-medium text-[#111827] hover:underline">用户协议</Link>
+          <Link href="/privacy" className="mx-1 font-medium text-[#111827] hover:underline">隐私政策</Link>
+          <Link href="/tokusho" className="mx-1 font-medium text-[#111827] hover:underline">特定商取引法表記</Link>
+          及
+          <Link href="/faq#returns" className="mx-1 font-medium text-[#111827] hover:underline">售后规则</Link>
+          。我理解未开封盒、预售、随机/开封类商品不支持个人原因退换；预售时间为预计时间，符合条款约定时可申请退款。
+        </span>
+      </label>
       {error && <p className="mt-3 text-sm text-red-500">{error}</p>}
 
-      <button onClick={handleCheckout} disabled={loading} className="btn-primary mt-6 w-full">
+      <button onClick={handleCheckout} disabled={loading || !acceptedRules} className="btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-50">
         {loading ? T("cart_checkout_loading") : T("cart_checkout")}
       </button>
     </div>

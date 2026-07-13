@@ -89,7 +89,7 @@ export default async function ContactPage() {
             <Link href="/privacy" className="font-medium text-[#111827] hover:underline">
               {notice.privacy}
             </Link>
-            <Link href="/faq#returns" className="font-medium text-[#111827] hover:underline">
+            <Link href="/after-sales" className="font-medium text-[#111827] hover:underline">
               {notice.returns}
             </Link>
           </div>

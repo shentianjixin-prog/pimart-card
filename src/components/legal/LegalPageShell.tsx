@@ -76,11 +76,14 @@ export function LegalPageShell({
           <Link href="/contact" className="legal-crosslink">
             联系客服
           </Link>
-          <Link href="/faq#returns" className="legal-crosslink">
-            售后说明
+          <Link href="/after-sales" className="legal-crosslink">
+            售后申请
           </Link>
           <Link href="/wholesale" className="legal-crosslink">
             批发合作
+          </Link>
+          <Link href="/wholesale-terms" className="legal-crosslink">
+            批发条款
           </Link>
           <a href={`mailto:${SUPPORT_EMAIL}`} className="legal-crosslink">
             {SUPPORT_EMAIL}

@@ -12,7 +12,7 @@ export async function startSoloCheckout(
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items, solo: true }),
+      body: JSON.stringify({ items, solo: true, acceptedRules: true }),
     });
     const data = (await res.json()) as { url?: string; error?: string };
     if (!res.ok || !data.url) {

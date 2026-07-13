@@ -16,11 +16,15 @@ export async function POST(request: NextRequest) {
   if (!checkoutLimit.allowed) {
     return NextResponse.json({ error: "请求过于频繁，请稍后再试" }, { status: 429 });
   }
-  let body: { items?: CheckoutItem[]; solo?: boolean };
+  let body: { items?: CheckoutItem[]; solo?: boolean; acceptedRules?: boolean };
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "请求格式错误" }, { status: 400 });
+  }
+
+  if (body.acceptedRules !== true) {
+    return NextResponse.json({ error: "请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则" }, { status: 400 });
   }
 
   const items = body.items;
