@@ -140,7 +140,16 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
 
         <section className="product-detail-shipping" aria-label="发货说明">
           <div className="product-detail-shipping-head">
-            <p className="product-detail-shipping-title">{T("detail_shipping_h")}</p>
+            <p className="product-detail-shipping-title">
+              <span className="product-detail-shipping-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3.5 7.25 12 3l8.5 4.25v9.5L12 21l-8.5-4.25v-9.5Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+                  <path d="m3.75 7.5 8.25 4.1 8.25-4.1M12 11.6V21" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="m8 5.25 8.25 4.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+                </svg>
+              </span>
+              {T("detail_shipping_h")}
+            </p>
             <span className="product-detail-shipping-badge">
               {product.isPreorder ? "预售/调货商品" : "现货商品"}
             </span>

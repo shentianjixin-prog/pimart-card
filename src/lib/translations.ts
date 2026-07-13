@@ -180,7 +180,7 @@ const dict: Record<string, Record<Lang, string>> = {
   detail_preorder:     { zh: "预售",       ja: "予約",          en: "Pre-order" },
   detail_remaining_pre:{ zh: "仅剩 ",      ja: "残り ",         en: "Only " },
   detail_remaining_suf:{ zh: " 件",        ja: " 点",           en: " left" },
-  detail_shipping_h:   { zh: "📦 发货说明",  ja: "📦 配送について", en: "📦 Shipping" },
+  detail_shipping_h:   { zh: "发货说明",  ja: "配送について", en: "Shipping" },
   detail_shipping_1_pre:{ zh: "预计发货时间：下单后 ", ja: "お支払い後 ",    en: "Ships within " },
   detail_shipping_1_suf:{ zh: " 个工作日",              ja: " 営業日以内に発送", en: " business days" },
   detail_shipping_2:   { zh: "我们将在发货后通过邮件通知您", ja: "発送後にメールでお知らせします", en: "You'll be notified by email after shipping" },
