@@ -28,22 +28,37 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "PIMART CARD | グローバルトレーディングカードマーケット",
+  metadataBase: new URL("https://pimartcard.com"),
+  title: {
+    default: "PIMART CARD | Global Trading Card Marketplace",
+    template: "%s | PIMART CARD",
+  },
   description:
     "日版・中国語版 TCG 未開封BOX、世界配送、卸売対応。正規品保証、日本から発送。",
+  openGraph: {
+    type: "website",
+    siteName: "PIMART CARD",
+    title: "PIMART CARD | Global Trading Card Marketplace",
+    description: "Curated sealed TCG products, worldwide shipping, and wholesale support from Japan.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PIMART CARD",
+    description: "Curated sealed TCG products from Japan to collectors worldwide.",
+  },
+  robots: { index: true, follow: true },
   icons: {
     icon: [{ url: "/logo-icon.png", type: "image/png" }, { url: "/favicon-32.png", sizes: "32x32", type: "image/png" }],
     apple: "/apple-touch-icon.png",
   },
 };
 
-/** 手机端关闭误触双指/双击缩放 */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   viewportFit: "cover",
+  themeColor: "#080b10",
 };
 
 export default async function RootLayout({
@@ -70,9 +85,12 @@ export default async function RootLayout({
         <LangProvider initial={lang}>
           <CartProvider>
             <MobileNavGestures />
+            <a href="#main-content" className="skip-link">
+              Skip to content
+            </a>
             <div className="site-frame">
               <Header member={member} />
-              <main className="flex-1">{children}</main>
+              <main id="main-content" className="flex-1" tabIndex={-1}>{children}</main>
             </div>
             <Footer />
           </CartProvider>

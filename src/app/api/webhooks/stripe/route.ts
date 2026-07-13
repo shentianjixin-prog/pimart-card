@@ -28,12 +28,14 @@ export async function POST(request: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session;
     const orderId = session.metadata?.orderId;
 
-    if (orderId) {
+    if (orderId && session.payment_status === "paid") {
       const order = await prisma.order.findUnique({
         where: { id: orderId },
         include: { items: true },
       });
-      if (order && order.status !== "paid") {
+      const sessionMatches = order?.stripeSessionId === session.id;
+      const amountMatches = session.amount_total === order?.totalJpy;
+      if (order && sessionMatches && amountMatches && order.status !== "paid") {
         const paidEmail = session.customer_details?.email?.trim().toLowerCase();
         let customerId = order.customerId;
         if (!customerId && paidEmail) {
@@ -58,6 +60,13 @@ export async function POST(request: NextRequest) {
             })
           ),
         ]);
+      } else if (order && (!sessionMatches || !amountMatches)) {
+        console.error("Ignored Stripe session with mismatched order integrity fields", {
+          orderId,
+          sessionId: session.id,
+          sessionMatches,
+          amountMatches,
+        });
       }
     }
   }

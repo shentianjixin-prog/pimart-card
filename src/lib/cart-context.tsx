@@ -37,38 +37,49 @@ function loadStoredCart(): CartItem[] {
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
+    const parsed: unknown = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.slice(0, 50).filter((item): item is CartItem => {
+      if (!item || typeof item !== "object") return false;
+      const candidate = item as Partial<CartItem>;
+      return (
+        typeof candidate.productId === "string" && candidate.productId.length > 0 &&
+        typeof candidate.name === "string" &&
+        typeof candidate.slug === "string" &&
+        typeof candidate.image === "string" &&
+        Number.isInteger(candidate.priceJpy) && Number(candidate.priceJpy) >= 0 &&
+        Number.isInteger(candidate.stock) && Number(candidate.stock) > 0 &&
+        Number.isInteger(candidate.quantity) && Number(candidate.quantity) > 0 &&
+        Number(candidate.quantity) <= Number(candidate.stock)
+      );
+    });
   } catch {
     return [];
   }
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  // 避免 SSR 与 localStorage 不一致导致 hydration 失败（移动端整站按钮失效）
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [hydrated, setHydrated] = useState(false);
+  // SSR returns an empty cart; the browser initializer restores validated local data.
+  // Cart-dependent UI uses useSyncExternalStore's server snapshot to avoid hydration drift.
+  const [items, setItems] = useState<CartItem[]>(loadStoredCart);
 
   useEffect(() => {
-    setItems(loadStoredCart());
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items, hydrated]);
+  }, [items]);
 
   const addItem = useCallback(
     (item: Omit<CartItem, "quantity">, quantity = 1) => {
+      if (!Number.isInteger(item.stock) || item.stock <= 0) return;
+      const safeQuantity = Math.max(1, Math.floor(Number(quantity) || 1));
       setItems((prev) => {
         const existing = prev.find((i) => i.productId === item.productId);
         if (existing) {
-          const nextQty = Math.min(existing.quantity + quantity, item.stock);
+          const nextQty = Math.min(existing.quantity + safeQuantity, item.stock);
           return prev.map((i) =>
             i.productId === item.productId ? { ...i, quantity: nextQty } : i
           );
         }
-        return [...prev, { ...item, quantity: Math.min(quantity, item.stock) }];
+        return [...prev, { ...item, quantity: Math.min(safeQuantity, item.stock) }];
       });
     },
     []
@@ -79,7 +90,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       prev
         .map((i) =>
           i.productId === productId
-            ? { ...i, quantity: Math.max(1, Math.min(quantity, i.stock)) }
+            ? { ...i, quantity: Math.max(1, Math.min(Math.floor(Number(quantity) || 1), i.stock)) }
             : i
         )
         .filter((i) => i.quantity > 0)

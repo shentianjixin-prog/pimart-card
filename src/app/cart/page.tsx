@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
@@ -12,9 +12,12 @@ export default function CartPage() {
   const T = useT();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false
+  );
   const [acceptedRules, setAcceptedRules] = useState(false);
-  useEffect(() => setMounted(true), []);
 
   async function handleCheckout() {
     if (!acceptedRules) {
@@ -73,7 +76,7 @@ export default function CartPage() {
 
       <div className="surface divide-y divide-[rgba(17,24,39,0.06)] overflow-hidden">
         {items.map((item) => (
-          <div key={item.productId} className="flex items-center gap-4 p-4">
+          <div key={item.productId} className="cart-line-item p-4 sm:p-5">
             <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-[14px] border border-[rgba(17,24,39,0.08)] bg-[#f7f8fa]">
               <Image
                 src={item.image}
@@ -83,13 +86,14 @@ export default function CartPage() {
                 className="object-contain p-1"
               />
             </div>
-            <div className="flex-1">
+            <div className="cart-line-copy min-w-0">
               <Link href={`/products/${item.slug}`} className="text-sm font-medium text-[#111827] hover:underline">
                 {item.name}
               </Link>
               <p className="mt-1 text-sm text-[#6b7280]">{formatJpy(item.priceJpy)}</p>
             </div>
             <input
+              aria-label={`${item.name} ${T("btn_quantity")}`}
               type="number"
               min={1}
               max={item.stock}
@@ -97,14 +101,14 @@ export default function CartPage() {
               onChange={(e) =>
                 updateQuantity(item.productId, Number(e.target.value) || 1)
               }
-              className="input-field w-16 py-1"
+              className="input-field cart-line-quantity w-16 py-1"
             />
-            <p className="w-24 text-right text-sm font-semibold text-[#111827]">
+            <p className="cart-line-total text-right text-sm font-semibold text-[#111827]">
               {formatJpy(item.priceJpy * item.quantity)}
             </p>
             <button
               onClick={() => removeItem(item.productId)}
-              className="text-sm text-[#6b7280] hover:text-red-500"
+              className="cart-line-remove text-sm text-[#6b7280] hover:text-red-500"
             >
               {T("cart_remove")}
             </button>

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { cache } from "react";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -7,6 +9,34 @@ import { isProductArchived } from "@/lib/product-status";
 import { findBoxVariants } from "@/lib/product-box-variants";
 import { OpcProductSpecs } from "@/components/OpcProductSpecs";
 import { ProductDetailPurchase } from "@/components/ProductDetailPurchase";
+
+const getProductBySlug = cache((slug: string) =>
+  prisma.product.findUnique({ where: { slug } })
+);
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug: rawSlug } = await params;
+  const product = await getProductBySlug(decodeURIComponent(rawSlug));
+  if (!product || isProductArchived(product.status)) return { title: "Product not found" };
+  const description = product.description?.slice(0, 155) ||
+    `${product.name} — current price, stock status, and dispatch information from PIMART CARD.`;
+  const image = product.images.split(",")[0]?.trim();
+  return {
+    title: product.name,
+    description,
+    alternates: { canonical: `/products/${encodeURIComponent(product.slug)}` },
+    openGraph: {
+      type: "website",
+      title: product.name,
+      description,
+      images: image ? [{ url: image, alt: product.name }] : undefined,
+    },
+  };
+}
 
 function formatReleaseDate(date: Date, lang: Lang) {
   if (lang === "en") {
@@ -25,7 +55,7 @@ export default async function ProductPage({
 }) {
   const [{ slug: rawSlug }, cookieStore] = await Promise.all([params, cookies()]);
   const slug = decodeURIComponent(rawSlug);
-  const product = await prisma.product.findUnique({ where: { slug } });
+  const product = await getProductBySlug(slug);
 
   if (!product || isProductArchived(product.status)) notFound();
 
@@ -33,9 +63,33 @@ export default async function ProductPage({
   const T = (key: string) => t(key, lang);
 
   const variants = await findBoxVariants(product);
+  const productUrl = `https://pimartcard.com/products/${encodeURIComponent(product.slug)}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description || undefined,
+    image: product.images.split(",").map((image) => image.trim()).filter(Boolean),
+    sku: product.id,
+    category: product.category,
+    offers: {
+      "@type": "Offer",
+      url: productUrl,
+      priceCurrency: "JPY",
+      price: product.priceJpy,
+      availability: product.stock > 0
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+  };
 
   return (
     <div className="product-detail">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <nav className="product-detail-nav">
         <Link href="/" className="link-muted">
           {T("detail_all_products")}
