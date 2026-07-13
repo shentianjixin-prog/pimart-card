@@ -4325,6 +4325,84 @@ button:not(:disabled),
     box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.2);
   }
 
+  .product-format-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .product-format-group {
+    overflow: hidden;
+    border: 1.5px solid rgba(15, 23, 42, 0.12);
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .product-format-group.is-active,
+  .product-format-group.is-open {
+    border-color: rgba(234, 88, 12, 0.45);
+  }
+
+  .product-format-group-head {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border: 0;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .product-format-group.is-open .product-format-group-head {
+    background: #fff7ed;
+  }
+
+  .product-format-group-title {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .product-format-group-sub {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    color: #6b7280;
+  }
+
+  .product-format-group-mark {
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: #f3f4f6;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6b7280;
+  }
+
+  .product-format-group.is-open .product-format-group-mark {
+    background: #ea580c;
+    color: #fff;
+  }
+
+  .product-format-group-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 0.65rem;
+  }
+
+  .product-format-row-compact {
+    min-height: 3.3rem;
+    border-radius: 9px;
+  }
   .product-format-thumb {
     display: block;
     width: 48px;
