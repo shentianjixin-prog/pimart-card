@@ -156,10 +156,13 @@ export function ProductFormatSelector({
                     <span className="product-format-group-title">{group.label}</span>
                     <span className="product-format-group-sub">原盒 / 散包 / 原箱</span>
                   </span>
-                  <span className="product-format-group-mark">{expanded ? "收起" : "选择"}</span>
+                  <span className="product-format-group-mark" aria-hidden="true">
+                    <span className="product-format-group-current">{activeInGroup ? "当前" : ""}</span>
+                    <span className="product-format-group-chevron">⌄</span>
+                  </span>
                 </button>
 
-                {expanded ? (
+                <div className="product-format-group-panel" aria-hidden={!expanded}>
                   <div className="product-format-group-options">
                     {group.items.map((v) => {
                       const active = v.slug === currentSlug;
@@ -184,7 +187,7 @@ export function ProductFormatSelector({
                       );
                     })}
                   </div>
-                ) : null}
+                </div>
               </section>
             );
           })}

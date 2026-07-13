@@ -138,17 +138,34 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
           onSelect={selectVariant}
         />
 
-        <div className="product-detail-shipping">
-          <p className="product-detail-shipping-title">{T("detail_shipping_h")}</p>
-          <ul>
-            <li>
-              {T("detail_shipping_1_pre")}
-              {product.shippingDays}
-              {T("detail_shipping_1_suf")}
-            </li>
-            <li>{T("detail_shipping_2")}</li>
-          </ul>
-        </div>
+        <section className="product-detail-shipping" aria-label="发货说明">
+          <div className="product-detail-shipping-head">
+            <p className="product-detail-shipping-title">{T("detail_shipping_h")}</p>
+            <span className="product-detail-shipping-badge">
+              {product.isPreorder ? "预售/调货商品" : "现货商品"}
+            </span>
+          </div>
+          <div className="product-detail-shipping-grid">
+            <div className="product-detail-shipping-item">
+              <span className="product-detail-shipping-k">预计发货</span>
+              <span className="product-detail-shipping-v">
+                下单付款后 {product.shippingDays} 个工作日内安排发出
+              </span>
+            </div>
+            <div className="product-detail-shipping-item">
+              <span className="product-detail-shipping-k">通知方式</span>
+              <span className="product-detail-shipping-v">发货后将通过邮件同步物流信息</span>
+            </div>
+            <div className="product-detail-shipping-item">
+              <span className="product-detail-shipping-k">合单规则</span>
+              <span className="product-detail-shipping-v">同一订单含预售或调货商品时，可能等待齐货后统一发出</span>
+            </div>
+            <div className="product-detail-shipping-item">
+              <span className="product-detail-shipping-k">签收提醒</span>
+              <span className="product-detail-shipping-v">签收前请检查外箱，异常请保留面单、外箱照片和完整开箱视频</span>
+            </div>
+          </div>
+        </section>
 
         {product.isPreorder && product.releaseDateLabel ? (
           <p className="product-detail-preorder-date">
