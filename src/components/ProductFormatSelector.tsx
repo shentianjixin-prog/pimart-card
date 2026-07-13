@@ -8,8 +8,8 @@ import {
   sortBoxVariants,
   formatVariantTitle,
   firstImage,
+  isPokemonPairFormat,
   isSvExtendedFormat,
-  isSvFormat,
   type BoxVariantOption,
 } from "@/lib/product-box-variant-types";
 import { formatJpy } from "@/lib/format";
@@ -33,7 +33,7 @@ export function ProductFormatSelector({
   const isCsv = Boolean(series && /\bCSV\d+c\b/i.test(series));
   const isGem = series === "宝石包";
   const isOpc = Boolean(series && /^OPC-\d+/i.test(series));
-  const hasSvPair = isCsv && ordered.some((v) => isSvFormat(v.boxType));
+  const hasPokemonPair = ordered.some((v) => isPokemonPairFormat(v.boxType));
   const currentGroup = ordered.find((v) => v.slug === currentSlug)?.boxType.startsWith("肥") ? "fat" : "slim";
   const [openGroup, setOpenGroup] = useState<"slim" | "fat">(currentGroup);
 
@@ -41,7 +41,7 @@ export function ProductFormatSelector({
     setOpenGroup(currentGroup);
   }, [currentGroup]);
 
-  const svGroups = useMemo(() => {
+  const pokemonPairGroups = useMemo(() => {
     const unitOrder = ["box", "pack", "case"] as const;
     type Unit = (typeof unitOrder)[number];
     type GroupKey = "slim" | "fat";
@@ -122,10 +122,10 @@ export function ProductFormatSelector({
     );
   }
 
-  if (hasSvPair) {
+  if (hasPokemonPair) {
     const groups = [
-      { key: "slim" as const, label: "瘦包", items: svGroups.slim },
-      { key: "fat" as const, label: "肥包", items: svGroups.fat },
+      { key: "slim" as const, label: "瘦包", items: pokemonPairGroups.slim },
+      { key: "fat" as const, label: "肥包", items: pokemonPairGroups.fat },
     ].filter((group) => group.items.length > 0);
 
     const unitLabel: Record<string, string> = {
