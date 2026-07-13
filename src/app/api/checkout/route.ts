@@ -4,8 +4,16 @@ import { getStripe } from "@/lib/stripe";
 import { isProductArchived } from "@/lib/product-status";
 import { checkRateLimit, rateLimitKey } from "@/lib/security";
 import { getMemberSession } from "@/lib/session";
+import { z } from "zod";
 
-type CheckoutItem = { productId: string; quantity: number };
+const checkoutSchema = z.object({
+  items: z.array(z.object({
+    productId: z.string().trim().min(1).max(128),
+    quantity: z.number().int().min(1).max(100),
+  })).min(1).max(25),
+  solo: z.boolean().optional(),
+  acceptedRules: z.literal(true),
+}).strict();
 
 export async function POST(request: NextRequest) {
   const checkoutLimit = checkRateLimit({
@@ -16,21 +24,31 @@ export async function POST(request: NextRequest) {
   if (!checkoutLimit.allowed) {
     return NextResponse.json({ error: "请求过于频繁，请稍后再试" }, { status: 429 });
   }
-  let body: { items?: CheckoutItem[]; solo?: boolean; acceptedRules?: boolean };
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > 16_384) {
+    return NextResponse.json({ error: "请求内容过大" }, { status: 413 });
+  }
+
+  let rawBody: unknown;
   try {
-    body = await request.json();
+    rawBody = await request.json();
   } catch {
     return NextResponse.json({ error: "请求格式错误" }, { status: 400 });
   }
 
-  if (body.acceptedRules !== true) {
-    return NextResponse.json({ error: "请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则" }, { status: 400 });
+  const parsed = checkoutSchema.safeParse(rawBody);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "商品数量或结算信息无效，请刷新后重试" }, { status: 400 });
   }
 
-  const items = body.items;
-  const solo = body.solo === true;
-  if (!items || items.length === 0) {
-    return NextResponse.json({ error: "购物车为空" }, { status: 400 });
+  const solo = parsed.data.solo === true;
+  const itemTotals = new Map<string, number>();
+  for (const item of parsed.data.items) {
+    itemTotals.set(item.productId, (itemTotals.get(item.productId) ?? 0) + item.quantity);
+  }
+  const items = Array.from(itemTotals, ([productId, quantity]) => ({ productId, quantity }));
+  if (items.some((item) => item.quantity > 100)) {
+    return NextResponse.json({ error: "单件商品数量超过结算上限" }, { status: 400 });
   }
 
   const products = await prisma.product.findMany({
@@ -109,7 +127,7 @@ export async function POST(request: NextRequest) {
       where: { id: order.id },
       data: { status: "cancelled" },
     });
-    const message = err instanceof Error ? err.message : "支付服务暂时不可用";
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error("Stripe checkout session creation failed", err);
+    return NextResponse.json({ error: "支付服务暂时不可用，请稍后重试" }, { status: 502 });
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useCart } from "@/lib/cart-context";
 import { useLang, useT } from "@/lib/lang-context";
 import type { Lang } from "@/lib/translations";
@@ -32,7 +32,7 @@ const OTHER_TCG_MENU = [
 ] as const;
 
 const MORE_MENU = [
-  { key: "menu_wholesale", href: "/contact" },
+  { key: "menu_wholesale", href: "/wholesale" },
   { key: "menu_shipping", href: "/shipping" },
   { key: "menu_guide", href: "/guide" },
 ] as const;
@@ -271,30 +271,47 @@ function MoreNavDropdown({
 export function Header({ member }: { member?: MemberSession | null }) {
   const { totalCount } = useCart();
   const T = useT();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false
+  );
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileLangOpen, setMobileLangOpen] = useState(false);
   const [mobilePokemonOpen, setMobilePokemonOpen] = useState(false);
   const [mobileOtherOpen, setMobileOtherOpen] = useState(false);
 
-  useEffect(() => setMounted(true), []);
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
-
-  const moreItems = MORE_MENU.map((item) => ({ label: T(item.key), href: item.href }));
-  const otherTcgItems = OTHER_TCG_MENU.map((item) => ({ label: T(item.key), href: item.href }));
-  const closeMobile = () => {
+  function closeMobile() {
     setMenuOpen(false);
     setMobileLangOpen(false);
     setMobilePokemonOpen(false);
     setMobileOtherOpen(false);
-  };
+  }
 
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = menuOpen ? "hidden" : previousOverflow;
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        setMobileLangOpen(false);
+        setMobilePokemonOpen(false);
+        setMobileOtherOpen(false);
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  const moreItems = MORE_MENU.map((item) => ({ label: T(item.key), href: item.href }));
+  const otherTcgItems = OTHER_TCG_MENU.map((item) => ({ label: T(item.key), href: item.href }));
   return (
     <div className="sticky top-0 z-50">
       <header className="glass-header">
@@ -474,7 +491,7 @@ export function Header({ member }: { member?: MemberSession | null }) {
 
               {[
                 { key: "menu_buyback", href: "/buyback", className: "nav-pill nav-pill-buyback w-full justify-center" },
-                { key: "menu_wholesale", href: "/contact", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
+                { key: "menu_wholesale", href: "/wholesale", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
                 { key: "footer_contact", href: "/contact", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
                 { key: "nav_account", href: "/account", className: "flex min-h-11 items-center rounded-[14px] px-3 text-sm font-medium text-[#374151] hover:bg-[#f7f8fa]" },
               ].map((item) => (
