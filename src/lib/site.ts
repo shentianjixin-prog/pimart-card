@@ -13,7 +13,7 @@ export const B2B_EMAIL =
 /** 主体信息（关于页 / 特商法） */
 export const COMPANY_FOUNDED_YEAR = 2022;
 /** 代表 / 法人（个人） */
-export const COMPANY_REPRESENTATIVE = "神田紀信";
+export const COMPANY_REPRESENTATIVE = "沈熙晨";
 /** 销售业者 / 公司名 */
 export const COMPANY_SELLER = "レモン商事";
 export const COMPANY_ADDRESS = "東京都板橋区弥生町１－２－１０６";

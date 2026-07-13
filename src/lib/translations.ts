@@ -380,11 +380,11 @@ const dict: Record<string, Record<Lang, string>> = {
   footer_faq:      { zh: "常见问题", ja: "よくある質問", en: "FAQ" },
   footer_tokusho:  { zh: "特定商取引法", ja: "特定商取引法", en: "Legal Notice" },
 
-  // 品牌叙事：全球零售 + B2B，不强调评级卡线
+  // 品牌叙事：过去（哔哩哔哩）→ 现在（PIMART）→ 未来
   about_p1: {
-    zh: "PIMART CARD 创立于 2022 年，以日本为履约枢纽，面向全球买家经营集换式卡牌原箱原盒。我们相信：跨境购卡不该靠运气——正品货源、清晰说明与可预期的发货，才是长期交易的基础。",
-    ja: "PIMART CARDは2022年に始まり、日本を発送拠点として、世界のお客様へTCG未開封BOXをお届けしています。越境の買い物は運任せであるべきではありません。正規ルートの仕入れ、明確な案内、予測可能な発送——それが長く続く取引の土台です。",
-    en: "Founded in 2022 and shipping from Japan, PIMART CARD serves buyers worldwide with sealed TCG boxes. Cross-border collecting should not rely on luck—traceable sourcing, clear product guidance, and predictable fulfillment are the foundation of lasting trade.",
+    zh: "在 PIMART CARD 创立之前，创始人沈熙晨是哔哩哔哩的初始成员之一。从社区萌芽到平台成长，那段经历让我们更早理解：内容、社群与信任，从来不是一夜建成的——先把基础做扎实，再谈规模。",
+    ja: "PIMART CARDを創業する前、創業者の沈熙晨はビリビリの初期メンバーの一人でした。コミュニティの芽生えからプラットフォームの成長までを見てきた経験から、コンテンツ・コミュニティ・信頼は一夜にして生まれない——基盤を固めてから規模を追う、という姿勢を学びました。",
+    en: "Before PIMART CARD, founder Shen Xichen was among Bilibili’s earliest members. Watching a community grow into a platform taught us that content, community, and trust are never built overnight—foundations come before scale.",
   },
   about_founded_label: { zh: "创办年份", ja: "設立年", en: "Founded" },
   about_company_label: { zh: "公司", ja: "販売業者", en: "Company" },
@@ -393,14 +393,14 @@ const dict: Record<string, Record<Lang, string>> = {
   about_phone_label: { zh: "电话", ja: "電話番号", en: "Phone" },
 
   about_p2: {
-    zh: "对个人买家，我们提供多语种未开封原盒的现货与预售，从日本发往世界各地。对经销商与店铺，我们正着力建设 B2B 能力：批量询价、稳定补货与长期供货协作。零售与批发共用同一标准——可溯源渠道、专业打包、售后边界写清楚。",
-    ja: "個人のお客様には、多言語の未開封BOXを現物・予約でご用意し、日本から世界各国へお届けします。ディーラー・店舗向けには、大口見積もり、安定した補充、長期取引を支えるB2B体制を拡充しています。小売も卸も同じ基準——正規ルート、丁寧な梱包、アフターの境界を明示します。",
-    en: "For collectors, we offer multilingual sealed boxes in stock and on pre-order, shipped worldwide from Japan. For shops and distributors, we are building B2B capacity—bulk quotes, steady replenishment, and long-term supply partnerships. Retail and wholesale share one standard: traceable channels, professional packing, and clearly stated after-sales boundaries.",
+    zh: "2022 年，我们在日本成立 PIMART CARD，以日本为履约枢纽，面向全球经营集换式卡牌原箱原盒。对个人买家，提供多语种现货与预售，从日本发往世界各地；对经销商与店铺，提供批量询价、稳定补货与长期供货协作。正品货源、清晰说明、可预期发货——是我们做生意的基本盘。",
+    ja: "2022年、日本でPIMART CARDを立ち上げ、日本を発送拠点として世界へTCG未開封BOXをお届けしています。個人のお客様には多言語の現物・予約を、ディーラー・店舗には大口見積もり・安定補充・長期取引を。正規ルート、明確な案内、予測可能な発送——それが私たちの基本です。",
+    en: "In 2022 we founded PIMART CARD in Japan, shipping sealed TCG boxes worldwide. Collectors get multilingual stock and pre-orders from Japan; shops get bulk quotes, steady replenishment, and long-term supply. Traceable sourcing, clear guidance, and predictable fulfillment remain our baseline.",
   },
   about_p3: {
-    zh: "真正的全球卖货，靠的是供应链与履约能力，而不是口号。我们将持续扩展语区覆盖与业者网络，让 PIMART CARD 成为连接日本库存与全球市场的可靠入口。",
-    ja: "本物のグローバル販売は、スローガンではなくサプライチェーンと履行力で決まります。言語圏とパートナー網を広げ、PIMART CARDを「日本在庫と世界市場をつなぐ信頼できる入口」にしていきます。",
-    en: "Real global commerce is built on supply chain and fulfillment—not slogans. We will keep expanding language coverage and partner networks so PIMART CARD remains a reliable gateway between Japanese inventory and the world market.",
+    zh: "接下来，我们将继续加深供应链与履约能力，扩展语区覆盖与业者网络，让 PIMART CARD 成为连接日本库存与全球市场的可靠入口——不只卖出一单，而是陪买家与合作方把长期交易走稳。",
+    ja: "これからもサプライチェーンと履行力を深め、言語圏とパートナー網を広げ、PIMART CARDを「日本在庫と世界市場をつなぐ信頼できる入口」にしていきます。一回の販売ではなく、長く続く取引を支えることが目標です。",
+    en: "Next, we will deepen supply chain and fulfillment, expand language coverage and partner networks, and keep PIMART CARD a reliable gateway between Japanese inventory and the world—not one-off sales, but lasting trade for buyers and partners.",
   },
   about_p4: {
     zh: "订单、物流与售后请联系客服；批发与商务合作请使用 B2B 邮箱。欢迎与我们开启对话。",
