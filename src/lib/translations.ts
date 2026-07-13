@@ -514,6 +514,33 @@ const dict: Record<string, Record<Lang, string>> = {
   b2b_v2_line1: { zh: "当地直采，全球供应，正品保障", ja: "現地直仕入れ · 世界供給 · 正規品保証", en: "Local sourcing · Global supply · Authentic guarantee" },
   b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
 
+  find_tag: { zh: "代寻服务", ja: "お探しサポート", en: "Sourcing Desk" },
+  find_title: {
+    zh: "没有找到您想要的商品？",
+    ja: "お探しの商品が見つかりませんか？",
+    en: "Can't find what you're looking for?",
+  },
+  find_desc: {
+    zh: "若站内暂无您想要的原盒或系列，可通过客服代寻。把需求告诉我们，我们会尽力协助确认货源与到货可能。",
+    ja: "サイトにない未開封BOXやシリーズも、スタッフがお探しをサポートします。ご希望を詳しくお知らせください。",
+    en: "If a sealed box or set isn't listed yet, ask our team to source it. Share your request and we'll check availability.",
+  },
+  find_hint_pre: { zh: "建议先", ja: "まずは", en: "Please " },
+  find_hint_register: { zh: "注册会员", ja: "会員登録", en: "register" },
+  find_hint_mid: {
+    zh: "，消息越详细越好。请尽量包含：",
+    ja: "のうえ、できるだけ詳しくご記入ください。含めていただきたい情報：",
+    en: ", and include as much detail as possible: ",
+  },
+  find_hint_fields: {
+    zh: "系列名、语种版本、发售信息等",
+    ja: "シリーズ名、言語版、発売情報など",
+    en: "set name, language version, release info, etc.",
+  },
+  find_hint_end: { zh: "。", ja: "。", en: "." },
+  find_cta: { zh: "帮我寻找", ja: "探してもらう", en: "Help me find it" },
+  find_cta_email: { zh: "邮件咨询", ja: "メールで相談", en: "Email us" },
+
   trusted_title: { zh: "全球信赖", ja: "世界中で信頼される", en: "Trusted Worldwide" },
   trusted_subtitle: { zh: "连接日本库存与全球收藏家", ja: "日本在庫と世界のコレクターをつなぐ", en: "Connecting Japanese inventory with collectors worldwide" },
   trusted_f1_title: { zh: "全球配送", ja: "世界配送", en: "Worldwide Shipping" },

@@ -24,7 +24,7 @@ export function WholesaleSection() {
           </ul>
         </div>
         <div className="flex flex-col items-center justify-center px-8 py-10">
-          <Link href="/contact" className="btn-primary min-w-[180px]">
+          <Link href="/wholesale" className="btn-primary min-w-[180px]">
             {T("wholesale_cta")}
           </Link>
         </div>

@@ -1,14 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import {
-  B2B_EMAIL,
-  COMPANY_ADDRESS,
-  COMPANY_FOUNDED_YEAR,
-  COMPANY_PHONE,
-  COMPANY_REPRESENTATIVE,
-  COMPANY_SELLER,
-  SUPPORT_EMAIL,
-} from "@/lib/site";
+import { B2B_EMAIL, SUPPORT_EMAIL } from "@/lib/site";
 import { t, resolveLang } from "@/lib/translations";
 
 export default async function AboutPage() {
@@ -23,10 +15,9 @@ export default async function AboutPage() {
         <h1 className="legal-title">{T("footer_about")}</h1>
         <p className="legal-subtitle">PIMART CARD · Global Sealed &amp; B2B</p>
         <div className="legal-meta-row">
-          <span className="legal-chip">
-            {T("about_founded_label")} {COMPANY_FOUNDED_YEAR}
-          </span>
-          <span className="legal-chip">{COMPANY_SELLER}</span>
+          <span className="legal-chip">Japan Hub</span>
+          <span className="legal-chip">Worldwide Shipping</span>
+          <span className="legal-chip">B2B Ready</span>
         </div>
       </header>
 
@@ -40,51 +31,27 @@ export default async function AboutPage() {
           </div>
         </article>
 
-        <div className="legal-info-card mt-1">
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_founded_label")}</span>
-            <span className="legal-info-value">{COMPANY_FOUNDED_YEAR}</span>
+        <div className="legal-crosslinks mt-2">
+          <p className="legal-crosslinks-heading">
+            {T("about_support_label")} / {T("about_b2b_label")}
+          </p>
+          <div className="legal-crosslinks-row">
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="legal-crosslink">
+              {SUPPORT_EMAIL}
+            </a>
+            <a href={`mailto:${B2B_EMAIL}`} className="legal-crosslink">
+              {B2B_EMAIL}
+            </a>
+            <Link href="/wholesale" className="legal-crosslink">
+              {T("footer_wholesale")}
+            </Link>
+            <Link href="/contact" className="legal-crosslink">
+              {T("footer_contact")}
+            </Link>
+            <Link href="/" className="legal-crosslink">
+              {T("page_back_home")}
+            </Link>
           </div>
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_company_label")}</span>
-            <span className="legal-info-value">{COMPANY_SELLER}</span>
-          </div>
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_rep_label")}</span>
-            <span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span>
-          </div>
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_address_label")}</span>
-            <span className="legal-info-value">{COMPANY_ADDRESS}</span>
-          </div>
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_phone_label")}</span>
-            <span className="legal-info-value">{COMPANY_PHONE}</span>
-          </div>
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_support_label")}</span>
-            <span className="legal-info-value">
-              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
-            </span>
-          </div>
-          <div className="legal-info-row">
-            <span className="legal-info-label">{T("about_b2b_label")}</span>
-            <span className="legal-info-value">
-              <a href={`mailto:${B2B_EMAIL}`}>{B2B_EMAIL}</a>
-            </span>
-          </div>
-        </div>
-
-        <div className="legal-crosslinks-row mt-2">
-          <Link href="/wholesale" className="legal-crosslink">
-            {T("footer_wholesale")}
-          </Link>
-          <Link href="/contact" className="legal-crosslink">
-            {T("footer_contact")}
-          </Link>
-          <Link href="/" className="legal-crosslink">
-            {T("page_back_home")}
-          </Link>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ export function WholesaleBanner() {
             {T("wholesale_desc")}
           </p>
           <div className="mt-6">
-            <Link href="/contact" className="btn-primary">
+            <Link href="/wholesale" className="btn-primary">
               {T("wholesale_cta")}
             </Link>
           </div>
