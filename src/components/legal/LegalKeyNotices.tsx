@@ -1,4 +1,5 @@
 type Notice = {
+  number?: string;
   title: string;
   body: string;
 };
@@ -18,7 +19,7 @@ export function LegalKeyNotices({ heading = "购前关键须知", items }: Legal
         {items.map((item, i) => (
           <li key={item.title} className="legal-key-item">
             <span className="legal-key-num" aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
+              {item.number ?? String(i + 1).padStart(2, "0")}
             </span>
             <div>
               <p className="legal-key-title">{item.title}</p>
