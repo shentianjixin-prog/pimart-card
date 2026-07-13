@@ -8,7 +8,6 @@ import { HomeHero } from "@/components/HomeHero";
 import { HomeAnnounceBar } from "@/components/HomeAnnounceBar";
 import { HomeProductSections } from "@/components/HomeProductSections";
 import { HomeB2B } from "@/components/HomeB2B";
-import { HomeFindRequest } from "@/components/HomeFindRequest";
 import { TrustedFeatures } from "@/components/TrustedFeatures";
 import { t, resolveLang } from "@/lib/translations";
 import { fetchFilterFacets, fetchSubGameCounts } from "@/lib/product-facets";
@@ -134,7 +133,6 @@ export default async function Home({
           <HomeProductSections latest={latestProducts} popular={popular} />
 
           <HomeB2B />
-          <HomeFindRequest />
           <TrustedFeatures />
         </div>
       </>
