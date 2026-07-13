@@ -5830,3 +5830,52 @@ button:not(:disabled),
   }
 }
 
+/* Restore the original production homepage composition while retaining the
+   accessibility, checkout, cart and product-detail hardening above. */
+.site-shell {
+  padding: 6px;
+  background: #0a0a0a;
+}
+
+.site-frame {
+  border: 3px solid #000;
+  box-shadow: 0 0 0 1px #000, 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.glass-header {
+  border-bottom-color: var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.home-main-stack {
+  padding-top: 0.25rem;
+  padding-bottom: 0.5rem;
+}
+
+.product-card {
+  border-color: rgba(15, 23, 42, 0.07);
+  border-radius: 24px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.035);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+@media (min-width: 640px) {
+  .site-shell {
+    padding: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-shell {
+    padding: 18px;
+  }
+}
+

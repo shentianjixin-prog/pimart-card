@@ -1,34 +1,73 @@
 "use client";
 
 import Link from "next/link";
-import { useT } from "@/lib/lang-context";
+import { useLang, useT } from "@/lib/lang-context";
+import type { Lang } from "@/lib/translations";
 
-const SERVICE_ITEMS = [
-  { key: "service_bar_stock", icon: "01" },
-  { key: "service_bar_shipping", icon: "02" },
-  { key: "service_bar_support", icon: "03" },
-] as const;
+type Announcement = {
+  id: string;
+  /** ISO date YYYY-MM-DD — newest first */
+  date: string;
+  messageKey: string;
+  ctaKey: string;
+  href: string;
+};
+
+/** 最新在上；发布时在此追加 */
+const ANNOUNCEMENTS: Announcement[] = [
+  {
+    id: "op-eb06",
+    date: "2025-06-28",
+    messageKey: "announce_op_eb06",
+    ctaKey: "announce_cta_preorder",
+    href: "/?game=onepiece&stock=preorder",
+  },
+  {
+    id: "gem-restock",
+    date: "2025-06-18",
+    messageKey: "announce_gem_restock",
+    ctaKey: "announce_cta_buy",
+    href: `/products/${encodeURIComponent("宝石包第五弹-box-简中")}`,
+  },
+].sort((a, b) => b.date.localeCompare(a.date));
+
+function formatAnnounceDate(iso: string, lang: Lang): string {
+  const d = new Date(`${iso}T00:00:00`);
+  if (lang === "en") {
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  }
+  if (lang === "ja") {
+    return `${d.getMonth() + 1}/${d.getDate()}`;
+  }
+  return `${d.getMonth() + 1}.${d.getDate()}`;
+}
 
 export function HomeAnnounceBar() {
   const T = useT();
+  const { lang } = useLang();
 
   return (
-    <aside className="service-command" aria-label={T("service_bar_label")}>
-      <div className="service-command-title">
-        <span className="service-command-pulse" aria-hidden="true" />
-        {T("service_bar_label")}
+    <section className="home-announce" aria-label={T("announce_title")}>
+      <div className="home-announce-panel">
+        <div className="home-announce-head">
+          <span className="home-announce-label">{T("announce_title")}</span>
+        </div>
+        <ul className="home-announce-list">
+          {ANNOUNCEMENTS.map((item) => (
+            <li key={item.id} className="home-announce-item">
+              <div className="home-announce-main">
+                <time className="home-announce-date" dateTime={item.date}>
+                  {formatAnnounceDate(item.date, lang)}
+                </time>
+                <span className="home-announce-text">{T(item.messageKey)}</span>
+              </div>
+              <Link href={item.href} className="home-announce-cta">
+                {T(item.ctaKey)}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="service-command-items" role="list">
-        {SERVICE_ITEMS.map((item) => (
-          <div key={item.key} className="service-command-item" role="listitem">
-            <span aria-hidden="true">{item.icon}</span>
-            <p>{T(item.key)}</p>
-          </div>
-        ))}
-      </div>
-      <Link href="/?sort=newest" className="service-command-link">
-        {T("service_bar_shop")} <span aria-hidden="true">→</span>
-      </Link>
-    </aside>
+    </section>
   );
 }

@@ -22,7 +22,6 @@ export function TrustedFeatures() {
           </h2>
           <p className="trusted-section-subtitle">{T("trusted_subtitle")}</p>
 
-          <p className="trusted-evidence-note">TRACEABLE SOURCING · CLEAR TERMS · SECURE CHECKOUT</p>
         </header>
 
         <div className="trusted-features-track">
