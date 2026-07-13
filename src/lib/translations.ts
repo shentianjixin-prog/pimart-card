@@ -380,11 +380,11 @@ const dict: Record<string, Record<Lang, string>> = {
   footer_faq:      { zh: "常见问题", ja: "よくある質問", en: "FAQ" },
   footer_tokusho:  { zh: "特定商取引法", ja: "特定商取引法", en: "Legal Notice" },
 
-  // 品牌叙事：过去（哔哩哔哩）→ 现在（PIMART）→ 未来
+  // 品牌叙事：创业经历 → PIMART CARD → 长期愿景
   about_p1: {
-    zh: "在 PIMART CARD 创立之前，创始人沈熙晨是哔哩哔哩的初始成员之一。从社区萌芽到平台成长，那段经历让我们更早理解：内容、社群与信任，从来不是一夜建成的——先把基础做扎实，再谈规模。",
-    ja: "PIMART CARDを創業する前、創業者の沈熙晨はビリビリの初期メンバーの一人でした。コミュニティの芽生えからプラットフォームの成長までを見てきた経験から、コンテンツ・コミュニティ・信頼は一夜にして生まれない——基盤を固めてから規模を追う、という姿勢を学びました。",
-    en: "Before PIMART CARD, founder Shen Xichen was among Bilibili’s earliest members. Watching a community grow into a platform taught us that content, community, and trust are never built overnight—foundations come before scale.",
+    zh: "PIMART CARD 创立于 2022 年。一路走来，我们深知：内容、社群与信任从来不是一夜建成的——先把基础做扎实，再谈规模。",
+    ja: "PIMART CARDは2022年に創業しました。これまでの歩みを通じて、コンテンツ・コミュニティ・信頼は一夜にして築けるものではないと、私たちは深く理解しています。まず基盤を固め、その先に規模を求めます。",
+    en: "PIMART CARD was founded in 2022. Throughout our journey, we have learned that content, community, and trust are never built overnight—foundations come before scale.",
   },
   about_founded_label: { zh: "创办年份", ja: "設立年", en: "Founded" },
   about_company_label: { zh: "公司", ja: "販売業者", en: "Company" },
@@ -393,19 +393,19 @@ const dict: Record<string, Record<Lang, string>> = {
   about_phone_label: { zh: "电话", ja: "電話番号", en: "Phone" },
 
   about_p2: {
-    zh: "2022 年，我们在日本成立 PIMART CARD，以日本为履约枢纽，面向全球经营集换式卡牌原箱原盒。对个人买家，提供多语种现货与预售，从日本发往世界各地；对经销商与店铺，提供批量询价、稳定补货与长期供货协作。正品货源、清晰说明、可预期发货——是我们做生意的基本盘。",
-    ja: "2022年、日本でPIMART CARDを立ち上げ、日本を発送拠点として世界へTCG未開封BOXをお届けしています。個人のお客様には多言語の現物・予約を、ディーラー・店舗には大口見積もり・安定補充・長期取引を。正規ルート、明確な案内、予測可能な発送——それが私たちの基本です。",
-    en: "In 2022 we founded PIMART CARD in Japan, shipping sealed TCG boxes worldwide. Collectors get multilingual stock and pre-orders from Japan; shops get bulk quotes, steady replenishment, and long-term supply. Traceable sourcing, clear guidance, and predictable fulfillment remain our baseline.",
+    zh: "我们以对卡牌的热爱与专业连接不同国家和地区的收藏者，以日本为履约枢纽，面向全球提供服务。对个人买家，我们致力于提供更便捷、安心的购物体验，帮助您寻找心之所想；对经销商与店铺，我们提供更稳定、长期的合作支持。寻找、筛选、交付——是我们做好每一笔生意的基础。",
+    ja: "私たちは、カードへの情熱と専門性を通じて、さまざまな国や地域のコレクターをつなぎ、日本を履行拠点として世界へサービスを提供しています。個人のお客様には、より便利で安心できる購入体験と、お探しの商品を見つけるお手伝いを。ディーラーや店舗には、より安定した長期的な協業を提供します。探す、選ぶ、届ける——それが一つひとつの取引を大切にする私たちの基盤です。",
+    en: "Through our passion for cards and professional expertise, we connect collectors across countries and regions, serving customers worldwide with Japan as our fulfillment hub. We give individual buyers a more convenient and reassuring shopping experience, helping them find what they truly want; for dealers and stores, we offer stable, long-term support. Sourcing, selecting, and delivering are the foundations of every transaction we handle.",
   },
   about_p3: {
-    zh: "接下来，我们将继续加深供应链与履约能力，扩展语区覆盖与业者网络，让 PIMART CARD 成为连接日本库存与全球市场的可靠入口——不只卖出一单，而是陪买家与合作方把长期交易走稳。",
-    ja: "これからもサプライチェーンと履行力を深め、言語圏とパートナー網を広げ、PIMART CARDを「日本在庫と世界市場をつなぐ信頼できる入口」にしていきます。一回の販売ではなく、長く続く取引を支えることが目標です。",
-    en: "Next, we will deepen supply chain and fulfillment, expand language coverage and partner networks, and keep PIMART CARD a reliable gateway between Japanese inventory and the world—not one-off sales, but lasting trade for buyers and partners.",
+    zh: "未来，我们将继续深化供应链，扩展语言服务与行业合作网络，让 PIMART CARD 成为连接全球市场的可靠入口。我们追求的不只是一笔订单，更是长期的陪伴，邀您一起目睹我们的成长。",
+    ja: "これからもサプライチェーンを深め、言語サービスと業界パートナーネットワークを広げ、PIMART CARDを世界市場へつながる信頼できる入口にしていきます。私たちが目指すのは一度きりの注文ではなく、長く寄り添う関係です。ぜひ、これからの成長をともに見届けてください。",
+    en: "Looking ahead, we will continue strengthening our supply chain and expanding our language services and industry partnerships, making PIMART CARD a reliable gateway to the global market. We seek more than a single order: we aim for lasting relationships and invite you to grow with us.",
   },
   about_p4: {
-    zh: "订单、物流与售后请联系客服；批发与商务合作请使用 B2B 邮箱。欢迎与我们开启对话。",
-    ja: "ご注文・配送・アフターはカスタマーサポートへ。卸売・提携はB2Bメールへ。まずはお気軽にご連絡ください。",
-    en: "For orders, shipping, and after-sales, contact support. For wholesale and partnerships, use the B2B inbox. We welcome the conversation.",
+    zh: "订单、物流与售后请联系客服；批发与商务合作，欢迎与我们开启对话。",
+    ja: "ご注文・配送・アフターサービスはカスタマーサポートへ。卸売・ビジネス提携についても、ぜひお気軽にご相談ください。",
+    en: "For orders, shipping, and after-sales support, please contact customer service. For wholesale and business partnerships, we welcome the conversation.",
   },
   about_support_label: { zh: "客服邮箱", ja: "カスタマーサポート", en: "Customer support" },
   about_b2b_label: { zh: "B2B / 批发合作", ja: "B2B / 卸売提携", en: "B2B / Wholesale" },
