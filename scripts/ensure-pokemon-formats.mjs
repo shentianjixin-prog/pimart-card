@@ -1,8 +1,8 @@
 /**
  * 为非朱紫宝可梦盒装补齐「散包 / 原箱」SKU（幂等）：
  * - 宝石包：宝石包 + 散包 + 原箱（约 15 包/盒）
- * - 日月 / 剑盾 肥盒：肥散包 + 肥原箱（约 30 包/盒）
- * - 日月 / 剑盾 瘦盒：瘦散包 + 瘦原箱（约 20 包/盒）
+ * - 日月 / 剑盾主补充包：25张装（肥）与5张装（瘦）各自补齐整盒/散包/原箱
+ * - 日月 / 剑盾强化包：瘦散包 + 瘦原箱（约 20 包/盒）
  *
  * 价格按整盒推算；库存按盒内包数/箱内盒数估算，后台可改。
  */
@@ -11,9 +11,21 @@ import { existsSync } from "fs";
 import { randomUUID } from "crypto";
 
 const GEM_PACKS_PER_BOX = 15;
-const FAT_PACKS_PER_BOX = 30;
+const FAT_PACKS_PER_BOX = 6;
+const LEGACY_SLIM_PACKS_PER_BOX = 30;
 const SLIM_PACKS_PER_BOX = 20;
 const BOXES_PER_CASE = 20;
+const VERIFIED_DUAL_FORMAT_SERIES = new Set([
+  "太阳&月亮 CSM1a",
+  "太阳&月亮 CSM1b",
+  "太阳&月亮 CSM1c",
+  "剑&盾 CS3a",
+  "剑&盾 CS3b",
+  "剑&盾 CS4a",
+  "剑&盾 CS4b",
+  "剑&盾 CS5a",
+  "剑&盾 CS5b",
+]);
 
 const url = process.env.DATABASE_URL || "file:./prisma/data/initial.db";
 const dbPath = url.startsWith("file:") ? url.slice(5) : url;
@@ -25,6 +37,21 @@ if (!existsSync(dbPath)) {
 
 const db = new Database(dbPath);
 const findBySlug = db.prepare(`SELECT id FROM Product WHERE slug = ?`);
+const updateBySlug = db.prepare(`
+  UPDATE Product
+  SET name = @name,
+      series = @series,
+      language = @language,
+      description = @description,
+      priceJpy = @priceJpy,
+      boxType = @boxType,
+      status = @status,
+      updatedAt = @updatedAt
+  WHERE slug = @slug
+`);
+const updateBaseDescription = db.prepare(`
+  UPDATE Product SET description = ?, updatedAt = ? WHERE id = ?
+`);
 const insert = db.prepare(`
   INSERT INTO Product (
     id, name, slug, category, series, language, description, priceJpy, stock, images,
@@ -92,6 +119,33 @@ function createVariants(box, variants) {
   }
 }
 
+function legacyBaseDescription(description) {
+  const clean = String(description || "")
+    .replace(/，?5张\/包\s*[×x]\s*30包\/盒。?/gi, "。")
+    .replace(/\s*本系列提供5张装（瘦包）与25张装（肥包）两种规格，请按所需包装选择。?/g, "")
+    .replace(/。{2,}/g, "。")
+    .trim();
+  return `${clean}\n本系列提供5张装（瘦包）与25张装（肥包）两种规格，请按所需包装选择。`.trim();
+}
+
+function upsertLegacyVariants(box, variants) {
+  for (const v of variants) {
+    const row = {
+      ...v,
+      series: box.series,
+      language: box.language,
+      status: box.status || "上架",
+      updatedAt: now,
+    };
+    if (findBySlug.get(v.slug)) {
+      updateBySlug.run(row);
+      skipped += 1;
+      continue;
+    }
+    createVariants(box, [v]);
+  }
+}
+
 const tx = db.transaction(() => {
   const gems = db
     .prepare(
@@ -143,27 +197,56 @@ const tx = db.transaction(() => {
     .all();
 
   for (const box of fatBoxes) {
+    // a / b / c 是不同补充包（例如 CS4a=朋、CS4b=源），每个系列都独立拥有肥/瘦规格。
+    if (!VERIFIED_DUAL_FORMAT_SERIES.has(String(box.series || ""))) continue;
+
     const title = displayTitle(box.name);
     const lang = box.language || "简中";
     const price = Number(box.priceJpy);
     const stock = Number(box.stock) || 0;
     const root = baseSlug(box.slug);
+    const baseDescription = legacyBaseDescription(box.description);
+    updateBaseDescription.run(baseDescription, now, box.id);
 
-    createVariants(box, [
+    upsertLegacyVariants(box, [
+      {
+        boxType: "瘦盒",
+        slug: `${root}-slim-box-简中`,
+        name: `${title} 瘦盒 BOX（${lang}）`,
+        priceJpy: price,
+        description: `${baseDescription}\n5张装整盒，约 ${LEGACY_SLIM_PACKS_PER_BOX} 包/瘦盒。`.trim(),
+        stock,
+      },
       {
         boxType: "肥散包",
         slug: `${root}-fat-pack-简中`,
         name: `${title} 肥散包（${lang}）`,
         priceJpy: roundYen(price / FAT_PACKS_PER_BOX),
-        description: `${box.description || ""}\n补充包散装，约 ${FAT_PACKS_PER_BOX} 包/肥盒。`.trim(),
+        description: `${baseDescription}\n25张装散包，约 ${FAT_PACKS_PER_BOX} 包/肥盒。`.trim(),
         stock: stock > 0 ? Math.max(FAT_PACKS_PER_BOX, stock * FAT_PACKS_PER_BOX) : 0,
+      },
+      {
+        boxType: "瘦散包",
+        slug: `${root}-slim-pack-简中`,
+        name: `${title} 瘦散包（${lang}）`,
+        priceJpy: roundYen(price / LEGACY_SLIM_PACKS_PER_BOX),
+        description: `${baseDescription}\n5张装散包，约 ${LEGACY_SLIM_PACKS_PER_BOX} 包/瘦盒。`.trim(),
+        stock: stock > 0 ? Math.max(LEGACY_SLIM_PACKS_PER_BOX, stock * LEGACY_SLIM_PACKS_PER_BOX) : 0,
       },
       {
         boxType: "肥原箱",
         slug: `${root}-fat-case-简中`,
         name: `${title} 肥原箱（${lang}）`,
         priceJpy: price * BOXES_PER_CASE,
-        description: `${box.description || ""}\n肥盒原箱，约 ${BOXES_PER_CASE} 盒/箱。`.trim(),
+        description: `${baseDescription}\n肥盒原箱，约 ${BOXES_PER_CASE} 盒/箱。`.trim(),
+        stock: Math.floor(stock / BOXES_PER_CASE),
+      },
+      {
+        boxType: "瘦原箱",
+        slug: `${root}-slim-case-简中`,
+        name: `${title} 瘦原箱（${lang}）`,
+        priceJpy: price * BOXES_PER_CASE,
+        description: `${baseDescription}\n瘦盒原箱，约 ${BOXES_PER_CASE} 盒/箱。`.trim(),
         stock: Math.floor(stock / BOXES_PER_CASE),
       },
     ]);

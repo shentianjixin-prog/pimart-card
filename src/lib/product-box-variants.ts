@@ -26,6 +26,8 @@ type SeriesBlock = {
   prefix: "CS" | "CSM";
   num: string;
   isSlim: boolean;
+  /** 完整系列编号。a / b / c 是不同商品，不能只按数字合并。 */
+  code: string;
 };
 
 /** 从 series 解析剑&盾 / 太阳&月亮 的肥瘦区块号 */
@@ -39,16 +41,18 @@ export function parseSeriesBlock(series: string | null | undefined): SeriesBlock
       prefix: slim[2] as "CS" | "CSM",
       num: slim[3],
       isSlim: true,
+      code: `${slim[2]}${slim[3]}.5`,
     };
   }
 
-  const fat = series.match(/^(剑&盾|太阳&月亮)\s+(CSM?)(\d+)[a-c]$/i);
+  const fat = series.match(/^(剑&盾|太阳&月亮)\s+(CSM?)(\d+)([a-c])$/i);
   if (fat) {
     return {
       era: fat[1],
       prefix: fat[2] as "CS" | "CSM",
       num: fat[3],
       isSlim: false,
+      code: `${fat[2]}${fat[3]}${fat[4].toLowerCase()}`,
     };
   }
 
@@ -67,26 +71,6 @@ export function parseCsvSeriesKey(series: string | null | undefined): string | n
   if (!series) return null;
   const m = series.match(/\b(CSV\d+c)\b/i);
   return m ? m[1].replace(/c$/i, "c").replace(/^csv/i, "CSV") : null;
-}
-
-function slimSeries(block: SeriesBlock) {
-  return `${block.era} ${block.prefix}${block.num}.5`;
-}
-
-function fatSeriesPattern(block: SeriesBlock) {
-  return `${block.era} ${block.prefix}${block.num}`;
-}
-
-function isFatSeriesForBlock(series: string | null, block: SeriesBlock) {
-  if (!series) return false;
-  return new RegExp(
-    `^${escapeRegExp(block.era)}\\s+${escapeRegExp(block.prefix)}${block.num}[a-c]$`,
-    "i"
-  ).test(series);
-}
-
-function escapeRegExp(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 type ProductLike = {
@@ -140,46 +124,19 @@ async function findLegacyPokemonVariants(product: ProductLike): Promise<BoxVaria
   if (!block) return [];
 
   const language = product.language ?? undefined;
-  const options: BoxVariantOption[] = [];
-  const seen = new Set<string>();
-
-  function push(p: Parameters<typeof toOption>[0]) {
-    if (seen.has(p.id)) return;
-    seen.add(p.id);
-    options.push(toOption(p));
-  }
-
-  push(product);
-
-  const prefix = fatSeriesPattern(block);
-  const fatCandidates = await prisma.product.findMany({
+  const exactSeries = `${block.era} ${block.code}`;
+  const siblings = await prisma.product.findMany({
     where: {
       status: "上架",
-      boxType: { in: ["肥盒", "肥散包", "肥原箱"] },
+      boxType: { in: [...SV_FORMATS] },
       ...(language ? { language } : {}),
-      series: { startsWith: prefix },
-    },
-    orderBy: { series: "asc" },
-    select: VARIANT_SELECT,
-  });
-
-  for (const p of fatCandidates) {
-    if (isFatSeriesForBlock(p.series, block)) push(p);
-  }
-
-  const slimRows = await prisma.product.findMany({
-    where: {
-      status: "上架",
-      boxType: { in: ["瘦盒", "瘦散包", "瘦原箱"] },
-      series: slimSeries(block),
-      ...(language ? { language } : {}),
+      series: exactSeries,
     },
     select: VARIANT_SELECT,
   });
-  for (const p of slimRows) push(p);
 
-  if (options.length < 2) return [];
-  return sortBoxVariants(options);
+  if (siblings.length < 2) return [];
+  return sortBoxVariants(siblings.map(toOption));
 }
 
 /** 朱・紫 CSV：同弹肥/瘦 × 整盒/散包/原箱 */

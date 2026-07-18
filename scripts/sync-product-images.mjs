@@ -65,14 +65,14 @@ const IMAGE_MAP = {
   "sv2-double-pack-简中": "/products/sv2-double-box-v2.png",
   "ポケモンカ-ド151-box-简中": "/products/151-box.png",
   "pokemon-card-151-box-简中": "/products/151-box.png",
-  "九彩汇聚-朋-box-简中": "/products/cs4a-box.jpg",
-  "九彩汇聚-源-box-简中": "/products/cs4b-box.webp",
+  "九彩汇聚-朋-box-简中": "/products/cs4a-fat.png",
+  "九彩汇聚-源-box-简中": "/products/cs4b-fat.png",
   "交相辉映-唤-box-简中": "/products/csm2c-box.png",
   "交相辉映-沐-box-简中": "/products/csm2a-box.png",
   "交相辉映-魁-box-简中": "/products/csm2b-box.png",
   "剑刃觉醒-box-简中": "/products/csv7c-fat.png",
-  "勇魅群星-勇-box-简中": "/products/cs5b-box.png",
-  "勇魅群星-魅-box-简中": "/products/cs5-box.png",
+  "勇魅群星-勇-box-简中": "/products/cs5b-fat.png",
+  "勇魅群星-魅-box-简中": "/products/cs5a-fat.png",
   "嘉奖回合-box-简中": "/products/csv4c-fat.png",
   "奇迹启程-box-简中": "/products/csv2c-fat.png",
   "宝石包第一弹-box-简中": "/products/cbb1c-box.png",
@@ -89,11 +89,11 @@ const IMAGE_MAP = {
   "极巨争锋-焰-box-简中": "/products/cs1b-box.png",
   "极巨争锋-雷-box-简中": "/products/cs1a-box.png",
   "极巨攻防-box-简中": "/products/cs15-box.png",
-  "横空出世-泽-box-简中": "/products/csm1c-box.png",
-  "横空出世-苍-box-简中": "/products/csm1b-box.png",
-  "横空出世-赫-box-简中": "/products/csm1a-box.png",
-  "洪荒演武-激-box-简中": "/products/cs3b-box.png",
-  "洪荒演武-茂-box-简中": "/products/cs3a-box.jpg",
+  "横空出世-泽-box-简中": "/products/csm1c-fat.png",
+  "横空出世-苍-box-简中": "/products/csm1b-fat.png",
+  "横空出世-赫-box-简中": "/products/csm1a-fat.png",
+  "洪荒演武-激-box-简中": "/products/cs3b-fat.png",
+  "洪荒演武-茂-box-简中": "/products/cs3a-fat.png",
   "浓墨重彩-靛-box-简中": "/products/cs2b-box.png",
   "浓墨重彩-黎-box-简中": "/products/cs2a-box.png",
   "游历对战周边礼盒-简中": "/products/ylsc-battle-box-v2.png",
@@ -124,6 +124,22 @@ const CSV_FORMAT_IMAGES = {
   CSV8C: { slim: "/products/csv8c-slim.png", fat: "/products/csv8c-fat.png" },
   CSV9C: { slim: "/products/csv9c-slim.png", fat: "/products/csv9c-fat.png" },
   CSV10C: { slim: "/products/csv10c-slim.png", fat: "/products/csv10c-fat.png" },
+};
+
+/**
+ * 日月 / 剑盾主补充包的独立 5 张装（瘦）与 25 张装（肥）包装图。
+ * a / b / c 分别是不同商品；例如 CS4a=九彩汇聚朋、CS4b=九彩汇聚源。
+ */
+const LEGACY_FORMAT_IMAGES = {
+  CSM1A: { slim: "/products/csm1a-slim.png", fat: "/products/csm1a-fat.png" },
+  CSM1B: { slim: "/products/csm1b-slim.png", fat: "/products/csm1b-fat.png" },
+  CSM1C: { slim: "/products/csm1c-slim.png", fat: "/products/csm1c-fat.png" },
+  CS3A: { slim: "/products/cs3a-slim.png", fat: "/products/cs3a-fat.png" },
+  CS3B: { slim: "/products/cs3b-slim.png", fat: "/products/cs3b-fat.png" },
+  CS4A: { slim: "/products/cs4a-slim.png", fat: "/products/cs4a-fat.png" },
+  CS4B: { slim: "/products/cs4b-slim.png", fat: "/products/cs4b-fat.png" },
+  CS5A: { slim: "/products/cs5a-slim.png", fat: "/products/cs5a-fat.png" },
+  CS5B: { slim: "/products/cs5b-slim.png", fat: "/products/cs5b-fat.png" },
 };
 
 // 海贼王旧库曾有 slug 与系列名脱节的记录；按系列编号校准比只依赖 slug 更可靠。
@@ -480,6 +496,43 @@ for (const product of csvProducts) {
     .map((image) => image.trim())
     .filter((image) => image.includes("/topcards/"));
   const images = [primaryImage, ...new Set(chaseImages)].join(",");
+  const result = updateCsvImage.run(images, product.slug, images);
+  if (result.changes > 0) updated++;
+}
+
+const legacyProducts = db
+  .prepare(`
+    SELECT slug, series, boxType, images
+    FROM "Product"
+    WHERE (series LIKE '剑&盾 %' OR series LIKE '太阳&月亮 %')
+      AND (boxType LIKE '瘦%' OR boxType LIKE '肥%')
+  `)
+  .all();
+
+const legacyChaseByCode = new Map();
+for (const product of legacyProducts) {
+  const code = String(product.series || "").match(/\b(CSM?\d+[A-C])\b/i)?.[1]?.toUpperCase();
+  if (!code) continue;
+  const chase = String(product.images || "")
+    .split(",")
+    .map((image) => image.trim())
+    .filter((image) => image.includes("/topcards/"));
+  if (!chase.length) continue;
+  legacyChaseByCode.set(code, [...new Set([...(legacyChaseByCode.get(code) || []), ...chase])]);
+}
+
+for (const product of legacyProducts) {
+  const code = String(product.series || "").match(/\b(CSM?\d+[A-C])\b/i)?.[1]?.toUpperCase();
+  const formatImages = code ? LEGACY_FORMAT_IMAGES[code] : null;
+  if (!formatImages) continue;
+
+  const isSlim = String(product.boxType || "").includes("瘦");
+  const primaryImage = isSlim ? formatImages.slim : formatImages.fat;
+  const chaseImages = String(product.images || "")
+    .split(",")
+    .map((image) => image.trim())
+    .filter((image) => image.includes("/topcards/"));
+  const images = [primaryImage, ...new Set([...(legacyChaseByCode.get(code) || []), ...chaseImages])].join(",");
   const result = updateCsvImage.run(images, product.slug, images);
   if (result.changes > 0) updated++;
 }
