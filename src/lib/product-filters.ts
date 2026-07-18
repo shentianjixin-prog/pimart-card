@@ -475,16 +475,22 @@ export function buildWhere(state: FilterState): Prisma.ProductWhereInput {
   }
 
   if (state.q) {
+    const searchTerms = /^scv1c$/i.test(state.q.trim())
+      ? [state.q, "CSV1c"]
+      : /^csv1c$/i.test(state.q.trim())
+        ? [state.q, "SCV1c"]
+        : [state.q];
+
     and.push({
-      OR: [
-        { name: { contains: state.q } },
-        { series: { contains: state.q } },
-        { cardNumber: { contains: state.q } },
-        { description: { contains: state.q } },
-        { rarity: { contains: state.q } },
-        { language: { contains: state.q } },
-        { category: { contains: state.q } },
-      ],
+      OR: searchTerms.flatMap((term) => [
+        { name: { contains: term } },
+        { series: { contains: term } },
+        { cardNumber: { contains: term } },
+        { description: { contains: term } },
+        { rarity: { contains: term } },
+        { language: { contains: term } },
+        { category: { contains: term } },
+      ]),
     });
   }
 
