@@ -27,7 +27,7 @@ const IMAGE_MAP = {
   "30th-vol1-简中": "/products/30th-vol1.png",
   "30th-vol2-简中": "/products/30th-vol2.png",
   "30th-booster-box-简中": "/products/30th-booster-box.png",
-  "共逐荣光-box-简中": "/products/csv10c-box.png",
+  "共逐荣光-box-简中": "/products/csv10c-fat.png",
   "大师战略-猛雷鼓ex-简中": "/products/master-deck-thunderdrum.png",
   "大师战略-多龙巴鲁托ex-简中": "/products/master-deck-hydreigon.png",
   "大师战略-赛富豪ex-简中": "/products/master-deck-ceruledge.png",
@@ -70,19 +70,19 @@ const IMAGE_MAP = {
   "交相辉映-唤-box-简中": "/products/csm2c-box.png",
   "交相辉映-沐-box-简中": "/products/csm2a-box.png",
   "交相辉映-魁-box-简中": "/products/csm2b-box.png",
-  "剑刃觉醒-box-简中": "/products/csv7c-box-v2.png",
+  "剑刃觉醒-box-简中": "/products/csv7c-fat.png",
   "勇魅群星-勇-box-简中": "/products/cs5b-box.png",
   "勇魅群星-魅-box-简中": "/products/cs5-box.png",
-  "嘉奖回合-box-简中": "/products/csv4c-box.png",
-  "奇迹启程-box-简中": "/products/csv2c-box.png",
+  "嘉奖回合-box-简中": "/products/csv4c-fat.png",
+  "奇迹启程-box-简中": "/products/csv2c-fat.png",
   "宝石包第一弹-box-简中": "/products/cbb1c-box.png",
   "宝石包第三弹-box-简中": "/products/cbb3c-box.png",
   "宝石包第二弹-box-简中": "/products/cbb2c-box.png",
   "宝石包第五弹-box-简中": "/products/cbb5c-box.png",
   "宝石包第四弹-box-简中": "/products/cbb4c-box.png",
   "怒炎灼天-box-简中": "/products/cs35-box.png",
-  "无畏太晶-box-简中": "/products/csv3c-box.png",
-  "星彩晶璃-box-简中": "/products/csv9c-box.png",
+  "无畏太晶-box-简中": "/products/csv3c-fat.png",
+  "星彩晶璃-box-简中": "/products/csv9c-fat.png",
   "暗影夺辉-box-简中": "/products/cs55-box.png",
   "朱-紫-黒炎の支配者-box-简中": "/products/sv3-box-v2.png",
   "朱-紫ex-強化拡張パック-box-简中": "/products/csv1c-box.png",
@@ -102,12 +102,53 @@ const IMAGE_MAP = {
   "naruto-collectible-starter-set": "/products/naruto-wafer-vol3.jpg",
   "火影忍者-疾風伝-カ-ドウエハ-ス-box": "/products/naruto-wafer-vol2.jpg",
   "璀璨反击-box-简中": "/products/cs25-box.png",
-  "璀璨诡幻-box-简中": "/products/csv8c-box.png",
-  "真实玄虚-box-简中": "/products/csv6c-box.png",
+  "璀璨诡幻-box-简中": "/products/csv8c-fat.png",
+  "真实玄虚-box-简中": "/products/csv6c-fat.png",
   "碧海暗影-box-简中": "/products/cs6a-box.png",
   "终末炎舞-box-简中": "/products/cs45-box.png",
   "胜象星引-box-简中": "/products/cs65-box.jpg",
-  "黑晶炽焰-box-简中": "/products/csv5c-box-v2.png",
+  "黑晶炽焰-box-简中": "/products/csv5c-fat.png",
+};
+
+/**
+ * 简中朱・紫补充包的 5 张装（瘦）与 20 张装（肥）官方图。
+ * 不能只按 slug 映射：旧 Railway Volume 中保留了历史 slug，但 series / boxType 稳定。
+ */
+const CSV_FORMAT_IMAGES = {
+  CSV2C: { slim: "/products/csv2c-slim.png", fat: "/products/csv2c-fat.png" },
+  CSV3C: { slim: "/products/csv3c-slim.png", fat: "/products/csv3c-fat.png" },
+  CSV4C: { slim: "/products/csv4c-slim.png", fat: "/products/csv4c-fat.png" },
+  CSV5C: { slim: "/products/csv5c-slim.png", fat: "/products/csv5c-fat.png" },
+  CSV6C: { slim: "/products/csv6c-slim.png", fat: "/products/csv6c-fat.png" },
+  CSV7C: { slim: "/products/csv7c-slim.png", fat: "/products/csv7c-fat.png" },
+  CSV8C: { slim: "/products/csv8c-slim.png", fat: "/products/csv8c-fat.png" },
+  CSV9C: { slim: "/products/csv9c-slim.png", fat: "/products/csv9c-fat.png" },
+  CSV10C: { slim: "/products/csv10c-slim.png", fat: "/products/csv10c-fat.png" },
+};
+
+// 海贼王旧库曾有 slug 与系列名脱节的记录；按系列编号校准比只依赖 slug 更可靠。
+const OPC_SERIES_IMAGES = {
+  "01": "/products/opc-01-box-v2.jpg",
+  "02": "/products/opc-02-box-v2.jpg",
+  "03": "/products/opc-03-box.jpg",
+  "04": "/products/opc-04-box-v2.jpg",
+  "05": "/products/opc-05-box-v2.jpg",
+  "06": "/products/opc-06-box-v2.jpg",
+  "07": "/products/opc-07-box-v2.jpg",
+  "08": "/products/opc-08-box.webp",
+  "09": "/products/opc-09-box.jpg",
+  "10": "/products/opc-10-box-v2.jpg",
+  "11": "/products/opc-11-box.png",
+  "14": "/products/opc-14-box.png",
+  "15": "/products/opc-15-box-v2.png",
+};
+
+const STC_SERIES_IMAGES = {
+  "01": "/products/stc-01-deck.jpg",
+  "02": "/products/stc-02-deck.jpg",
+  "03": "/products/stc-03-deck.jpg",
+  "04": "/products/stc-04-deck.jpg",
+  "06": "/products/stc-06-deck.jpg",
 };
 
 function loadTopcardsManifest(path) {
@@ -415,6 +456,76 @@ for (const [slug, images] of Object.entries(IMAGE_MAP_FINAL)) {
   } else {
     skipped++;
   }
+}
+
+const csvProducts = db
+  .prepare(`
+    SELECT slug, series, boxType, images
+    FROM "Product"
+    WHERE UPPER(series) LIKE '%CSV%C%'
+      AND (boxType LIKE '瘦%' OR boxType LIKE '肥%')
+  `)
+  .all();
+
+const updateCsvImage = db.prepare('UPDATE "Product" SET images = ? WHERE slug = ? AND images != ?');
+for (const product of csvProducts) {
+  const code = String(product.series || "").match(/CSV\s*(\d+)\s*C/i);
+  const formatImages = code ? CSV_FORMAT_IMAGES[`CSV${code[1]}C`] : null;
+  if (!formatImages) continue;
+
+  const isSlim = String(product.boxType || "").includes("瘦");
+  const primaryImage = isSlim ? formatImages.slim : formatImages.fat;
+  const chaseImages = String(product.images || "")
+    .split(",")
+    .map((image) => image.trim())
+    .filter((image) => image.includes("/topcards/"));
+  const images = [primaryImage, ...new Set(chaseImages)].join(",");
+  const result = updateCsvImage.run(images, product.slug, images);
+  if (result.changes > 0) updated++;
+}
+
+const onePieceProducts = db
+  .prepare(`SELECT slug, name, series, images FROM "Product" WHERE category LIKE '%海贼王%' OR category LIKE '%航海王%'`)
+  .all();
+for (const product of onePieceProducts) {
+  const identity = [product.series, product.slug, product.name].filter(Boolean).join(" ");
+  const opcCode = identity.match(/OPC?[-\s]?0?(\d{1,2})/i)?.[1]?.padStart(2, "0");
+  const stcCode = identity.match(/STC?[-\s]?0?(\d{1,2})/i)?.[1]?.padStart(2, "0");
+  const primaryImage = (opcCode && OPC_SERIES_IMAGES[opcCode]) || (stcCode && STC_SERIES_IMAGES[stcCode]);
+  if (!primaryImage) continue;
+
+  const chaseImages = String(product.images || "")
+    .split(",")
+    .map((image) => image.trim())
+    .filter((image) => image.includes("/topcards/"));
+  const images = [primaryImage, ...new Set(chaseImages)].join(",");
+  const result = updateCsvImage.run(images, product.slug, images);
+  if (result.changes > 0) updated++;
+}
+
+// 修正早期导入时使用的非官方译名；slug 保持不变，避免破坏既有链接。
+const catalogNameFixes = [
+  ["黑晶炽焰", "黑晶炽诚"],
+  ["剑刃觉醒", "利刃猛醒"],
+];
+for (const [incorrect, official] of catalogNameFixes) {
+  db.prepare(`
+    UPDATE "Product"
+    SET name = REPLACE(name, ?, ?),
+        series = REPLACE(series, ?, ?),
+        description = REPLACE(description, ?, ?)
+    WHERE name LIKE ? OR series LIKE ? OR description LIKE ?
+  `).run(
+    incorrect,
+    official,
+    incorrect,
+    official,
+    incorrect,
+    official,
+    `%${incorrect}%`,
+    `%${incorrect}%`,
+    `%${incorrect}%`,
+  );
 }
 
 const insertNew = db.prepare(`

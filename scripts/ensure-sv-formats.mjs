@@ -68,6 +68,13 @@ function csvCode(series) {
   return m ? m[0].toUpperCase().replace("C", "c").replace(/CSV(\d+)C/i, (_, n) => `CSV${n}c`) : "CSV";
 }
 
+function officialFormatImage(code, boxType, fallback) {
+  const match = String(code).match(/CSV(\d+)C?/i);
+  if (!match || Number(match[1]) < 2 || Number(match[1]) > 10) return fallback;
+  const format = String(boxType).includes("瘦") ? "slim" : "fat";
+  return `/products/csv${match[1]}c-${format}.png`;
+}
+
 let created = 0;
 let skipped = 0;
 const now = new Date().toISOString();
@@ -144,7 +151,7 @@ const tx = db.transaction(() => {
         description: v.description,
         priceJpy: v.priceJpy,
         stock: v.stock,
-        images: box.images,
+        images: officialFormatImage(code, v.boxType, box.images),
         boxType: v.boxType,
         featured: 0,
         isPreorder: box.isPreorder ? 1 : 0,
