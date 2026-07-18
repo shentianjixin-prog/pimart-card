@@ -480,6 +480,7 @@ export function buildWhere(state: FilterState): Prisma.ProductWhereInput {
         { name: { contains: state.q } },
         { series: { contains: state.q } },
         { cardNumber: { contains: state.q } },
+        { description: { contains: state.q } },
         { rarity: { contains: state.q } },
         { language: { contains: state.q } },
         { category: { contains: state.q } },
