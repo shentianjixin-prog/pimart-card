@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { formatJpy } from "@/lib/format";
+import { formatProductPrice } from "@/lib/format";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
 import { AddToCartButton } from "@/components/AddToCartButton";
@@ -120,8 +120,8 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
 
         {product.language ? <p className="product-detail-lang">{product.language}</p> : null}
 
-        <p className="product-detail-price">{formatJpy(selected.priceJpy)}</p>
-        <p className="product-detail-tax">{T("detail_price_tax")}</p>
+        <p className="product-detail-price">{formatProductPrice(selected.priceJpy, T("price_pending"))}</p>
+        {selected.priceJpy > 0 ? <p className="product-detail-tax">{T("detail_price_tax")}</p> : null}
 
         {!soldOut && selected.stock <= 3 ? (
           <p className="product-detail-lowstock">

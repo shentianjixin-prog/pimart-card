@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { formatJpy } from "@/lib/format";
+import { formatProductPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
@@ -148,7 +148,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
               <Image src={thumb} alt="" width={72} height={72} className="buy-sheet-thumb-img" />
             </span>
             <div className="buy-sheet-hero-main">
-              <p className="buy-sheet-price">{formatJpy(active.priceJpy)}</p>
+              <p className="buy-sheet-price">{formatProductPrice(active.priceJpy, T("price_pending"))}</p>
               <p className="buy-sheet-stock">
                 {soldOut ? T("card_sold_out") : `${T("btn_stock")} ${active.stock}`}
               </p>
@@ -205,7 +205,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
                           </span>
                         )}
                       </span>
-                      <span className="product-format-price">{formatJpy(v.priceJpy)}</span>
+                      <span className="product-format-price">{formatProductPrice(v.priceJpy, T("price_pending"))}</span>
                     </button>
                   );
                 })}

@@ -160,6 +160,7 @@ const OPC_SERIES_IMAGES = {
   "13": "/products/onepiece-official/opc-13-pack.png",
   "14": "/products/onepiece-official/opc-14-pack.png",
   "15": "/products/onepiece-official/opc-15-pack.png",
+  "16": "/products/onepiece-official/opc-16-pack.png",
 };
 
 // STC-01～04 从简中官网同一张官方牌组大图做像素级裁切；STC-06 使用官方独立盒图。
@@ -168,7 +169,16 @@ const STC_SERIES_IMAGES = {
   "02": "/products/onepiece-official/stc-02-deck.jpg",
   "03": "/products/onepiece-official/stc-03-deck.jpg",
   "04": "/products/onepiece-official/stc-04-deck.jpg",
+  "05": "/products/onepiece-official/stc-05-deck.png",
   "06": "/products/onepiece-official/stc-06-deck.jpg",
+  "07": "/products/onepiece-official/stc-07-deck.png",
+  "08": "/products/onepiece-official/stc-08-deck.png",
+  "09": "/products/onepiece-official/stc-09-deck.png",
+  "10": "/products/onepiece-official/stc-10-deck.png",
+  "12": "/products/onepiece-official/stc-12-deck.png",
+  "13": "/products/onepiece-official/stc-13-deck.png",
+  "14": "/products/onepiece-official/stc-14-deck.png",
+  "29": "/products/onepiece-official/stc-29-deck.png",
 };
 
 function loadTopcardsManifest(path) {

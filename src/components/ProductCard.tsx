@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { formatJpy } from "@/lib/format";
+import { formatProductPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useT } from "@/lib/lang-context";
 import { CardPlaceholder, isUsableProductImage } from "@/components/HeroPlaceholders";
@@ -179,7 +179,7 @@ export function ProductCard({ product }: Props) {
 
           <div className="mt-4 flex items-end justify-between gap-2">
             <p className="text-lg font-semibold tracking-tight text-[#111827]">
-              {formatJpy(product.priceJpy)}
+              {formatProductPrice(product.priceJpy, T("price_pending"))}
             </p>
           </div>
         </div>

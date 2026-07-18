@@ -139,6 +139,13 @@ async function findLegacyPokemonVariants(product: ProductLike): Promise<BoxVaria
   return sortBoxVariants(siblings.map(toOption));
 }
 
+/** 收集啦151 的四个独立版本：旅 / 望 / 惊 / 聚。 */
+export function parse151SeriesKey(series: string | null | undefined): string | null {
+  if (!series) return null;
+  const match = series.match(/^收集啦151\s+(旅|望|惊|聚)$/);
+  return match ? match[1] : null;
+}
+
 /** 朱・紫 CSV：同弹肥/瘦 × 整盒/散包/原箱 */
 async function findSvVariants(product: ProductLike): Promise<BoxVariantOption[]> {
   const key = parseCsvSeriesKey(product.series);
@@ -189,6 +196,19 @@ async function findGemVariants(product: ProductLike): Promise<BoxVariantOption[]
 }
 
 async function findPokemonVariants(product: ProductLike): Promise<BoxVariantOption[]> {
+  const edition151 = parse151SeriesKey(product.series);
+  if (edition151 && (isPokemonPairFormat(product.boxType) || isSvFormat(product.boxType))) {
+    const siblings = await prisma.product.findMany({
+      where: {
+        status: "上架",
+        series: `收集啦151 ${edition151}`,
+        boxType: { in: [...SV_FORMATS] },
+        ...(product.language ? { language: product.language } : {}),
+      },
+      select: VARIANT_SELECT,
+    });
+    return siblings.length >= 2 ? sortBoxVariants(siblings.map(toOption)) : [];
+  }
   if (parseCsvSeriesKey(product.series) && (isSvFormat(product.boxType) || isPokemonPairFormat(product.boxType))) {
     return findSvVariants(product);
   }
@@ -275,6 +295,11 @@ function gemGroupKey(name: string, slug: string, language: string | null) {
   return `${key}::${language ?? ""}`;
 }
 
+function collection151GroupKey(series: string | null, language: string | null) {
+  const key = parse151SeriesKey(series);
+  return key ? `${key}::${language ?? ""}` : null;
+}
+
 /**
  * 列表页批量查规格，避免 N+1。
  */
@@ -298,6 +323,9 @@ export async function findBoxVariantsForProducts(
       isPokemonPairFormat(p.boxType) &&
       !parseCsvSeriesKey(p.series) &&
       parseSeriesBlock(p.series)
+  );
+  const collection151Products = products.filter(
+    (p) => Boolean(parse151SeriesKey(p.series)) && (isPokemonPairFormat(p.boxType) || isSvFormat(p.boxType))
   );
 
   if (opcProducts.length > 0) {
@@ -402,6 +430,31 @@ export async function findBoxVariantsForProducts(
       const gk = csvGroupKey(product.series, product.language);
       if (!gk) continue;
       const sorted = sortBoxVariants(byGroup.get(gk) ?? []);
+      if (sorted.length >= 2) result.set(product.id, sorted);
+    }
+  }
+
+  if (collection151Products.length > 0) {
+    const siblings: SiblingRow[] = await prisma.product.findMany({
+      where: {
+        status: "上架",
+        series: { in: ["收集啦151 旅", "收集啦151 望", "收集啦151 惊", "收集啦151 聚"] },
+        boxType: { in: [...SV_FORMATS] },
+      },
+      select: VARIANT_SELECT,
+    });
+    const byGroup = new Map<string, BoxVariantOption[]>();
+    for (const row of siblings) {
+      const key = collection151GroupKey(row.series, row.language);
+      if (!key) continue;
+      const list = byGroup.get(key) ?? [];
+      list.push(toOption(row));
+      byGroup.set(key, list);
+    }
+    for (const product of collection151Products) {
+      const key = collection151GroupKey(product.series, product.language);
+      if (!key) continue;
+      const sorted = sortBoxVariants(byGroup.get(key) ?? []);
       if (sorted.length >= 2) result.set(product.id, sorted);
     }
   }

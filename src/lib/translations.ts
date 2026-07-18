@@ -141,6 +141,7 @@ const dict: Record<string, Record<Lang, string>> = {
   card_add_cart:       { zh: "+ 加入购物车", ja: "カートに追加", en: "Add to Cart" },
   card_preorder:       { zh: "预售",         ja: "予約",          en: "Pre-order" },
   card_sold_out:       { zh: "售罄",         ja: "売切",          en: "Sold Out" },
+  price_pending:       { zh: "待核价",       ja: "価格確認中",    en: "Price pending" },
   card_new:            { zh: "新品",         ja: "NEW",           en: "New" },
   card_hot:            { zh: "热销",         ja: "HOT",           en: "Hot" },
   card_psa:            { zh: "PSA",          ja: "PSA",           en: "PSA" },

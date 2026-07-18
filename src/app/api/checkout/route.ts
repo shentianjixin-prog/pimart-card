@@ -70,6 +70,12 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    if (product.priceJpy <= 0) {
+      return NextResponse.json(
+        { error: `「${product.name}」尚未完成价格核验` },
+        { status: 409 }
+      );
+    }
     if (item.quantity < 1 || item.quantity > product.stock) {
       return NextResponse.json(
         { error: `「${product.name}」库存不足` },

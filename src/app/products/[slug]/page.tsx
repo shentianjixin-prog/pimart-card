@@ -72,7 +72,7 @@ export default async function ProductPage({
     image: product.images.split(",").map((image) => image.trim()).filter(Boolean),
     sku: product.id,
     category: product.category,
-    offers: {
+    ...(product.priceJpy > 0 ? { offers: {
       "@type": "Offer",
       url: productUrl,
       priceCurrency: "JPY",
@@ -81,7 +81,7 @@ export default async function ProductPage({
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
       itemCondition: "https://schema.org/NewCondition",
-    },
+    } } : {}),
   };
 
   return (

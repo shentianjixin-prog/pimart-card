@@ -91,6 +91,15 @@ try {
 }
 
 try {
+  execSync(`node ${join(root, "scripts", "ensure-catalog-completeness.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 151 / 航海王官方目录补全失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "ensure-release-dates.mjs")}`, {
     stdio: "inherit",
     env: process.env,

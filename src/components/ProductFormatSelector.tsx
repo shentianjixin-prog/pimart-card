@@ -12,7 +12,7 @@ import {
   isSvExtendedFormat,
   type BoxVariantOption,
 } from "@/lib/product-box-variant-types";
-import { formatJpy } from "@/lib/format";
+import { formatProductPrice } from "@/lib/format";
 
 export function ProductFormatSelector({
   variants,
@@ -182,7 +182,7 @@ export function ProductFormatSelector({
                               </span>
                             )}
                           </span>
-                          <span className="product-format-price">{formatJpy(v.priceJpy)}</span>
+                          <span className="product-format-price">{formatProductPrice(v.priceJpy, T("price_pending"))}</span>
                         </OptionShell>
                       );
                     })}
@@ -222,7 +222,7 @@ export function ProductFormatSelector({
                     </span>
                   )}
                 </span>
-                <span className="product-format-price">{formatJpy(v.priceJpy)}</span>
+                <span className="product-format-price">{formatProductPrice(v.priceJpy, T("price_pending"))}</span>
               </OptionShell>
             );
           })}
@@ -251,7 +251,7 @@ export function ProductFormatSelector({
               className="product-format-option"
             >
               <span className="product-format-name">{label}</span>
-              <span className="product-format-price">{formatJpy(v.priceJpy)}</span>
+              <span className="product-format-price">{formatProductPrice(v.priceJpy, T("price_pending"))}</span>
               {v.stock <= 0 ? (
                 <span className="product-format-stock is-out">{T("card_sold_out")}</span>
               ) : (
