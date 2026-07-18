@@ -21,6 +21,12 @@ const pending = db.prepare(`
   SELECT COUNT(*) AS count FROM Product
   WHERE priceJpy = 0 AND stock = 0 AND researchStatus LIKE '%价格待人工复核%'
 `).get();
+const csv1c = db.prepare(`
+  SELECT COUNT(*) AS count, COUNT(DISTINCT boxType) AS formats,
+         SUM(CASE WHEN images = '/products/csv1c-slim.png' THEN 1 ELSE 0 END) AS slimImages,
+         SUM(CASE WHEN images = '/products/csv1c-fat.png' THEN 1 ELSE 0 END) AS fatImages
+  FROM Product WHERE series = '朱・紫 CSV1c 亘古开来' AND status = '上架'
+`).get();
 
 const expected151 = new Set(["收集啦151 旅", "收集啦151 望", "收集啦151 惊", "收集啦151 聚"]);
 if (editions151.length !== 4 || editions151.some((row) => !expected151.has(row.series) || row.formats !== 6)) {
@@ -29,6 +35,9 @@ if (editions151.length !== 4 || editions151.some((row) => !expected151.has(row.s
 if (opc.length !== 16 || opc.some((row) => row.count < 3)) {
   throw new Error(`One Piece OPC audit failed: ${JSON.stringify(opc)}`);
 }
+if (csv1c.count !== 6 || csv1c.formats !== 6 || csv1c.slimImages !== 3 || csv1c.fatImages !== 3) {
+  throw new Error(`CSV1c catalog audit failed: ${JSON.stringify(csv1c)}`);
+}
 
-console.log(JSON.stringify({ editions151, opc, pendingPriceProducts: pending.count }, null, 2));
+console.log(JSON.stringify({ editions151, opc, csv1c, pendingPriceProducts: pending.count }, null, 2));
 db.close();

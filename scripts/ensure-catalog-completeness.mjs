@@ -1,5 +1,5 @@
 /**
- * 生产库目录补全：收集啦151 四版本 + 航海王简中官方目录缺项。
+ * 生产库目录补全：收集啦151 四版本、CSV1c 亘古开来、航海王简中官方目录缺项。
  *
  * 价格原则：只写入用户工作簿中已有的价格；未能从集换社公开网页核验的
  * 商品写 0 / 库存 0，并由前台显示“待核价”，绝不把 0 当作可购买价格。
@@ -24,7 +24,7 @@ const upsert = db.prepare(`
     images, boxType, featured, isPreorder, shippingDays, releaseDate, status,
     researchStatus, createdAt, updatedAt
   ) VALUES (
-    @id, @name, @slug, @category, @series, '简中', @description, @priceJpy, 0,
+    @id, @name, @slug, @category, @series, '简中', @description, @priceJpy, @stock,
     @images, @boxType, 0, 0, 6, @releaseDate, '上架', @researchStatus,
     CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
   )
@@ -35,7 +35,7 @@ const upsert = db.prepare(`
     language = excluded.language,
     description = excluded.description,
     priceJpy = excluded.priceJpy,
-    stock = 0,
+    stock = excluded.stock,
     images = excluded.images,
     boxType = excluded.boxType,
     releaseDate = excluded.releaseDate,
@@ -81,6 +81,31 @@ for (const edition of editions151) {
       researchStatus: format.price > 0 ? verifiedPrice : pendingPrice,
     });
   }
+}
+
+const csv1cFormats = [
+  { slug: "slim-box", boxType: "瘦盒", label: "瘦盒", image: "slim", price: 3200, stock: 10, spec: "5张装，每盒15包" },
+  { slug: "fat-box", boxType: "肥盒", label: "肥盒", image: "fat", price: 0, stock: 0, spec: "20张装，每盒6包" },
+  { slug: "slim-pack", boxType: "瘦散包", label: "瘦散包", image: "slim", price: 0, stock: 0, spec: "5张装散包" },
+  { slug: "fat-pack", boxType: "肥散包", label: "肥散包", image: "fat", price: 0, stock: 0, spec: "20张装散包" },
+  { slug: "slim-case", boxType: "瘦原箱", label: "瘦原箱", image: "slim", price: 0, stock: 0, spec: "5张装瘦盒原箱" },
+  { slug: "fat-case", boxType: "肥原箱", label: "肥原箱", image: "fat", price: 0, stock: 0, spec: "20张装肥盒原箱" },
+];
+for (const format of csv1cFormats) {
+  products.push({
+    id: randomUUID(),
+    name: `亘古开来 ${format.label}（简中）`,
+    slug: `csv1c-${format.slug}-简中`,
+    category: "宝可梦原盒",
+    series: "朱・紫 CSV1c 亘古开来",
+    description: `宝可梦卡牌朱&紫第一弹「亘古开来」，商品标记 CSV1c（兼容搜索：SCV1c），${format.spec}。2025年1月17日发售。`,
+    priceJpy: format.price,
+    stock: format.stock,
+    images: `/products/csv1c-${format.image}.png`,
+    boxType: format.boxType,
+    releaseDate: "2025-01-17",
+    researchStatus: format.price > 0 ? verifiedPrice : pendingPrice,
+  });
 }
 
 const opcSets = [
@@ -150,8 +175,13 @@ for (const [slug, name, series, boxType, releaseDate, image] of onePiecePending)
 }
 
 const transaction = db.transaction(() => {
+  db.prepare(`
+    UPDATE Product SET status = '下架', researchStatus = '已由正确 CSV1c 亘古开来规格替代', updatedAt = CURRENT_TIMESTAMP
+    WHERE slug = '朱-紫ex-強化拡張パック-box-简中'
+       OR (series = '朱・紫ex' AND name LIKE '%强化扩张包%')
+  `).run();
   for (const product of products) {
-    upsert.run({ ...product, releaseDate: `${product.releaseDate}T00:00:00.000Z` });
+    upsert.run({ ...product, stock: product.stock ?? 0, releaseDate: `${product.releaseDate}T00:00:00.000Z` });
   }
 
   const officialOpc = [
@@ -187,5 +217,5 @@ const transaction = db.transaction(() => {
 });
 
 transaction();
-console.log(`[catalog-completeness] 已校准/补齐 ${products.length} 个 151 与航海王商品规格`);
+console.log(`[catalog-completeness] 已校准/补齐 ${products.length} 个重点目录商品规格`);
 db.close();

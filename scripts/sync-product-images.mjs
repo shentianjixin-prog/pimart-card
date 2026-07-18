@@ -115,6 +115,7 @@ const IMAGE_MAP = {
  * 不能只按 slug 映射：旧 Railway Volume 中保留了历史 slug，但 series / boxType 稳定。
  */
 const CSV_FORMAT_IMAGES = {
+  CSV1C: { slim: "/products/csv1c-slim.png", fat: "/products/csv1c-fat.png" },
   CSV2C: { slim: "/products/csv2c-slim.png", fat: "/products/csv2c-fat.png" },
   CSV3C: { slim: "/products/csv3c-slim.png", fat: "/products/csv3c-fat.png" },
   CSV4C: { slim: "/products/csv4c-slim.png", fat: "/products/csv4c-fat.png" },
