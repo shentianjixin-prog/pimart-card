@@ -141,6 +141,7 @@ const LEGACY_FORMAT_IMAGES = {
   CS4B: { slim: "/products/cs4b-slim.png", fat: "/products/cs4b-fat.png" },
   CS5A: { slim: "/products/cs5a-slim.png", fat: "/products/cs5a-fat.png" },
   CS5B: { slim: "/products/cs5b-slim.png", fat: "/products/cs5b-fat.png" },
+  CS6B: { slim: "/products/cs6b-slim.png", fat: "/products/cs6b-fat.png" },
 };
 
 // 海贼王旧库曾有 slug 与系列名脱节的记录；按系列编号校准比只依赖 slug 更可靠。

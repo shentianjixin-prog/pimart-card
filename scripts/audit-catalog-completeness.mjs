@@ -1,4 +1,4 @@
-/** Read-only acceptance audit for the 151 / One Piece catalog migration. */
+/** Read-only acceptance audit for the 151 / CSV1c / CS6b / One Piece catalog migration. */
 import Database from "better-sqlite3";
 import { existsSync } from "fs";
 
@@ -27,6 +27,12 @@ const csv1c = db.prepare(`
          SUM(CASE WHEN images = '/products/csv1c-fat.png' THEN 1 ELSE 0 END) AS fatImages
   FROM Product WHERE series = '朱・紫 CSV1c 亘古开来' AND status = '上架'
 `).get();
+const cs6b = db.prepare(`
+  SELECT COUNT(*) AS count, COUNT(DISTINCT boxType) AS formats,
+         SUM(CASE WHEN images = '/products/cs6b-slim.png' THEN 1 ELSE 0 END) AS slimImages,
+         SUM(CASE WHEN images = '/products/cs6b-fat.png' THEN 1 ELSE 0 END) AS fatImages
+  FROM Product WHERE series = '剑&盾 CS6b 碧海暗影 逐' AND status = '上架'
+`).get();
 
 const expected151 = new Set(["收集啦151 旅", "收集啦151 望", "收集啦151 惊", "收集啦151 聚"]);
 if (editions151.length !== 4 || editions151.some((row) => !expected151.has(row.series) || row.formats !== 6)) {
@@ -38,6 +44,9 @@ if (opc.length !== 16 || opc.some((row) => row.count < 3)) {
 if (csv1c.count !== 6 || csv1c.formats !== 6 || csv1c.slimImages !== 3 || csv1c.fatImages !== 3) {
   throw new Error(`CSV1c catalog audit failed: ${JSON.stringify(csv1c)}`);
 }
+if (cs6b.count !== 6 || cs6b.formats !== 6 || cs6b.slimImages !== 3 || cs6b.fatImages !== 3) {
+  throw new Error(`CS6b catalog audit failed: ${JSON.stringify(cs6b)}`);
+}
 
-console.log(JSON.stringify({ editions151, opc, csv1c, pendingPriceProducts: pending.count }, null, 2));
+console.log(JSON.stringify({ editions151, opc, csv1c, cs6b, pendingPriceProducts: pending.count }, null, 2));
 db.close();

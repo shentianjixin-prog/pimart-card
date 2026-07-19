@@ -1,5 +1,5 @@
 /**
- * 生产库目录补全：收集啦151 四版本、CSV1c 亘古开来、航海王简中官方目录缺项。
+ * 生产库目录补全：收集啦151 四版本、CSV1c 亘古开来、CS6b 碧海暗影 逐、航海王简中官方目录缺项。
  *
  * 价格原则：只写入用户工作簿中已有的价格；未能从集换社公开网页核验的
  * 商品写 0 / 库存 0，并由前台显示“待核价”，绝不把 0 当作可购买价格。
@@ -105,6 +105,31 @@ for (const format of csv1cFormats) {
     boxType: format.boxType,
     releaseDate: "2025-01-17",
     researchStatus: format.price > 0 ? verifiedPrice : pendingPrice,
+  });
+}
+
+const cs6bFormats = [
+  { slug: "slim-box", boxType: "瘦盒", label: "瘦盒", image: "slim", spec: "5张装，每盒30包" },
+  { slug: "fat-box", boxType: "肥盒", label: "肥盒", image: "fat", spec: "25张装原盒" },
+  { slug: "slim-pack", boxType: "瘦散包", label: "瘦散包", image: "slim", spec: "5张装散包，包含1张闪卡" },
+  { slug: "fat-pack", boxType: "肥散包", label: "肥散包", image: "fat", spec: "25张装散包，包含5张闪卡" },
+  { slug: "slim-case", boxType: "瘦原箱", label: "瘦原箱", image: "slim", spec: "5张装瘦盒原箱" },
+  { slug: "fat-case", boxType: "肥原箱", label: "肥原箱", image: "fat", spec: "25张装肥盒原箱" },
+];
+for (const format of cs6bFormats) {
+  products.push({
+    id: randomUUID(),
+    name: `碧海暗影 逐 ${format.label}（简中）`,
+    slug: `cs6b-${format.slug}-简中`,
+    category: "宝可梦原盒",
+    series: "剑&盾 CS6b 碧海暗影 逐",
+    description: `宝可梦卡牌剑&盾第六弹「碧海暗影 逐」，商品标记 CS6bC，${format.spec}。2024年9月20日发售；与 CS6aC「碧海暗影 啸」为两个独立版本。`,
+    priceJpy: 0,
+    stock: 0,
+    images: `/products/cs6b-${format.image}.png`,
+    boxType: format.boxType,
+    releaseDate: "2024-09-20",
+    researchStatus: pendingPrice,
   });
 }
 
