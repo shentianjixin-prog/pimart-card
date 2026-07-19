@@ -122,7 +122,7 @@ for (const format of cs6bFormats) {
     name: `碧海暗影 逐 ${format.label}（简中）`,
     slug: `cs6b-${format.slug}-简中`,
     category: "宝可梦原盒",
-    series: "剑&盾 CS6b 碧海暗影 逐",
+    series: "剑&盾 CS6b",
     description: `宝可梦卡牌剑&盾第六弹「碧海暗影 逐」，商品标记 CS6bC，${format.spec}。2024年9月20日发售；与 CS6aC「碧海暗影 啸」为两个独立版本。`,
     priceJpy: 0,
     stock: 0,

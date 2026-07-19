@@ -31,7 +31,7 @@ const cs6b = db.prepare(`
   SELECT COUNT(*) AS count, COUNT(DISTINCT boxType) AS formats,
          SUM(CASE WHEN images = '/products/cs6b-slim.png' THEN 1 ELSE 0 END) AS slimImages,
          SUM(CASE WHEN images = '/products/cs6b-fat.png' THEN 1 ELSE 0 END) AS fatImages
-  FROM Product WHERE series = '剑&盾 CS6b 碧海暗影 逐' AND status = '上架'
+  FROM Product WHERE series = '剑&盾 CS6b' AND status = '上架'
 `).get();
 
 const expected151 = new Set(["收集啦151 旅", "收集啦151 望", "收集啦151 惊", "收集啦151 聚"]);
