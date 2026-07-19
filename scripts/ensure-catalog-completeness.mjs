@@ -75,7 +75,7 @@ for (const edition of editions151) {
       series,
       description: `${series}官方简中商品，${format.spec}。旅、望、惊、聚为四个不同版本，商品与图片不混用。`,
       priceJpy: format.price,
-      images: `/products/pokemon151-official/151-${edition.key}-${format.image}.${edition.key === "lv" && format.image === "fat" ? "svg" : "png"}`,
+      images: `/products/151c-${edition.key}-${format.image}.png`,
       boxType: format.boxType,
       releaseDate: edition.date,
       researchStatus: format.price > 0 ? verifiedPrice : pendingPrice,

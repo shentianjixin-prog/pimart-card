@@ -1972,5 +1972,263 @@
         "local": "/products/topcards/cbb5c-5.webp"
       }
     ]
+  },
+  "共逐荣光-box-简中": {
+    "set_id": "csv10c",
+    "topcards": [
+      "/products/topcards/csv10c-1.webp",
+      "/products/topcards/csv10c-2.webp",
+      "/products/topcards/csv10c-3.webp",
+      "/products/topcards/csv10c-4.webp",
+      "/products/topcards/csv10c-5.webp"
+    ],
+    "meta": [
+      {
+        "name": "Team Rocket's Mewtwo ex",
+        "image_url": "https://images.pikaqian.com/csv10c/b1574251-cc83-410f-ac1a-da6693dd6071.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-1.webp"
+      },
+      {
+        "name": "Ethan's Ho-Oh ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d811f89a-d894-4494-b883-da146084fb77.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-2.webp"
+      },
+      {
+        "name": "Cynthia's Garchomp ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d998a0d7-c07f-4030-8053-adfd9350920b.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-3.webp"
+      },
+      {
+        "name": "N's Zoroark ex",
+        "image_url": "https://images.pikaqian.com/csv10c/31b3ff58-87f2-4fa9-bc07-c5dfa16d88fa.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-4.webp"
+      },
+      {
+        "name": "Lillie's Clefairy ex",
+        "image_url": "https://images.pikaqian.com/csv10c/7a4a0c5f-4d72-4ddc-bb81-d4690ebb721e.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-5.webp"
+      }
+    ],
+    "note": "无行情时手选代表性ex"
+  },
+  "共逐荣光-slim-box-简中": {
+    "set_id": "csv10c",
+    "topcards": [
+      "/products/topcards/csv10c-1.webp",
+      "/products/topcards/csv10c-2.webp",
+      "/products/topcards/csv10c-3.webp",
+      "/products/topcards/csv10c-4.webp",
+      "/products/topcards/csv10c-5.webp"
+    ],
+    "meta": [
+      {
+        "name": "Team Rocket's Mewtwo ex",
+        "image_url": "https://images.pikaqian.com/csv10c/b1574251-cc83-410f-ac1a-da6693dd6071.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-1.webp"
+      },
+      {
+        "name": "Ethan's Ho-Oh ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d811f89a-d894-4494-b883-da146084fb77.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-2.webp"
+      },
+      {
+        "name": "Cynthia's Garchomp ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d998a0d7-c07f-4030-8053-adfd9350920b.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-3.webp"
+      },
+      {
+        "name": "N's Zoroark ex",
+        "image_url": "https://images.pikaqian.com/csv10c/31b3ff58-87f2-4fa9-bc07-c5dfa16d88fa.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-4.webp"
+      },
+      {
+        "name": "Lillie's Clefairy ex",
+        "image_url": "https://images.pikaqian.com/csv10c/7a4a0c5f-4d72-4ddc-bb81-d4690ebb721e.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-5.webp"
+      }
+    ],
+    "note": "无行情时手选代表性ex"
+  },
+  "共逐荣光-fat-pack-简中": {
+    "set_id": "csv10c",
+    "topcards": [
+      "/products/topcards/csv10c-1.webp",
+      "/products/topcards/csv10c-2.webp",
+      "/products/topcards/csv10c-3.webp",
+      "/products/topcards/csv10c-4.webp",
+      "/products/topcards/csv10c-5.webp"
+    ],
+    "meta": [
+      {
+        "name": "Team Rocket's Mewtwo ex",
+        "image_url": "https://images.pikaqian.com/csv10c/b1574251-cc83-410f-ac1a-da6693dd6071.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-1.webp"
+      },
+      {
+        "name": "Ethan's Ho-Oh ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d811f89a-d894-4494-b883-da146084fb77.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-2.webp"
+      },
+      {
+        "name": "Cynthia's Garchomp ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d998a0d7-c07f-4030-8053-adfd9350920b.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-3.webp"
+      },
+      {
+        "name": "N's Zoroark ex",
+        "image_url": "https://images.pikaqian.com/csv10c/31b3ff58-87f2-4fa9-bc07-c5dfa16d88fa.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-4.webp"
+      },
+      {
+        "name": "Lillie's Clefairy ex",
+        "image_url": "https://images.pikaqian.com/csv10c/7a4a0c5f-4d72-4ddc-bb81-d4690ebb721e.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-5.webp"
+      }
+    ],
+    "note": "无行情时手选代表性ex"
+  },
+  "共逐荣光-slim-pack-简中": {
+    "set_id": "csv10c",
+    "topcards": [
+      "/products/topcards/csv10c-1.webp",
+      "/products/topcards/csv10c-2.webp",
+      "/products/topcards/csv10c-3.webp",
+      "/products/topcards/csv10c-4.webp",
+      "/products/topcards/csv10c-5.webp"
+    ],
+    "meta": [
+      {
+        "name": "Team Rocket's Mewtwo ex",
+        "image_url": "https://images.pikaqian.com/csv10c/b1574251-cc83-410f-ac1a-da6693dd6071.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-1.webp"
+      },
+      {
+        "name": "Ethan's Ho-Oh ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d811f89a-d894-4494-b883-da146084fb77.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-2.webp"
+      },
+      {
+        "name": "Cynthia's Garchomp ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d998a0d7-c07f-4030-8053-adfd9350920b.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-3.webp"
+      },
+      {
+        "name": "N's Zoroark ex",
+        "image_url": "https://images.pikaqian.com/csv10c/31b3ff58-87f2-4fa9-bc07-c5dfa16d88fa.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-4.webp"
+      },
+      {
+        "name": "Lillie's Clefairy ex",
+        "image_url": "https://images.pikaqian.com/csv10c/7a4a0c5f-4d72-4ddc-bb81-d4690ebb721e.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-5.webp"
+      }
+    ],
+    "note": "无行情时手选代表性ex"
+  },
+  "共逐荣光-fat-case-简中": {
+    "set_id": "csv10c",
+    "topcards": [
+      "/products/topcards/csv10c-1.webp",
+      "/products/topcards/csv10c-2.webp",
+      "/products/topcards/csv10c-3.webp",
+      "/products/topcards/csv10c-4.webp",
+      "/products/topcards/csv10c-5.webp"
+    ],
+    "meta": [
+      {
+        "name": "Team Rocket's Mewtwo ex",
+        "image_url": "https://images.pikaqian.com/csv10c/b1574251-cc83-410f-ac1a-da6693dd6071.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-1.webp"
+      },
+      {
+        "name": "Ethan's Ho-Oh ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d811f89a-d894-4494-b883-da146084fb77.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-2.webp"
+      },
+      {
+        "name": "Cynthia's Garchomp ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d998a0d7-c07f-4030-8053-adfd9350920b.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-3.webp"
+      },
+      {
+        "name": "N's Zoroark ex",
+        "image_url": "https://images.pikaqian.com/csv10c/31b3ff58-87f2-4fa9-bc07-c5dfa16d88fa.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-4.webp"
+      },
+      {
+        "name": "Lillie's Clefairy ex",
+        "image_url": "https://images.pikaqian.com/csv10c/7a4a0c5f-4d72-4ddc-bb81-d4690ebb721e.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-5.webp"
+      }
+    ],
+    "note": "无行情时手选代表性ex"
+  },
+  "共逐荣光-slim-case-简中": {
+    "set_id": "csv10c",
+    "topcards": [
+      "/products/topcards/csv10c-1.webp",
+      "/products/topcards/csv10c-2.webp",
+      "/products/topcards/csv10c-3.webp",
+      "/products/topcards/csv10c-4.webp",
+      "/products/topcards/csv10c-5.webp"
+    ],
+    "meta": [
+      {
+        "name": "Team Rocket's Mewtwo ex",
+        "image_url": "https://images.pikaqian.com/csv10c/b1574251-cc83-410f-ac1a-da6693dd6071.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-1.webp"
+      },
+      {
+        "name": "Ethan's Ho-Oh ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d811f89a-d894-4494-b883-da146084fb77.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-2.webp"
+      },
+      {
+        "name": "Cynthia's Garchomp ex",
+        "image_url": "https://images.pikaqian.com/csv10c/d998a0d7-c07f-4030-8053-adfd9350920b.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-3.webp"
+      },
+      {
+        "name": "N's Zoroark ex",
+        "image_url": "https://images.pikaqian.com/csv10c/31b3ff58-87f2-4fa9-bc07-c5dfa16d88fa.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-4.webp"
+      },
+      {
+        "name": "Lillie's Clefairy ex",
+        "image_url": "https://images.pikaqian.com/csv10c/7a4a0c5f-4d72-4ddc-bb81-d4690ebb721e.webp",
+        "set_id": "csv10c",
+        "local": "/products/topcards/csv10c-5.webp"
+      }
+    ],
+    "note": "无行情时手选代表性ex"
   }
 }

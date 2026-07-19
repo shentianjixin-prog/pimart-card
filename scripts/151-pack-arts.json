@@ -1,0 +1,22 @@
+{
+  "旅": {
+    "slim": "/products/151c-lv-slim.png",
+    "fat": "/products/151c-lv-fat.png",
+    "box": "/products/151c-lv-box.png"
+  },
+  "望": {
+    "slim": "/products/151c-wang-slim.png",
+    "fat": "/products/151c-wang-fat.png",
+    "box": "/products/151c-wang-box.png"
+  },
+  "惊": {
+    "slim": "/products/151c-jing-slim.png",
+    "fat": "/products/151c-jing-fat.png",
+    "box": "/products/151c-jing-box.png"
+  },
+  "聚": {
+    "slim": "/products/151c-ju-slim.png",
+    "fat": "/products/151c-ju-fat.png",
+    "box": "/products/151c-ju-box.png"
+  }
+}

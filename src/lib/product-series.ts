@@ -12,7 +12,7 @@ export const POKEMON_SERIES: SeriesOption[] = [
   { id: "sun-moon", label: "太阳&月亮", match: ["太阳&月亮"] },
   { id: "sword-shield", label: "剑&盾", match: ["剑&盾"] },
   { id: "scarlet-violet", label: "朱・紫", match: ["朱・紫", "朱紫"] },
-  { id: "151", label: "151", match: ["151"] },
+  { id: "151", label: "151", match: ["151", "收集啦151"] },
   { id: "gem-pack", label: "宝石包", match: ["宝石包"] },
 ];
 
