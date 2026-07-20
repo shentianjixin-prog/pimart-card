@@ -109,23 +109,33 @@ try {
 }
 
 try {
-  // 按网站数据表全量上架 + catalogSort（宝可梦→海贼王）
-  execSync(`python ${join(root, "scripts", "sync-from-website-xlsx.py")}`, {
+  // 优先用已导出的 JSON 目录（不依赖 openpyxl），写入 Volume DATABASE_URL
+  execSync(`node ${join(root, "scripts", "sync-from-website-catalog.mjs")}`, {
     stdio: "inherit",
     env: process.env,
   });
 } catch (err) {
-  console.error("[railway] 网站数据表同步失败（可忽略若未挂载表格）:", err);
+  console.error("[railway] website-catalog.json 同步失败:", err);
+}
+
+try {
+  // 本地/有 openpyxl 时再按 xlsx 覆盖（桌面表优先）
+  execSync(`python3 ${join(root, "scripts", "sync-from-website-xlsx.py")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 网站数据表 xlsx 同步跳过（无 openpyxl/表格时正常）:", err?.message || err);
 }
 
 try {
   // 礼盒/STC/EBC 图位与系列规格二次校准
-  execSync(`python ${join(root, "scripts", "fix-listing-images-and-specs.py")}`, {
+  execSync(`python3 ${join(root, "scripts", "fix-listing-images-and-specs.py")}`, {
     stdio: "inherit",
     env: process.env,
   });
 } catch (err) {
-  console.error("[railway] 上架图/规格校准失败:", err);
+  console.error("[railway] 上架图/规格校准失败:", err?.message || err);
 }
 
 try {

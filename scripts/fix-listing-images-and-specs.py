@@ -72,11 +72,11 @@ NAME_IMAGE = [
     ("硬币收藏艺术展示框", "/products/151-box.png"),
 ]
 
-# 系列名对齐：纪念收藏合集 → EBC-01，便于规格切换
+# 系列名对齐：纪念收藏合集 → 官方商品编号 EB-01，便于规格切换
 SERIES_FIX = {
-    "特别补充包-纪念收藏合集-原盒-简中-": "EBC-01",
-    "特别补充包-纪念收藏合集-散包-简中-": "EBC-01",
-    "特别补充包-纪念收藏合集-原箱-简中-": "EBC-01",
+    "特别补充包-纪念收藏合集-原盒-简中-": "EB-01",
+    "特别补充包-纪念收藏合集-散包-简中-": "EB-01",
+    "特别补充包-纪念收藏合集-原箱-简中-": "EB-01",
 }
 
 
@@ -150,8 +150,8 @@ def fix_db(db: Path) -> None:
         if new_series != series:
             n_series += 1
         # 纪念收藏合集 series 统一
-        if "纪念收藏合集" in name and series != "EBC-01":
-            new_series = "EBC-01"
+        if "纪念收藏合集" in name and series != "EB-01":
+            new_series = "EB-01"
             n_series += 1
         new_desc = ensure_spec_note(desc, box_type or "", new_series)
         if new_desc != desc:

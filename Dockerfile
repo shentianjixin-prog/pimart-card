@@ -1,8 +1,9 @@
 FROM node:20-bookworm-slim
 
-# better-sqlite3 需要原生编译
+# better-sqlite3 需要原生编译；openpyxl 供可选 xlsx 同步
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3 make g++ \
+  && apt-get install -y --no-install-recommends python3 python3-pip make g++ \
+  && pip3 install --break-system-packages --no-cache-dir openpyxl \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

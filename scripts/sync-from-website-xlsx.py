@@ -135,11 +135,12 @@ def normalize_pokemon_box(box: str | None, spec: str | None) -> str | None:
             return "瘦原箱" if b == "瘦盒" else "肥原箱"
         return b
     if "补充包(肥盒)" in b or b == "补充包(肥盒)":
+        # 剑盾等仅肥盒轨：用原盒/散包/原箱，避免被「肥盒作规格附属」从列表隐藏
         if s == "散包":
-            return "肥散包"
+            return "散包"
         if s == "原箱":
-            return "肥原箱"
-        return "肥盒"
+            return "原箱"
+        return "原盒"
     if "强化包(瘦盒)" in b:
         if s == "散包":
             return "瘦散包"
@@ -183,6 +184,16 @@ def pokemon_slug(
     excel_slug: str | None,
     name: str,
 ) -> str:
+    # 剑盾「补充包(肥盒)」映射后的原盒/散包/原箱：必须按规格拆 slug
+    if box_type in ("原盒", "散包", "原箱") and (
+        (series and ("剑" in series or "CS" in series))
+        or "补充包" in name
+        or "强化包" in name
+    ):
+        base = (title or re.sub(r"[^\w\u4e00-\u9fff-]+", "-", name.strip())[:40]).strip("-")
+        suffix = {"原盒": "box", "散包": "pack", "原箱": "case"}[box_type]
+        return f"{base}-{suffix}-简中"
+
     # 礼盒/周边等：绝不能走扩充包 slug（否则会占掉 pokemon-151-*-slim-box）
     if box_type not in SV_BOX:
         if excel_slug and str(excel_slug).strip():
@@ -466,7 +477,11 @@ def parse_excel() -> list[dict]:
         note = ws.cell(r, 18).value
         slug_x = ws.cell(r, 20).value
         s_spec = str(spec).strip() if spec else "原盒"
-        box_type = s_spec if s_spec in ("原盒", "散包", "原箱") else (str(box).strip() if box else "原盒")
+        box_s = str(box).strip() if box else ""
+        if box_s in ("礼盒", "专属礼盒", "大礼盒", "周边"):
+            box_type = box_s
+        else:
+            box_type = s_spec if s_spec in ("原盒", "散包", "原箱") else (box_s or "原盒")
         if box_type == "特别版":
             box_type = "原盒"
         code = opc_code(str(series) if series else None, str(name))
@@ -691,12 +706,15 @@ def delist_orphans(conn: sqlite3.Connection, items: list[dict]) -> int:
             OR category='海贼王'
             OR category LIKE '%ONE%'
             OR series LIKE 'OPC%'
+            OR series LIKE 'EB%'
             OR series LIKE 'EBC%'
             OR series LIKE 'PRB%'
             OR series LIKE 'STC%'
+            OR series LIKE '航海王%'
             OR name LIKE '收集啦151%'
             OR slug LIKE 'pokemon-151%'
             OR slug LIKE '收集啦151%'
+            OR slug LIKE 'onepiece-gift%'
           )
         """
     ).fetchall()
