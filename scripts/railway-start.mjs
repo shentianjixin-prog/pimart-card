@@ -109,6 +109,26 @@ try {
 }
 
 try {
+  // 按网站数据表全量上架 + catalogSort（宝可梦→海贼王）
+  execSync(`python ${join(root, "scripts", "sync-from-website-xlsx.py")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 网站数据表同步失败（可忽略若未挂载表格）:", err);
+}
+
+try {
+  // 礼盒/STC/EBC 图位与系列规格二次校准
+  execSync(`python ${join(root, "scripts", "fix-listing-images-and-specs.py")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 上架图/规格校准失败:", err);
+}
+
+try {
   execSync(`node ${join(root, "scripts", "sync-product-images.mjs")}`, {
     stdio: "inherit",
     env: process.env,

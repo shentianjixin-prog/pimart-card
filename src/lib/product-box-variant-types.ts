@@ -26,10 +26,11 @@ const SV_FORMAT_SET = new Set<string>(SV_FORMATS);
 const SV_EXTENDED_SET = new Set<string>(SV_EXTENDED_FORMATS);
 
 function formatRank(boxType: string) {
+  // 表格约定：瘦盒优先，再肥盒；海贼王原盒→散包→原箱
   const sv = SV_FORMATS.indexOf(boxType as (typeof SV_FORMATS)[number]);
   if (sv >= 0) return sv;
-  if (boxType === "肥盒") return 0;
-  if (boxType === "瘦盒") return 1;
+  if (boxType === "瘦盒") return 0;
+  if (boxType === "肥盒") return 1;
   if (boxType === "宝石包") return 10;
   const opc = OPC_FORMATS.indexOf(boxType as (typeof OPC_FORMATS)[number]);
   return opc >= 0 ? 10 + opc : 99;

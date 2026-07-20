@@ -59,11 +59,15 @@ export function parseSeriesBlock(series: string | null | undefined): SeriesBlock
   return null;
 }
 
-/** 解析海贼王 OPC 系列键，如 OPC-01 */
+/** 解析海贼王系列键：OPC / EBC / PRBC / STC */
 export function parseOpcSeriesKey(series: string | null | undefined): string | null {
   if (!series) return null;
-  const m = series.match(/^(OPC-\d+)\b/i);
-  return m ? m[1].toUpperCase() : null;
+  const m = series.match(/^(OPC-\d+|EBC-\d+|PRBC?-\d+|STC-\S+)/i);
+  if (!m) return null;
+  let key = m[1].toUpperCase();
+  if (/^PRB\d/i.test(key)) key = key.replace(/^PRB/i, "PRBC-");
+  if (key.startsWith("PRB-")) key = key.replace(/^PRB-/, "PRBC-");
+  return key;
 }
 
 /** 解析朱・紫 CSV 键，如 CSV10c */

@@ -30,6 +30,7 @@ const PRODUCT_COLUMNS = [
   { name: "status", ddl: 'ALTER TABLE "Product" ADD COLUMN "status" TEXT NOT NULL DEFAULT \'上架\'' },
   { name: "researchStatus", ddl: 'ALTER TABLE "Product" ADD COLUMN "researchStatus" TEXT' },
   { name: "priceUpdatedAt", ddl: 'ALTER TABLE "Product" ADD COLUMN "priceUpdatedAt" DATETIME' },
+  { name: "catalogSort", ddl: 'ALTER TABLE "Product" ADD COLUMN "catalogSort" INTEGER NOT NULL DEFAULT 999999' },
 ];
 
 const db = new Database(dbPath);

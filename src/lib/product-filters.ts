@@ -69,7 +69,7 @@ export const VARIANT_ONLY_BOX_TYPES = [
   "瘦散包",
   "肥原箱",
   "瘦原箱",
-  "瘦盒", // 朱紫瘦盒规格附属，列表只展示肥盒主 SKU
+  "肥盒", // 表格「瘦盒优先」：列表展示瘦盒主 SKU，肥盒作详情规格
 ] as const;
 
 /** 前台列表 / 首页用：上架且排除规格附属 SKU */
@@ -514,7 +514,13 @@ export function buildOrderBy(
       return [{ priceUpdatedAt: "desc" }, { createdAt: "desc" }];
     case "featured":
     default:
-      return [{ featured: "desc" }, { releaseDate: "desc" }, { createdAt: "desc" }];
+      // 默认：严格按网站数据表顺序（宝可梦→海贼王）；推荐仅作次级并列
+      return [
+        { catalogSort: "asc" },
+        { featured: "desc" },
+        { releaseDate: "desc" },
+        { createdAt: "desc" },
+      ];
   }
 }
 

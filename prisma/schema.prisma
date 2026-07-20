@@ -35,6 +35,8 @@ model Product {
   status         String      @default("上架") // 上架 / 下架
   researchStatus String?
   priceUpdatedAt DateTime?
+  /** 网站数据表顺序：宝可梦 → 海贼王，数值越小越靠前 */
+  catalogSort    Int         @default(999999)
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
   orderItems     OrderItem[]

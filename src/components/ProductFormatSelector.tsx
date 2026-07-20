@@ -34,8 +34,11 @@ export function ProductFormatSelector({
   const isGem = series === "宝石包";
   const isOpc = Boolean(series && /^OPC-\d+/i.test(series));
   const hasPokemonPair = ordered.some((v) => isPokemonPairFormat(v.boxType));
-  const currentGroup = ordered.find((v) => v.slug === currentSlug)?.boxType.startsWith("肥") ? "fat" : "slim";
-  const [openGroup, setOpenGroup] = useState<"slim" | "fat">(currentGroup);
+  const currentGroup = ordered.find((v) => v.slug === currentSlug)?.boxType.startsWith("肥")
+    ? "fat"
+    : "slim";
+  // 表格默认瘦盒优先：无当前规格时展开瘦组
+  const [openGroup, setOpenGroup] = useState<"slim" | "fat">(currentGroup || "slim");
 
   useEffect(() => {
     setOpenGroup(currentGroup);
