@@ -24,8 +24,9 @@ if (!existsSync(dbPath)) {
   process.exit(0);
 }
 
+const raw = readFileSync(catalogPath, "utf8").replace(/^\uFEFF/, "");
 /** @type {Array<Record<string, any>>} */
-const items = JSON.parse(readFileSync(catalogPath, "utf8"));
+const items = JSON.parse(raw);
 if (!Array.isArray(items) || items.length === 0) {
   console.warn("[catalog-sync] 目录为空，跳过");
   process.exit(0);
@@ -88,6 +89,18 @@ function mergeTopcards(slug, cover) {
   return tops.length ? [cover, ...tops].join(",") : cover;
 }
 
+function normalizeReleaseDate(value) {
+  if (!value) return null;
+  const s = String(value).trim();
+  if (!s) return null;
+  // Excel 常出 "2026-12-01 00:00:00" → ISO
+  if (/^\d{4}-\d{2}-\d{2}/.test(s)) {
+    const day = s.slice(0, 10);
+    return `${day}T00:00:00.000Z`;
+  }
+  return s;
+}
+
 const slugSet = new Set(items.map((it) => it.slug));
 let inserted = 0;
 let updated = 0;
@@ -110,7 +123,7 @@ const tx = db.transaction(() => {
       featured: Number(it.featured || 0),
       isPreorder: Number(it.isPreorder || 0),
       shippingDays: Number(it.shippingDays || 6),
-      releaseDate: it.releaseDate ?? null,
+      releaseDate: normalizeReleaseDate(it.releaseDate),
       costPrice: it.costPrice ?? null,
       catalogSort: Number(it.catalogSort ?? 999999),
     };

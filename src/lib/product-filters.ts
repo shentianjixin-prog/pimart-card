@@ -323,16 +323,21 @@ const ONEPIECE_WHERE: Prisma.ProductWhereInput = {
     {
       OR: [
         { category: { contains: "海贼王" } },
+        { category: { contains: "航海王" } },
         { category: { contains: "ワンピース" } },
         { category: { contains: "One Piece" } },
         { name: { startsWith: "OPC-" } },
         { name: { startsWith: "EBC-" } },
+        { name: { startsWith: "EB-" } },
         { name: { startsWith: "STC-" } },
         { name: { startsWith: "PRB" } },
+        { name: { contains: "航海王" } },
         { series: { startsWith: "OPC-" } },
         { series: { startsWith: "EBC-" } },
+        { series: { startsWith: "EB-" } },
         { series: { startsWith: "STC-" } },
         { series: { startsWith: "PRB" } },
+        { series: { contains: "航海王" } },
       ],
     },
     // 避免 NARUTOP 等被 series contains "OP" 误伤
