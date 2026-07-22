@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useT } from "@/lib/lang-context";
 import { PimartLogo } from "@/components/PimartLogo";
-import { B2B_EMAIL, SUPPORT_EMAIL } from "@/lib/site";
+import { INSTAGRAM_URL, TWITTER_URL } from "@/lib/site";
 
 export function Footer() {
   const T = useT();
@@ -21,16 +21,20 @@ export function Footer() {
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               <a
-                href={`mailto:${SUPPORT_EMAIL}`}
+                href={TWITTER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="site-footer-contact"
               >
-                Customer care ↗
+                {T("footer_twitter")} ↗
               </a>
               <a
-                href={`mailto:${B2B_EMAIL}`}
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="site-footer-contact"
               >
-                B2B desk ↗
+                {T("footer_instagram")} ↗
               </a>
             </div>
           </div>

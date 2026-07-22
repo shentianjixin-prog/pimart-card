@@ -10,6 +10,15 @@ export const SUPPORT_EMAIL =
 export const B2B_EMAIL =
   process.env.NEXT_PUBLIC_B2B_EMAIL?.trim() || "info@pimartcard.com";
 
+/** 官方 X（Twitter）主页 */
+export const TWITTER_URL =
+  process.env.NEXT_PUBLIC_TWITTER_URL?.trim() || "https://x.com/PiMartTCG_JP";
+
+/** 官方 Instagram 主页 */
+export const INSTAGRAM_URL =
+  process.env.NEXT_PUBLIC_INSTAGRAM_URL?.trim() ||
+  "https://www.instagram.com/kandadesu111/";
+
 /** 主体信息（关于页 / 特商法） */
 export const COMPANY_FOUNDED_YEAR = 2022;
 /** 网站及业务负责人 */

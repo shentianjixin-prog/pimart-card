@@ -315,7 +315,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_slide2_sub:   { zh: "最新未开封 BOX 持续更新", ja: "最新未開封BOXを随時更新", en: "Fresh sealed boxes added regularly" },
   hero_slide2_cta:   { zh: "浏览新品", ja: "新着商品を見る", en: "Shop New Arrivals" },
 
-  hero_slide3_title: { zh: "原盒臻选", ja: "未開封BOX厳選", en: "Sealed Selection" },
+  hero_slide3_title: { zh: "产品甄选", ja: "厳選コレクション", en: "Curated Selection" },
   hero_slide3_desc:  { zh: "全球直供 · 正品保证", ja: "世界直送・正規品保証", en: "Global Direct Supply · Authentic Guarantee" },
   hero_slide3_sub:   { zh: "多语种现货与预售", ja: "多言語の現物・予約", en: "Multilingual stock & pre-order" },
   hero_slide3_cta:   { zh: "立即选购", ja: "購入する", en: "Shop Now" },
@@ -371,6 +371,8 @@ const dict: Record<string, Record<Lang, string>> = {
 
   // 页脚扩展
   footer_tagline:  { zh: "全球交易平台", ja: "グローバルトレーディングプラットフォーム", en: "Global Trading Platform" },
+  footer_twitter:  { zh: "Twitter", ja: "Twitter", en: "Twitter" },
+  footer_instagram: { zh: "Instagram", ja: "Instagram", en: "Instagram" },
   footer_support:  { zh: "帮助中心", ja: "ヘルプセンター", en: "Help Center" },
   footer_legal:    { zh: "法律信息", ja: "法的情報", en: "Legal" },
   footer_about:    { zh: "关于我们", ja: "会社概要", en: "About Us" },
@@ -458,7 +460,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_s1_title: { zh: "PIMART CARD", ja: "PIMART CARD", en: "PIMART CARD" },
   hero_v2_s1_sub: { zh: "全球卡牌交易平台", ja: "グローバルトレーディングカードマーケット", en: "Global Trading Card Marketplace" },
   hero_v2_s1_desc: { zh: "日本全国配送 · 正品保证", ja: "日本全国配送 · 正規品保証", en: "Nationwide Japan Delivery · Authentic Guarantee" },
-  hero_v2_s2_title: { zh: "原盒臻选", ja: "未開封BOX厳選", en: "Sealed Selection" },
+  hero_v2_s2_title: { zh: "产品甄选", ja: "厳選コレクション", en: "Curated Selection" },
   hero_v2_s2_sub: { zh: "各语版本 · 链接世界", ja: "多言語対応 · 世界をつなぐ", en: "All Languages · Connecting the World" },
   hero_v2_s2_desc: {
     zh: "日版、简中与多语种原盒，精选现货与预售。",

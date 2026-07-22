@@ -9,6 +9,7 @@ import {
   HeroPsaSlideBackground,
   HeroPsaVisual,
 } from "@/components/home/HeroVisuals";
+import { INSTAGRAM_URL, TWITTER_URL } from "@/lib/site";
 
 export type HeroStackProduct = {
   name: string;
@@ -338,6 +339,36 @@ export function HomeHero({ products }: { products: HeroStackProduct[] }) {
             </div>
           ))}
         </div>
+
+        {SLIDES[active]?.visual === "b2b" && (
+          <div className="hero-v2-b2b-social pointer-events-auto">
+            <span className="hero-v2-b2b-social-label">FOLLOW US</span>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-v2-b2b-social-link"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+              </svg>
+            </a>
+            <a
+              href={TWITTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-v2-b2b-social-link"
+              aria-label="X"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M18.244 2H21.5l-7.5 8.57L22.5 22h-6.59l-5.16-6.74L5.2 22H1.94l8.03-9.17L1.5 2h6.76l4.66 6.17L18.244 2zm-1.16 18h1.82L7.08 4H5.13l11.95 16z" />
+              </svg>
+            </a>
+          </div>
+        )}
 
         <button
           type="button"
