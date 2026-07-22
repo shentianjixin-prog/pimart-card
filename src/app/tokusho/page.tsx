@@ -1,8 +1,11 @@
 import {
+  CHINA_REGION_REPRESENTATIVE,
   COMPANY_ADDRESS,
   COMPANY_PHONE,
   COMPANY_REPRESENTATIVE,
   COMPANY_SELLER,
+  JAPAN_DELIVERY_CONTACT_ADDRESS,
+  PAYMENT_METHODS,
   SUPPORT_EMAIL,
 } from "@/lib/site";
 import { LegalKeyNotices } from "@/components/legal/LegalKeyNotices";
@@ -18,25 +21,27 @@ type Row =
 
 const ROWS: Row[] = [
   { id: "tk-seller", label: "販売業者", value: COMPANY_SELLER },
-  { id: "tk-rep", label: "代表責任者", value: COMPANY_REPRESENTATIVE },
-  { id: "tk-addr", label: "所在地", value: COMPANY_ADDRESS },
+  { id: "tk-rep", label: "運営責任者", value: COMPANY_REPRESENTATIVE },
+  { id: "tk-cn-rep", label: "中国地域責任者", value: CHINA_REGION_REPRESENTATIVE },
+  { id: "tk-addr", label: "事業者所在地", value: COMPANY_ADDRESS },
+  { id: "tk-japan-delivery", label: "日本配送連絡先", value: `${JAPAN_DELIVERY_CONTACT_ADDRESS}\n※販売業者の所在地ではありません。返品先は事前にカスタマーサポートが指定します。` },
   {
     id: "tk-phone",
     label: "電話番号",
-    value: `${COMPANY_PHONE}\n※お問い合わせはメールを優先してください（電話対応は行っておりません）`,
+    value: `${COMPANY_PHONE}（中国）\n※お問い合わせはメールを優先してください`,
   },
   {
     id: "tk-email",
     label: "メールアドレス",
     value: `${SUPPORT_EMAIL}\n※通常２営業日以内にご返信します`,
   },
-  { id: "tk-price", label: "販売価格", value: "各商品ページに税込価格を表示します。表示価格は市場状況、在庫、為替、仕入条件により予告なく変更される場合があります。" },
+  { id: "tk-price", label: "販売価格", value: "各商品ページに日本円（JPY）で表示します。税の取扱いは商品ページ・決済画面の表示に従います。表示価格は市場状況、在庫、為替、仕入条件により変更される場合があります。" },
   {
     id: "tk-extra",
     label: "商品代金以外の必要料金",
     value: "送料：注文画面または商品ページに表示\n決済手数料：決済手段により発生する場合あり（Stripe表示に従う）\n関税・輸入消費税・通関手数料：海外配送時はお客様負担\n再配送費用・返送料・保管料：お客様都合またはお客様事由による場合はお客様負担",
   },
-  { id: "tk-pay", label: "支払方法", value: "クレジットカード（Visa / Mastercard / JCB 等、Stripe対応）。その他の支払方法を追加する場合は注文画面に表示します。" },
+  { id: "tk-pay", label: "支払方法", value: `${PAYMENT_METHODS.ja}\n※利用可能な方法は国・地域、端末および Stripe の提供状況により異なります。` },
   { id: "tk-timing", label: "支払時期", value: "注文確定時に即時決済。予約商品も注文時決済となります。" },
   {
     id: "tk-delivery",
@@ -76,8 +81,7 @@ const ROWS: Row[] = [
   },
   { id: "tk-cancel", label: "キャンセルについて", value: "注文成立後のお客様都合キャンセルは原則不可。当店が別途認める場合、または本表記・利用規約の特別条項に該当する場合を除きます。" },
   { id: "tk-limit", label: "販売数量の制限", value: "商品ごとに購入数量制限を設ける場合があります。同一人物による複数アカウント利用、転売目的の大量注文、不正利用が疑われる場合、注文を取消すことがあります。" },
-  { id: "tk-buyback", label: "買取サービス", value: "買取価格は事前案内時点の参考価格であり、最終査定は実物到着後の真贋、状態、版、言語、相場、在庫状況により決定します。盗品、偽物、改造品、再封品、出所不明品、権利関係に問題がある商品は受付できません。" },
-  { id: "tk-used", label: "古物営業に関する表示", value: "古物営業に該当する取引については、必要な許認可・本人確認・帳簿保存等の法令に従って運用します。許可番号等の表示が必要となる場合は取得・確認後に掲載します。" },
+  { id: "tk-buyback", label: "買取サービス", value: "現在、買取機能は停止しており、申込、商品の受領、査定、本人確認資料・振込先口座情報の収集は行っていません。" },
   { id: "tk-ip", label: "表現および商標", value: "当店は各カードゲーム、出版社、メーカー、権利者の公式ショップではありません。商品名、作品名、商標は各権利者に帰属し、商品識別のために使用しています。" },
 ];
 
@@ -102,7 +106,7 @@ export default function TokushoPage() {
       active="tokusho"
       title="特定商取引法に基づく表記"
       subtitle="Specified Commercial Transaction Act Disclosure"
-      updatedAt="2026年7月13日"
+      updatedAt="2026年7月23日"
       sellerLabel={`販売業者：${COMPANY_SELLER}`}
       toc={TOC}
       notices={<LegalKeyNotices heading="重要なお知らせ" items={KEY_NOTICES} />}

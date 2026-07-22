@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: "%s | PIMART CARD",
   },
   description:
-    "日版・中国語版 TCG 未開封BOX、世界配送、卸売対応。正規品保証、日本から発送。",
+    "日版・中国語版 TCG 未開封BOX、世界配送、卸売対応。正規品保証、アジア履行。",
   openGraph: {
     type: "website",
     siteName: "PIMART CARD",

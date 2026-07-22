@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
+import { JAPAN_DELIVERY_CONTACT_ADDRESS } from "@/lib/site";
 import { resolveLang } from "@/lib/translations";
 
 type Section = { title: string; items: string[] };
@@ -13,9 +14,17 @@ const DATA: Record<"zh" | "ja" | "en", { title: string; lead: string; sections: 
       {
         title: "发货时效",
         items: [
+          "本站以亚洲为履约枢纽；每件商品的实际发货地以商品页面、订单和物流信息为准。",
           "现货商品：支付确认后通常 5-7 个工作日内安排发货。",
           "预售商品：以商品页面标注的发售/到货时间为准，到货后按订单顺序发货。",
           "调货或海外直送商品：可能受供应商、通关、物流节点影响，实际时间以物流进度为准。",
+        ],
+      },
+      {
+        title: "日本配送联络地址",
+        items: [
+          `${JAPAN_DELIVERY_CONTACT_ADDRESS}。该地址仅用于日本配送联络，不是销售主体所在地，也不是未经确认即可寄回的退货地址。`,
+          "任何退货或售后寄送都须先联系客户服务，并以客服书面指定的地址为准。",
         ],
       },
       {
@@ -55,7 +64,8 @@ const DATA: Record<"zh" | "ja" | "en", { title: string; lead: string; sections: 
     lead: "ご注文前に商品ページの発送元、在庫/予約区分、配送条件をご確認ください。カード商品は受取時の証拠保全が重要です。",
     back: "ホームに戻る",
     sections: [
-      { title: "発送目安", items: ["在庫商品：決済確認後、通常 5〜7 営業日以内に発送します。", "予約商品：商品ページ記載の発売・入荷時期を基準に、入荷後順次発送します。", "取り寄せ・海外直送品は仕入先、通関、物流状況により遅延する場合があります。"] },
+      { title: "発送目安", items: ["当店はアジアを履行拠点とし、実際の発送元は商品ページ、注文情報および追跡情報に表示します。", "在庫商品：決済確認後、通常 5〜7 営業日以内に発送します。", "予約商品：商品ページ記載の発売・入荷時期を基準に、入荷後順次発送します。", "取り寄せ・海外直送品は仕入先、通関、物流状況により遅延する場合があります。"] },
+      { title: "日本配送連絡先", items: [`${JAPAN_DELIVERY_CONTACT_ADDRESS}。販売業者の所在地ではなく、事前確認なしに返品できる住所でもありません。`, "返品・アフターサポートの送付先は、必ず事前にカスタマーサポートへ連絡し、書面で指定された住所をご利用ください。"] },
       { title: "送料・追加費用", items: ["送料は決済画面または商品ページに表示されます。", "住所不備、不在、受取拒否、保管期限超過による返送・再送費用はお客様負担となります。", "関税、輸入消費税、通関手数料等が発生する場合は受取人負担となります。"] },
       { title: "同梱・分割発送", items: ["在庫商品と予約商品を同時購入した場合、入荷待ちまたは分割発送となる場合があります。", "発送元が異なる商品は複数の追跡番号で発送される場合があります。"] },
       { title: "受取・破損時の対応", items: ["受取時に外箱の破損、水濡れ、開封跡、重量異常をご確認ください。", "問題がある場合は外箱、伝票、梱包材、商品写真、開封動画を保管し、到着後 7 日以内にご連絡ください。", "配達完了後、連続した証拠がない場合は対応が難しいことがあります。"] },
@@ -67,7 +77,8 @@ const DATA: Record<"zh" | "ja" | "en", { title: string; lead: string; sections: 
     lead: "Before ordering, check the product page for origin, stock/pre-order status, and shipping notes. Keep packaging and opening evidence for sealed card products.",
     back: "Back to home",
     sections: [
-      { title: "Dispatch Timing", items: ["In-stock items usually ship within 5-7 business days after payment confirmation.", "Pre-orders ship after release or arrival according to the product page.", "Backordered or cross-border items may be delayed by suppliers, customs, or carriers."] },
+      { title: "Dispatch Timing", items: ["We use Asia as our fulfillment hub. The actual dispatch origin is shown on the product page, order information, and tracking details.", "In-stock items usually ship within 5-7 business days after payment confirmation.", "Pre-orders ship after release or arrival according to the product page.", "Backordered or cross-border items may be delayed by suppliers, customs, or carriers."] },
+      { title: "Japan Delivery Contact Address", items: [`${JAPAN_DELIVERY_CONTACT_ADDRESS}. This is a delivery contact address, not the seller's registered address or an unapproved return address.`, "Contact customer support before any return and use only the return address provided in writing."] },
       { title: "Shipping Fees", items: ["Shipping fees are shown on the product or checkout page.", "Return, reshipment, or storage fees caused by wrong address, refusal, absence, or missed pickup are borne by the customer.", "Customs duties, import taxes, and clearance fees are borne by the recipient when applicable."] },
       { title: "Combined / Split Shipping", items: ["Orders containing both in-stock and pre-order items may wait for all items or ship separately.", "Items from different warehouses may be sent with separate tracking numbers."] },
       { title: "Receipt & Damage Claims", items: ["Check the outer box when receiving the parcel.", "If damaged, keep the box, label, packing material, product photos, and opening video, then contact us within 7 days.", "After tracking shows delivered, claims may be difficult without continuous evidence."] },

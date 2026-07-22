@@ -1,31 +1,25 @@
+import Link from "next/link";
 import { cookies } from "next/headers";
-import { BuybackForm } from "@/components/BuybackForm";
 import { resolveLang } from "@/lib/translations";
 
 const NOTICE = {
   zh: {
-    title: "买取审核提示",
-    items: [
-      "线上填写或沟通的价格仅为参考，最终査定以实物到达后的真伪、版本、语言、品相、市场流动性和库存需求为准。",
-      "请勿提交盗品、仿品、改卡、重封、调包、来源不明或权利受限商品；本站可拒收、退回或依法提供相关信息。",
-      "未满 18 岁的用户需监护人同意，并按页面要求提供监护人信息及本人确认资料。",
-    ],
+    eyebrow: "Buyback",
+    title: "买取功能暂未开放",
+    body: "目前不接受买取申请，也不会收集买取表单、身份证明或收款账户信息。开放时间请关注网站公告。",
+    back: "返回首页",
   },
   ja: {
-    title: "買取査定に関するご案内",
-    items: [
-      "オンライン上の案内価格は参考価格です。最終査定は実物到着後、真贋、版、言語、状態、相場、在庫需要により決定します。",
-      "盗品、偽物、改造品、再封品、すり替え品、出所不明品、権利に問題がある商品は受付できません。必要に応じて関係機関へ情報提供する場合があります。",
-      "18歳未満のお客様は保護者の同意が必要です。画面の案内に従って保護者情報と本人確認資料をご準備ください。",
-    ],
+    eyebrow: "Buyback",
+    title: "買取機能は現在ご利用いただけません",
+    body: "現在、買取申込は受け付けておらず、買取フォーム、本人確認書類、振込先口座情報の収集も行っていません。再開時期はサイトのお知らせをご確認ください。",
+    back: "ホームに戻る",
   },
   en: {
-    title: "Buyback Review Notes",
-    items: [
-      "Online estimates are for reference only. Final appraisal depends on authenticity, version, language, condition, market liquidity, and inventory demand after we receive the item.",
-      "Do not submit stolen, counterfeit, altered, resealed, swapped, unknown-origin, or rights-restricted items. We may refuse, return, or provide information to authorities when required.",
-      "Users under 18 need guardian consent and must provide guardian details and verification materials as instructed.",
-    ],
+    eyebrow: "Buyback",
+    title: "Buyback is not currently available",
+    body: "We are not accepting buyback applications or collecting buyback forms, identity documents, or payout account details. Please check site announcements for future availability.",
+    back: "Back to home",
   },
 };
 
@@ -35,16 +29,15 @@ export default async function BuybackPage() {
   const notice = NOTICE[lang];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mb-6 rounded-lg border border-[#e5e7eb] bg-white p-5 text-sm shadow-sm">
-        <h1 className="text-base font-semibold text-[#111827]">{notice.title}</h1>
-        <ul className="mt-3 list-disc space-y-1.5 pl-5 leading-relaxed text-[#6b7280]">
-          {notice.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+    <div className="mx-auto flex min-h-[56vh] max-w-3xl items-center px-4 py-14 sm:px-6 lg:px-8">
+      <div className="surface w-full p-8 text-center sm:p-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6b7280]">{notice.eyebrow}</p>
+        <h1 className="section-title mt-3">{notice.title}</h1>
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#6b7280]">{notice.body}</p>
+        <Link href="/" className="btn-primary mt-7 inline-flex min-h-11 items-center justify-center rounded-full px-6 text-sm font-medium">
+          {notice.back}
+        </Link>
       </div>
-      <BuybackForm lang={lang} />
     </div>
   );
 }

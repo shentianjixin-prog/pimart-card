@@ -258,7 +258,7 @@ const dict: Record<string, Record<Lang, string>> = {
   footer_privacy:  { zh: "隐私政策",   ja: "プライバシーポリシー",  en: "Privacy Policy" },
   footer_terms:    { zh: "用户协议",   ja: "利用規約",              en: "Terms of Use" },
   footer_admin:    { zh: "管理后台",   ja: "管理画面",              en: "Admin" },
-  footer_payment:  { zh: "支持 Visa / Mastercard / JCB 在线支付", ja: "Visa / Mastercard / JCB 対応", en: "Visa / Mastercard / JCB accepted" },
+  footer_payment:  { zh: "支持多种 Stripe 支付方式 · 以结账页为准", ja: "Stripeの各種決済に対応 · チェックアウト画面に準拠", en: "Multiple Stripe payment methods · See checkout for availability" },
 
   // 公告
   ann_title:  { zh: "最新公告", ja: "お知らせ", en: "Announcements" },
@@ -285,7 +285,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_2_cta2:  { zh: "查看现货",     ja: "現物を見る",      en: "View In Stock" },
 
   // 顶部公告栏
-  banner_worldwide: { zh: "日本发货 · 全球配送", ja: "日本から世界へ発送", en: "Ships Worldwide from Japan" },
+  banner_worldwide: { zh: "亚洲履约枢纽 · 全球配送", ja: "アジア履行拠点 · 世界配送", en: "Asia Fulfillment Hub · Worldwide Shipping" },
   banner_wholesale: { zh: "支持批发询价", ja: "卸売対応", en: "Wholesale Available" },
   banner_psa:       { zh: "多语种原盒持续更新", ja: "多言語未開封BOXを随時更新", en: "Multilingual sealed boxes updated regularly" },
 
@@ -350,8 +350,8 @@ const dict: Record<string, Record<Lang, string>> = {
   why_subtitle: { zh: "原盒零售与 B2B 客户的可靠供货", ja: "未開封BOX小売とB2B向けの信頼できる仕入れ", en: "Trusted supply for sealed-box retail and B2B buyers" },
   why_auth_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
   why_auth_desc:  { zh: "所有商品均来自可溯源的正规渠道", ja: "すべて正規ルートから仕入れ、トレーサビリティを確保", en: "All products sourced through verified channels with traceable supply." },
-  why_japan_title:{ zh: "日本发货", ja: "日本から発送", en: "Ships from Japan" },
-  why_japan_desc: { zh: "日本国内精心打包，可靠出库", ja: "日本国内で丁寧に梱包し、確実に発送", en: "Carefully packed and dispatched from Japan with reliable handling." },
+  why_japan_title:{ zh: "亚洲履约", ja: "アジア履行", en: "Asia Fulfillment" },
+  why_japan_desc: { zh: "以亚洲为履约枢纽，发货地以商品页为准", ja: "アジアを履行拠点とし、発送元は商品ページに表示", en: "Fulfilled through our Asia hub; origin is shown on each product page." },
   why_world_title:{ zh: "全球配送", ja: "世界各国へ配送", en: "Worldwide Shipping" },
   why_world_desc: { zh: "支持海外收藏家与经销商配送", ja: "海外のコレクター・業者向けに国際配送対応", en: "International delivery support for collectors and resellers worldwide." },
   why_pay_title:  { zh: "安全支付", ja: "安全な決済", en: "Secure Payment" },
@@ -389,14 +389,17 @@ const dict: Record<string, Record<Lang, string>> = {
   },
   about_founded_label: { zh: "创办年份", ja: "設立年", en: "Founded" },
   about_company_label: { zh: "公司", ja: "販売業者", en: "Company" },
-  about_rep_label: { zh: "法人 / 代表", ja: "代表責任者", en: "Representative" },
+  about_rep_label: { zh: "负责人", ja: "責任者", en: "Person responsible" },
+  about_china_rep_label: { zh: "中国地区负责人", ja: "中国地域責任者", en: "China regional contact" },
   about_address_label: { zh: "所在地", ja: "所在地", en: "Address" },
   about_phone_label: { zh: "电话", ja: "電話番号", en: "Phone" },
+  about_japan_delivery_label: { zh: "日本配送联络地址", ja: "日本配送連絡先", en: "Japan delivery contact address" },
+  about_payment_label: { zh: "支付方式", ja: "支払方法", en: "Payment methods" },
 
   about_p2: {
-    zh: "我们以对卡牌的热爱与专业连接不同国家和地区的收藏者，以日本为履约枢纽，面向全球提供服务。对个人买家，我们致力于提供更便捷、安心的购物体验，帮助您寻找心之所想；对经销商与店铺，我们提供更稳定、长期的合作支持。寻找、筛选、交付——是我们做好每一笔生意的基础。",
-    ja: "私たちは、カードへの情熱と専門性を通じて、さまざまな国や地域のコレクターをつなぎ、日本を履行拠点として世界へサービスを提供しています。個人のお客様には、より便利で安心できる購入体験と、お探しの商品を見つけるお手伝いを。ディーラーや店舗には、より安定した長期的な協業を提供します。探す、選ぶ、届ける——それが一つひとつの取引を大切にする私たちの基盤です。",
-    en: "Through our passion for cards and professional expertise, we connect collectors across countries and regions, serving customers worldwide with Japan as our fulfillment hub. We give individual buyers a more convenient and reassuring shopping experience, helping them find what they truly want; for dealers and stores, we offer stable, long-term support. Sourcing, selecting, and delivering are the foundations of every transaction we handle.",
+    zh: "我们以对卡牌的热爱与专业连接不同国家和地区的收藏者，以亚洲为履约枢纽，面向全球提供服务。对个人买家，我们致力于提供更便捷、安心的购物体验，帮助您寻找心之所想；对经销商与店铺，我们提供更稳定、长期的合作支持。寻找、筛选、交付——是我们做好每一笔生意的基础。",
+    ja: "私たちは、カードへの情熱と専門性を通じて、さまざまな国や地域のコレクターをつなぎ、アジアを履行拠点として世界へサービスを提供しています。個人のお客様には、より便利で安心できる購入体験と、お探しの商品を見つけるお手伝いを。ディーラーや店舗には、より安定した長期的な協業を提供します。探す、選ぶ、届ける——それが一つひとつの取引を大切にする私たちの基盤です。",
+    en: "Through our passion for cards and professional expertise, we connect collectors across countries and regions, serving customers worldwide with Asia as our fulfillment hub. We give individual buyers a more convenient and reassuring shopping experience, helping them find what they truly want; for dealers and stores, we offer stable, long-term support. Sourcing, selecting, and delivering are the foundations of every transaction we handle.",
   },
   about_p3: {
     zh: "未来，我们将继续深化供应链，扩展语言服务与行业合作网络，让 PIMART CARD 成为连接全球市场的可靠入口。我们追求的不只是一笔订单，更是长期的陪伴，邀您一起目睹我们的成长。",
@@ -412,7 +415,7 @@ const dict: Record<string, Record<Lang, string>> = {
   about_b2b_label: { zh: "B2B / 批发合作", ja: "B2B / 卸売提携", en: "B2B / Wholesale" },
 
   faq_q1: { zh: "是否支持国际配送？", ja: "海外配送は可能ですか？", en: "Do you ship internationally?" },
-  faq_a1: { zh: "支持。我们从日本发货，具体时效与费用以结账页为准。", ja: "はい。日本から世界各国へ発送しています。詳細はチェックアウト時にご確認ください。", en: "Yes. We ship worldwide from Japan. Rates and delivery times are shown at checkout." },
+  faq_a1: { zh: "支持。我们以亚洲为履约枢纽，具体发货地、时效与费用以商品页和结账页为准。", ja: "はい。アジアを履行拠点として世界各国へ配送します。発送元、料金、配送目安は商品ページとチェックアウト画面をご確認ください。", en: "Yes. We fulfill through our Asia hub. Origin, rates, and delivery times are shown on the product and checkout pages." },
   faq_q2: { zh: "商品是否为正品？", ja: "正規品ですか？", en: "Are products authentic?" },
   faq_a2: { zh: "所有商品均来自可溯源的正规渠道。", ja: "すべて正規ルートから仕入れた商品です。", en: "All items are sourced through verified authentic channels." },
   faq_q3: { zh: "如何咨询批发？", ja: "卸売の問い合わせは？", en: "How do I inquire about wholesale?" },
@@ -469,7 +472,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_cta_quote: { zh: "获取报价", ja: "見積もり", en: "Get a Quote" },
   hero_v2_cta_learn: { zh: "了解详情", ja: "詳しく見る", en: "Learn More" },
   hero_v2_cta_wholesale: { zh: "批发咨询", ja: "卸売相談", en: "Wholesale Inquiry" },
-  hero_premium_kicker: { zh: "日本发货 · 面向全球收藏者", ja: "日本から発送 · 世界のコレクターへ", en: "Dispatched from Japan · Built for collectors" },
+  hero_premium_kicker: { zh: "亚洲履约 · 面向全球收藏者", ja: "アジア履行 · 世界のコレクターへ", en: "Fulfilled in Asia · Built for collectors" },
   hero_premium_title: { zh: "把真正值得收藏的卡牌，送到世界各地。", ja: "本当に集めたいカードを、世界へ。", en: "Collector-grade cards, sourced with intent." },
   hero_premium_lead: {
     zh: "精选宝可梦、海贼王及多语种未开封商品。价格、库存与发货条件清晰透明，让每一次购买更有把握。",
@@ -516,7 +519,7 @@ const dict: Record<string, Record<Lang, string>> = {
   b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
 
   trusted_title: { zh: "全球信赖", ja: "世界中で信頼される", en: "Trusted Worldwide" },
-  trusted_subtitle: { zh: "连接日本库存与全球收藏家", ja: "日本在庫と世界のコレクターをつなぐ", en: "Connecting Japanese inventory with collectors worldwide" },
+  trusted_subtitle: { zh: "以亚洲履约网络连接全球收藏家", ja: "アジアの履行ネットワークと世界のコレクターをつなぐ", en: "Connecting collectors worldwide through our Asia fulfillment network" },
   trusted_f1_title: { zh: "全球配送", ja: "世界配送", en: "Worldwide Shipping" },
   trusted_f1_desc: { zh: "覆盖中国、美国、东南亚等多个国家地区", ja: "中国・米国・東南アジアなど多国対応", en: "China, US, Southeast Asia and more" },
   trusted_f2_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
@@ -533,7 +536,7 @@ const dict: Record<string, Record<Lang, string>> = {
   stats_rating: { zh: "好评率", ja: "高評価率", en: "Positive Rating" },
 
   world_title: { zh: "全球收藏家的选择", ja: "世界のコレクターに選ばれる", en: "Trusted by Collectors Worldwide" },
-  world_subtitle: { zh: "从日本发往世界各地的收藏家与经销商", ja: "日本から世界のコレクター・業者へ", en: "From Japan to collectors and dealers worldwide" },
+  world_subtitle: { zh: "从亚洲履约网络送达全球收藏家与经销商", ja: "アジアの履行ネットワークから世界のコレクター・事業者へ", en: "From our Asia fulfillment network to collectors and dealers worldwide" },
   region_jp: { zh: "日本", ja: "日本", en: "Japan" },
   region_cn: { zh: "中国", ja: "中国", en: "China" },
   region_us: { zh: "美国", ja: "米国", en: "United States" },

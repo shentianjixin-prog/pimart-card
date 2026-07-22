@@ -1,9 +1,11 @@
 import Link from "next/link";
 import {
+  CHINA_REGION_REPRESENTATIVE,
   COMPANY_ADDRESS,
   COMPANY_PHONE,
   COMPANY_REPRESENTATIVE,
   COMPANY_SELLER,
+  JAPAN_DELIVERY_CONTACT_ADDRESS,
   SUPPORT_EMAIL,
 } from "@/lib/site";
 import { LegalCallout } from "@/components/legal/LegalCallout";
@@ -58,7 +60,7 @@ export default function PrivacyPage() {
       active="privacy"
       title="隐私政策"
       subtitle="プライバシーポリシー / Privacy Policy"
-      updatedAt="2026年7月13日"
+      updatedAt="2026年7月23日"
       sellerLabel={`事业者：${COMPANY_SELLER}`}
       toc={TOC}
       notices={<LegalKeyNotices heading="隐私要点" items={KEY_NOTICES} />}
@@ -66,12 +68,14 @@ export default function PrivacyPage() {
       <LegalArticle id="pv-1" index="01" title="事业者信息">
         <div className="legal-info-card">
           <div className="legal-info-row"><span className="legal-info-label">销售业者</span><span className="legal-info-value">{COMPANY_SELLER}</span></div>
-          <div className="legal-info-row"><span className="legal-info-label">代表责任者</span><span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span></div>
-          <div className="legal-info-row"><span className="legal-info-label">所在地</span><span className="legal-info-value">{COMPANY_ADDRESS}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">运营负责人</span><span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">中国地区负责人</span><span className="legal-info-value">{CHINA_REGION_REPRESENTATIVE}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">经营者所在地</span><span className="legal-info-value">{COMPANY_ADDRESS}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">日本配送联络地址</span><span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}（非销售主体所在地）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">电话</span><span className="legal-info-value">{COMPANY_PHONE}（请优先邮件）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">咨询窗口</span><span className="legal-info-value"><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a></span></div>
         </div>
-        <p>本站依据日本《个人情报保护法》及相关法令，妥善管理您的个人信息。</p>
+        <p>本站依据经营者所在地及服务对象所在地适用的数据与个人信息保护法律，妥善管理您的个人信息。</p>
       </LegalArticle>
 
       <LegalArticle id="pv-2" index="02" title="收集的信息">
@@ -80,10 +84,9 @@ export default function PrivacyPage() {
           <li>账号信息：昵称、邮箱、密码加密摘要、登录状态、会员设置</li>
           <li>身份与联络：姓名、电话、收货地址、会员账号信息</li>
           <li>交易信息：订单内容、金额、支付状态、物流单号、退款与售后沟通记录</li>
-          <li>买取申请信息：姓名、生日、地址、电话、邮箱、职业、银行账户、本人确认证件类型、买取商品信息、反社会势力确认及权属声明</li>
           <li>支付相关：支付金额、币种、支付结果、Stripe 返回的交易识别信息；本站不存储完整卡号或安全码</li>
           <li>技术与安全信息：Cookie、设备与浏览器信息、IP、访问日志、语言偏好、失败登录次数、请求频率、风控命中记录</li>
-          <li>您主动提交的咨询内容、买取申请材料、售后证据照片或视频等</li>
+          <li>您主动提交的咨询内容、售后证据照片或视频等</li>
           <li>您在咨询、售后或代他人填写信息时提供的第三方姓名、地址、电话、邮箱等配送或联络信息</li>
         </ul>
         <LegalCallout tone="info">
@@ -97,7 +100,6 @@ export default function PrivacyPage() {
           <li>安排发货、物流跟踪、售后与退换核实</li>
           <li>处理您通过邮件、LINE、联系页面或其他客服渠道提交的咨询，并进行身份确认、回复通知、证据核验和问题归档</li>
           <li>账号注册、登录、密码重置、会员服务</li>
-          <li>处理卡牌买取申请、本人确认、査定、汇款、税务及古物相关合规记录</li>
           <li>发送订单通知、物流通知、必要的服务邮件</li>
           <li>防范欺诈、盗刷、拒付滥用、批量请求、接口滥用、安全事件与漏洞利用</li>
           <li>改进网站功能、统计与服务品质（去标识化后可用于分析）</li>
@@ -126,7 +128,7 @@ export default function PrivacyPage() {
 
       <LegalArticle id="pv-6" index="06" title="跨境处理与保存地点">
         <p>
-          本站面向日本及跨境用户提供服务，订单、支付、云服务、邮件、物流或客服数据可能在日本以外的国家或地区被处理。我们会在合理范围内选择具备安全管理措施的服务商，并仅在达成使用目的所需范围内传输信息。
+          本站由中国经营主体面向日本及其他国家和地区的用户提供服务。订单、支付、云服务、邮件、物流或客服数据可能在中国、日本及服务商所在的其他国家或地区被处理。我们会在合理范围内选择具备安全管理措施的服务商，并仅在达成使用目的所需范围内传输信息。
         </p>
       </LegalArticle>
 
@@ -139,7 +141,6 @@ export default function PrivacyPage() {
       <LegalArticle id="pv-8" index="08" title="保存期间">
         <ul className="list-disc space-y-1">
           <li>订单、支付、配送、售后和会计相关记录通常至少保存 5 年，或依适用法律要求保存更长时间。</li>
-          <li>买取、本人确认、査定、汇款及古物相关记录，会按日本法律、税务和争议处理需要保存。</li>
           <li>账号信息在用户注销或长期不使用后可申请删除，但为履行法定义务、处理争议、防止滥用而必须保留的信息除外。</li>
           <li>客服咨询、售后证据和联系记录会在问题处理、质量改善、争议防止和法定义务所需期间内保存。</li>
           <li>安全日志会在达成风控、安全审计和故障排查目的所需期间内保存。</li>
@@ -158,7 +159,7 @@ export default function PrivacyPage() {
 
       <LegalArticle id="pv-10" index="10" title="未成年人">
         <p>
-          本站服务原则上不面向 13 岁以下儿童。未成年人使用本站进行购买、预售、买取或提交个人信息前，应取得监护人同意。若发现误收集，将尽快删除或采取必要限制。
+          本站服务原则上不面向 13 岁以下儿童。未成年人使用本站进行购买、预售或提交个人信息前，应取得监护人同意。若发现误收集，将尽快删除或采取必要限制。
         </p>
       </LegalArticle>
 

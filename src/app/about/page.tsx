@@ -2,11 +2,14 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import {
   B2B_EMAIL,
+  CHINA_REGION_REPRESENTATIVE,
   COMPANY_ADDRESS,
   COMPANY_FOUNDED_YEAR,
   COMPANY_PHONE,
   COMPANY_REPRESENTATIVE,
   COMPANY_SELLER,
+  JAPAN_DELIVERY_CONTACT_ADDRESS,
+  PAYMENT_METHODS,
   SUPPORT_EMAIL,
 } from "@/lib/site";
 import { t, resolveLang } from "@/lib/translations";
@@ -52,12 +55,24 @@ export default async function AboutPage() {
             <span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span>
           </div>
           <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_china_rep_label")}</span>
+            <span className="legal-info-value">{CHINA_REGION_REPRESENTATIVE}</span>
+          </div>
+          <div className="legal-info-row">
             <span className="legal-info-label">{T("about_address_label")}</span>
             <span className="legal-info-value">{COMPANY_ADDRESS}</span>
           </div>
           <div className="legal-info-row">
             <span className="legal-info-label">{T("about_phone_label")}</span>
             <span className="legal-info-value">{COMPANY_PHONE}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_japan_delivery_label")}</span>
+            <span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}</span>
+          </div>
+          <div className="legal-info-row">
+            <span className="legal-info-label">{T("about_payment_label")}</span>
+            <span className="legal-info-value">{PAYMENT_METHODS[lang]}</span>
           </div>
           <div className="legal-info-row">
             <span className="legal-info-label">{T("about_support_label")}</span>

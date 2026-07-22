@@ -1,10 +1,12 @@
 import Link from "next/link";
 import {
   B2B_EMAIL,
+  CHINA_REGION_REPRESENTATIVE,
   COMPANY_ADDRESS,
   COMPANY_PHONE,
   COMPANY_REPRESENTATIVE,
   COMPANY_SELLER,
+  JAPAN_DELIVERY_CONTACT_ADDRESS,
   SUPPORT_EMAIL,
 } from "@/lib/site";
 import { LegalCallout } from "@/components/legal/LegalCallout";
@@ -26,7 +28,7 @@ const TOC = [
   { id: "art-8", label: "08 特殊品类" },
   { id: "art-9", label: "09 售后与举证" },
   { id: "art-10", label: "10 随机性与品相" },
-  { id: "art-11", label: "11 买取服务" },
+  { id: "art-11", label: "11 买取暂停" },
   { id: "art-12", label: "12 禁止行为" },
   { id: "art-13", label: "13 免责范围" },
   { id: "art-14", label: "14 协议变更" },
@@ -50,7 +52,7 @@ export default function TermsPage() {
       active="terms"
       title="用户协议"
       subtitle="利用規約 / Terms of Use"
-      updatedAt="2026年7月13日"
+      updatedAt="2026年7月23日"
       toc={TOC}
       notices={<LegalKeyNotices items={KEY_NOTICES} />}
     >
@@ -58,10 +60,10 @@ export default function TermsPage() {
         <ol className="list-decimal space-y-2">
           <li>
             本协议是您与 {COMPANY_SELLER}（以下简称「本站」）之间，就使用 PIMART CARD
-            网站、购买商品、提交买取申请及使用相关服务所订立的具有约束力的协议。代表责任者：{COMPANY_REPRESENTATIVE}。
+            网站、购买商品及使用相关服务所订立的具有约束力的协议。运营负责人：{COMPANY_REPRESENTATIVE}。
           </li>
           <li>
-            不同商品适用不同售后政策（现货 / 预售 / 未开封原盒 / 随机商品 / 买取服务等），将在商品详情页及本协议、
+            不同商品适用不同售后政策（现货 / 预售 / 未开封原盒 / 随机商品等），将在商品详情页及本协议、
             <Link href="/tokusho">特定商取引法表記</Link>、
             <Link href="/faq#returns">售后说明</Link>
             中公示。不一致时，以商品页特别说明优先；商品页未说明的，以本协议为准。
@@ -108,7 +110,7 @@ export default function TermsPage() {
             <LegalCallout>订单成立后，除本站书面同意或本协议特别约定外，您不得单方取消。</LegalCallout>
           </li>
           <li>付款完成后，除本协议明确列明的可退款情形外，<strong>原则上不支持退款</strong>。</li>
-          <li>预售、随机、补充包、未开封盒、限量商品、个人订购商品及买取相关费用，尤其不适用无理由取消。</li>
+          <li>预售、随机、补充包、未开封盒、限量商品及个人订购商品，尤其不适用无理由取消。</li>
         </ol>
       </LegalArticle>
 
@@ -123,7 +125,7 @@ export default function TermsPage() {
 
       <LegalArticle id="art-6" index="06" title="发货、配送与签收">
         <ol className="list-decimal space-y-2">
-          <li>发货地、预计时效以商品页及结账说明为准。日本仓现货通常在付款确认后尽快安排发货。</li>
+          <li>本站以亚洲为履约枢纽。具体发货地、预计时效以商品页、订单及结账说明为准；不同商品可能从不同地点发出。</li>
           <li>
             <strong>预售及其他标注「预计发货 / 到货时间」的时间仅为参考时间</strong>
             ，可能因厂商出荷、质检返工、库存调配、清关、承运、目的地等因素产生偏差；实际发货时间以本站实际发货为准。
@@ -188,13 +190,8 @@ export default function TermsPage() {
         </ol>
       </LegalArticle>
 
-      <LegalArticle id="art-11" index="11" title="卡牌买取服务特别规则">
-        <ol className="list-decimal space-y-2">
-          <li>用户提交买取申请时，应保证出售商品为本人合法所有，不属于盗窃、诈骗、遗失、侵权、仿品、改卡、重封、调包、来历不明或权利受限商品。</li>
-          <li>线上预估价仅供参考，最终价格以本站收到实物后基于真伪、版本、语言、品相、市场流动性及库存需求作出的正式査定为准。</li>
-          <li>本站可拒收或退回疑似假货、重封、盗品、无法确认来源或不符合收购条件的商品；必要时可依法向相关机关提供信息。</li>
-          <li>未成年人使用买取服务时，应取得监护人同意，并按页面要求提供监护人信息及本人确认资料。</li>
-        </ol>
+      <LegalArticle id="art-11" index="11" title="买取服务暂停">
+        <p>本站目前不提供卡牌买取服务，不接受买取申请或商品寄送，也不收集买取用途的身份证明、银行账户等资料。恢复时间以网站后续公告为准。</p>
       </LegalArticle>
 
       <LegalArticle id="art-12" index="12" title="禁止行为">
@@ -203,7 +200,7 @@ export default function TermsPage() {
           <li>提供虚假信息、盗用他人身份或支付方式</li>
           <li>攻击、扫描、爬取、压测、逆向、绕过限速、干扰支付流程、批量注册、批量占库存、篡改请求、上传恶意内容或利用本站漏洞获利</li>
           <li>恶意拒付、虚假售后主张、重复纠缠同一已结案事由</li>
-          <li>冒用他人身份、盗刷、洗钱、诽谤本站或其他用户、侵犯知识产权、违反日本或用户所在地法律法规</li>
+          <li>冒用他人身份、盗刷、洗钱、诽谤本站或其他用户、侵犯知识产权、违反经营者所在地、交易履行地或用户所在地适用的法律法规</li>
         </ul>
       </LegalArticle>
 
@@ -220,11 +217,13 @@ export default function TermsPage() {
       </LegalArticle>
 
       <LegalArticle id="art-15" index="15" title="适用法律、管辖与联系方式">
-        <p className="mb-4">本协议受日本法律管辖。因本协议引起的争议，双方应先协商；协商不成的，提交日本东京地方法院为第一审专属合意管辖法院。</p>
+        <p className="mb-4">本协议原则上适用中华人民共和国法律，但不排除消费者所在地依法不得排除的强制性保护规定。因本协议引起的争议，双方应先协商；协商不成的，在法律允许范围内提交经营者所在地有管辖权的人民法院处理，强制性消费者保护规则另有规定的除外。</p>
         <div className="legal-info-card">
           <div className="legal-info-row"><span className="legal-info-label">销售业者</span><span className="legal-info-value">{COMPANY_SELLER}</span></div>
-          <div className="legal-info-row"><span className="legal-info-label">代表责任者</span><span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span></div>
-          <div className="legal-info-row"><span className="legal-info-label">所在地</span><span className="legal-info-value">{COMPANY_ADDRESS}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">运营负责人</span><span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">中国地区负责人</span><span className="legal-info-value">{CHINA_REGION_REPRESENTATIVE}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">经营者所在地</span><span className="legal-info-value">{COMPANY_ADDRESS}</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">日本配送联络地址</span><span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}（非销售主体所在地；退货地址以客服书面指示为准）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">电话</span><span className="legal-info-value">{COMPANY_PHONE}（请优先邮件）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">客服</span><span className="legal-info-value"><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{" ｜ "}<Link href="/contact">联系页面</Link></span></div>
           <div className="legal-info-row"><span className="legal-info-label">批发合作</span><span className="legal-info-value"><a href={`mailto:${B2B_EMAIL}`}>{B2B_EMAIL}</a>{" ｜ "}<Link href="/wholesale">批发合作页</Link></span></div>
