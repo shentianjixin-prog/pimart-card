@@ -34,18 +34,18 @@ export const metadata: Metadata = {
     template: "%s | PIMART CARD",
   },
   description:
-    "日版・中国語版 TCG 未開封BOX、世界配送、卸売対応。正規品保証、アジア履行。",
+    "日版・中国語版 TCG 未開封BOX、日本国内配送、卸売対応。正規品保証、日本国内履行。",
   openGraph: {
     type: "website",
     siteName: "PIMART CARD",
     title: "PIMART CARD | Global Trading Card Marketplace",
-    description: "Curated sealed TCG products, worldwide shipping, and wholesale support from Japan.",
+    description: "Curated sealed TCG products, nationwide delivery, and wholesale support in Japan.",
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
     title: "PIMART CARD",
-    description: "Curated sealed TCG products from Japan to collectors worldwide.",
+    description: "Curated sealed TCG products fulfilled and delivered within Japan.",
   },
   robots: { index: true, follow: true },
   icons: {

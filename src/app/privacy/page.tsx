@@ -71,7 +71,7 @@ export default function PrivacyPage() {
           <div className="legal-info-row"><span className="legal-info-label">运营负责人</span><span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span></div>
           <div className="legal-info-row"><span className="legal-info-label">中国地区负责人</span><span className="legal-info-value">{CHINA_REGION_REPRESENTATIVE}</span></div>
           <div className="legal-info-row"><span className="legal-info-label">经营者所在地</span><span className="legal-info-value">{COMPANY_ADDRESS}</span></div>
-          <div className="legal-info-row"><span className="legal-info-label">日本配送联络地址</span><span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}（非销售主体所在地）</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">日本国内履约地址</span><span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}（非销售主体所在地）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">电话</span><span className="legal-info-value">{COMPANY_PHONE}（请优先邮件）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">咨询窗口</span><span className="legal-info-value"><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a></span></div>
         </div>

@@ -145,6 +145,18 @@ if (!orderCols.has("customerId")) {
   db.exec('ALTER TABLE "Order" ADD COLUMN "customerId" TEXT;');
   console.log("[schema] Order.customerId 已添加");
 }
+if (!orderCols.has("shippingFeeJpy")) {
+  db.exec('ALTER TABLE "Order" ADD COLUMN "shippingFeeJpy" INTEGER NOT NULL DEFAULT 0;');
+  console.log("[schema] Order.shippingFeeJpy 已添加");
+}
+if (!orderCols.has("shippingPrefecture")) {
+  db.exec('ALTER TABLE "Order" ADD COLUMN "shippingPrefecture" TEXT;');
+  console.log("[schema] Order.shippingPrefecture 已添加");
+}
+if (!orderCols.has("shippingAddressJson")) {
+  db.exec('ALTER TABLE "Order" ADD COLUMN "shippingAddressJson" TEXT;');
+  console.log("[schema] Order.shippingAddressJson 已添加");
+}
 
 const resetTable = db
   .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='PasswordResetToken'")

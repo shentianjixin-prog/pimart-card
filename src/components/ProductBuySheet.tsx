@@ -7,7 +7,6 @@ import { formatProductPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
-import { startSoloCheckout } from "@/lib/checkout-client";
 import {
   sortBoxVariants,
   formatVariantTitle,
@@ -123,7 +122,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
     setTimeout(() => setAdded(false), 1200);
   }
 
-  async function handleBuy() {
+  function handleBuy() {
     if (soldOut || buying) return;
     if (!acceptedRules) {
       setError("请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。");
@@ -131,11 +130,18 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
     }
     setBuying(true);
     setError(null);
-    const result = await startSoloCheckout([{ productId: active.id, quantity: qty }]);
-    if (!result.ok) {
-      setError(result.error);
-      setBuying(false);
-    }
+    addItem(
+      {
+        productId: active.id,
+        name: active.name,
+        slug: active.slug,
+        image: thumb,
+        priceJpy: active.priceJpy,
+        stock: active.stock,
+      },
+      qty
+    );
+    window.location.href = "/cart";
   }
 
   return (

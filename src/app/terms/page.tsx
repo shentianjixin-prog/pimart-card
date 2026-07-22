@@ -125,12 +125,12 @@ export default function TermsPage() {
 
       <LegalArticle id="art-6" index="06" title="发货、配送与签收">
         <ol className="list-decimal space-y-2">
-          <li>本站以亚洲为履约枢纽。具体发货地、预计时效以商品页、订单及结账说明为准；不同商品可能从不同地点发出。</li>
+          <li>商品统一进口至日本履约点后，由日本国内承运商进行配送。国际干线运输、进口清关及入库成本已计入商品价格；日本国内运费按收货都道府县在结账页面另行计算。</li>
           <li>
             <strong>预售及其他标注「预计发货 / 到货时间」的时间仅为参考时间</strong>
             ，可能因厂商出荷、质检返工、库存调配、清关、承运、目的地等因素产生偏差；实际发货时间以本站实际发货为准。
           </li>
-          <li>运费以结账页为准。目的地关税、税费、清关手续费由买家承担；本站不垫付、不承诺免税通关。</li>
+          <li>日本国内运费以结账页按收货都道府县计算的金额为准。国际干线运输、进口清关及入库成本已计入商品价格；地址错误、拒收、逾期取件造成的退回或重寄费用由买家承担。</li>
           <li>因海关查验、地址错误、长期无人签收、无正当理由拒签、逾期取件、海关资料不完整等导致的延误、退回、毁损灭失风险及费用，由买家承担。</li>
           <li>
             商品完成签收、代签、投递柜入库或物流显示妥投后，灭失和损坏风险原则上转移给用户。
@@ -223,7 +223,7 @@ export default function TermsPage() {
           <div className="legal-info-row"><span className="legal-info-label">运营负责人</span><span className="legal-info-value">{COMPANY_REPRESENTATIVE}</span></div>
           <div className="legal-info-row"><span className="legal-info-label">中国地区负责人</span><span className="legal-info-value">{CHINA_REGION_REPRESENTATIVE}</span></div>
           <div className="legal-info-row"><span className="legal-info-label">经营者所在地</span><span className="legal-info-value">{COMPANY_ADDRESS}</span></div>
-          <div className="legal-info-row"><span className="legal-info-label">日本配送联络地址</span><span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}（非销售主体所在地；退货地址以客服书面指示为准）</span></div>
+          <div className="legal-info-row"><span className="legal-info-label">日本国内履约地址</span><span className="legal-info-value">{JAPAN_DELIVERY_CONTACT_ADDRESS}（非销售主体所在地；退货前须通过 {SUPPORT_EMAIL} 联系，地址以客服书面指示为准）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">电话</span><span className="legal-info-value">{COMPANY_PHONE}（请优先邮件）</span></div>
           <div className="legal-info-row"><span className="legal-info-label">客服</span><span className="legal-info-value"><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{" ｜ "}<Link href="/contact">联系页面</Link></span></div>
           <div className="legal-info-row"><span className="legal-info-label">批发合作</span><span className="legal-info-value"><a href={`mailto:${B2B_EMAIL}`}>{B2B_EMAIL}</a>{" ｜ "}<Link href="/wholesale">批发合作页</Link></span></div>

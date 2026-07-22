@@ -35,8 +35,15 @@ export async function POST(request: NextRequest) {
       });
       const sessionMatches = order?.stripeSessionId === session.id;
       const amountMatches = session.amount_total === order?.totalJpy;
-      if (order && sessionMatches && amountMatches && order.status !== "paid") {
+      if (order && sessionMatches && amountMatches && !["paid", "shipping_review"].includes(order.status)) {
         const paidEmail = session.customer_details?.email?.trim().toLowerCase();
+        const shippingDetails = session.collected_information?.shipping_details;
+        const shippingState = shippingDetails?.address.state?.trim();
+        const prefectureMatches =
+          !shippingState ||
+          shippingState === order.shippingPrefecture ||
+          shippingState === session.metadata?.shippingPrefectureCode ||
+          shippingState.includes(order.shippingPrefecture || "__missing__");
         let customerId = order.customerId;
         if (!customerId && paidEmail) {
           const customer = await prisma.customer.findUnique({ where: { email: paidEmail } });
@@ -47,10 +54,16 @@ export async function POST(request: NextRequest) {
           prisma.order.update({
             where: { id: orderId },
             data: {
-              status: "paid",
+              status: prefectureMatches ? "paid" : "shipping_review",
               customerId: customerId ?? undefined,
               customerEmail: paidEmail ?? order.customerEmail ?? undefined,
               customerName: session.customer_details?.name ?? order.customerName ?? undefined,
+              shippingAddressJson: shippingDetails
+                ? JSON.stringify({
+                    ...shippingDetails,
+                    phone: session.customer_details?.phone ?? null,
+                  })
+                : undefined,
             },
           }),
           ...order.items.map((item) =>

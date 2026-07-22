@@ -235,7 +235,13 @@ const dict: Record<string, Record<Lang, string>> = {
   cart_go_shop:         { zh: "去逛逛",           ja: "商品を見る",          en: "Browse Products" },
   cart_remove:          { zh: "删除",             ja: "削除",                en: "Remove" },
   cart_total:           { zh: "合计",             ja: "合計",                en: "Total" },
-  cart_shipping_note:   { zh: "运费将在结账时显示", ja: "送料はチェックアウト時に表示されます", en: "Shipping calculated at checkout" },
+  cart_shipping_note:   { zh: "商品统一进口至日本履约点后，由日本国内承运商配送。国际干线运输、进口清关及入库成本已计入商品价格。", ja: "商品は日本の履行拠点へ一括輸入後、日本国内の配送業者より発送します。国際幹線輸送、輸入通関、入庫費用は商品価格に含まれます。", en: "Products are imported to our Japan fulfillment point and delivered by a domestic carrier. International freight, import clearance, and inbound handling are included in product prices." },
+  cart_prefecture_label: { zh: "日本收货都道府县", ja: "お届け先の都道府県", en: "Delivery prefecture" },
+  cart_prefecture_select: { zh: "请选择都道府县", ja: "都道府県を選択してください", en: "Select a prefecture" },
+  cart_prefecture_error: { zh: "请选择日本收货都道府县后再结算", ja: "お届け先の都道府県を選択してください", en: "Select a Japanese delivery prefecture before checkout" },
+  cart_subtotal: { zh: "商品小计", ja: "商品小計", en: "Subtotal" },
+  cart_shipping_fee: { zh: "日本国内运费", ja: "日本国内送料", en: "Domestic shipping" },
+  cart_payment_total: { zh: "最终付款金额", ja: "お支払い合計", en: "Total payment" },
   cart_checkout:        { zh: "前往结算",         ja: "レジへ進む",          en: "Checkout" },
   cart_checkout_loading:{ zh: "跳转中…",          ja: "処理中…",             en: "Redirecting…" },
   cart_checkout_error:  { zh: "结算失败，请重试", ja: "決済に失敗しました", en: "Checkout failed, please try again" },
@@ -285,7 +291,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_2_cta2:  { zh: "查看现货",     ja: "現物を見る",      en: "View In Stock" },
 
   // 顶部公告栏
-  banner_worldwide: { zh: "亚洲履约枢纽 · 全球配送", ja: "アジア履行拠点 · 世界配送", en: "Asia Fulfillment Hub · Worldwide Shipping" },
+  banner_worldwide: { zh: "日本国内履约 · 日本全国配送", ja: "日本国内履行 · 全国配送", en: "Fulfilled in Japan · Nationwide Delivery" },
   banner_wholesale: { zh: "支持批发询价", ja: "卸売対応", en: "Wholesale Available" },
   banner_psa:       { zh: "多语种原盒持续更新", ja: "多言語未開封BOXを随時更新", en: "Multilingual sealed boxes updated regularly" },
 
@@ -350,10 +356,10 @@ const dict: Record<string, Record<Lang, string>> = {
   why_subtitle: { zh: "原盒零售与 B2B 客户的可靠供货", ja: "未開封BOX小売とB2B向けの信頼できる仕入れ", en: "Trusted supply for sealed-box retail and B2B buyers" },
   why_auth_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
   why_auth_desc:  { zh: "所有商品均来自可溯源的正规渠道", ja: "すべて正規ルートから仕入れ、トレーサビリティを確保", en: "All products sourced through verified channels with traceable supply." },
-  why_japan_title:{ zh: "亚洲履约", ja: "アジア履行", en: "Asia Fulfillment" },
-  why_japan_desc: { zh: "以亚洲为履约枢纽，发货地以商品页为准", ja: "アジアを履行拠点とし、発送元は商品ページに表示", en: "Fulfilled through our Asia hub; origin is shown on each product page." },
-  why_world_title:{ zh: "全球配送", ja: "世界各国へ配送", en: "Worldwide Shipping" },
-  why_world_desc: { zh: "支持海外收藏家与经销商配送", ja: "海外のコレクター・業者向けに国際配送対応", en: "International delivery support for collectors and resellers worldwide." },
+  why_japan_title:{ zh: "日本国内履约", ja: "日本国内履行", en: "Japan Fulfillment" },
+  why_japan_desc: { zh: "统一进口至日本履约点后，由日本国内承运商配送", ja: "日本の履行拠点へ一括輸入後、国内配送業者より発送", en: "Imported to our Japan fulfillment point, then delivered by a domestic carrier." },
+  why_world_title:{ zh: "日本全国配送", ja: "日本全国へ配送", en: "Nationwide Japan Delivery" },
+  why_world_desc: { zh: "按收货都道府县自动计算日本国内运费", ja: "お届け先の都道府県に基づき国内送料を自動計算", en: "Domestic shipping is calculated automatically by delivery prefecture." },
   why_pay_title:  { zh: "安全支付", ja: "安全な決済", en: "Secure Payment" },
   why_pay_desc:   { zh: "Stripe 加密结账，安心付款", ja: "Stripeによる暗号化チェックアウト", en: "Stripe-powered checkout with encrypted payment processing." },
 
@@ -393,13 +399,13 @@ const dict: Record<string, Record<Lang, string>> = {
   about_china_rep_label: { zh: "中国地区负责人", ja: "中国地域責任者", en: "China regional contact" },
   about_address_label: { zh: "所在地", ja: "所在地", en: "Address" },
   about_phone_label: { zh: "电话", ja: "電話番号", en: "Phone" },
-  about_japan_delivery_label: { zh: "日本配送联络地址", ja: "日本配送連絡先", en: "Japan delivery contact address" },
+  about_japan_delivery_label: { zh: "日本国内履约地址", ja: "日本国内履行住所", en: "Japan fulfillment address" },
   about_payment_label: { zh: "支付方式", ja: "支払方法", en: "Payment methods" },
 
   about_p2: {
-    zh: "我们以对卡牌的热爱与专业连接不同国家和地区的收藏者，以亚洲为履约枢纽，面向全球提供服务。对个人买家，我们致力于提供更便捷、安心的购物体验，帮助您寻找心之所想；对经销商与店铺，我们提供更稳定、长期的合作支持。寻找、筛选、交付——是我们做好每一笔生意的基础。",
-    ja: "私たちは、カードへの情熱と専門性を通じて、さまざまな国や地域のコレクターをつなぎ、アジアを履行拠点として世界へサービスを提供しています。個人のお客様には、より便利で安心できる購入体験と、お探しの商品を見つけるお手伝いを。ディーラーや店舗には、より安定した長期的な協業を提供します。探す、選ぶ、届ける——それが一つひとつの取引を大切にする私たちの基盤です。",
-    en: "Through our passion for cards and professional expertise, we connect collectors across countries and regions, serving customers worldwide with Asia as our fulfillment hub. We give individual buyers a more convenient and reassuring shopping experience, helping them find what they truly want; for dealers and stores, we offer stable, long-term support. Sourcing, selecting, and delivering are the foundations of every transaction we handle.",
+    zh: "我们以对卡牌的热爱与专业连接不同国家和地区的收藏者。商品统一进口至日本履约点后，由日本国内承运商进行配送；国际干线运输、进口清关及入库成本已计入商品价格。对个人买家，我们致力于提供更便捷、安心的购物体验；对经销商与店铺，我们提供更稳定、长期的合作支持。",
+    ja: "私たちはカードへの情熱と専門性を通じて、さまざまな国や地域のコレクターをつないでいます。商品は日本の履行拠点へ一括輸入後、日本国内の配送業者より発送します。国際幹線輸送、輸入通関、入庫費用は商品価格に含まれます。個人のお客様には安心できる購入体験を、事業者には安定した長期的な協業を提供します。",
+    en: "We connect collectors across countries through our passion and expertise. Products are imported to our Japan fulfillment point and delivered by a domestic carrier. International freight, import clearance, and inbound handling are included in product prices. We support individual buyers and long-term business partners alike.",
   },
   about_p3: {
     zh: "未来，我们将继续深化供应链，扩展语言服务与行业合作网络，让 PIMART CARD 成为连接全球市场的可靠入口。我们追求的不只是一笔订单，更是长期的陪伴，邀您一起目睹我们的成长。",
@@ -415,7 +421,7 @@ const dict: Record<string, Record<Lang, string>> = {
   about_b2b_label: { zh: "B2B / 批发合作", ja: "B2B / 卸売提携", en: "B2B / Wholesale" },
 
   faq_q1: { zh: "是否支持国际配送？", ja: "海外配送は可能ですか？", en: "Do you ship internationally?" },
-  faq_a1: { zh: "支持。我们以亚洲为履约枢纽，具体发货地、时效与费用以商品页和结账页为准。", ja: "はい。アジアを履行拠点として世界各国へ配送します。発送元、料金、配送目安は商品ページとチェックアウト画面をご確認ください。", en: "Yes. We fulfill through our Asia hub. Origin, rates, and delivery times are shown on the product and checkout pages." },
+  faq_a1: { zh: "目前提供日本国内配送。商品统一进口至日本履约点后，由日本国内承运商发出，运费按收货都道府县在结账页计算。", ja: "現在は日本国内配送に対応しています。商品は日本の履行拠点へ一括輸入後、国内配送業者より発送し、送料はお届け先の都道府県に基づき計算します。", en: "We currently deliver within Japan. Products are imported to our Japan fulfillment point and domestic shipping is calculated from the delivery prefecture." },
   faq_q2: { zh: "商品是否为正品？", ja: "正規品ですか？", en: "Are products authentic?" },
   faq_a2: { zh: "所有商品均来自可溯源的正规渠道。", ja: "すべて正規ルートから仕入れた商品です。", en: "All items are sourced through verified authentic channels." },
   faq_q3: { zh: "如何咨询批发？", ja: "卸売の問い合わせは？", en: "How do I inquire about wholesale?" },
@@ -451,7 +457,7 @@ const dict: Record<string, Record<Lang, string>> = {
   // Homepage V2
   hero_v2_s1_title: { zh: "PIMART CARD", ja: "PIMART CARD", en: "PIMART CARD" },
   hero_v2_s1_sub: { zh: "全球卡牌交易平台", ja: "グローバルトレーディングカードマーケット", en: "Global Trading Card Marketplace" },
-  hero_v2_s1_desc: { zh: "全球配送 · 正品保证", ja: "世界配送 · 正規品保証", en: "Worldwide Shipping · Authentic Guarantee" },
+  hero_v2_s1_desc: { zh: "日本全国配送 · 正品保证", ja: "日本全国配送 · 正規品保証", en: "Nationwide Japan Delivery · Authentic Guarantee" },
   hero_v2_s2_title: { zh: "原盒臻选", ja: "未開封BOX厳選", en: "Sealed Selection" },
   hero_v2_s2_sub: { zh: "各语版本 · 链接世界", ja: "多言語対応 · 世界をつなぐ", en: "All Languages · Connecting the World" },
   hero_v2_s2_desc: {
@@ -472,7 +478,7 @@ const dict: Record<string, Record<Lang, string>> = {
   hero_v2_cta_quote: { zh: "获取报价", ja: "見積もり", en: "Get a Quote" },
   hero_v2_cta_learn: { zh: "了解详情", ja: "詳しく見る", en: "Learn More" },
   hero_v2_cta_wholesale: { zh: "批发咨询", ja: "卸売相談", en: "Wholesale Inquiry" },
-  hero_premium_kicker: { zh: "亚洲履约 · 面向全球收藏者", ja: "アジア履行 · 世界のコレクターへ", en: "Fulfilled in Asia · Built for collectors" },
+  hero_premium_kicker: { zh: "日本国内履约 · 面向收藏者", ja: "日本国内履行 · コレクターへ", en: "Fulfilled in Japan · Built for collectors" },
   hero_premium_title: { zh: "把真正值得收藏的卡牌，送到世界各地。", ja: "本当に集めたいカードを、世界へ。", en: "Collector-grade cards, sourced with intent." },
   hero_premium_lead: {
     zh: "精选宝可梦、海贼王及多语种未开封商品。价格、库存与发货条件清晰透明，让每一次购买更有把握。",
@@ -519,9 +525,9 @@ const dict: Record<string, Record<Lang, string>> = {
   b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
 
   trusted_title: { zh: "全球信赖", ja: "世界中で信頼される", en: "Trusted Worldwide" },
-  trusted_subtitle: { zh: "以亚洲履约网络连接全球收藏家", ja: "アジアの履行ネットワークと世界のコレクターをつなぐ", en: "Connecting collectors worldwide through our Asia fulfillment network" },
-  trusted_f1_title: { zh: "全球配送", ja: "世界配送", en: "Worldwide Shipping" },
-  trusted_f1_desc: { zh: "覆盖中国、美国、东南亚等多个国家地区", ja: "中国・米国・東南アジアなど多国対応", en: "China, US, Southeast Asia and more" },
+  trusted_subtitle: { zh: "统一进口至日本履约点，由日本国内承运商配送", ja: "日本の履行拠点へ一括輸入し、国内配送業者より発送", en: "Imported to our Japan fulfillment point and delivered domestically" },
+  trusted_f1_title: { zh: "日本全国配送", ja: "日本全国配送", en: "Nationwide Japan Delivery" },
+  trusted_f1_desc: { zh: "按日本收货都道府县透明计算运费", ja: "お届け先の都道府県に基づく明確な送料", en: "Transparent rates based on the Japanese delivery prefecture" },
   trusted_f2_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
   trusted_f2_desc: { zh: "所有商品均来自可溯源渠道", ja: "すべてトレーサブルな正規ルート", en: "All products from traceable sources" },
   trusted_f3_title: { zh: "透明发货", ja: "明確な発送案内", en: "Transparent Dispatch" },
@@ -536,7 +542,7 @@ const dict: Record<string, Record<Lang, string>> = {
   stats_rating: { zh: "好评率", ja: "高評価率", en: "Positive Rating" },
 
   world_title: { zh: "全球收藏家的选择", ja: "世界のコレクターに選ばれる", en: "Trusted by Collectors Worldwide" },
-  world_subtitle: { zh: "从亚洲履约网络送达全球收藏家与经销商", ja: "アジアの履行ネットワークから世界のコレクター・事業者へ", en: "From our Asia fulfillment network to collectors and dealers worldwide" },
+  world_subtitle: { zh: "从日本履约点送达日本各地收藏家与经销商", ja: "日本の履行拠点から全国のコレクター・事業者へ", en: "From our Japan fulfillment point to collectors and dealers nationwide" },
   region_jp: { zh: "日本", ja: "日本", en: "Japan" },
   region_cn: { zh: "中国", ja: "中国", en: "China" },
   region_us: { zh: "美国", ja: "米国", en: "United States" },

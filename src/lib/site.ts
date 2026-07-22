@@ -21,7 +21,7 @@ export const COMPANY_ADDRESS = "中国 江苏省南通市滨江新城15-601";
 export const CHINA_REGION_REPRESENTATIVE = "包海兵";
 /** 对外联系电话（中国大陆） */
 export const COMPANY_PHONE = "+86 131 4291 3561";
-/** 日本国内配送联络地址；并非销售主体所在地或无条件退货地址 */
+/** 日本国内履约地址；并非销售主体所在地或无条件退货地址 */
 export const JAPAN_DELIVERY_CONTACT_ADDRESS =
   "〒170-0013 東京都豊島区東池袋1-33-4 ニュー池袋ハイツ705室";
 

@@ -50,7 +50,10 @@ model Order {
   customer        Customer?   @relation(fields: [customerId], references: [id], onDelete: SetNull)
   customerEmail   String?
   customerName    String?
-  status          String      @default("pending") // pending/paid/cancelled
+  status          String      @default("pending") // pending/paid/shipping_review/cancelled
+  shippingFeeJpy  Int         @default(0)
+  shippingPrefecture String?
+  shippingAddressJson String?
   totalJpy        Int
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt

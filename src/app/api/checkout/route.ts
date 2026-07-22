@@ -5,6 +5,7 @@ import { isProductArchived } from "@/lib/product-status";
 import { checkRateLimit, rateLimitKey } from "@/lib/security";
 import { getMemberSession } from "@/lib/session";
 import { z } from "zod";
+import { getJapanShippingRate } from "@/lib/shipping";
 
 const checkoutSchema = z.object({
   items: z.array(z.object({
@@ -12,6 +13,7 @@ const checkoutSchema = z.object({
     quantity: z.number().int().min(1).max(100),
   })).min(1).max(25),
   solo: z.boolean().optional(),
+  prefecture: z.string().trim().regex(/^JP-\d{2}$/),
   acceptedRules: z.literal(true),
 }).strict();
 
@@ -42,6 +44,10 @@ export async function POST(request: NextRequest) {
   }
 
   const solo = parsed.data.solo === true;
+  const shipping = getJapanShippingRate(parsed.data.prefecture);
+  if (!shipping) {
+    return NextResponse.json({ error: "请选择有效的日本收货都道府县" }, { status: 400 });
+  }
   const itemTotals = new Map<string, number>();
   for (const item of parsed.data.items) {
     itemTotals.set(item.productId, (itemTotals.get(item.productId) ?? 0) + item.quantity);
@@ -98,11 +104,14 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  totalJpy += shipping.feeJpy;
   const member = await getMemberSession();
 
   const order = await prisma.order.create({
     data: {
       totalJpy,
+      shippingFeeJpy: shipping.feeJpy,
+      shippingPrefecture: shipping.label,
       customerId: member?.customerId,
       customerEmail: member?.email,
       customerName: member?.name,
@@ -115,11 +124,29 @@ export async function POST(request: NextRequest) {
     const origin = request.nextUrl.origin;
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      locale: "ja",
       line_items: lineItems,
       customer_email: member?.email,
+      phone_number_collection: { enabled: true },
+      shipping_address_collection: { allowed_countries: ["JP"] },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            display_name: `日本国内配送（${shipping.label}）`,
+            fixed_amount: { amount: shipping.feeJpy, currency: "jpy" },
+          },
+        },
+      ],
       success_url: `${origin}/checkout/success?order=${order.id}${solo ? "&solo=1" : ""}`,
       cancel_url: `${origin}/checkout/cancel?order=${order.id}`,
-      metadata: { orderId: order.id, solo: solo ? "1" : "0" },
+      metadata: {
+        orderId: order.id,
+        solo: solo ? "1" : "0",
+        shippingPrefecture: shipping.label,
+        shippingPrefectureCode: shipping.code,
+        shippingFeeJpy: String(shipping.feeJpy),
+      },
     });
 
     await prisma.order.update({
