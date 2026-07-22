@@ -92,7 +92,7 @@ export function AfterSalesPageClient() {
         </div>
 
         <p className="mt-4 text-xs text-[#9ca3af]">
-          申请会打开邮件草稿并带入已填信息。证据照片/视频请作为邮件附件发送；网页暂不接收上传。文件较大时可改走 LINE。
+          申请会打开邮件草稿并带入已填信息。证据照片/视频请作为邮件附件发送；网页暂不接收上传。
         </p>
       </section>
 

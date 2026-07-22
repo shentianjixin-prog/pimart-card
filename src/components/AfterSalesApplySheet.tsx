@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { LINE_CONTACT_URL, SUPPORT_EMAIL } from "@/lib/site";
+import { SUPPORT_EMAIL } from "@/lib/site";
 
 export const AFTER_SALES_ISSUE_TYPES = [
   "运输破损",
@@ -279,7 +279,7 @@ export function AfterSalesApplySheet({ open, onClose, initialIssueType = "" }: P
                 </ul>
               ) : (
                 <p className="mt-2 text-xs text-[#9ca3af]">
-                  可多选照片/视频。提交后会打开邮件草稿，请手动添加附件；大文件请改走 LINE。
+                  可多选照片/视频。提交后会打开邮件草稿，请手动添加附件。
                 </p>
               )}
             </div>
@@ -293,14 +293,6 @@ export function AfterSalesApplySheet({ open, onClose, initialIssueType = "" }: P
               <button type="submit" className="btn-primary rounded-full px-5 text-sm font-medium">
                 打开邮件并发送申请
               </button>
-              <a
-                href={LINE_CONTACT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary inline-flex min-h-12 flex-1 items-center justify-center rounded-full px-5 text-sm font-medium"
-              >
-                LINE 联系客服
-              </a>
             </div>
           </div>
         </form>

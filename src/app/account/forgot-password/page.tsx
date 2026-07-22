@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { ForgotPasswordForm } from "@/components/account/MemberAuthForm";
-import { LINE_CONTACT_URL, SUPPORT_EMAIL } from "@/lib/site";
+import { SUPPORT_EMAIL } from "@/lib/site";
 import { isEmailConfigured } from "@/lib/email";
 import { resolveLang, t } from "@/lib/translations";
 
@@ -22,15 +22,12 @@ export default async function ForgotPasswordPage() {
         ) : (
           <div className="space-y-4 text-sm text-[#6b7280]">
             <p>{T("auth_err_email_not_configured")}</p>
-            <a href={LINE_CONTACT_URL} target="_blank" rel="noopener noreferrer" className="buyback-line-btn w-full">
-              {T("contact_line_btn")}
+            <a
+              href={`mailto:${SUPPORT_EMAIL}`}
+              className="btn-primary inline-flex min-h-11 w-full items-center justify-center rounded-full px-5 text-sm font-medium"
+            >
+              {SUPPORT_EMAIL}
             </a>
-            <p>
-              {T("contact_email_label")}:{" "}
-              <a href={`mailto:${SUPPORT_EMAIL}`} className="font-medium text-[#111827] hover:underline">
-                {SUPPORT_EMAIL}
-              </a>
-            </p>
           </div>
         )}
       </div>
