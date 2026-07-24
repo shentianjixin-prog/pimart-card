@@ -5,6 +5,10 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { t, resolveLang, type Lang } from "@/lib/translations";
+import {
+  localizeDescription,
+  localizeProductName,
+} from "@/lib/product-i18n";
 import { isProductArchived } from "@/lib/product-status";
 import { findBoxVariants } from "@/lib/product-box-variants";
 import { OpcProductSpecs } from "@/components/OpcProductSpecs";
@@ -22,18 +26,22 @@ export async function generateMetadata({
   const { slug: rawSlug } = await params;
   const product = await getProductBySlug(decodeURIComponent(rawSlug));
   if (!product || isProductArchived(product.status)) return { title: "Product not found" };
-  const description = product.description?.slice(0, 155) ||
-    `${product.name} — current price, stock status, and dispatch information from PIMART CARD.`;
+  const cookieStore = await cookies();
+  const lang = resolveLang(cookieStore.get("lang")?.value);
+  const displayName = localizeProductName(product.name, lang);
+  const displayDesc = localizeDescription(product.description, lang);
+  const description = displayDesc?.slice(0, 155) ||
+    `${displayName} — current price, stock status, and dispatch information from PIMART CARD.`;
   const image = product.images.split(",")[0]?.trim();
   return {
-    title: product.name,
+    title: displayName,
     description,
     alternates: { canonical: `/products/${encodeURIComponent(product.slug)}` },
     openGraph: {
       type: "website",
-      title: product.name,
+      title: displayName,
       description,
-      images: image ? [{ url: image, alt: product.name }] : undefined,
+      images: image ? [{ url: image, alt: displayName }] : undefined,
     },
   };
 }
@@ -61,14 +69,16 @@ export default async function ProductPage({
 
   const lang = resolveLang(cookieStore.get("lang")?.value);
   const T = (key: string) => t(key, lang);
+  const displayName = localizeProductName(product.name, lang);
+  const displayDesc = localizeDescription(product.description, lang);
 
   const variants = await findBoxVariants(product);
   const productUrl = `https://pimartcard.com/products/${encodeURIComponent(product.slug)}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: product.name,
-    description: product.description || undefined,
+    name: displayName,
+    description: displayDesc || undefined,
     image: product.images.split(",").map((image) => image.trim()).filter(Boolean),
     sku: product.id,
     category: product.category,
@@ -95,7 +105,7 @@ export default async function ProductPage({
           {T("detail_all_products")}
         </Link>
         <span className="text-[#9ca3af]"> / </span>
-        <span className="truncate text-[#111827]">{product.name}</span>
+        <span className="truncate text-[#111827]">{displayName}</span>
       </nav>
 
       <ProductDetailPurchase
@@ -125,13 +135,6 @@ export default async function ProductPage({
           lang={lang}
           T={T}
         />
-
-        {product.description ? (
-          <div className="product-detail-desc">
-            <p className="product-detail-desc-title">{T("detail_description")}</p>
-            <p className="whitespace-pre-line">{product.description}</p>
-          </div>
-        ) : null}
       </ProductDetailPurchase>
     </div>
   );

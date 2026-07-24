@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
+import { localizeProductText } from "@/lib/product-i18n";
 import {
   sortBoxVariants,
   formatVariantTitle,
@@ -127,17 +128,17 @@ export function ProductFormatSelector({
 
   if (hasPokemonPair) {
     const groups = [
-      { key: "slim" as const, label: "瘦包", items: pokemonPairGroups.slim },
-      { key: "fat" as const, label: "肥包", items: pokemonPairGroups.fat },
+      { key: "slim" as const, label: localizeProductText("瘦包", lang), items: pokemonPairGroups.slim },
+      { key: "fat" as const, label: localizeProductText("肥包", lang), items: pokemonPairGroups.fat },
     ].filter((group) => group.items.length > 0);
 
     const unitLabel: Record<string, string> = {
-      瘦盒: "原盒",
-      肥盒: "原盒",
-      瘦散包: "散包",
-      肥散包: "散包",
-      瘦原箱: "原箱",
-      肥原箱: "原箱",
+      瘦盒: localizeProductText("原盒", lang),
+      肥盒: localizeProductText("原盒", lang),
+      瘦散包: localizeProductText("散包", lang),
+      肥散包: localizeProductText("散包", lang),
+      瘦原箱: localizeProductText("原箱", lang),
+      肥原箱: localizeProductText("原箱", lang),
     };
 
     return (
@@ -157,10 +158,15 @@ export function ProductFormatSelector({
                 >
                   <span>
                     <span className="product-format-group-title">{group.label}</span>
-                    <span className="product-format-group-sub">原盒 / 散包 / 原箱</span>
+                    <span className="product-format-group-sub">
+                      {localizeProductText("原盒", lang)} / {localizeProductText("散包", lang)} /{" "}
+                      {localizeProductText("原箱", lang)}
+                    </span>
                   </span>
                   <span className="product-format-group-mark" aria-hidden="true">
-                    <span className="product-format-group-current">{activeInGroup ? "当前" : ""}</span>
+                    <span className="product-format-group-current">
+                      {activeInGroup ? T("format_current") : ""}
+                    </span>
                     <span className="product-format-group-chevron">⌄</span>
                   </span>
                 </button>
@@ -170,13 +176,16 @@ export function ProductFormatSelector({
                     {group.items.map((v) => {
                       const active = v.slug === currentSlug;
                       const thumb = firstImage(v.images);
+                      const rowTitle =
+                        unitLabel[v.boxType] ??
+                        localizeProductText(formatVariantTitle(v.boxType, v.name, series), lang);
                       return (
                         <OptionShell key={v.slug} active={active} slug={v.slug} className="product-format-row product-format-row-compact">
                           <span className="product-format-thumb">
                             <Image src={thumb} alt="" width={48} height={48} className="product-format-thumb-img" />
                           </span>
                           <span className="product-format-list-main">
-                            <span className="product-format-name">{unitLabel[v.boxType] ?? formatVariantTitle(v.boxType, v.name, series)}</span>
+                            <span className="product-format-name">{rowTitle}</span>
                             {v.stock <= 0 ? (
                               <span className="product-format-stock is-out">{T("card_sold_out")}</span>
                             ) : (
@@ -207,7 +216,7 @@ export function ProductFormatSelector({
             const active = v.slug === currentSlug;
             const title =
               isCsv || isGem || isSvExtendedFormat(v.boxType)
-                ? formatVariantTitle(v.boxType, v.name, series)
+                ? localizeProductText(formatVariantTitle(v.boxType, v.name, series), lang)
                 : translateBoxType(v.boxType, lang);
             const thumb = firstImage(v.images);
             return (

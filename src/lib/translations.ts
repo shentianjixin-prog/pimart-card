@@ -699,6 +699,45 @@ const dict: Record<string, Record<Lang, string>> = {
     ja: "受取後7日以内に、輸送破損・誤配送・欠品について注文番号・伝票・外箱写真・連続開封動画または連続写真を提出できます。",
     en: "Within 7 days of receipt you may submit order number, label, box photos and continuous unboxing video or photos for transit damage, wrong item or shortage.",
   },
+
+  detail_badge_preorder: { zh: "预售/调货商品", ja: "予約・取り寄せ商品", en: "Pre-order / Transfer" },
+  detail_badge_instock: { zh: "现货商品", ja: "現物商品", en: "In stock" },
+  detail_ship_eta_k: { zh: "预计发货", ja: "発送目安", en: "Dispatch" },
+  detail_ship_eta_v_pre: { zh: "下单付款后 ", ja: "お支払い後 ", en: "Within " },
+  detail_ship_eta_v_suf: { zh: " 个工作日内安排发出", ja: " 営業日以内に発送手配", en: " business days after payment" },
+  detail_ship_notify_k: { zh: "通知方式", ja: "通知方法", en: "Updates" },
+  detail_ship_notify_v: {
+    zh: "发货后将通过邮件同步物流信息",
+    ja: "発送後にメールで配送情報をお知らせします",
+    en: "Tracking details are emailed after dispatch",
+  },
+  detail_ship_merge_k: { zh: "合单规则", ja: "同梱ルール", en: "Combined shipping" },
+  detail_ship_merge_v: {
+    zh: "同一订单含预售或调货商品时，可能等待齐货后统一发出",
+    ja: "同一注文に予約・取り寄せが含まれる場合、揃い次第まとめて発送することがあります",
+    en: "Orders with pre-order or transfer items may ship together once all items are ready",
+  },
+  detail_ship_sign_k: { zh: "签收提醒", ja: "受取時の注意", en: "On delivery" },
+  detail_confirm_h: { zh: "购前请确认", ja: "ご購入前にご確認ください", en: "Please confirm before purchase" },
+  detail_confirm_1: {
+    zh: "未开封盒、补充包、预售、随机/开封类商品属于特殊品类，不支持个人原因退换。",
+    ja: "未開封BOX・ブースター・予約・ランダム／開封系は特殊商品のため、お客様都合の返品・交換はお受けできません。",
+    en: "Sealed boxes, boosters, pre-orders and random/opened items are special categories and cannot be returned for personal reasons.",
+  },
+  detail_confirm_2: {
+    zh: "卡牌开封结果、行情涨跌、轻微盒损或封膜褶皱，不作为取消、补差或售后依据。",
+    ja: "開封結果・相場変動・軽微な外箱傷やシュリンク皺は、キャンセル・差額補填・アフターの根拠になりません。",
+    en: "Pull results, market swings, light box wear or film wrinkles are not grounds for cancel, price adjust or claims.",
+  },
+  detail_confirm_preorder: {
+    zh: "预售时间为预计时间；满 90 日仍未发货且订单未发货时，可按条款申请退款。",
+    ja: "予約の発送日は目安です。初回表示の予定日から90日を過ぎても未発送の場合、規約に従い返金申請できます。",
+    en: "Pre-order dates are estimates; if still unshipped 90 days after the first listed date, you may request a refund under the Terms.",
+  },
+  detail_link_terms: { zh: "用户协议", ja: "利用規約", en: "Terms of Use" },
+  detail_link_faq: { zh: "售后说明", ja: "アフター案内", en: "After-sales" },
+  detail_link_tokusho: { zh: "特定商取引法表記", ja: "特定商取引法に基づく表記", en: "Legal Notice" },
+  format_current: { zh: "当前", ja: "選択中", en: "Selected" },
 };
 
 export function t(key: string, lang: Lang): string {

@@ -6,6 +6,13 @@ import { useRouter } from "next/navigation";
 import { formatProductPrice } from "@/lib/format";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
+import {
+  localizeCategory,
+  localizeDescription,
+  localizeLanguageLabel,
+  localizeProductName,
+  localizeSeries,
+} from "@/lib/product-i18n";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { ProductFormatSelector } from "@/components/ProductFormatSelector";
@@ -78,6 +85,11 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
 
   const soldOut = selected.stock <= 0;
   const boxLabel = selected.boxType ? translateBoxType(selected.boxType, lang) : "";
+  const displayName = localizeProductName(selected.name, lang);
+  const displaySeries = localizeSeries(product.series, lang);
+  const displayLanguage = localizeLanguageLabel(product.language, lang, product.name);
+  const displayCategory = localizeCategory(product.category, lang);
+  const displayDescription = localizeDescription(product.description, lang);
 
   function selectVariant(slug: string) {
     if (slug === selectedSlug) return;
@@ -94,7 +106,7 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
         <ProductImageGallery
           key={selected.slug}
           images={selected.images}
-          name={selected.name}
+          name={displayName}
           soldOut={soldOut}
           soldOutLabel={T("card_sold_out")}
         />
@@ -102,23 +114,23 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
 
       <div className="product-detail-info">
         <div className="product-detail-meta">
-          {product.category ? <span className="product-detail-badge">{product.category}</span> : null}
+          {displayCategory ? <span className="product-detail-badge">{displayCategory}</span> : null}
           {boxLabel ? <span className="product-detail-badge">{boxLabel}</span> : null}
           {product.isPreorder ? (
             <span className="product-detail-badge is-preorder">{T("detail_preorder")}</span>
           ) : null}
         </div>
 
-        <h1 className="product-detail-title">{selected.name}</h1>
+        <h1 className="product-detail-title">{displayName}</h1>
 
-        {product.series ? (
+        {displaySeries ? (
           <p className="product-detail-series">
             {T("detail_series")}
-            {product.series}
+            {displaySeries}
           </p>
         ) : null}
 
-        {product.language ? <p className="product-detail-lang">{product.language}</p> : null}
+        {displayLanguage !== "—" ? <p className="product-detail-lang">{displayLanguage}</p> : null}
 
         <p className="product-detail-price">{formatProductPrice(selected.priceJpy, T("price_pending"))}</p>
         {selected.priceJpy > 0 ? <p className="product-detail-tax">{T("detail_price_tax")}</p> : null}
@@ -138,7 +150,7 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
           onSelect={selectVariant}
         />
 
-        <section className="product-detail-shipping" aria-label="发货说明">
+        <section className="product-detail-shipping" aria-label={T("detail_shipping_h")}>
           <div className="product-detail-shipping-head">
             <p className="product-detail-shipping-title">
               <span className="product-detail-shipping-icon" aria-hidden="true">
@@ -151,26 +163,28 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
               {T("detail_shipping_h")}
             </p>
             <span className="product-detail-shipping-badge">
-              {product.isPreorder ? "预售/调货商品" : "现货商品"}
+              {product.isPreorder ? T("detail_badge_preorder") : T("detail_badge_instock")}
             </span>
           </div>
           <div className="product-detail-shipping-grid">
             <div className="product-detail-shipping-item">
-              <span className="product-detail-shipping-k">预计发货</span>
+              <span className="product-detail-shipping-k">{T("detail_ship_eta_k")}</span>
               <span className="product-detail-shipping-v">
-                下单付款后 {product.shippingDays} 个工作日内安排发出
+                {T("detail_ship_eta_v_pre")}
+                {product.shippingDays}
+                {T("detail_ship_eta_v_suf")}
               </span>
             </div>
             <div className="product-detail-shipping-item">
-              <span className="product-detail-shipping-k">通知方式</span>
-              <span className="product-detail-shipping-v">发货后将通过邮件同步物流信息</span>
+              <span className="product-detail-shipping-k">{T("detail_ship_notify_k")}</span>
+              <span className="product-detail-shipping-v">{T("detail_ship_notify_v")}</span>
             </div>
             <div className="product-detail-shipping-item">
-              <span className="product-detail-shipping-k">合单规则</span>
-              <span className="product-detail-shipping-v">同一订单含预售或调货商品时，可能等待齐货后统一发出</span>
+              <span className="product-detail-shipping-k">{T("detail_ship_merge_k")}</span>
+              <span className="product-detail-shipping-v">{T("detail_ship_merge_v")}</span>
             </div>
             <div className="product-detail-shipping-item">
-              <span className="product-detail-shipping-k">签收提醒</span>
+              <span className="product-detail-shipping-k">{T("detail_ship_sign_k")}</span>
               <span className="product-detail-shipping-v">{T("product_shipping_evidence")}</span>
             </div>
           </div>
@@ -183,19 +197,24 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
           </p>
         ) : null}
 
-
         <section className="rounded-[16px] border border-[rgba(17,24,39,0.08)] bg-[#fafafa] p-4 text-xs leading-relaxed text-[#6b7280]">
-          <p className="font-semibold text-[#111827]">购前请确认</p>
+          <p className="font-semibold text-[#111827]">{T("detail_confirm_h")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-4">
-            <li>未开封盒、补充包、预售、随机/开封类商品属于特殊品类，不支持个人原因退换。</li>
-            <li>卡牌开封结果、行情涨跌、轻微盒损或封膜褶皱，不作为取消、补差或售后依据。</li>
+            <li>{T("detail_confirm_1")}</li>
+            <li>{T("detail_confirm_2")}</li>
             <li>{T("product_returns_hint")}</li>
-            {product.isPreorder ? <li>预售时间为预计时间；满 90 日仍未发货且订单未发货时，可按条款申请退款。</li> : null}
+            {product.isPreorder ? <li>{T("detail_confirm_preorder")}</li> : null}
           </ul>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Link href="/terms" className="font-medium text-[#111827] hover:underline">用户协议</Link>
-            <Link href="/faq#returns" className="font-medium text-[#111827] hover:underline">售后说明</Link>
-            <Link href="/tokusho" className="font-medium text-[#111827] hover:underline">特定商取引法表記</Link>
+            <Link href="/terms" className="font-medium text-[#111827] hover:underline">
+              {T("detail_link_terms")}
+            </Link>
+            <Link href="/faq#returns" className="font-medium text-[#111827] hover:underline">
+              {T("detail_link_faq")}
+            </Link>
+            <Link href="/tokusho" className="font-medium text-[#111827] hover:underline">
+              {T("detail_link_tokusho")}
+            </Link>
           </div>
         </section>
         <div className="product-detail-cta">
@@ -203,7 +222,7 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
             key={selected.id}
             product={{
               id: selected.id,
-              name: selected.name,
+              name: displayName,
               slug: selected.slug,
               series: product.series,
               boxType: selected.boxType,
@@ -216,6 +235,13 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
         </div>
 
         {children}
+
+        {displayDescription ? (
+          <div className="product-detail-desc mt-6">
+            <p className="product-detail-desc-title">{T("detail_description")}</p>
+            <p className="whitespace-pre-line">{displayDescription}</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );

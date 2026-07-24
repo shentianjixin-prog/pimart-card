@@ -6,7 +6,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { formatProductPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
-import { useT } from "@/lib/lang-context";
+import { useLang, useT } from "@/lib/lang-context";
+import {
+  localizeLanguageLabel,
+  localizeProductName,
+  localizeSeries,
+} from "@/lib/product-i18n";
 import { CardPlaceholder, isUsableProductImage } from "@/components/HeroPlaceholders";
 
 const NEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
@@ -48,6 +53,7 @@ export function ProductCard({ product }: Props) {
   const router = useRouter();
   const { addItem } = useCart();
   const T = useT();
+  const { lang } = useLang();
   const [added, setAdded] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
 
@@ -59,6 +65,9 @@ export function ProductCard({ product }: Props) {
   const isPsa = isPsaProduct(product);
   const isWholesale = isWholesaleProduct(product);
   const productHref = `/products/${encodeURIComponent(product.slug)}`;
+  const displayName = localizeProductName(product.name, lang);
+  const displaySeries = localizeSeries(product.series, lang);
+  const displayLanguage = localizeLanguageLabel(product.language, lang, product.name);
 
   const stockLabel = soldOut
     ? T("card_sold_out")
@@ -72,7 +81,7 @@ export function ProductCard({ product }: Props) {
     if (soldOut) return;
     addItem({
       productId: product.id,
-      name: product.name,
+      name: displayName,
       slug: product.slug,
       image,
       priceJpy: product.priceJpy,
@@ -104,7 +113,7 @@ export function ProductCard({ product }: Props) {
           ) : (
             <Image
               src={image}
-              alt={product.name}
+              alt={displayName}
               fill
               unoptimized={image?.endsWith(".svg") || image?.endsWith(".webp")}
               sizes="(max-width: 768px) 50vw, 25vw"
@@ -137,21 +146,18 @@ export function ProductCard({ product }: Props) {
 
         <div className="border-t border-[rgba(17,24,39,0.06)] p-3 sm:p-4">
           <p className="line-clamp-2 min-h-[2.5rem] text-sm font-medium leading-snug text-[#111827]">
-            {product.name}
+            {displayName}
           </p>
 
           <dl className="product-card-meta mt-2.5 text-[11px] text-[#6b7280] sm:mt-3">
             <div className="product-card-meta-row">
               <dt className="shrink-0 text-[#9ca3af]">{T("card_label_language")}</dt>
-              <dd className="truncate text-[#374151]">
-                {product.language?.trim() ||
-                  (product.name.includes("简中") ? "简中" : product.name.includes("日版") || product.name.includes("日文") ? "日文" : "—")}
-              </dd>
+              <dd className="truncate text-[#374151]">{displayLanguage}</dd>
             </div>
-            {product.series && (
+            {displaySeries && (
               <div className="product-card-meta-row product-card-meta-series">
                 <dt className="shrink-0 text-[#9ca3af]">{T("card_label_series")}</dt>
-                <dd className="truncate text-[#374151]">{product.series}</dd>
+                <dd className="truncate text-[#374151]">{displaySeries}</dd>
               </div>
             )}
             <div className="product-card-meta-row">

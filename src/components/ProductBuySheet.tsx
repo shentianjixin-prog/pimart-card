@@ -7,6 +7,7 @@ import { formatProductPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useLang, useT } from "@/lib/lang-context";
 import { translateBoxType } from "@/lib/translations";
+import { localizeProductName, localizeProductText } from "@/lib/product-i18n";
 import {
   sortBoxVariants,
   formatVariantTitle,
@@ -97,6 +98,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
   const soldOut = active.stock <= 0;
   const maxQty = Math.max(1, active.stock);
   const qty = Math.min(quantity, maxQty);
+  const displayName = localizeProductName(active.name, lang);
   const isOpc = Boolean(product.series && /^OPC-\d+/i.test(product.series));
   const useListTitles =
     Boolean(product.series && /\bCSV\d+c\b/i.test(product.series)) ||
@@ -110,7 +112,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
     addItem(
       {
         productId: active.id,
-        name: active.name,
+        name: displayName,
         slug: active.slug,
         image: thumb,
         priceJpy: active.priceJpy,
@@ -133,7 +135,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
     addItem(
       {
         productId: active.id,
-        name: active.name,
+        name: displayName,
         slug: active.slug,
         image: thumb,
         priceJpy: active.priceJpy,
@@ -146,7 +148,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
 
   return (
     <div className="buy-sheet-root" role="dialog" aria-modal="true" aria-label={T("btn_buy_now")}>
-      <button type="button" className="buy-sheet-backdrop" aria-label="关闭" onClick={onClose} />
+      <button type="button" className="buy-sheet-backdrop" aria-label="Close" onClick={onClose} />
       <div className="buy-sheet-panel">
         <div className="buy-sheet-header">
           <div className="buy-sheet-hero">
@@ -158,7 +160,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
               <p className="buy-sheet-stock">
                 {soldOut ? T("card_sold_out") : `${T("btn_stock")} ${active.stock}`}
               </p>
-              <p className="buy-sheet-name">{active.name}</p>
+              <p className="buy-sheet-name">{displayName}</p>
             </div>
           </div>
           <button type="button" className="buy-sheet-close" onClick={onClose} aria-label="×">
@@ -175,7 +177,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
                   const activeFmt = v.id === active.id;
                   const title =
                     useListTitles && !isOpc
-                      ? formatVariantTitle(v.boxType, v.name, product.series)
+                      ? localizeProductText(formatVariantTitle(v.boxType, v.name, product.series), lang)
                       : translateBoxType(v.boxType, lang);
                   const out = v.stock <= 0;
                   return (
