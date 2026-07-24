@@ -150,6 +150,15 @@ try {
   console.error("[railway] 库存重置失败:", err);
 }
 
+try {
+  execSync(`node ${join(root, "scripts", "reset-admin-password.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 管理员密码重置失败:", err);
+}
+
 const port = process.env.PORT || "3000";
 console.log(`[railway] 启动 Next.js，端口 ${port}`);
 
