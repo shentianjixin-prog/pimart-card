@@ -64,7 +64,7 @@ try {
 }
 
 try {
-  execSync(`node ${join(root, "scripts", "reset-all-stock-100.mjs")}`, {
+  execSync(`node ${join(root, "scripts", "reset-all-stock-10.mjs")}`, {
     stdio: "inherit",
     env: process.env,
   });
