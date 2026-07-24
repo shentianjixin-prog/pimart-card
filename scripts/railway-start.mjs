@@ -64,15 +64,6 @@ try {
 }
 
 try {
-  execSync(`node ${join(root, "scripts", "reset-all-stock-10.mjs")}`, {
-    stdio: "inherit",
-    env: process.env,
-  });
-} catch (err) {
-  console.error("[railway] 库存重置失败:", err);
-}
-
-try {
   execSync(`node ${join(root, "scripts", "ensure-product-listing.mjs")}`, {
     stdio: "inherit",
     env: process.env,
@@ -145,6 +136,18 @@ try {
   });
 } catch (err) {
   console.error("[railway] 图片路径同步失败:", err);
+}
+
+try {
+  // 必须放在 sync-from-website-xlsx.py / website-catalog 同步之后：
+  // 那两步会用表格里的库存列覆盖 stock，若这个重置脚本排在它们前面，
+  // 刚设置的 stock 会在同一次部署里被立刻覆盖掉。
+  execSync(`node ${join(root, "scripts", "reset-all-stock-10.mjs")}`, {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (err) {
+  console.error("[railway] 库存重置失败:", err);
 }
 
 const port = process.env.PORT || "3000";
