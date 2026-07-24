@@ -171,7 +171,7 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
             </div>
             <div className="product-detail-shipping-item">
               <span className="product-detail-shipping-k">签收提醒</span>
-              <span className="product-detail-shipping-v">签收前请检查外箱，异常请保留面单、外箱照片和完整开箱视频</span>
+              <span className="product-detail-shipping-v">{T("product_shipping_evidence")}</span>
             </div>
           </div>
         </section>
@@ -189,7 +189,7 @@ export function ProductDetailPurchase({ product, variants, children }: Props) {
           <ul className="mt-2 list-disc space-y-1 pl-4">
             <li>未开封盒、补充包、预售、随机/开封类商品属于特殊品类，不支持个人原因退换。</li>
             <li>卡牌开封结果、行情涨跌、轻微盒损或封膜褶皱，不作为取消、补差或售后依据。</li>
-            <li>签收后 7 日内可就运输破损、错发、漏发提交订单号、面单、外箱照片和完整开箱视频。</li>
+            <li>{T("product_returns_hint")}</li>
             {product.isPreorder ? <li>预售时间为预计时间；满 90 日仍未发货且订单未发货时，可按条款申请退款。</li> : null}
           </ul>
           <div className="mt-3 flex flex-wrap gap-2">

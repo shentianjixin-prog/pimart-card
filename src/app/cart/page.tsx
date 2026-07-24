@@ -5,12 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { formatJpy } from "@/lib/format";
-import { useT } from "@/lib/lang-context";
+import { useLang, useT } from "@/lib/lang-context";
 import { getJapanShippingRate, JAPAN_PREFECTURES } from "@/lib/shipping";
+import { PAYMENT_METHODS } from "@/lib/site";
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, totalJpy } = useCart();
   const T = useT();
+  const { lang } = useLang();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const mounted = useSyncExternalStore(
@@ -25,7 +27,7 @@ export default function CartPage() {
 
   async function handleCheckout() {
     if (!acceptedRules) {
-      setError("请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。");
+      setError(T("cart_agree_error"));
       return;
     }
     if (!shipping) {
@@ -164,6 +166,28 @@ export default function CartPage() {
 
       <p className="mt-4 text-xs leading-relaxed text-[#6b7280]">{T("cart_shipping_note")}</p>
 
+      <div className="mt-5 rounded-[16px] border border-[rgba(17,24,39,0.1)] bg-white p-4">
+        <p className="text-sm font-semibold text-[#111827]">{T("cart_final_title")}</p>
+        <ul className="mt-3 space-y-2 text-xs leading-relaxed text-[#6b7280]">
+          <li>
+            <span className="font-medium text-[#374151]">{T("cart_final_total")}：</span>
+            {shipping ? formatJpy(paymentTotalJpy) : "—"}
+          </li>
+          <li>
+            <span className="font-medium text-[#374151]">{T("cart_final_payment")}：</span>
+            {PAYMENT_METHODS[lang]}
+          </li>
+          <li>
+            <span className="font-medium text-[#374151]">{T("cart_final_shipping")}：</span>
+            {T("cart_final_shipping_body")}
+          </li>
+          <li>
+            <span className="font-medium text-[#374151]">{T("cart_final_returns")}：</span>
+            {T("cart_final_returns_body")}
+          </li>
+        </ul>
+      </div>
+
       <label className="mt-5 flex items-start gap-3 rounded-[16px] border border-[rgba(17,24,39,0.08)] bg-white p-4 text-xs leading-relaxed text-[#6b7280]">
         <input
           type="checkbox"
@@ -172,13 +196,13 @@ export default function CartPage() {
           className="mt-0.5 size-4 shrink-0 rounded border-[rgba(17,24,39,0.18)]"
         />
         <span>
-          我已阅读并同意
-          <Link href="/terms" className="mx-1 font-medium text-[#111827] hover:underline">用户协议</Link>
-          <Link href="/privacy" className="mx-1 font-medium text-[#111827] hover:underline">隐私政策</Link>
-          <Link href="/tokusho" className="mx-1 font-medium text-[#111827] hover:underline">特定商取引法表記</Link>
-          及
-          <Link href="/faq#returns" className="mx-1 font-medium text-[#111827] hover:underline">售后规则</Link>
-          。我理解未开封盒、预售、随机/开封类商品不支持个人原因退换；预售时间为预计时间，符合条款约定时可申请退款。
+          {T("cart_agree_prefix")}
+          <Link href="/terms" className="mx-1 font-medium text-[#111827] hover:underline">{T("cart_agree_terms")}</Link>
+          <Link href="/privacy" className="mx-1 font-medium text-[#111827] hover:underline">{T("cart_agree_privacy")}</Link>
+          <Link href="/tokusho" className="mx-1 font-medium text-[#111827] hover:underline">{T("cart_agree_tokusho")}</Link>
+          {T("cart_agree_and")}
+          <Link href="/faq#returns" className="mx-1 font-medium text-[#111827] hover:underline">{T("cart_agree_returns")}</Link>
+          {T("cart_agree_suffix")}
         </span>
       </label>
       {error && <p className="mt-3 text-sm text-red-500">{error}</p>}

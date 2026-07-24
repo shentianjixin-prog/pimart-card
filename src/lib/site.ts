@@ -22,7 +22,7 @@ export const INSTAGRAM_URL =
 /** 主体信息（关于页 / 特商法） */
 export const COMPANY_FOUNDED_YEAR = 2022;
 /** 网站及业务负责人 */
-export const COMPANY_REPRESENTATIVE = "KANDAKSIN";
+export const COMPANY_REPRESENTATIVE = "神田紀信";
 /** 销售业者 / 商户名称 */
 export const COMPANY_SELLER = "江苏派漫文化有限公司";
 export const COMPANY_ADDRESS = "中国 江苏省南通市滨江新城15-601";

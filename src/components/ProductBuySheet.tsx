@@ -125,7 +125,7 @@ export function ProductBuySheet({ open, onClose, product, variants = [] }: Props
   function handleBuy() {
     if (soldOut || buying) return;
     if (!acceptedRules) {
-      setError("请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。");
+      setError(T("product_agree_error") || T("cart_agree_error"));
       return;
     }
     setBuying(true);

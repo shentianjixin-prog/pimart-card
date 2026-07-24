@@ -54,7 +54,7 @@ export function Footer() {
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
               <Link href="/guide" className="site-footer-link">{T("footer_guide")}</Link>
               <Link href="/shipping" className="site-footer-link">{T("footer_shipping_policy")}</Link>
-              <Link href="/after-sales" className="site-footer-link">售后申请</Link>
+              <Link href="/after-sales" className="site-footer-link">{T("footer_after_sales")}</Link>
               <Link href="/faq" className="site-footer-link">{T("footer_faq")}</Link>
             </div>
           </div>
@@ -65,7 +65,7 @@ export function Footer() {
               <Link href="/terms" className="site-footer-link">{T("footer_terms")}</Link>
               <Link href="/privacy" className="site-footer-link">{T("footer_privacy")}</Link>
               <Link href="/tokusho" className="site-footer-link">{T("footer_tokusho")}</Link>
-              <Link href="/wholesale-terms" className="site-footer-link">批发条款</Link>
+              <Link href="/wholesale-terms" className="site-footer-link">{T("footer_wholesale_terms")}</Link>
             </div>
           </div>
         </div>

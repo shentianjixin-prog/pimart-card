@@ -435,9 +435,9 @@ const dict: Record<string, Record<Lang, string>> = {
     en: "By paying, you accept product-page rules and the Terms. Sealed, pre-order, and random/open-pack items are not covered by blanket no-reason returns. Preference and pull disappointment are generally ineligible.",
   },
   faq_returns_a2: {
-    zh: "【可受理】运输破损致商品实质受损、错发、漏发。请于签收后 7 日内联系客服，并提供订单号与完整开箱视频（从封闭包裹连续拍到取出）。证凭不足或逾期，可能不予受理。经核实属本站责任的，优先补发/换货；无库存可退该商品实付。不接受到付退货。",
-    ja: "【対応可】輸送破損（本体に実質損害）、誤発送、欠品。受取後7日以内に注文番号と開封動画（未開封外装から連続撮影）をご提出ください。不足・期限超過はお受けできないことがあります。当店都合は補送・交換優先、在庫がなければ実支払額返金。着払い不可。",
-    en: "Eligible: transit damage to the item, wrong/missing goods. Contact within 7 days with order ID and continuous unboxing video. We may prioritize reship/exchange; refund if no stock. No COD returns.",
+    zh: "【可受理】运输破损致商品实质受损、错发、漏发。请于签收后 7 日内联系客服，并提供订单号、照片，以及连续开箱视频或连续照片。证据不足或逾期可能影响调查，但不排除法定权利。经核实属本站责任的，优先补发/换货；无库存可退该商品实付。不接受到付退货。",
+    ja: "【対応可】輸送破損（本体に実質損害）、誤発送、欠品。受取後7日以内に注文番号、写真、連続開封動画または連続写真をご提出ください。不足・期限超過は調査に影響し得ますが、法令上の権利を排除しません。当店都合は補送・交換優先、在庫がなければ実支払額返金。着払い不可。",
+    en: "Eligible: transit damage to the item, wrong/missing goods. Contact within 7 days with order ID, photos, and continuous unboxing video or photos. Incomplete evidence may limit investigation but does not waive statutory rights. We may prioritize reship/exchange; refund if no stock. No COD returns.",
   },
   faq_returns_a3: {
     zh: "【预售】预计发货/到货仅为参考。自首次展示预计发货日起满 90 日仍未发货（且未发货）可退该商品实付。轻微外箱压痕不影响 sealed 的，一般不视为质量问题。本站不做鉴定仓「全额补偿」。详见《用户协议》与特定商取引法表記。",
@@ -527,7 +527,7 @@ const dict: Record<string, Record<Lang, string>> = {
   b2b_v2_desc: { zh: "支持长期合作与定制采购。", ja: "長期取引とカスタム仕入れに対応。", en: "Long-term partnerships and custom sourcing available." },
 
   trusted_title: { zh: "全球信赖", ja: "世界中で信頼される", en: "Trusted Worldwide" },
-  trusted_subtitle: { zh: "统一进口至日本履约点，由日本国内承运商配送", ja: "日本の履行拠点へ一括輸入し、国内配送業者より発送", en: "Imported to our Japan fulfillment point and delivered domestically" },
+  trusted_subtitle: { zh: "以亚洲履约网络连接全球收藏家", ja: "アジアの履行ネットワークと世界のコレクターをつなぐ", en: "Connecting collectors worldwide through our Asia fulfillment network" },
   trusted_f1_title: { zh: "日本全国配送", ja: "日本全国配送", en: "Nationwide Japan Delivery" },
   trusted_f1_desc: { zh: "按日本收货都道府县透明计算运费", ja: "お届け先の都道府県に基づく明確な送料", en: "Transparent rates based on the Japanese delivery prefecture" },
   trusted_f2_title: { zh: "正品保证", ja: "正規品保証", en: "Authentic Guarantee" },
@@ -628,6 +628,76 @@ const dict: Record<string, Record<Lang, string>> = {
   contact_b2b_title: { zh: "批发 / B2B 合作", ja: "卸売 / B2B提携", en: "Wholesale / B2B" },
   contact_b2b_desc: { zh: "原盒批量、定期供货等商务合作，请发至合作邮箱。", ja: "未開封BOXの大口、定期仕入れなどのご相談は提携用メールへ。", en: "For bulk sealed boxes or recurring supply, email our B2B inbox." },
   contact_back: { zh: "← 返回首页", ja: "← ホームに戻る", en: "← Back to home" },
+
+  footer_after_sales: { zh: "售后申请", ja: "アフターサポート", en: "After-sales" },
+  footer_wholesale_terms: { zh: "批发条款", ja: "卸売条件", en: "Wholesale Terms" },
+
+  cart_agree_prefix: { zh: "我已阅读并同意", ja: "以下に同意します：", en: "I have read and agree to the" },
+  cart_agree_terms: { zh: "用户协议", ja: "利用規約", en: "Terms of Use" },
+  cart_agree_privacy: { zh: "隐私政策", ja: "プライバシーポリシー", en: "Privacy Policy" },
+  cart_agree_tokusho: { zh: "特定商取引法表記", ja: "特定商取引法に基づく表記", en: "Legal Notice" },
+  cart_agree_and: { zh: "及", ja: "および", en: "and" },
+  cart_agree_returns: { zh: "售后规则", ja: "返品・交換について", en: "After-sales rules" },
+  cart_agree_suffix: {
+    zh: "。我理解未开封盒、预售、随机/开封类商品不支持个人原因退换；预售时间为预计时间，符合条款约定时可申请退款。订单与个人信息可能在中国、日本及 Stripe 等服务商所在地跨境处理。",
+    ja: "。未開封BOX・予約・ランダム/開封系はお客様都合返品不可であること、予約時期は目安であり規約該当時に返金申請できること、注文・個人情報が中国・日本・Stripe 等で越境処理され得ることを理解します。",
+    en: ". I understand sealed/pre-order/random goods are generally non-returnable for personal reasons; pre-order dates are estimates with refunds when Terms allow; order/personal data may be processed cross-border in China, Japan and by Stripe/other processors.",
+  },
+  cart_agree_error: {
+    zh: "请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。",
+    ja: "利用規約・プライバシーポリシー・特定商取引法表記・アフタールールへの同意が必要です。",
+    en: "Please confirm you agree to the Terms, Privacy Policy, Legal Notice and after-sales rules.",
+  },
+  cart_final_title: { zh: "订单最终确认", ja: "ご注文内容の最終確認", en: "Final order confirmation" },
+  cart_final_total: { zh: "最终付款金额", ja: "お支払い合計", en: "Total payment" },
+  cart_final_payment: { zh: "付款方式", ja: "お支払い方法", en: "Payment method" },
+  cart_final_shipping: { zh: "配送时间", ja: "配送目安", en: "Shipping timing" },
+  cart_final_shipping_body: {
+    zh: "现货：支付确认后通常 5–7 个工作日内发货。预售/调货：以商品页标注为准，到货后按序发货。",
+    ja: "在庫：決済確認後、通常 5〜7 営業日以内に発送。予約/取寄：商品ページ案内に従い入荷後順次発送。",
+    en: "In-stock: usually ships within 5–7 business days after payment. Pre-order/backorder: per product page, then in sequence after arrival.",
+  },
+  cart_final_returns: { zh: "退货条件", ja: "返品条件", en: "Return conditions" },
+  cart_final_returns_body: {
+    zh: "特殊 sealed/预售/随机商品原则上不支持个人原因退换。运输破损、错发、漏发请于签收后 7 日内联系，并提供照片或连续开箱视频。日本履约地址不是可直接寄回的退货地址。",
+    ja: "特殊な sealed/予約/ランダム商品はお客様都合返品原則不可。輸送破損・誤配送・欠品は受取後7日以内に写真または連続開封動画を添えて連絡。日本履行住所は無断返品先ではありません。",
+    en: "Special sealed/pre-order/random goods generally exclude convenience returns. For transit damage, wrong item or shortage, contact within 7 days with photos or continuous unboxing video. The Japan fulfillment address is not an unsupervised return address.",
+  },
+
+  aftersales_title: { zh: "售后申请", ja: "アフターサポート申請", en: "After-sales request" },
+  aftersales_lead: {
+    zh: "运输破损、错发、漏发等问题，请于签收后 7 日内提交。建议提供从封闭外箱到取出商品的连续开箱视频或连续照片。",
+    ja: "輸送破損・誤配送・欠品などは受取後7日以内にご申請ください。連続開封動画または連続写真の提出を推奨します。",
+    en: "For transit damage, wrong item or shortage, apply within 7 days of receipt. Continuous unboxing video or continuous photos are recommended.",
+  },
+  aftersales_evidence_video: {
+    zh: "从未开封外箱开始连续拍摄到取出商品的开箱视频，或同等连续照片",
+    ja: "未開封外箱から取出まで連続撮影した開封動画、または同等の連続写真",
+    en: "Continuous unboxing video from sealed outer box to unpacked item, or equivalent continuous photos",
+  },
+
+  status_not_found_title: { zh: "页面未找到", ja: "ページが見つかりません", en: "Page not found" },
+  status_not_found_body: { zh: "这张卡已经离开收藏柜了。", ja: "このカードはコレクションから外れました。", en: "This card has left the collection." },
+  status_not_found_home: { zh: "返回首页", ja: "ホームへ", en: "Back to home" },
+  status_error_title: { zh: "出错了", ja: "エラーが発生しました", en: "Something went wrong" },
+  status_error_retry: { zh: "重试", ja: "再試行", en: "Try again" },
+  status_loading: { zh: "加载中…", ja: "読み込み中…", en: "Loading PIMART CARD…" },
+
+  product_agree_error: {
+    zh: "请先确认并同意用户协议、隐私政策、特定商取引法表記及特殊商品售后规则。",
+    ja: "利用規約・プライバシーポリシー・特定商取引法表記・アフタールールへの同意が必要です。",
+    en: "Please confirm you agree to the Terms, Privacy Policy, Legal Notice and after-sales rules.",
+  },
+  product_shipping_evidence: {
+    zh: "签收前请检查外箱；异常请保留面单、外箱照片和连续开箱视频或连续照片",
+    ja: "受取前に外箱を確認。異常時は伝票・外箱写真・連続開封動画または連続写真を保管",
+    en: "Inspect the outer box on receipt; keep label, box photos and continuous unboxing video or photos if abnormal",
+  },
+  product_returns_hint: {
+    zh: "签收后 7 日内可就运输破损、错发、漏发提交订单号、面单、外箱照片和连续开箱视频或连续照片。",
+    ja: "受取後7日以内に、輸送破損・誤配送・欠品について注文番号・伝票・外箱写真・連続開封動画または連続写真を提出できます。",
+    en: "Within 7 days of receipt you may submit order number, label, box photos and continuous unboxing video or photos for transit damage, wrong item or shortage.",
+  },
 };
 
 export function t(key: string, lang: Lang): string {
