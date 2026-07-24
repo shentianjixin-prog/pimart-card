@@ -27,7 +27,7 @@ function build(lang: Lang): TokushoDocContent {
         { id: "tk-price", label: "销售价格", value: "以各商品页日元（JPY）显示为准。税费处理以商品页与结账页为准。价格可能随市场、库存、汇率、采购条件变动。" },
         { id: "tk-extra", label: "商品价款以外的必要费用", value: "日本国内运费：东京都・关东・东北・信越・北陆・东海 ¥330／近畿・中国・四国 ¥660／北海道・九州 ¥880／冲绳 ¥1,250\n国际干线运输・进口清关・入库费用：已计入商品价格\n支付手续费：视支付方式，以 Stripe 显示为准\n再配送・退回・保管费：因客户事由产生的由客户承担" },
         { id: "tk-pay", label: "支付方式", value: `${PAYMENT_METHODS.zh}\n※可用方式因国家/地区、设备及 Stripe 提供情况而异。` },
-        { id: "tk-timing", label: "支付时期", value: "订单确认时即时结算。预售商品亦于下单时结算。" },
+        { id: "tk-timing", label: "支付时期", value: "订单确认时即时结算。预售商品亦于下单时结算。\n※若结账页显示コンビニ決済（便利店支付）等延迟到账方式，须在下单后约3天内于便利店完成支付，逾期订单将自动取消。" },
         { id: "tk-delivery", label: "商品交付时期", value: "商品统一进口至日本履约点后，由日本国内承运商发货。\n【现货】支付确认后通常 5〜7 个工作日内发货\n【预售・调货】页面显示时间为参考，实际以发货日为准\n※自首次展示预计发货日起满 90 日仍未发货的，可就该商品申请按实付退款（仅标到「某月」的以该月末起算）" },
         { id: "tk-valid", label: "申请有效期限", value: "缺货、价格误标、支付错误、可疑订单、供应商原因等情形下，本站可取消订单并退还已收款。" },
         {
@@ -72,7 +72,7 @@ function build(lang: Lang): TokushoDocContent {
         { id: "tk-price", label: "販売価格", value: "各商品ページに日本円（JPY）で表示します。税の取扱いは商品ページ・決済画面の表示に従います。" },
         { id: "tk-extra", label: "商品代金以外の必要料金", value: "日本国内送料：東京都・関東・東北・信越・北陸・東海 330円／近畿・中国・四国 660円／北海道・九州 880円／沖縄 1,250円\n国際幹線輸送・輸入通関・入庫費用：商品価格に含む\n決済手数料：Stripe表示に従う\n再配送・返送・保管料：お客様事由の場合はお客様負担" },
         { id: "tk-pay", label: "支払方法", value: `${PAYMENT_METHODS.ja}\n※利用可能な方法は国・地域、端末および Stripe の提供状況により異なります。` },
-        { id: "tk-timing", label: "支払時期", value: "注文確定時に即時決済。予約商品も注文時決済となります。" },
+        { id: "tk-timing", label: "支払時期", value: "注文確定時に即時決済。予約商品も注文時決済となります。\n※チェックアウト画面にコンビニ決済等の後払い方式が表示される場合、ご注文から約3日間の期限内にお支払いください。お支払い期限を過ぎると、自動でキャンセルとなります。" },
         { id: "tk-delivery", label: "商品の引渡時期", value: "商品は日本の履行拠点へ一括輸入後、日本国内の配送業者より発送します。\n【現物】決済確認後 5〜7 営業日を目安に発送\n【予約・取り寄せ】表示予定は目安。実際の発送日をもって確定\n※初回表示の発送予定日から90日経過しても未発送の場合、当該商品の実支払額で返金申請可" },
         { id: "tk-valid", label: "申込の有効期限", value: "在庫切れ、価格誤表示、決済エラー、不正注文の疑い、仕入先都合等がある場合、当店は注文を取消し、受領済み代金を返金できます。" },
         {
@@ -116,7 +116,7 @@ function build(lang: Lang): TokushoDocContent {
       { id: "tk-price", label: "Selling price", value: "Shown in JPY on each product page. Tax treatment follows product/checkout display. Prices may change with market, stock, FX and sourcing." },
       { id: "tk-extra", label: "Fees besides product price", value: "Domestic Japan shipping: Tokyo/Kanto/Tohoku/Shinetsu/Hokuriku/Tokai ¥330; Kinki/Chugoku/Shikoku ¥660; Hokkaido/Kyushu ¥880; Okinawa ¥1,250\nInternational freight/clearance/inbound: included in product price\nPayment fees: per Stripe\nReship/return/storage: buyer-caused fees borne by buyer" },
       { id: "tk-pay", label: "Payment methods", value: `${PAYMENT_METHODS.en}\nAvailability varies by country, device and Stripe.` },
-      { id: "tk-timing", label: "Payment timing", value: "Charged when the order is confirmed. Pre-orders are also charged at order time." },
+      { id: "tk-timing", label: "Payment timing", value: "Charged when the order is confirmed. Pre-orders are also charged at order time.\nIf a delayed-settlement method such as konbini is shown at checkout, pay in-store within about 3 days of ordering; unpaid orders are cancelled automatically after the deadline." },
       { id: "tk-delivery", label: "Delivery timing", value: "Imported to Japan fulfillment then shipped domestically.\nIn-stock: usually 5–7 business days after payment confirmation\nPre-order/backorder: dates are estimates; actual dispatch date controls\nIf unshipped 90 days after first displayed estimate, refund of amounts paid for that item may be requested" },
       { id: "tk-valid", label: "Application validity", value: "We may cancel and refund for shortage, mispricing, payment errors, suspected abuse or supplier issues." },
       {

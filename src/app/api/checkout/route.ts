@@ -125,6 +125,9 @@ export async function POST(request: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       locale: "ja",
+      // 不写死 payment_method_types：具体展示哪些支付方式由 Stripe 后台
+      // 「Settings → Payment methods」里实际启用的方式自动决定，写死列表反而会在
+      // 某个方式未在后台开启时导致整个 session 创建失败。
       line_items: lineItems,
       customer_email: member?.email,
       phone_number_collection: { enabled: true },

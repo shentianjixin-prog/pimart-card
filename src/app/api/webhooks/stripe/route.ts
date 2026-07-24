@@ -24,7 +24,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "签名验证失败" }, { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
+  // konbini（コンビニ決済）等延迟支付方式：客户完成 checkout 时会先收到
+  // `checkout.session.completed`（此时 payment_status 仍是 unpaid），
+  // 真正在便利店付款后才会触发 `checkout.session.async_payment_succeeded`。
+  // 两个事件都要处理，否则延迟支付的订单永远不会被标记为已付款。
+  if (
+    event.type === "checkout.session.completed" ||
+    event.type === "checkout.session.async_payment_succeeded"
+  ) {
     const session = event.data.object as Stripe.Checkout.Session;
     const orderId = session.metadata?.orderId;
 
@@ -79,6 +86,22 @@ export async function POST(request: NextRequest) {
           sessionId: session.id,
           sessionMatches,
           amountMatches,
+        });
+      }
+    }
+  }
+
+  // konbini 等延迟支付方式逾期未付款时，Stripe 触发这个事件；库存此前未扣减，
+  // 这里只需把订单标记为取消，不需要回补库存。
+  if (event.type === "checkout.session.async_payment_failed") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    const orderId = session.metadata?.orderId;
+    if (orderId) {
+      const order = await prisma.order.findUnique({ where: { id: orderId } });
+      if (order && order.stripeSessionId === session.id && order.status === "pending") {
+        await prisma.order.update({
+          where: { id: orderId },
+          data: { status: "cancelled" },
         });
       }
     }
