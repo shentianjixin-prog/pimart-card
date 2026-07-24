@@ -56,7 +56,7 @@ const SLIDES: SlideConfig[] = [
     subtitleKey: "hero_v2_s2_sub",
     descKey: "hero_v2_s2_desc",
     ctas: [
-      { key: "hero_v2_cta_psa", href: "/?stock=instock", primary: true },
+      { key: "hero_v2_cta_merch", href: "/?type=merch", primary: true },
       { key: "hero_v2_cta_contact", href: "/contact" },
     ],
     visual: "psa",
